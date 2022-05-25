@@ -1,5 +1,8 @@
 #pragma once
 #include "UserInterface.h"
+#include "Alchemist.h"
+
+#define TOTAL_NUMBER_OF_MENU_ITEMS	6		// Общее кол-во пунктов меню в интерфейсе
 
 class AlchemicalUserInterface : public UserInterface
 {
@@ -8,31 +11,8 @@ public:
 	// Конструктор по умолчанию
 	AlchemicalUserInterface();
 
-private:
-
-};
-
-
-
-// Класс - Пользовательский интерфейс
-class UserInterface
-{
-public:
-
-	// Конструктор по умолчанию
-	UserInterface();
-
-	//// Печать интерфейса
-	//void print();
-
-	// Цикл программы
-	void mainloop();
-
-	// задать название программы
-	void setTitle(string title);
-
-	// Сеттер для алхимика
-	void setAlchemist(Alchemist* alchemist);
+	// Запуск главного цикла программы
+	void launchMainLoop() override;
 
 private:
 
@@ -42,8 +22,42 @@ private:
 	// Строитель ингредиентов
 	IngredientBuilder* ingredientBuilder;
 
-	// Функция для предикатов
-	function<bool(int)> func;
+	// Список строк - пунктов меню
+	static string listOfMenuItems[TOTAL_NUMBER_OF_MENU_ITEMS];
+
+	// Заполнить ассоциативный массив меню
+	void fillActionMenuMap() override;
+
+	// Заниматься алхимией
+	void doAlchemy();
+
+#pragma region Методы печати
+
+	// Печатает заголовок программы
+	void printTitle() override;
+
+	// Печатает "кнопку" выхода ESC
+	void printExitButton() override;
+
+	// Печать главного меню
+	void printMainMenu() override;
+
+	// Печать инструкций
+	void printInstructions() override;
+
+#pragma endregion Методы печати
+
+
+};
+
+
+
+// Класс - Пользовательский интерфейс
+class UserInterface1
+{
+public:
+
+private:
 
 	// Ассоциативный массив координат и "кнопок меню"
 	map <int, string> actionMenu;
@@ -96,8 +110,7 @@ private:
 	//// Проверить была ли команда покинуть программу
 	//void checkExit();
 
-	// Заниматься алхимией
-	void doAlchemy();
+
 
 #pragma region Методы печати
 

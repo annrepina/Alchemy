@@ -19,7 +19,7 @@ int main()
 
     userInterface.setAlchemist(&alchemist);
 
-    userInterface.mainloop();
+    userInterface.launchMainLoop();
 
 
 

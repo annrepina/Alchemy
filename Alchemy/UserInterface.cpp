@@ -1,18 +1,8 @@
 #include "UserInterface.h"
 
-// Возможно добавить меню "Перейти в инструкцию"
-string UserInterface::listOfMenuItems[TOTAL_NUMBER_OF_MENU_ITEMS] = {
-	"Выберите действие : ",
-	"Создание зелий",
-	"Покупка ингредиентов",
-	"Продажа ингредиентов",
-	"Продажа зелий",
-	"Работа с таблицами"
-};
-
 UserInterface::UserInterface()
 {
-	this->alchemist = nullptr;
+	//this->alchemist = nullptr;
 
 	this->titleXCoord = 0;
 	this->currentXCursorCoord = 0;
@@ -21,89 +11,10 @@ UserInterface::UserInterface()
 	this->keyBoard = this->keyBoard->getInstance();
 }
 
-void UserInterface::mainloop()
-{
-	fillActionMenuMap();
-
-	// Возможно раскоментировать
-	//setXCoord();
-
-	printTitle();
-
-	printExitButton();
-
-	printMainMenu();
-
-	this->func = std::bind(&UserInterface::isMenuChoiceFalse, this, _1);
-
-	checkMenuChoice();
-
-	eraseScreenAfterTitle();
-
-	switch (this->keyBoard->getPressedKey())
-	{
-		case VK_1: case VK_NUMPAD1:
-		{
-			doAlchemy();
-		}
-		break;
-
-		case VK_2: case VK_NUMPAD2:
-		{
-			cout << "\nИнструкция" << endl;
-		}
-		break;
-
-		case VK_ESCAPE:
-		{
-			cout << "\nДо скорой встречи!" << endl;
-		}
-		break;
-	}
-}
-
 void UserInterface::setTitle(string title)
 {
 	this->title = title;
 }
-
-void UserInterface::setAlchemist(Alchemist* alchemist)
-{
-	this->alchemist = alchemist;
-}
-
-void UserInterface::printTitle()
-{
-	this->setXCoord();
-
-	printFramedText(title, TITLE_Y_COORD, titleXCoord);
-}
-
-void UserInterface::printMainMenu()
-{
-	cout << "\nВыберите действие: " << endl
-		<< "1 - Алхимичить" << endl
-		<< "2 - Ознакомиться с инструкцией к программе" << endl/*
-		<< "ESC - выход" << endl*/;
-}
-
-void UserInterface::printInstructions()
-{
-	eraseScreenAfterTitle();
-
-	cout << "Инструкции к программе \"Зельеварение\"" << endl
-		<< "0 - назад"
-		<< "ESC - выход";
-}
-
-//void UserInterface::printContinueGameMenu()
-//{
-//	//cout << "\nАлхимия" << endl;
-//
-//	cout << "Хотите продолжить последнюю игру или создать новую?" << endl
-//		<< "1 - Продолжить игру" << endl
-//		<< "2 - Создать новую игру" << endl;
-//}
 
 void UserInterface::printActionMenu()
 {
@@ -211,18 +122,6 @@ void UserInterface::printActionMenu()
 	} while (false == exitFlag);
 }
 
-void UserInterface::printExitButton()
-{
-	// Текст кнопки
-	string exit = "ESC - выход";
-
-	// координата печати кнопки
-	int xCoord = calculateConsoleWidth() - exit.length();
-
-	// Печать кнопки
-	cout << goToXY(EXIT_Y_COORD, xCoord) << exit << endl;
-}
-
 void UserInterface::eraseScreenAfterTitle()
 {
 	cout << goToXY(Y_COORD_AFTER_TITLE, 0);
@@ -257,17 +156,17 @@ void UserInterface::setXCoord()
 	titleXCoord = (calculateConsoleWidth() / 2) - (title.length() / 2);
 }
 
-void UserInterface::fillActionMenuMap()
-{
-	// Стартовый ключ
-	int startIndex = ACTION_MENU_Y_COORD;
-
-	// Заполняем ассоциативный массив
-	for (int i = 0; i < NUMBER_OF_MAIN_MENU_ITEMS; ++i, ++startIndex)
-	{
-		this->actionMenu.emplace(startIndex, listOfMenuItems[i]);
-	}
-}
+//void UserInterface::fillActionMenuMap()
+//{
+//	// Стартовый ключ
+//	int startIndex = ACTION_MENU_Y_COORD;
+//
+//	// Заполняем ассоциативный массив
+//	for (int i = 0; i < NUMBER_OF_MAIN_MENU_ITEMS; ++i, ++startIndex)
+//	{
+//		this->actionMenu.emplace(startIndex, listOfMenuItems[i]);
+//	}
+//}
 
 void UserInterface::checkMenuChoice()
 {
@@ -332,52 +231,52 @@ void UserInterface::checkArrowsChoice(bool &exitFlag, int BorderYCoord, int keyC
 //	
 //}
 
-void UserInterface::doAlchemy()
-{
-	//printContinueGameMenu();
-
-	// !!! Стерла всё, т.к. инфа будет парситься !!!
-
-	//cout << "Хотите продолжить последнюю игру или создать новую?" << endl
-	//	<< "1 - Продолжить игру" << endl
-	//	<< "2 - Создать новую игру" << endl;
-
-	//func = std::bind(&UserInterface::isContinueGameFalse, this, _1);
-
-	//checkMenuChoice();
-
-	// !!! Нужно спарсить
-	// Имя алхимика
-
-
-
-
-
-	// !!! СПАРСИЛИ !!!
-
-	// если имя пользователя пустое
-	if ("" == this->alchemist->getName())
-	{
-		// имя пользователя
-		string name;
-
-		cout << "Введите ваше имя: ";
-
-		cin >> name;
-
-		this->alchemist->setName(name);
-	}
-
-
-
-	//string name = "Андрей";
-
-	eraseScreenAfterTitle();
-
-	//this->alchemist->setName(name);
-
-	this->alchemist->print();
-
-	printActionMenu();
-
-}
+//void UserInterface::doAlchemy()
+//{
+//	//printContinueGameMenu();
+//
+//	// !!! Стерла всё, т.к. инфа будет парситься !!!
+//
+//	//cout << "Хотите продолжить последнюю игру или создать новую?" << endl
+//	//	<< "1 - Продолжить игру" << endl
+//	//	<< "2 - Создать новую игру" << endl;
+//
+//	//func = std::bind(&UserInterface::isContinueGameFalse, this, _1);
+//
+//	//checkMenuChoice();
+//
+//	// !!! Нужно спарсить
+//	// Имя алхимика
+//
+//
+//
+//
+//
+//	// !!! СПАРСИЛИ !!!
+//
+//	// если имя пользователя пустое
+//	if ("" == this->alchemist->getName())
+//	{
+//		// имя пользователя
+//		string name;
+//
+//		cout << "Введите ваше имя: ";
+//
+//		cin >> name;
+//
+//		this->alchemist->setName(name);
+//	}
+//
+//
+//
+//	//string name = "Андрей";
+//
+//	eraseScreenAfterTitle();
+//
+//	//this->alchemist->setName(name);
+//
+//	this->alchemist->print();
+//
+//	printActionMenu();
+//
+//}

@@ -5,7 +5,6 @@
 #include <map>
 #include "Formatting.h"
 #include "KeyBoard.h"
-#include "Alchemist.h"
 #include "IngredientBuilder.h"
 
 using namespace std;
@@ -32,7 +31,7 @@ using std::placeholders::_1;
 
 
 #define NUMBER_OF_MAIN_MENU_ITEMS	6		// Количество главных пунктов меню в интерфейсе вместе с "выберите"
-#define TOTAL_NUMBER_OF_MENU_ITEMS	6		// Общее кол-во пунктов меню в интерфейсе
+
 
 // Класс - Пользовательский интерфейс
 class UserInterface
@@ -42,41 +41,64 @@ public:
 	// Конструктор по умолчанию
 	UserInterface();
 
-	//// Печать интерфейса
-	//void print();
-
 	// Цикл программы
-	virtual void mainloop() = 0;
+	virtual void launchMainLoop() = 0;
 
 	// задать название программы
 	void setTitle(string title);
 
-	// Сеттер для алхимика
-	virtual void setAlchemist(Alchemist* alchemist) = 0;
-
-private:
-
-	// Алхимик (пользователь)
-	Alchemist* alchemist;
-
-	// Строитель ингредиентов
-	IngredientBuilder* ingredientBuilder;
+protected:
 
 	// Функция для предикатов
 	function<bool(int)> func;
 
+	// Экземпляр клавиатуры
+	KeyBoard* keyBoard;
+
 	// Ассоциативный массив координат и "кнопок меню"
 	map <int, string> actionMenu;
 
-	// Список строк - пунктов меню
-	static string listOfMenuItems[TOTAL_NUMBER_OF_MENU_ITEMS];
+	// Заполнить ассоциативный массив меню действий
+	virtual void fillActionMenuMap() = 0;
+
+	// Проверка выбора в меню
+	void checkMenuChoice();
+
+	// Проверка выбора стрелочек вверх/вниз
+	void checkArrowsChoice(bool& exitFlag, int BorderYCoord, int keyCode);
+
+	// Очищает на консоли всё, кроме названия программы
+	void eraseScreenAfterTitle();
+
+#pragma region Методы печати
+
+	// Печатает заголовок программы
+	virtual void printTitle() = 0;
+
+	// Печатает "кнопку" выхода ESC
+	virtual void printExitButton() = 0;
+
+	// Печать главного меню
+	virtual void printMainMenu() = 0;
+
+	// Печать инструкций
+	virtual void printInstructions() = 0;
+
+#pragma endregion Методы печати
+
+#pragma region Предикаты
+
+	// Предикат для выбора пользователя в главном меню
+	bool isMenuChoiceFalse(int key);
+
+#pragma endregion Предикаты
+
+private:
 
 #pragma region КООРДИНАТЫ
 
 	// Координата Х - печати названия программы
 	int titleXCoord;
-
-	//int exitXCoord;
 
 	// Текущая координата Х
 	int currentXCursorCoord;
@@ -89,46 +111,24 @@ private:
 	// Название программы
 	string title;
 
-	//// Нажатая пользователем клавиша
-	//int key;
-
-	// Экземпляр клавиатуры
-	KeyBoard* keyBoard;
-
 	// Расчитывает координату Х для заголовков
 	void setXCoord();
 
-	// Заполнить ассоциативный массив меню действий
-	void fillActionMenuMap();
-
-	//// Получение нажатой кнопки
-	//void getKey();
 
 	//// Проверка выбора в меню
 	//void checkMenuChoice(/*int key, */function<bool(int)> condition /*bool (*condition) (int key)*/);
 
-	// Проверка выбора в меню
-	void checkMenuChoice();
 
-	// Проверка выбора стрелочек вверх/вниз
-	void checkArrowsChoice(bool& exitFlag, int BorderYCoord, int keyCode);
 
-	//// Проверить была ли команда покинуть программу
-	//void checkExit();
 
-	// Заниматься алхимией
-	void doAlchemy();
+
 
 #pragma region Методы печати
 
-	// Печатает заголовок программы
-	void printTitle();
+	//// Печать главного меню
+	//void printMainMenu();
 
-	// Печать главного меню
-	void printMainMenu();
 
-	// Печать инструкций
-	void printInstructions();
 
 	//// Печать меню с вопросом о продолжении игры
 	//void printContinueGameMenu();
@@ -136,21 +136,16 @@ private:
 	// Печатает меню действий
 	void printActionMenu();
 
-	// Печатает "кнопку" выхода ESC
-	void printExitButton();
-
 #pragma endregion Методы печати
 
-	// Очищает на консоли всё, кроме названия программы
-	void eraseScreenAfterTitle();
+
 
 
 
 
 #pragma region ПРЕДИКАТЫ
 
-	// Предикат для выбора пользователя в главном меню
-	bool isMenuChoiceFalse(int key);
+
 
 	// Предикат для выбора продолжения или создания игры
 	bool isContinueGameFalse(int key);

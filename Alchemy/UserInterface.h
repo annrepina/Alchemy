@@ -46,13 +46,13 @@ public:
 	//void print();
 
 	// Цикл программы
-	void mainloop();
+	virtual void mainloop() = 0;
 
 	// задать название программы
 	void setTitle(string title);
 
 	// Сеттер для алхимика
-	void setAlchemist(Alchemist* alchemist);
+	virtual void setAlchemist(Alchemist* alchemist) = 0;
 
 private:
 

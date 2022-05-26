@@ -5,7 +5,6 @@
 #include <map>
 #include "Formatting.h"
 #include "KeyBoard.h"
-#include "IngredientBuilder.h"
 
 using namespace std;
 
@@ -14,8 +13,10 @@ using std::placeholders::_1;
 // Координаты
 #define TITLE_Y_COORD			1		// Координаты Y курсора для печати названия программы
 #define Y_COORD_AFTER_TITLE		4		// Координата Y после названя программы
-#define ACTION_MENU_Y_COORD		8		// Координата Y меню действий
+
 #define EXIT_Y_COORD			2		// Координата Y кнопки выхода
+
+#define MENU_Y_COORD			9		// Координата Y меню действий
 
 // Коды клавиш
 #define VK_1					0x31	// Клавиша 1
@@ -49,28 +50,31 @@ public:
 
 protected:
 
+	// Название программы
+	string title;
+
 	// Функция для предикатов
 	function<bool(int)> func;
 
 	// Экземпляр клавиатуры
 	KeyBoard* keyBoard;
 
-	// Ассоциативный массив координат и "кнопок меню"
-	map <int, string> actionMenu;
-
 	// Заполнить ассоциативный массив меню действий
-	virtual void fillActionMenuMap() = 0;
+	virtual void fillActionMenuMap(const int menuYCoord, const int numberOfItems, const string listOfItems[], map <int, string> menu);
 
 	// Проверка выбора в меню
 	void checkMenuChoice();
 
 	// Проверка выбора стрелочек вверх/вниз
-	void checkArrowsChoice(bool& exitFlag, int BorderYCoord, int keyCode);
+	void checkArrowsChoice(bool& exitFlag, int BorderYCoord, int keyCode, map <int, string> actionMenu);
 
 	// Очищает на консоли всё, кроме названия программы
 	void eraseScreenAfterTitle();
 
-#pragma region Методы печати
+	// Расчитывает координату Х для заголовков
+	void setXCoord();
+
+#pragma region МЕТОДЫ ПЕЧАТИ
 
 	// Печатает заголовок программы
 	virtual void printTitle() = 0;
@@ -84,16 +88,20 @@ protected:
 	// Печать инструкций
 	virtual void printInstructions() = 0;
 
-#pragma endregion Методы печати
+	// Печатает меню действий
+	virtual void printActionMenu() = 0;
 
-#pragma region Предикаты
+#pragma endregion МЕТОДЫ ПЕЧАТИ
+
+#pragma region ПРЕДИКАТЫ
 
 	// Предикат для выбора пользователя в главном меню
 	bool isMenuChoiceFalse(int key);
 
-#pragma endregion Предикаты
+	// Не были ли нажаты кнопки стрелок?
+	bool isArrowKeyFalse(int key);
 
-private:
+#pragma endregion ПРЕДИКАТЫ
 
 #pragma region КООРДИНАТЫ
 
@@ -108,56 +116,7 @@ private:
 
 #pragma endregion КООРДИНАТЫ
 
-	// Название программы
-	string title;
-
-	// Расчитывает координату Х для заголовков
-	void setXCoord();
-
-
-	//// Проверка выбора в меню
-	//void checkMenuChoice(/*int key, */function<bool(int)> condition /*bool (*condition) (int key)*/);
-
-
-
-
-
-
-#pragma region Методы печати
-
-	//// Печать главного меню
-	//void printMainMenu();
-
-
-
-	//// Печать меню с вопросом о продолжении игры
-	//void printContinueGameMenu();
-
-	// Печатает меню действий
-	void printActionMenu();
-
-#pragma endregion Методы печати
-
-
-
-
-
-
-#pragma region ПРЕДИКАТЫ
-
-
-
-	// Предикат для выбора продолжения или создания игры
-	bool isContinueGameFalse(int key);
-
-	// Продолжить работу приложения или выйти
-	bool isContinue(int key);
-
-	// Не были ли нажаты кнопки стрелок?
-	bool isArrowKeyFalse(int key);
-
-#pragma endregion ПРЕДИКАТЫ
-
+private:
 
 };
 

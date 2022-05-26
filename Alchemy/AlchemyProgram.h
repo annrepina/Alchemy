@@ -27,21 +27,21 @@ class AlchemyProgram
 {
 public:
 
-	// Конструктор по умолчанию
-	AlchemyProgram();
+	//// Конструктор по умолчанию
+	//AlchemyProgram();
 
 
 
-	// Запуск главного цикла программы
-	void launchMainLoop();
+	//// Запуск главного цикла программы
+	//void launchMainLoop();
 
 private:
 
-	// Алхимик (пользователь)
-	Alchemist* alchemist;
+	//// Алхимик (пользователь)
+	//Alchemist* alchemist;
 
-	// Экземпляр интерфейса
-	AlchemicalUserInterface* userInterface;
+	//// Экземпляр интерфейса
+	//AlchemicalUserInterface* alchemicalUserInterface;
 
 
 

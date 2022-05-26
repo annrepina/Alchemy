@@ -2,14 +2,14 @@
 
 
 
-AlchemyProgram::AlchemyProgram()
-{
-	//this->titleXCoord = 0;
-	//
-	//this->keyBoard = this->keyBoard->getInstance();
-
-	
-}
+//AlchemyProgram::AlchemyProgram()
+//{
+//	//this->titleXCoord = 0;
+//	//
+//	//this->keyBoard = this->keyBoard->getInstance();
+//
+//	
+//}
 
 //void AlchemyProgram::printTitle()
 //{

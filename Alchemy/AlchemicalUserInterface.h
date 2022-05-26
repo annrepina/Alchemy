@@ -9,7 +9,9 @@
 #define Y_COORD_AFTER_ALCHEMIST			8		// Координата Y после печати алхимика
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
 //#define INSTRUCTIONS_Y_COORD			10
+#define Y_COORD_AFTER_MENU_TITLE		9		// Координата Y после печати заголовка меню
 #define STANDARD_CURSOR_X_COORD			0		// Стандартная координата X курсора 
+
 
 
 // Кол-ва
@@ -60,6 +62,12 @@ private:
 		Exit
 	};
 
+	enum BuyingIngredientsMenuCode 
+	{
+		ChooseFromList = MAIN_MENU_Y_COORD,
+		CreateNewIngredient
+	};
+
 	// Алхимик (пользователь)
 	Alchemist* alchemist;
 
@@ -93,8 +101,8 @@ private:
 	// Флаг для выхода из главного цикла
 	bool exitFlag;
 
-	// Координата X для инструкций
-	int instructionsXCoord;
+	//// Координата X для инструкций
+	//int instructionsXCoord;
 
 	// Граничная координата Y для управления стрелками
 	int boundaryYCoord;
@@ -138,6 +146,9 @@ private:
 
 	// Покупка ингредиентов
 	void buyIngredients();
+
+	// Покупка ингредиентов из имеющегося списка
+	void buyIngredientsFromList();
 
 	// Стирает с консоли все после печати алхимика
 	void eraseScreenAfterAlchemist();

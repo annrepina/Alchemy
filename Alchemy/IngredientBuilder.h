@@ -38,7 +38,7 @@ private:
 	// Список имен ингредиентов
 	static string listOfIngredientsNames[100];
 
-	// Список имен эффектов
-	static string listOfEffectsNames[55];
+	//// Список имен эффектов
+	//static string listOfEffectsNames[55];
 };
 

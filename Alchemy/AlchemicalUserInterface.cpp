@@ -32,7 +32,7 @@ AlchemicalUserInterface::AlchemicalUserInterface()
 	this->exitFlag = false;
 	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 	this->boundaryYCoord = MAIN_MENU_Y_COORD;
-	this->instructionsXCoord = 0;
+	//this->instructionsXCoord = 0;
 	this->instructionsMenuTitle = "Инструкции к программе \"Зельеварение\"";
 	this->mainMenuTitle = "Главное меню";
 	this->alchemicalMenuTitle = "Меню алхимии";
@@ -198,7 +198,17 @@ void AlchemicalUserInterface::checkChoiceInBuyingIngredientsMenu()
 {
 	switch (this->currentYCursorCoord)
 	{
-		case 
+		case BuyingIngredientsMenuCode::ChooseFromList:
+		{
+
+		}
+		break;
+
+		case BuyingIngredientsMenuCode::CreateNewIngredient:
+		{
+
+		}
+		break;
 	}
 }
 
@@ -220,6 +230,21 @@ void AlchemicalUserInterface::buyIngredients()
 	this->menuCode = MenuCode::BuyingIngredientsMenu;
 
 	printMenuInLoop(buyingIngredientsMenu, alchemicalMenuTitle);
+}
+
+void AlchemicalUserInterface::buyIngredientsFromList()
+{
+	cout << goToXY(Y_COORD_AFTER_MENU_TITLE, STANDARD_CURSOR_X_COORD);
+
+	cout << "Введите id ингредиента: ";
+
+
+
+	int id;
+
+	cin >> id;
+	
+	
 }
 
 void AlchemicalUserInterface::eraseScreenAfterAlchemist()

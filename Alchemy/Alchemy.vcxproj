@@ -141,10 +141,15 @@
   <ItemGroup>
     <ClCompile Include="AlchemicalUserInterface.cpp" />
     <ClCompile Include="AlchemyProgram.cpp" />
+    <ClCompile Include="AlchemyProgramParser.cpp" />
     <ClCompile Include="EffectBuilder.cpp" />
+    <ClCompile Include="EffectsTable.cpp" />
+    <ClCompile Include="EffectsTableBuilder.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Formatting.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
+    <ClCompile Include="KnownIngredientsTable.cpp" />
+    <ClCompile Include="KnownIngredientsTableBuilder.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Ingredient.cpp" />
@@ -152,13 +157,17 @@
     <ClCompile Include="IngredientDirector.cpp" />
     <ClCompile Include="Alchemist.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="ServiceFunctions.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlchemicalUserInterface.h" />
     <ClInclude Include="AlchemyProgram.h" />
+    <ClInclude Include="AlchemyProgramParser.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectBuilder.h" />
+    <ClInclude Include="EffectsTable.h" />
+    <ClInclude Include="EffectsTableBuilder.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Formatting.h" />
     <ClInclude Include="Ingredient.h" />
@@ -166,7 +175,10 @@
     <ClInclude Include="IngredientDirector.h" />
     <ClInclude Include="Alchemist.h" />
     <ClInclude Include="KeyBoard.h" />
+    <ClInclude Include="KnownIngredientsTable.h" />
+    <ClInclude Include="KnownIngredientsTableBuilder.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="ServiceFunctions.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

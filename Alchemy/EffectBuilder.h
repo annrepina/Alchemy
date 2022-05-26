@@ -1,6 +1,9 @@
 #pragma once
 #include "Effect.h"
 
+#define NUMBER_OF_POSITIVE_EFFECTS	35		// Кол-во позитивных эффектов
+#define NUMBER_OF_NEGATIVE_EFFECTS	20		// Кол-во негативных эффектов
+
 // Строитель эффектов
 class EffectBuilder
 {
@@ -18,6 +21,15 @@ public:
 	// Сеттер для пременной означающей положительный ли эффект
 	void setIsPositive(bool isPositive);
 
+	// Создать эффект
+	void buildEffect(int lastIndex, string listOfEffectsNames[], bool isPositive);
+
+	// Создать позитивный эффект
+	void buildPositiveEffect(int lastIndex);
+
+	// Создать негативныйэффект эффект
+	void buildNegativeEffect(int lastIndex);
+
 	// Получить результат строительства
 	Effect* getResult();
 
@@ -31,5 +43,14 @@ private:
 
 	// Чистит память (неиспользованный эффект)
 	void clear();
+
+	// Выбрать имя
+	string chooseEffectName(int lastIndex, string listOfEffectsNames[]);
+
+	// Список имен положительных эффектов
+	static string listOfPositiveEffectsNames[NUMBER_OF_POSITIVE_EFFECTS];
+
+	// Список имен отрицательных эффектов
+	static string listOfNegativeEffectsNames[NUMBER_OF_NEGATIVE_EFFECTS];
 };
 

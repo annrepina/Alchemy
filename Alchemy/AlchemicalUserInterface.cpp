@@ -10,6 +10,7 @@ string AlchemicalUserInterface::listOfALchemicalMenuItems[NUMBER_OF_ALCHEMICAL_M
 	"Создание зелий",
 	"Покупка ингредиентов",
 	"Продажа ингредиентов",
+	"Поедание ингредиентов",
 	"Продажа зелий",
 	"Работа с таблицами"
 };
@@ -17,6 +18,11 @@ string AlchemicalUserInterface::listOfALchemicalMenuItems[NUMBER_OF_ALCHEMICAL_M
 string AlchemicalUserInterface::listOfInstructionsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] = {
 	"Назад",
 	"Выйти из программы"
+};
+
+string AlchemicalUserInterface::listOfBuyingIngredientsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] = {
+	"Покупка ингредиентов из имеющегося списка",
+	"Покупка новых ингредиентов, которых нет в списке"
 };
 
 AlchemicalUserInterface::AlchemicalUserInterface()
@@ -27,16 +33,15 @@ AlchemicalUserInterface::AlchemicalUserInterface()
 	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 	this->boundaryYCoord = MAIN_MENU_Y_COORD;
 	this->instructionsXCoord = 0;
-	this->instructionsTitle = "Инструкции к программе \"Зельеварение\"";
+	this->instructionsMenuTitle = "Инструкции к программе \"Зельеварение\"";
+	this->mainMenuTitle = "Главное меню";
+	this->alchemicalMenuTitle = "Меню алхимии";
+	this->buyingIngredientsMenuTitle = "Покупка ингредиентов";
 }
 
 void AlchemicalUserInterface::launchMainLoop()
 {
-	mainMenu = fillActionMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfMainMenuItems);
-	alchemicalMenu = fillActionMenuMap(NUMBER_OF_ALCHEMICAL_MENU_ITEMS, listOfALchemicalMenuItems);
-
-	this->currentYCursorCoord = INSTRUCTIONS_Y_COORD;
-	instructionsMenu = fillActionMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfInstructionsMenuItems);
+	fillAllMenu();
 
 	// Возможно раскоментировать
 	//setXCoord();
@@ -49,12 +54,12 @@ void AlchemicalUserInterface::launchMainLoop()
 
 	printAlchemist();
 
-	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-	this->boundaryYCoord = MAIN_MENU_Y_COORD;
+	//this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+	//this->boundaryYCoord = MAIN_MENU_Y_COORD;
 
 	menuCode = MenuCode::MainMenu;
 
-	printMenuInLoop(mainMenu);
+	printMenuInLoop(mainMenu, mainMenuTitle);
 
 	printBye();
 }
@@ -79,7 +84,7 @@ void AlchemicalUserInterface::chooseMenuItem(map <int, string> menu)
 			case VK_DOWN:
 			{
 				// Проверяем стрелочки
-				checkArrowsChoice(boundaryYCoord + NUMBER_OF_MAIN_MENU_ITEMS - 1, VK_DOWN, menu);
+				checkArrowsChoice(boundaryYCoord + menu.size() - 1, VK_DOWN, menu);
 			}
 			break;
 
@@ -111,13 +116,19 @@ void AlchemicalUserInterface::makeChoice()
 
 		case MenuCode::AlchemicalMenu:
 		{
-
+			checkChoiceInAlchemicalMenu();
 		}
 		break;
 
 		case MenuCode::InstructionsMenu:
 		{
 			checkChoiceInInstructionsMenu();
+		}
+		break;
+
+		case MenuCode::BuyingIngredientsMenu:
+		{
+			checkChoiceInBuyingIngredientsMenu();
 		}
 		break;
 	}
@@ -149,11 +160,11 @@ void AlchemicalUserInterface::checkChoiceInInstructionsMenu()
 		{
 			this->menuCode = MenuCode::MainMenu;
 			this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-			this->boundaryYCoord = MAIN_MENU_Y_COORD;
+			//this->boundaryYCoord = MAIN_MENU_Y_COORD;
 
 			eraseScreenAfterAlchemist();
 
-			printMenuInLoop(mainMenu);
+			printMenuInLoop(mainMenu, mainMenuTitle);
 		}
 		break;
 
@@ -165,59 +176,64 @@ void AlchemicalUserInterface::checkChoiceInInstructionsMenu()
 	}
 }
 
+void AlchemicalUserInterface::checkChoiceInAlchemicalMenu()
+{
+	switch (this->currentYCursorCoord)
+	{
+		case AlchemicalMenuCode::MakingPotions:
+		{
+
+		}
+		break;
+
+		case AlchemicalMenuCode::BuyingIngredients:
+		{
+			buyIngredients();
+		}
+		break;
+	}
+}
+
+void AlchemicalUserInterface::checkChoiceInBuyingIngredientsMenu()
+{
+	switch (this->currentYCursorCoord)
+	{
+		case 
+	}
+}
+
 void AlchemicalUserInterface::doAlchemy()
 {
-	//printContinueGameMenu();
+	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+	//this->boundaryYCoord = MAIN_MENU_Y_COORD;
 
-// !!! Стерла всё, т.к. инфа будет парситься !!!
+	this->menuCode = MenuCode::AlchemicalMenu;
 
-//cout << "Хотите продолжить последнюю игру или создать новую?" << endl
-//	<< "1 - Продолжить игру" << endl
-//	<< "2 - Создать новую игру" << endl;
+	printMenuInLoop(alchemicalMenu, alchemicalMenuTitle);
+}
 
-//func = std::bind(&UserInterface::isContinueGameFalse, this, _1);
+void AlchemicalUserInterface::buyIngredients()
+{
+	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+	//this->boundaryYCoord = MAIN_MENU_Y_COORD;
 
-//checkMenuChoice();
+	this->menuCode = MenuCode::BuyingIngredientsMenu;
 
-// !!! Нужно спарсить
-// Имя алхимика
-
-
-
-
-
-// !!! СПАРСИЛИ !!!
-
-// если имя пользователя пустое
-	if ("" == this->alchemist->getName())
-	{
-		// имя пользователя
-		string name;
-
-		cout << "Введите ваше имя: ";
-
-		cin >> name;
-
-		this->alchemist->setName(name);
-	}
-
-
-
-	//string name = "Андрей";
-
-	eraseScreenAfterTitle();
-
-	//this->alchemist->setName(name);
-
-	this->alchemist->print();
-
-	printActionMenu();
+	printMenuInLoop(buyingIngredientsMenu, alchemicalMenuTitle);
 }
 
 void AlchemicalUserInterface::eraseScreenAfterAlchemist()
 {
 	cout << goToXY(Y_COORD_AFTER_ALCHEMIST, STANDARD_CURSOR_X_COORD);
 	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+}
+
+void AlchemicalUserInterface::fillAllMenu()
+{
+	mainMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfMainMenuItems);
+	alchemicalMenu = fillMenuMap(NUMBER_OF_ALCHEMICAL_MENU_ITEMS, listOfALchemicalMenuItems);
+	instructionsMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfInstructionsMenuItems);
+	buyingIngredientsMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfBuyingIngredientsMenuItems);
 }
 
 void AlchemicalUserInterface::printTitle()
@@ -239,8 +255,10 @@ void AlchemicalUserInterface::printExitButton()
 	cout << goToXY(EXIT_Y_COORD, xCoord) << exit << endl;
 }
 
-void AlchemicalUserInterface::printMenuInLoop(map<int, string> menu)
+void AlchemicalUserInterface::printMenuInLoop(map<int, string> menu, string menuTitle)
 {
+	printMenuTitle(menuTitle);
+
 	printColoredText("Выберите действие:", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 	cout << endl;
 
@@ -253,133 +271,24 @@ void AlchemicalUserInterface::printMenuInLoop(map<int, string> menu)
 
 void AlchemicalUserInterface::printInstructions()
 {
-	//eraseScreenAfterTitle();
+	//eraseScreenAfterAlchemist();
 
-	eraseScreenAfterAlchemist();
+	//this->instructionsXCoord = calculateXCoordInMiddle(instructionsMenuTitle);
 
-	this->instructionsXCoord = calculateXCoordInMiddle(instructionsTitle);
+	//cout << goToXY(Y_COORD_AFTER_ALCHEMIST, instructionsXCoord);
 
-	cout << goToXY(Y_COORD_AFTER_ALCHEMIST, instructionsXCoord);
-
-	printColoredText(instructionsTitle, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
-	cout << endl;
-
-	//printTextWithBackground("Назад", R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
+	//printColoredText(instructionsMenuTitle, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+	//cout << endl;
 
 	menuCode = MenuCode::InstructionsMenu;
 	
-	this->currentYCursorCoord = INSTRUCTIONS_Y_COORD;
-	this->boundaryYCoord = INSTRUCTIONS_Y_COORD;
+	//this->currentYCursorCoord = INSTRUCTIONS_Y_COORD;
+	//this->boundaryYCoord = INSTRUCTIONS_Y_COORD;
 
-	printMenuInLoop(instructionsMenu);
-}
-
-void AlchemicalUserInterface::printActionMenu()
-{
-	// Изменяем цвет фона на серый
-	cout << changeBackgroundColorsExtra(R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
-
-	//// Стартовый индекс печати главного меню действий
-	//int startIndex = 0;
-
-	//cout << listOfMenuItems[startIndex++] << endl;
-	cout << "Выберите действие: " << endl;
-
-	cout << resetColorParams();
-
-	// Печатаем пункты меню
-	for (int i = 0; i < NUMBER_OF_ALCHEMICAL_MENU_ITEMS; ++i)
-	{
-		cout << listOfALchemicalMenuItems[i] << endl;
-	}
-	//<< "Создание зелий" << endl
-	//<< "Покупка ингредиентов" << endl
-	//<< "Продажа ингредиентов" << endl
-	//<< "Продажа зелий" << endl
-	//<< "Работа с таблицей" << endl;
-
-	cout << goToXY(MAIN_MENU_Y_COORD, 1);
-
-	//// Запоминаем текущие координаты курсора
-	//this->currentXCursorCoord = 1;
 	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+	//this->boundaryYCoord = MAIN_MENU_Y_COORD;
 
-	this->func = std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this, _1);
-
-	// Флаг для выхода из цикла do-while
-	bool exitFlag = false;
-
-	do {
-		// Проверяем нажатую кнопку
-		checkMenuChoice();
-
-		switch (this->keyBoard->getPressedKey())
-		{
-		case VK_UP:
-		{
-			// !! раскоментить
-			// Проверяем стрелочки
-			checkArrowsChoice(MAIN_MENU_Y_COORD, VK_UP, alchemicalMenu);
-
-			//if (ACTION_MENU_Y_COORD == this->currentYCursorCoord)
-			//{
-			//	exitFlag = true;
-			//}
-			//else
-			//{
-			//	cout << goToXY(--this->currentYCursorCoord, 1);
-			//	// Изменяем цвет фона на серый
-			//	cout << changeBackgroundColorsExtra(R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
-			//	// печатаем главное меню действий
-			//	for (int i = currentYCursorCoord; i < ACTION_MENU_Y_COORD + NUMBER_OF_MAIN_MENU_ITEMS; ++i)
-			//	{
-			//		if (i == currentYCursorCoord)
-			//		{
-			//			// Изменяем цвет фона на серый
-			//			cout << changeBackgroundColorsExtra(R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
-			//			// Печатаем пункт меню
-			//			cout << actionMenu[i] << endl; 
-			//			// Сбрасываем параметры текста
-			//			cout << resetColorParams();
-			//		}
-			//		else 
-			//			// Печатаем пункт меню
-			//			cout << actionMenu[i] << endl;
-			//	}
-			//	cout << goToXY(currentYCursorCoord, 1);
-			//	// Сбрасываем флаг
-			//	exitFlag = false;
-			// }	
-		}
-		break;
-
-		case VK_DOWN:
-		{
-			// !! раскоментить
-			// Проверяем стрелочки
-			checkArrowsChoice(MAIN_MENU_Y_COORD + NUMBER_OF_MAIN_MENU_ITEMS - 1, VK_DOWN, alchemicalMenu);
-		}
-		break;
-
-		case VK_RETURN:
-		{
-			if (MAIN_MENU_Y_COORD == this->currentYCursorCoord)
-			{
-				exitFlag = false;
-			}
-
-			else
-				// !! Осуществление действий
-			{
-
-			}
-		}
-		break;
-
-		case VK_ESCAPE:
-			break;
-		}
-	} while (false == exitFlag);
+	printMenuInLoop(instructionsMenu, instructionsMenuTitle);
 }
 
 void AlchemicalUserInterface::printBye()
@@ -407,4 +316,16 @@ void AlchemicalUserInterface::printAlchemist()
 	eraseScreenAfterTitle();
 
 	this->alchemist->print();
+}
+
+void AlchemicalUserInterface::printMenuTitle(string title)
+{
+	eraseScreenAfterAlchemist();
+
+	this->currentXCursorCoord = calculateXCoordInMiddle(title);
+
+	cout << goToXY(Y_COORD_AFTER_ALCHEMIST, currentXCursorCoord);
+
+	printColoredText(title, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+	cout << endl;
 }

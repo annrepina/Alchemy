@@ -58,7 +58,7 @@ protected:
 	int menuCode;
 
 	// Заполнить ассоциативный массив меню действий
-	virtual map<int, string> fillActionMenuMap(const int numberOfItems, const string listOfItems[]);
+	virtual map<int, string> fillMenuMap(const int numberOfItems, const string listOfItems[]);
 
 	// Проверка выбора в меню
 	void checkMenuChoice() const;
@@ -84,13 +84,10 @@ protected:
 	virtual void printMenu(map <int, string> menu) const;
 
 	// Печать главного меню в цикле
-	virtual void printMenuInLoop(map <int, string> menu) = 0;
+	virtual void printMenuInLoop(map<int, string> menu, string menuTitle) = 0;
 
 	// Печать инструкций
 	virtual void printInstructions() = 0;
-
-	// Печатает меню действий
-	virtual void printActionMenu() = 0;
 
 	// Печать прощания
 	virtual void printBye() = 0;
@@ -112,8 +109,8 @@ protected:
 	// Координата Х - печати названия программы
 	int titleXCoord;
 
-	//// Текущая координата Х
-	//int currentXCursorCoord;
+	// Текущая координата Х
+	int currentXCursorCoord;
 
 	// Текущая координата Y
 	int currentYCursorCoord;

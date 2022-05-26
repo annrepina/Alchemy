@@ -7,14 +7,14 @@
 #define TITLE_Y_COORD					1		// Координаты Y курсора для печати названия программы
 #define EXIT_Y_COORD					2		// Координата Y кнопки выхода
 #define Y_COORD_AFTER_ALCHEMIST			8		// Координата Y после печати алхимика
-#define MAIN_MENU_Y_COORD				9		// Координата Y меню действий
-#define INSTRUCTIONS_Y_COORD			10
+#define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
+//#define INSTRUCTIONS_Y_COORD			10
 #define STANDARD_CURSOR_X_COORD			0		// Стандартная координата X курсора 
 
 
 // Кол-ва
 #define NUMBER_OF_MAIN_MENU_ITEMS		2		// Кол-во пунктов в главном меню
-#define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	5		// Кол-во пунктов в алхимическом меню
+#define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	6		// Кол-во пунктов в алхимическом меню
 
 class AlchemicalUserInterface : public UserInterface
 {
@@ -33,7 +33,8 @@ private:
 	{
 		MainMenu, 
 		AlchemicalMenu,
-		InstructionsMenu
+		InstructionsMenu,
+		BuyingIngredientsMenu
 	};
 
 	// Коды пунктов в главном меню
@@ -43,9 +44,19 @@ private:
 		ReadInstructions
 	};
 
+	enum AlchemicalMenuCode
+	{
+		MakingPotions = MAIN_MENU_Y_COORD,
+		BuyingIngredients,
+		SellingIngredients,
+		EatingIngredients,
+		SellingPotions,
+		WorkingWithTables
+	};
+
 	enum InstructionsMenuCode
 	{
-		Return = INSTRUCTIONS_Y_COORD,
+		Return = MAIN_MENU_Y_COORD,
 		Exit
 	};
 
@@ -73,6 +84,12 @@ private:
 	// Ассоциативный массив координат и "кнопок" меню инструкций
 	map <int, string> instructionsMenu;
 
+	// Список строк - пунктов меню покупки ингредиентов
+	static string listOfBuyingIngredientsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
+	
+	// Ассоциативный массив координат и "кнопок" меню покупки ингредиентов
+	map<int, string> buyingIngredientsMenu;
+
 	// Флаг для выхода из главного цикла
 	bool exitFlag;
 
@@ -82,8 +99,21 @@ private:
 	// Граничная координата Y для управления стрелками
 	int boundaryYCoord;
 
+#pragma region НАЗВАНИЕ ЗАГОЛОВКОВ
+
+	// Название главного меню
+	string mainMenuTitle;
+
 	// Название инструкции
-	string instructionsTitle;
+	string instructionsMenuTitle;
+
+	// Название меню алхимии
+	string alchemicalMenuTitle;
+
+	// Название меню покупки ингредиентов
+	string buyingIngredientsMenuTitle;
+
+#pragma endregion НАЗВАНИЕ ЗАГОЛОВКОВ
 
 	// Принять решение
 	void chooseMenuItem(map <int, string> menu);
@@ -97,11 +127,23 @@ private:
 	// Проверка выбора в меню инструкций
 	void checkChoiceInInstructionsMenu();
 
+	// Проверка выбоа меню в меню алхимии
+	void checkChoiceInAlchemicalMenu();
+
+	// Проверка выбора пункта в меню покупки ингредиентов
+	void checkChoiceInBuyingIngredientsMenu();
+
 	// Заниматься алхимией
 	void doAlchemy();
 
+	// Покупка ингредиентов
+	void buyIngredients();
+
 	// Стирает с консоли все после печати алхимика
 	void eraseScreenAfterAlchemist();
+
+	// Заполнить все меню
+	void fillAllMenu();
 
 #pragma region МЕТОДЫ ПЕЧАТИ
 
@@ -112,19 +154,19 @@ private:
 	void printExitButton() override;
 
 	// Печать главного меню в цикле
-	void printMenuInLoop(map <int, string> menu) override;
+	void printMenuInLoop(map<int, string> menu, string menuTitle) override;
 
 	// Печать инструкций
 	void printInstructions() override;
-
-	// Печатает меню действий
-	void printActionMenu() override;
 
 	// Печать прощания
 	void printBye() override;
 
 	// Печать инфы про алхимика
 	void printAlchemist();
+
+	// Печать названия Меню
+	void printMenuTitle(string title);
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 

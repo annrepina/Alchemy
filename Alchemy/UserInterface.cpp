@@ -6,7 +6,7 @@ UserInterface::UserInterface()
 
 	this->titleXCoord = 0;
 	this->menuCode = 0;
-	//this->currentXCursorCoord = 0;
+	this->currentXCursorCoord = 0;
 	this->currentYCursorCoord = 0;
 
 	this->keyBoard = this->keyBoard->getInstance();
@@ -66,7 +66,7 @@ void UserInterface::printMenu(map <int, string> menu) const
 	}
 }
 
-map<int, string> UserInterface::fillActionMenuMap(const int numberOfItems, const string listOfItems[])
+map<int, string> UserInterface::fillMenuMap(const int numberOfItems, const string listOfItems[])
 {
 	// Стартовый ключ в ассоциативном массиве
 	int startKey = this->currentYCursorCoord;

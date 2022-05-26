@@ -2,17 +2,29 @@
 #include "AlchemyProgram.h"
 #include "FileReader.h"
 
+
+#include "EffectsTableBuilder.h"
+
 int main()
 {
     setlocale(LC_ALL, "rus");
     SetConsoleCP(1251);
 
-    Alchemist alchemist;
+    //Alchemist alchemist;
 
-    AlchemicalUserInterface userInterface;
+    //AlchemicalUserInterface userInterface;
 
-    userInterface.setTitle("Зельеварение");
+    //userInterface.setTitle("Зельеварение");
 
-    userInterface.launchMainLoop();
+    //userInterface.launchMainLoop();
+
+
+
+    EffectsTableBuilder effectsTableBuilder;
+
+    effectsTableBuilder.addEffects(35, POSITIVE);
+
+    effectsTableBuilder.addEffects(20, NEGATIVE);
+
 }
 

@@ -12,13 +12,21 @@ public:
 
 	void setEffectstable(AlchemyProgramParser* alchemyProgramParser);
 
+	// Добавить эффекты
+	void addEffects(int numberOfEffects, bool isPositive);
+
+	//// Добавить позитивные эффекты
+	//void addPositiveEffects(int numberOfEffects);
+
+	//// Добавить негативные эффекты
+	//void addNegativeEffects(int numberOfEffects);
+
 private:
 
 	EffectsTable* effectstable;
 
 	EffectBuilder* effectBuilder;
 
-	// Добавить позитивные эффекты
-	void addPositiveEffects(int numberOfEffects);
+
 };
 

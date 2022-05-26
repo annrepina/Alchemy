@@ -4,6 +4,9 @@
 #define NUMBER_OF_POSITIVE_EFFECTS	35		// Кол-во позитивных эффектов
 #define NUMBER_OF_NEGATIVE_EFFECTS	20		// Кол-во негативных эффектов
 
+#define POSITIVE	true
+#define NEGATIVE	false
+
 // Строитель эффектов
 class EffectBuilder
 {
@@ -22,13 +25,16 @@ public:
 	void setIsPositive(bool isPositive);
 
 	// Создать эффект
-	void buildEffect(int lastIndex, string listOfEffectsNames[], bool isPositive);
+	void buildEffect(int lastIndex, bool IsPositive);
 
-	// Создать позитивный эффект
-	void buildPositiveEffect(int lastIndex);
+	// Создать эффект - перегрузка
+	void buildEffect(int lastIndex, string listOfEffects[], bool isPositive);
 
-	// Создать негативныйэффект эффект
-	void buildNegativeEffect(int lastIndex);
+	//// Создать позитивный эффект
+	//void buildPositiveEffect(int lastIndex);
+
+	//// Создать негативныйэффект эффект
+	//void buildNegativeEffect(int lastIndex);
 
 	// Получить результат строительства
 	Effect* getResult();

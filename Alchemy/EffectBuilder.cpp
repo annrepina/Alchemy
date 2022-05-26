@@ -82,10 +82,19 @@ void EffectBuilder::setIsPositive(bool isPositive)
 	this->effect->setIsPositive(isPositive);
 }
 
-void EffectBuilder::buildEffect(int lastIndex, string listOfEffectsNames[], bool isPositive)
+void EffectBuilder::buildEffect(int lastIndex, bool IsPositive)
+{
+	if (IsPositive)
+		buildEffect(lastIndex, listOfPositiveEffectsNames, POSITIVE);
+
+	else
+		buildEffect(lastIndex, listOfNegativeEffectsNames, NEGATIVE);
+}
+
+void EffectBuilder::buildEffect(int lastIndex, string listOfEffects[], bool isPositive)
 {
 	// Выбираем рандомно имя
-	string name = chooseEffectName(lastIndex, listOfEffectsNames);
+	string name = chooseEffectName(lastIndex, listOfEffects);
 
 	// Устанавливаем имя
 	setName(name);
@@ -94,29 +103,29 @@ void EffectBuilder::buildEffect(int lastIndex, string listOfEffectsNames[], bool
 	setIsPositive(isPositive);
 }
 
-void EffectBuilder::buildPositiveEffect(int lastIndex)
-{
-	// Выбираем рандомно имя
-	string name = chooseEffectName(lastIndex, listOfPositiveEffectsNames);
-
-	// Устанавливаем имя
-	setName(name);
-
-	// Говорим, что эффект позитивный
-	setIsPositive(true);
-}
-
-void EffectBuilder::buildNegativeEffect(int lastIndex)
-{
-	// Выбираем рандомно имя
-	string name = chooseEffectName(lastIndex, listOfNegativeEffectsNames);
-
-	// Устанавливаем имя
-	setName(name);
-
-	// Говорим, что эффект позитивный
-	setIsPositive(false);
-}
+//void EffectBuilder::buildPositiveEffect(int lastIndex)
+//{
+//	// Выбираем рандомно имя
+//	string name = chooseEffectName(lastIndex, listOfPositiveEffectsNames);
+//
+//	// Устанавливаем имя
+//	setName(name);
+//
+//	// Говорим, что эффект позитивный
+//	setIsPositive(true);
+//}
+//
+//void EffectBuilder::buildNegativeEffect(int lastIndex)
+//{
+//	// Выбираем рандомно имя
+//	string name = chooseEffectName(lastIndex, listOfNegativeEffectsNames);
+//
+//	// Устанавливаем имя
+//	setName(name);
+//
+//	// Говорим, что эффект позитивный
+//	setIsPositive(false);
+//}
 
 Effect* EffectBuilder::getResult()
 {

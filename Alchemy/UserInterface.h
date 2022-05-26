@@ -11,11 +11,7 @@ using namespace std;
 using std::placeholders::_1;
 
 // Координаты
-#define TITLE_Y_COORD			1		// Координаты Y курсора для печати названия программы
 #define Y_COORD_AFTER_TITLE		4		// Координата Y после названя программы
-#define EXIT_Y_COORD			2		// Координата Y кнопки выхода
-#define MENU_Y_COORD			9		// Координата Y меню действий
-#define X_STANDARD_CURSOR_COORD	0		// Стандартная координата X курсора 
 
 // Коды клавиш
 #define VK_1					0x31	// Клавиша 1
@@ -58,6 +54,9 @@ protected:
 	// Экземпляр клавиатуры
 	KeyBoard* keyBoard;
 
+	// Код меню
+	int menuCode;
+
 	// Заполнить ассоциативный массив меню действий
 	virtual map<int, string> fillActionMenuMap(const int numberOfItems, const string listOfItems[]);
 
@@ -70,8 +69,8 @@ protected:
 	// Очищает на консоли всё, кроме названия программы
 	void eraseScreenAfterTitle() const;
 
-	// Расчитывает координату Х для заголовков
-	void setXCoord();
+	//// Расчитывает координату Х для заголовков
+	//void setXCoordInMiddle();
 
 #pragma region МЕТОДЫ ПЕЧАТИ
 
@@ -92,6 +91,9 @@ protected:
 
 	// Печатает меню действий
 	virtual void printActionMenu() = 0;
+
+	// Печать прощания
+	virtual void printBye() = 0;
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 

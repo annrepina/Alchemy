@@ -5,8 +5,9 @@ UserInterface::UserInterface()
 	//this->alchemist = nullptr;
 
 	this->titleXCoord = 0;
+	this->menuCode = 0;
 	//this->currentXCursorCoord = 0;
-	this->currentYCursorCoord = MENU_Y_COORD;
+	this->currentYCursorCoord = 0;
 
 	this->keyBoard = this->keyBoard->getInstance();
 }
@@ -40,10 +41,10 @@ bool UserInterface::isArrowKeyFalse(int key)
 	return res;
 }
 
-void UserInterface::setXCoord()
-{
-	titleXCoord = (calculateConsoleWidth() / 2) - (title.length() / 2);
-}
+//void UserInterface::setXCoordInMiddle()
+//{
+//	titleXCoord = (calculateConsoleWidth() / 2) - (title.length() / 2);
+//}
 
 void UserInterface::printMenu(map <int, string> menu) const
 {

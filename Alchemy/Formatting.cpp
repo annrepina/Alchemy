@@ -264,6 +264,13 @@ int calculateConsoleWidth()
     return consoleWidth;
 }
 
+int calculateXCoordInMiddle(string text)
+{
+    int x = (calculateConsoleWidth() / 2) - (text.length() / 2);
+
+    return x;
+}
+
 void printTopTableFrame(int numberOfColumn, int columWidth)
 {
     cout << turnOnDECMode() << TOP_LEFT_CORNER;

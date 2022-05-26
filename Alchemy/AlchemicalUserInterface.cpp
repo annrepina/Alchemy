@@ -14,17 +14,29 @@ string AlchemicalUserInterface::listOfALchemicalMenuItems[NUMBER_OF_ALCHEMICAL_M
 	"Работа с таблицами"
 };
 
+string AlchemicalUserInterface::listOfInstructionsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] = {
+	"Назад",
+	"Выйти из программы"
+};
+
 AlchemicalUserInterface::AlchemicalUserInterface()
 {
 	this->alchemist = new Alchemist();
 	this->ingredientBuilder = new IngredientBuilder();
 	this->exitFlag = false;
+	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+	this->boundaryYCoord = MAIN_MENU_Y_COORD;
+	this->instructionsXCoord = 0;
+	this->instructionsTitle = "Инструкции к программе \"Зельеварение\"";
 }
 
 void AlchemicalUserInterface::launchMainLoop()
 {
 	mainMenu = fillActionMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfMainMenuItems);
 	alchemicalMenu = fillActionMenuMap(NUMBER_OF_ALCHEMICAL_MENU_ITEMS, listOfALchemicalMenuItems);
+
+	this->currentYCursorCoord = INSTRUCTIONS_Y_COORD;
+	instructionsMenu = fillActionMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfInstructionsMenuItems);
 
 	// Возможно раскоментировать
 	//setXCoord();
@@ -37,38 +49,14 @@ void AlchemicalUserInterface::launchMainLoop()
 
 	printAlchemist();
 
+	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+	this->boundaryYCoord = MAIN_MENU_Y_COORD;
+
+	menuCode = MenuCode::MainMenu;
+
 	printMenuInLoop(mainMenu);
 
-
-
-	//printMenu();
-
-	this->func = std::bind(&AlchemicalUserInterface::isMenuChoiceFalse, this, _1);
-
-	checkMenuChoice();
-
-	eraseScreenAfterTitle();
-
-	switch (this->keyBoard->getPressedKey())
-	{
-	case VK_1: case VK_NUMPAD1:
-	{
-		doAlchemy();
-	}
-	break;
-
-	case VK_2: case VK_NUMPAD2:
-	{
-		cout << "\nИнструкция" << endl;
-	}
-	break;
-
-	case VK_ESCAPE:
-	{
-		cout << "\nДо скорой встречи!" << endl;
-	}
-	break;
-	}
+	printBye();
 }
 
 void AlchemicalUserInterface::chooseMenuItem(map <int, string> menu)
@@ -81,31 +69,100 @@ void AlchemicalUserInterface::chooseMenuItem(map <int, string> menu)
 
 		switch (this->keyBoard->getPressedKey())
 		{
-		case VK_UP:
-		{
-			// Проверяем стрелочки
-			checkArrowsChoice(MENU_Y_COORD, VK_UP, menu);
-		}
-		break;
+			case VK_UP:
+			{
+				// Проверяем стрелочки
+				checkArrowsChoice(boundaryYCoord, VK_UP, menu);
+			}
+			break;
 
-		case VK_DOWN:
-		{
-			// Проверяем стрелочки
-			checkArrowsChoice(MENU_Y_COORD + NUMBER_OF_MAIN_MENU_ITEMS - 1, VK_DOWN, menu);
-		}
-		break;
+			case VK_DOWN:
+			{
+				// Проверяем стрелочки
+				checkArrowsChoice(boundaryYCoord + NUMBER_OF_MAIN_MENU_ITEMS - 1, VK_DOWN, menu);
+			}
+			break;
 
-		case VK_RETURN:
-		{
-			// !! Осуществление действий
+			case VK_RETURN:
+			{
+				// Сделать выбор пункта меню
+				makeChoice();// !! Осуществление действий
+			}
+			break;
 
-		}
-		break;
-
-		case VK_ESCAPE:
+			case VK_ESCAPE:
+			{
+				exitFlag = true;
+			}
 			break;
 		}
 	} while (false == exitFlag);
+}
+
+void AlchemicalUserInterface::makeChoice()
+{
+	switch (menuCode)
+	{
+		case MenuCode::MainMenu:
+		{
+			checkChoiceInMainMenu();
+		}
+		break;
+
+		case MenuCode::AlchemicalMenu:
+		{
+
+		}
+		break;
+
+		case MenuCode::InstructionsMenu:
+		{
+			checkChoiceInInstructionsMenu();
+		}
+		break;
+	}
+}
+
+void AlchemicalUserInterface::checkChoiceInMainMenu()
+{
+	switch (this->currentYCursorCoord)
+	{
+		case MainMenuCode::DoAlchemy:
+		{
+			doAlchemy();
+		}
+		break;
+
+		case MainMenuCode::ReadInstructions:
+		{
+			printInstructions();
+		}
+		break;
+	}
+}
+
+void AlchemicalUserInterface::checkChoiceInInstructionsMenu()
+{
+	switch (this->currentYCursorCoord)
+	{
+		case InstructionsMenuCode::Return:
+		{
+			this->menuCode = MenuCode::MainMenu;
+			this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+			this->boundaryYCoord = MAIN_MENU_Y_COORD;
+
+			eraseScreenAfterAlchemist();
+
+			printMenuInLoop(mainMenu);
+		}
+		break;
+
+		case InstructionsMenuCode::Exit:
+		{
+			this->exitFlag = true;
+		}
+		break;
+	}
 }
 
 void AlchemicalUserInterface::doAlchemy()
@@ -157,9 +214,15 @@ void AlchemicalUserInterface::doAlchemy()
 	printActionMenu();
 }
 
+void AlchemicalUserInterface::eraseScreenAfterAlchemist()
+{
+	cout << goToXY(Y_COORD_AFTER_ALCHEMIST, STANDARD_CURSOR_X_COORD);
+	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+}
+
 void AlchemicalUserInterface::printTitle()
 {
-	this->setXCoord();
+	titleXCoord = calculateXCoordInMiddle(title);
 
 	printFramedText(title, TITLE_Y_COORD, titleXCoord);
 }
@@ -181,39 +244,34 @@ void AlchemicalUserInterface::printMenuInLoop(map<int, string> menu)
 	printColoredText("Выберите действие:", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 	cout << endl;
 
-	//// Изменяем цвет фона на серый
-	//cout << changeBackgroundColorsExtra(R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
-
-	//cout << "Выберите действие: " << endl;
-
-	//cout << resetColorParams();
-
-	//// Задаем значение координате Y
- //   this->currentYCursorCoord = MENU_Y_COORD;
-
 	printMenu(menu);
 
-	//<< "Создание зелий" << endl
-	//<< "Покупка ингредиентов" << endl
-	//<< "Продажа ингредиентов" << endl
-	//<< "Продажа зелий" << endl
-	//<< "Работа с таблицей" << endl;
-
-	cout << goToXY(currentYCursorCoord, X_STANDARD_CURSOR_COORD);
-
-	//// Запоминаем текущие координаты курсора
-	//this->currentXCursorCoord = 1;
+	cout << goToXY(currentYCursorCoord, STANDARD_CURSOR_X_COORD);
 	
 	chooseMenuItem(menu);
 }
 
 void AlchemicalUserInterface::printInstructions()
 {
-	eraseScreenAfterTitle();
+	//eraseScreenAfterTitle();
 
-	cout << "Инструкции к программе \"Зельеварение\"" << endl
-		<< "0 - назад"
-		<< "ESC - выход";
+	eraseScreenAfterAlchemist();
+
+	this->instructionsXCoord = calculateXCoordInMiddle(instructionsTitle);
+
+	cout << goToXY(Y_COORD_AFTER_ALCHEMIST, instructionsXCoord);
+
+	printColoredText(instructionsTitle, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+	cout << endl;
+
+	//printTextWithBackground("Назад", R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
+
+	menuCode = MenuCode::InstructionsMenu;
+	
+	this->currentYCursorCoord = INSTRUCTIONS_Y_COORD;
+	this->boundaryYCoord = INSTRUCTIONS_Y_COORD;
+
+	printMenuInLoop(instructionsMenu);
 }
 
 void AlchemicalUserInterface::printActionMenu()
@@ -240,11 +298,11 @@ void AlchemicalUserInterface::printActionMenu()
 	//<< "Продажа зелий" << endl
 	//<< "Работа с таблицей" << endl;
 
-	cout << goToXY(MENU_Y_COORD, 1);
+	cout << goToXY(MAIN_MENU_Y_COORD, 1);
 
 	//// Запоминаем текущие координаты курсора
 	//this->currentXCursorCoord = 1;
-	this->currentYCursorCoord = MENU_Y_COORD;
+	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 
 	this->func = std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this, _1);
 
@@ -261,7 +319,7 @@ void AlchemicalUserInterface::printActionMenu()
 		{
 			// !! раскоментить
 			// Проверяем стрелочки
-			checkArrowsChoice(MENU_Y_COORD, VK_UP, alchemicalMenu);
+			checkArrowsChoice(MAIN_MENU_Y_COORD, VK_UP, alchemicalMenu);
 
 			//if (ACTION_MENU_Y_COORD == this->currentYCursorCoord)
 			//{
@@ -299,13 +357,13 @@ void AlchemicalUserInterface::printActionMenu()
 		{
 			// !! раскоментить
 			// Проверяем стрелочки
-			checkArrowsChoice(MENU_Y_COORD + NUMBER_OF_MAIN_MENU_ITEMS - 1, VK_DOWN, alchemicalMenu);
+			checkArrowsChoice(MAIN_MENU_Y_COORD + NUMBER_OF_MAIN_MENU_ITEMS - 1, VK_DOWN, alchemicalMenu);
 		}
 		break;
 
 		case VK_RETURN:
 		{
-			if (MENU_Y_COORD == this->currentYCursorCoord)
+			if (MAIN_MENU_Y_COORD == this->currentYCursorCoord)
 			{
 				exitFlag = false;
 			}
@@ -322,6 +380,13 @@ void AlchemicalUserInterface::printActionMenu()
 			break;
 		}
 	} while (false == exitFlag);
+}
+
+void AlchemicalUserInterface::printBye()
+{
+	eraseScreenAfterAlchemist();
+
+	printColoredText("До скорой встречи!", R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
 }
 
 void AlchemicalUserInterface::printAlchemist()

@@ -23,7 +23,6 @@ using namespace std;
 #define G_LIGHT_GREEN		"e1"
 #define B_LIGHT_GREEN		"cc"
 
-
 // Белый цвет экрана
 #define WHITE_DEFAULT_16	"FF"      // Белый цвет фона
 
@@ -42,6 +41,14 @@ using namespace std;
 #define G_DECIMAL_GREY		"96"
 #define B_DECIMAL_GREY		"96"
 
+// Красный цвет
+#define R_DECIMAL_RED		"255"
+#define G_DECIMAL_RED		"0"
+#define B_DECIMAL_RED		"0"
+
+//// Цвета для стандартоного форматированя текста
+//// Красный цвет
+//#define RED_FOREGROUND		"31"		
 
 
 /* Коды для стирания вывода с экрана консоли */
@@ -149,6 +156,9 @@ string turnOffDECMode();
 
 // Возвращает ширину консоли
 int calculateConsoleWidth();
+
+// Возвращает координату х для печати текста hgjchtlbyt консоли
+int calculateXCoordInMiddle(string text);
 
 #pragma region Функции для печати таблицы с одинаковой шириной колонок и строчек с высотой 1
 

@@ -5,8 +5,8 @@ UserInterface::UserInterface()
 	//this->alchemist = nullptr;
 
 	this->titleXCoord = 0;
-	this->currentXCursorCoord = 0;
-	this->currentYCursorCoord = 0;
+	//this->currentXCursorCoord = 0;
+	this->currentYCursorCoord = MENU_Y_COORD;
 
 	this->keyBoard = this->keyBoard->getInstance();
 }
@@ -16,7 +16,7 @@ void UserInterface::setTitle(string title)
 	this->title = title;
 }
 
-void UserInterface::eraseScreenAfterTitle()
+void UserInterface::eraseScreenAfterTitle() const
 {
 	cout << goToXY(Y_COORD_AFTER_TITLE, 0);
 
@@ -45,19 +45,44 @@ void UserInterface::setXCoord()
 	titleXCoord = (calculateConsoleWidth() / 2) - (title.length() / 2);
 }
 
-void UserInterface::fillActionMenuMap(const int menuYCoord, const int numberOfItems, const string listOfItems[], map<int, string> menu)
+void UserInterface::printMenu(map <int, string> menu) const
 {
 	// Стартовый ключ в ассоциативном массиве
-	int startKey = menuYCoord;
+	int border = currentYCursorCoord + menu.size();
+
+	// Печатаем ассоциативный массив
+	for (int i = currentYCursorCoord; i < border; ++i)
+	{
+		if (i == currentYCursorCoord)
+		{
+			printTextWithBackground(menu[i], R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
+			cout << endl;
+		}
+
+		else
+			// Печатаем пункт меню
+			cout << menu[i] << endl;
+	}
+}
+
+map<int, string> UserInterface::fillActionMenuMap(const int numberOfItems, const string listOfItems[])
+{
+	// Стартовый ключ в ассоциативном массиве
+	int startKey = this->currentYCursorCoord;
+
+	// Создаем ассоциативный массив
+	map<int, string> menu;
 
 	// Заполняем ассоциативный массив
 	for (int i = 0; i < numberOfItems; ++i, ++startKey)
 	{
 		menu.emplace(startKey, listOfItems[i]);
 	}
+
+	return menu;
 }
 
-void UserInterface::checkMenuChoice()
+void UserInterface::checkMenuChoice() const
 {
 	// нажатая клавиша
 	int key;
@@ -72,19 +97,16 @@ void UserInterface::checkMenuChoice()
 	while (this->func(key));
 }
 
-void UserInterface::checkArrowsChoice(bool &exitFlag, int BorderYCoord, int keyCode, map <int, string> actionMenu)
+void UserInterface::checkArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu)
 {
-	// Сбрасываем флаг
-	exitFlag = false;
-
 	// если граничная координата не равна текущей
-	if (BorderYCoord != this->currentYCursorCoord)
+	if (borderYCoord != this->currentYCursorCoord)
 	{
 		// Если кнопка вниз
 		if (VK_DOWN == keyCode)
 		{
 			// Печатаем пункт меню без выделения
-			cout << actionMenu[currentYCursorCoord] << endl;
+			cout << menu[currentYCursorCoord];
 
 			// увеличиваем координаты
 			++this->currentYCursorCoord;
@@ -95,22 +117,11 @@ void UserInterface::checkArrowsChoice(bool &exitFlag, int BorderYCoord, int keyC
 			--this->currentYCursorCoord;
 
 		// Переходим по координатам
-		cout << goToXY(this->currentYCursorCoord, 1);
+		cout << goToXY(this->currentYCursorCoord, 0);
 
-		// печатаем главное меню действий
-		for (int i = currentYCursorCoord; i < MENU_Y_COORD + NUMBER_OF_MAIN_MENU_ITEMS; ++i)
-		{
-			if (i == currentYCursorCoord)
-			{
-				printTextWithBackground(actionMenu[i], R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
-			}
-
-			else
-				// Печатаем пункт меню
-				cout << actionMenu[i] << endl;
-		}
+		printMenu(menu);
 
 		// Возвращаемся в координаты
-		cout << goToXY(currentYCursorCoord, 1);
+		cout << goToXY(currentYCursorCoord, 0);
 	}
 }

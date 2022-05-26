@@ -13,10 +13,9 @@ using std::placeholders::_1;
 // Координаты
 #define TITLE_Y_COORD			1		// Координаты Y курсора для печати названия программы
 #define Y_COORD_AFTER_TITLE		4		// Координата Y после названя программы
-
 #define EXIT_Y_COORD			2		// Координата Y кнопки выхода
-
 #define MENU_Y_COORD			9		// Координата Y меню действий
+#define X_STANDARD_CURSOR_COORD	0		// Стандартная координата X курсора 
 
 // Коды клавиш
 #define VK_1					0x31	// Клавиша 1
@@ -46,7 +45,7 @@ public:
 	virtual void launchMainLoop() = 0;
 
 	// задать название программы
-	void setTitle(string title);
+	void setTitle(const string title);
 
 protected:
 
@@ -60,16 +59,16 @@ protected:
 	KeyBoard* keyBoard;
 
 	// Заполнить ассоциативный массив меню действий
-	virtual void fillActionMenuMap(const int menuYCoord, const int numberOfItems, const string listOfItems[], map <int, string> menu);
+	virtual map<int, string> fillActionMenuMap(const int numberOfItems, const string listOfItems[]);
 
 	// Проверка выбора в меню
-	void checkMenuChoice();
+	void checkMenuChoice() const;
 
 	// Проверка выбора стрелочек вверх/вниз
-	void checkArrowsChoice(bool& exitFlag, int BorderYCoord, int keyCode, map <int, string> actionMenu);
+	void checkArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu);
 
 	// Очищает на консоли всё, кроме названия программы
-	void eraseScreenAfterTitle();
+	void eraseScreenAfterTitle() const;
 
 	// Расчитывает координату Х для заголовков
 	void setXCoord();
@@ -83,7 +82,10 @@ protected:
 	virtual void printExitButton() = 0;
 
 	// Печать главного меню
-	virtual void printMainMenu() = 0;
+	virtual void printMenu(map <int, string> menu) const;
+
+	// Печать главного меню в цикле
+	virtual void printMenuInLoop(map <int, string> menu) = 0;
 
 	// Печать инструкций
 	virtual void printInstructions() = 0;
@@ -108,8 +110,8 @@ protected:
 	// Координата Х - печати названия программы
 	int titleXCoord;
 
-	// Текущая координата Х
-	int currentXCursorCoord;
+	//// Текущая координата Х
+	//int currentXCursorCoord;
 
 	// Текущая координата Y
 	int currentYCursorCoord;

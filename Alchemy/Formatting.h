@@ -38,10 +38,6 @@ using namespace std;
 #define B_AQUAMARINE        "203"
 
 // Серый цвет
-//#define R_DECIMAL_GREY		"128"
-//#define G_DECIMAL_GREY		"128"
-//#define B_DECIMAL_GREY		"128"
-
 #define R_DECIMAL_GREY		"96"
 #define G_DECIMAL_GREY		"96"
 #define B_DECIMAL_GREY		"96"
@@ -138,6 +134,9 @@ void printFramedText(string text, int yCoord, int xCoord);
 
 // Печать текста с другим цветом фона
 void printTextWithBackground(string text, string r, string g, string b);
+
+// Печать цветного текста
+void printColoredText(string text, string r, string g, string b);
 
 // переходит по координатам, а после увеличивает Y координату
 void goToCoordAndIncreaseY(int& yCoord, int xCoord);

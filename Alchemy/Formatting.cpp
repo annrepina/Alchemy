@@ -213,6 +213,15 @@ void printTextWithBackground(string text, string r, string g, string b)
     cout << resetColorParams();
 }
 
+void printColoredText(string text, string r, string g, string b)
+{
+    cout << changeForegroundColorsExtra(r, g, b);
+
+    cout << text;
+
+    cout << resetColorParams();
+}
+
 void goToCoordAndIncreaseY(int& yCoord, int xCoord)
 {
     cout << goToXY(yCoord, xCoord);

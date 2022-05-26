@@ -3,8 +3,8 @@
 #include "Alchemist.h"
 #include "IngredientBuilder.h"
 
-// Координаты
-#define MENU_Y_COORD					9		// Координата Y меню действий
+//// Координаты
+//#define MENU_Y_COORD					9		// Координата Y меню действий
 
 // Кол-ва
 #define NUMBER_OF_MAIN_MENU_ITEMS		2		// Кол-во пунктов в главном меню
@@ -40,6 +40,12 @@ private:
 	// Ассоциативный массив координат и "кнопок" меню алхимии
 	map <int, string> alchemicalMenu;
 
+	// Флаг для выхода из главного цикла
+	bool exitFlag;
+
+	// Принять решение
+	void chooseMenuItem(map <int, string> menu);
+
 	// Заниматься алхимией
 	void doAlchemy();
 
@@ -51,8 +57,8 @@ private:
 	// Печатает "кнопку" выхода ESC
 	void printExitButton() override;
 
-	// Печать главного меню
-	void printMainMenu() override;
+	// Печать главного меню в цикле
+	void printMenuInLoop(map <int, string> menu) override;
 
 	// Печать инструкций
 	void printInstructions() override;

@@ -5,6 +5,10 @@ AlchemyProgramBuilder::AlchemyProgramBuilder()
 	reset();
 
 	this->effectsTableBuilder = new EffectsTableBuilder();
+
+	this->ingredientsTableBuilder = new IngredientsTableBuilder();
+
+	this->ingredientBuilder = new IngredientBuilder();
 }
 
 AlchemyProgramBuilder::~AlchemyProgramBuilder()
@@ -19,6 +23,35 @@ AlchemyProgram* AlchemyProgramBuilder::getResult()
 	reset();
 
 	return res;
+}
+
+void AlchemyProgramBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgramParse)
+{
+	/// Парсим
+
+	// Если док пустой
+
+	// Строим таблицу эффектов
+	this->effectsTableBuilder->buildEffectsTable(alchemyProgramParse);
+
+	// Присваиваем программе таблицу эффектов
+	this->alchemyProgram->setEffectsTable(this->effectsTableBuilder->getResult());
+
+	// Присвоить строителю ингредиентов таблицу эффектов
+	this->ingredientBuilder->setEffectsTable(this->alchemyProgram->getEffectsTable());
+
+	// Заполняем список имен эффектов
+	this->ingredientBuilder->fillEffectId();
+
+	// Задаем строителя ингредиентов
+	this->ingredientsTableBuilder->setIngredientBuilder(ingredientBuilder);
+
+	// Строим таблицу ингредиентов
+	this->ingredientsTableBuilder->buildIngredientsTable(alchemyProgramParse);
+
+	// Присваиваем таблицу ингредиентов
+	this->alchemyProgram->setIngredientsTable(ingredientsTableBuilder->getResult());
+
 }
 
 void AlchemyProgramBuilder::setEffectsTable(AlchemyProgramParser* alchemyProgramParse)

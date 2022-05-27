@@ -37,10 +37,21 @@ AlchemicalUserInterface::AlchemicalUserInterface()
 	this->mainMenuTitle = "Главное меню";
 	this->alchemicalMenuTitle = "Меню алхимии";
 	this->buyingIngredientsMenuTitle = "Покупка ингредиентов";
+
+	// Программа - алхимия
+	this->alchemyProgram = nullptr;
+
+	// Строитель для алхимической программы
+	this->alchemyProgramBuilder = new AlchemyProgramBuilder();
+
+	// создаем новый экземпляр
+	this->alchemyProgramParser = new AlchemyProgramParser();
 }
 
 void AlchemicalUserInterface::launchMainLoop()
 {
+	setAlchemyProgram();
+
 	fillAllMenu();
 
 	printTitle();
@@ -54,6 +65,15 @@ void AlchemicalUserInterface::launchMainLoop()
 	printMenuInLoop(mainMenu, mainMenuTitle);
 
 	printBye();
+}
+
+void AlchemicalUserInterface::setAlchemyProgram()
+{
+	// Создать программу Алхимии
+	this->alchemyProgramBuilder->buildAlchemyProgram(this->alchemyProgramParser);
+
+	// Присвоить результат программе алхимии
+	this->alchemyProgram = this->alchemyProgramBuilder->getResult();
 }
 
 void AlchemicalUserInterface::chooseMenuItem(map <int, string> menu)
@@ -102,31 +122,31 @@ void AlchemicalUserInterface::makeChoice()
 	{
 		case MenuCode::MainMenu:
 		{
-			checkChoiceInMainMenu();
+			checkMainMenu();
 		}
 		break;
 
 		case MenuCode::AlchemicalMenu:
 		{
-			checkChoiceInAlchemicalMenu();
+			checkAlchemicalMenu();
 		}
 		break;
 
 		case MenuCode::InstructionsMenu:
 		{
-			checkChoiceInInstructionsMenu();
+			checkInstructionsMenu();
 		}
 		break;
 
 		case MenuCode::BuyingIngredientsMenu:
 		{
-			checkChoiceInBuyingIngredientsMenu();
+			checkBuyingIngredientsMenu();
 		}
 		break;
 	}
 }
 
-void AlchemicalUserInterface::checkChoiceInMainMenu()
+void AlchemicalUserInterface::checkMainMenu()
 {
 	switch (this->currentYCursorCoord)
 	{
@@ -144,7 +164,7 @@ void AlchemicalUserInterface::checkChoiceInMainMenu()
 	}
 }
 
-void AlchemicalUserInterface::checkChoiceInInstructionsMenu()
+void AlchemicalUserInterface::checkInstructionsMenu()
 {
 	switch (this->currentYCursorCoord)
 	{
@@ -168,7 +188,7 @@ void AlchemicalUserInterface::checkChoiceInInstructionsMenu()
 	}
 }
 
-void AlchemicalUserInterface::checkChoiceInAlchemicalMenu()
+void AlchemicalUserInterface::checkAlchemicalMenu()
 {
 	switch (this->currentYCursorCoord)
 	{
@@ -186,7 +206,7 @@ void AlchemicalUserInterface::checkChoiceInAlchemicalMenu()
 	}
 }
 
-void AlchemicalUserInterface::checkChoiceInBuyingIngredientsMenu()
+void AlchemicalUserInterface::checkBuyingIngredientsMenu()
 {
 	switch (this->currentYCursorCoord)
 	{

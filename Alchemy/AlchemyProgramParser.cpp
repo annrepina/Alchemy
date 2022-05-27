@@ -2,4 +2,5 @@
 
 AlchemyProgramParser::AlchemyProgramParser()
 {
+	a = 1;
 }

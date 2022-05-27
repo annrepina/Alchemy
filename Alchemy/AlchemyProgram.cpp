@@ -28,6 +28,11 @@ Alchemist* AlchemyProgram::getAlchemist()
 	return this->alchemist;
 }
 
+EffectsTable* AlchemyProgram::getEffectsTable()
+{
+	return this->effectsTable;
+}
+
 //void AlchemyProgram::printTitle()
 //{
 //	this->setXCoord();

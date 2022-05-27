@@ -2,7 +2,7 @@
 #include "AlchemyProgram.h"
 #include "AlchemyProgramParser.h"
 #include "EffectsTableBuilder.h"
-
+#include "IngredientsTableBuilder.h"
 
 class AlchemyProgramBuilder
 {
@@ -17,8 +17,8 @@ public:
 	// Получить результа
 	AlchemyProgram* getResult();
 
-
-	void buildAlchemyProgram();
+	// Построить программу алхимии
+	void buildAlchemyProgram(AlchemyProgramParser* alchemyProgramParse);
 
 	// Задает таблицу эффектов
 	void setEffectsTable(AlchemyProgramParser* alchemyProgramParse);
@@ -31,7 +31,11 @@ private:
 	// Строитель таблицы эффектов
 	EffectsTableBuilder* effectsTableBuilder;
 
-	//IngredientsTableBuilder* 
+	// Строитель таблицы ингредиентов
+	IngredientsTableBuilder* ingredientsTableBuilder;
+
+	// Строитель ингредиентов
+	IngredientBuilder* ingredientBuilder;
 
 	// Сбросить до начальных установок
 	void reset();

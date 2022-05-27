@@ -76,6 +76,12 @@ private:
 	// Строитель для алхимической программы
 	AlchemyProgramBuilder* alchemyProgramBuilder;
 
+	// Парсер для программы алхимии
+	AlchemyProgramParser* alchemyProgramParser;
+
+	// Настроить программу Алхимии
+	void setAlchemyProgram();
+
 	// Алхимик (пользователь)
 	//Alchemist* alchemist;
 
@@ -138,16 +144,16 @@ private:
 	void makeChoice();
 
 	// Проверка выбора в главном меню
-	void checkChoiceInMainMenu();
+	void checkMainMenu();
 
 	// Проверка выбора в меню инструкций
-	void checkChoiceInInstructionsMenu();
+	void checkInstructionsMenu();
 
 	// Проверка выбоа меню в меню алхимии
-	void checkChoiceInAlchemicalMenu();
+	void checkAlchemicalMenu();
 
 	// Проверка выбора пункта в меню покупки ингредиентов
-	void checkChoiceInBuyingIngredientsMenu();
+	void checkBuyingIngredientsMenu();
 
 	// Заниматься алхимией
 	void doAlchemy();

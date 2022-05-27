@@ -43,6 +43,7 @@ void IngredientsTable::print()
 		for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
 		{
 			this->effectsTable->getEffectByKey(ingredient.second->getEffectId(i))->print();
+			cout << ' ';
 		}
 
 		cout << endl;

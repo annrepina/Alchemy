@@ -1,7 +1,9 @@
 #pragma once
 #include "UserInterface.h"
-#include "Alchemist.h"
-#include "IngredientBuilder.h"
+//#include "Alchemist.h"
+//#include "IngredientBuilder.h"
+#include "AlchemyProgramBuilder.h"
+//#include "AlchemyProgram.h"
 
 // Координаты
 #define TITLE_Y_COORD					1		// Координаты Y курсора для печати названия программы
@@ -68,11 +70,17 @@ private:
 		CreateNewIngredient
 	};
 
-	// Алхимик (пользователь)
-	Alchemist* alchemist;
+	// Программа - алхимия
+	AlchemyProgram* alchemyProgram;
 
-	// Строитель ингредиентов
-	IngredientBuilder* ingredientBuilder;
+	// Строитель для алхимической программы
+	AlchemyProgramBuilder* alchemyProgramBuilder;
+
+	// Алхимик (пользователь)
+	//Alchemist* alchemist;
+
+	//// Строитель ингредиентов
+	//IngredientBuilder* ingredientBuilder;
 
 	// Список строк - пунктов главного меню
 	static string listOfMainMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];

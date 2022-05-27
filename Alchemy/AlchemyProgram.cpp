@@ -6,9 +6,21 @@ AlchemyProgram::AlchemyProgram()
 {
 	this->alchemist = new Alchemist();
 
+	this->effectsTable = nullptr;
 
+	this->ingredientsTable = nullptr;
 
 	
+}
+
+void AlchemyProgram::setEffectsTable(EffectsTable* effectsTable)
+{
+	this->effectsTable = effectsTable;
+}
+
+Alchemist* AlchemyProgram::getAlchemist()
+{
+	return this->alchemist;
 }
 
 //void AlchemyProgram::printTitle()

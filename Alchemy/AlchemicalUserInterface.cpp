@@ -27,8 +27,8 @@ string AlchemicalUserInterface::listOfBuyingIngredientsMenuItems[NUMBER_OF_MAIN_
 
 AlchemicalUserInterface::AlchemicalUserInterface()
 {
-	this->alchemist = new Alchemist();
-	this->ingredientBuilder = new IngredientBuilder();
+	//this->alchemist = new Alchemist();
+	//this->ingredientBuilder = new IngredientBuilder();
 	this->exitFlag = false;
 	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 	this->boundaryYCoord = MAIN_MENU_Y_COORD;
@@ -43,19 +43,11 @@ void AlchemicalUserInterface::launchMainLoop()
 {
 	fillAllMenu();
 
-	// Возможно раскоментировать
-	//setXCoord();
-
 	printTitle();
 
 	printExitButton();
 
-	cout << endl;
-
 	printAlchemist();
-
-	//this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-	//this->boundaryYCoord = MAIN_MENU_Y_COORD;
 
 	menuCode = MenuCode::MainMenu;
 
@@ -200,7 +192,7 @@ void AlchemicalUserInterface::checkChoiceInBuyingIngredientsMenu()
 	{
 		case BuyingIngredientsMenuCode::ChooseFromList:
 		{
-
+			buyIngredientsFromList();
 		}
 		break;
 
@@ -277,7 +269,7 @@ void AlchemicalUserInterface::printExitButton()
 	int xCoord = calculateConsoleWidth() - exit.length();
 
 	// Печать кнопки
-	cout << goToXY(EXIT_Y_COORD, xCoord) << exit << endl;
+	cout << goToXY(EXIT_Y_COORD, xCoord) << exit << endl << endl;
 }
 
 void AlchemicalUserInterface::printMenuInLoop(map<int, string> menu, string menuTitle)
@@ -325,22 +317,20 @@ void AlchemicalUserInterface::printBye()
 
 void AlchemicalUserInterface::printAlchemist()
 {
-	// ПАРСИМ!
-
-	string name;
-
 	// Если файл пустой и имя пустое
-	if ("" == this->alchemist->getName())
+	if ("" == this->alchemyProgram->getAlchemist()->getName())
 	{
+		string name;
+
 		cout << "Введите ваше имя: ";
 		cin >> name;
-	}
 
-	this->alchemist->setName(name);
+		this->alchemyProgram->getAlchemist()->setName(name);
+	}
 
 	eraseScreenAfterTitle();
 
-	this->alchemist->print();
+	this->alchemyProgram->getAlchemist()->print();
 }
 
 void AlchemicalUserInterface::printMenuTitle(string title)

@@ -5,7 +5,9 @@
 //#include "Formatting.h"
 //#include "KeyBoard.h"
 #include "Alchemist.h"
-#include "EffectsTableBuilder.h"
+//#include "EffectsTableBuilder.h"
+#include "IngredientsTable.h"
+#include "EffectsTable.h"
 
 //using namespace std;
 //
@@ -30,7 +32,15 @@ public:
 	// Конструктор по умолчанию
 	AlchemyProgram();
 
+	// Сеттер для таблицы эффектов
+	void setEffectsTable(EffectsTable* effectsTable);
 
+#pragma region ГЕТТЕРЫ
+
+	// Геттер для алхимика
+	Alchemist* getAlchemist();
+
+#pragma endregion ГЕТТЕРЫ
 
 	//// Запуск главного цикла программы
 	//void launchMainLoop();
@@ -43,8 +53,12 @@ private:
 	// Таблица эффектов
 	EffectsTable* effectsTable;
 
-	// Строитель таблицы эффектов
-	EffectsTableBuilder* effectsTableBuilder;
+	// Таблица ингредиентов
+	IngredientsTable* ingredientsTable;
+
+	//// Строитель таблицы эффектов
+	//EffectsTableBuilder* effectsTableBuilder;
+
 
 
 //	// Функция для предикатов
@@ -53,8 +67,8 @@ private:
 //	// Координата Х - печати названия программы
 //	int titleXCoord;
 //
-	// Название программы
-	string title = "Зельеварение";
+	//// Название программы
+	//string title = "Зельеварение";
 //
 //	//// Нажатая пользователем клавиша
 //	//int key;

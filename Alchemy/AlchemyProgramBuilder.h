@@ -1,5 +1,7 @@
 #pragma once
 #include "AlchemyProgram.h"
+#include "AlchemyProgramParser.h"
+#include "EffectsTableBuilder.h"
 
 
 class AlchemyProgramBuilder
@@ -28,6 +30,8 @@ private:
 
 	// Строитель таблицы эффектов
 	EffectsTableBuilder* effectsTableBuilder;
+
+	//IngredientsTableBuilder* 
 
 	// Сбросить до начальных установок
 	void reset();

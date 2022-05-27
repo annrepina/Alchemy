@@ -1,6 +1,7 @@
 #include "IngredientBuilder.h"
+#include "ServiceFunctions.h"
 
-string IngredientBuilder::listOfIngredientsNames[100] = {
+string IngredientBuilder::listOfIngredientsNames[NUMBER_OF_INGREDIENTS] = {
 	"Абесинский окунь",
 	"Алый корень Нирна",
 	"Белянка",
@@ -103,72 +104,41 @@ string IngredientBuilder::listOfIngredientsNames[100] = {
 	"Пепел порождения",
 };
 
-//string IngredientBuilder::listOfEffectsNames[55] = {
-//	"Водное дыхание",
-//	"Восстановление запаса сил",
-//	"Восстановление здоровья",
-//	"Восстановление магии",
-//	"Исцеление болезней",
-//	"Невидимость",
-//	"Повышение запаса сил",
-//	"Повышение здоровья",
-//	"Повышение магии",
-//	"Повышение искусства торговли",
-//	"Повышение навыка: блокирование",
-//	"Повышение навыка: взлом",
-//	"Повышение навыка: восстановление",
-//	"Повышение навыка: двуручное оружие",
-//	"Повышение навыка: зачарование",
-//	"Повышение навыка: изменение",
-//	"Повышение навыка: иллюзия",
-//	"Повышение навыка: карманные кражи",
-//	"Повышение навыка: колдовство",
-//	"Повышение навыка: кузнечное дело",
-//	"Повышение навыка: лёгкая броня",
-//	"Повышение навыка: одноручное оружие",
-//	"Повышение навыка: разрушение",
-//	"Повышение навыка: скрытность",
-//	"Повышение навыка: стрельба",
-//	"Повышение навыка: тяжёлая броня",
-//	"Повышение переносимого веса",
-//	"Регенерация запаса сил",
-//	"Регенерация здоровья",
-//	"Регенерация магии",
-//	"Сопротивление магии",
-//	"Сопротивление огню",
-//	"Сопротивление холоду",
-//	"Сопротивление электричеству",
-//	"Сопротивление ядам",
-//	"Бешенство",
-//	"Замедление",
-//	"Затяжной урон запасу сил",
-//	"Затяжной урон здоровью",
-//	"Затяжной урон магии",
-//	"Опустошение запаса сил",
-//	"Опустошение здоровья",
-//	"Опустошение магии",
-//	"Паралич",
-//	"Повреждение регенерации запаса сил",
-//	"Повреждение регенерации магии",
-//	"Страх",
-//	"Урон запасу сил",
-//	"Урон здоровью",
-//	"Урон магии",
-//	"Уязвимость к магии",
-//	"Уязвимость к огню",
-//	"Уязвимость к холоду",
-//	"Уязвимость к электричеству",
-//	"Уязвимость к яду",
-//};
-
 IngredientBuilder::IngredientBuilder()
 {
 	reset();
+
+	this->effectsTable = nullptr;
 }
 
 IngredientBuilder::~IngredientBuilder()
 {
 	clear();
+}
+
+void IngredientBuilder::setEffectsTable(EffectsTable* effectsTable)
+{
+	this->effectsTable = effectsTable;
+}
+
+void IngredientBuilder::buildIngredient(int lastIngredientNameIndex, int& lastEffectIndex)
+{
+	string name = chooseIngredientName(lastIngredientNameIndex);
+
+	setName(name);
+
+	int price = randInRange(MIN_PRICE, MAX_PRICE);
+
+	//int price = generatePrice();
+
+	setPrice(price);
+
+	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i, --lastEffectIndex)
+	{
+		int id = randInRange(0, lastEffectIndex);
+
+		addEffect(id);
+	}
 }
 
 void IngredientBuilder::setName(string name)
@@ -193,6 +163,28 @@ Ingredient* IngredientBuilder::getResult()
 	reset();
 
 	return result;
+}
+
+string IngredientBuilder::chooseIngredientName(int lastIndex)
+{
+	// Рандомно выбираем имя из списка
+	int numberOfName = randInRange(0, lastIndex);
+
+	// Присваиваем строке выбранное имя
+	string name = listOfIngredientsNames[numberOfName];
+
+	// Свопаем выбранный и последний элемент
+	swap(listOfIngredientsNames[numberOfName], listOfIngredientsNames[lastIndex]);
+
+	// Возвращаем имя
+	return name;
+}
+
+int IngredientBuilder::generatePrice()
+{
+	int price = randInRange(MIN_PRICE, MAX_PRICE);
+
+	return price;
 }
 
 void IngredientBuilder::reset()

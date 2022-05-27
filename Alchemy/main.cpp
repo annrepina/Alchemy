@@ -2,8 +2,12 @@
 #include "AlchemyProgram.h"
 #include "FileReader.h"
 
+using namespace std;
+
 
 #include "EffectsTableBuilder.h"
+#include "AlchemicalUserInterface.h"
+//#include <consoleapi2.h>
 
 int main()
 {
@@ -18,13 +22,16 @@ int main()
 
     //userInterface.launchMainLoop();
 
-
+    AlchemyProgramParser parser;
 
     EffectsTableBuilder effectsTableBuilder;
 
-    effectsTableBuilder.addEffects(35, POSITIVE);
+    effectsTableBuilder.buildEffectstable(&parser);
 
-    effectsTableBuilder.addEffects(20, NEGATIVE);
+    EffectsTable* table = effectsTableBuilder.getResult();
+
+    table->print();
+
 
 }
 

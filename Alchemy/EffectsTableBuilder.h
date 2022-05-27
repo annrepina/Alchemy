@@ -17,9 +17,6 @@ public:
 	// Строит таблицу эффектов
 	void buildEffectstable(AlchemyProgramParser* alchemyProgramParser);
 
-	// Добавить эффекты
-	void addEffects(int numberOfEffects, bool isPositive);
-
 	//// Добавить позитивные эффекты
 	//void addPositiveEffects(int numberOfEffects);
 
@@ -34,6 +31,9 @@ private:
 	EffectsTable* effectsTable;
 
 	EffectBuilder* effectBuilder;
+
+	// Добавить эффекты
+	void addEffects(int numberOfEffects, bool isPositive);
 
 	// Сбрасывает до начальных установок
 	void reset();

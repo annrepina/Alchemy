@@ -32,8 +32,18 @@ public:
 	// Конструктор по умолчанию
 	AlchemyProgram();
 
+#pragma region СЕТТЕРЫ
+
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
+
+	// Сеттер для таблицы ингредиентов
+	void setIngredientsTable(IngredientsTable* ingredientsTable);
+
+#pragma endregion СЕТТЕРЫ
+
+
+
 
 #pragma region ГЕТТЕРЫ
 

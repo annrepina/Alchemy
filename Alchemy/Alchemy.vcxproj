@@ -149,6 +149,7 @@
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Formatting.cpp" />
     <ClCompile Include="IngredientsTable.cpp" />
+    <ClCompile Include="IngredientsTableBuilder.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="KnownIngredientsTable.cpp" />
     <ClCompile Include="KnownIngredientsTableBuilder.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="IngredientDirector.h" />
     <ClInclude Include="Alchemist.h" />
     <ClInclude Include="IngredientsTable.h" />
+    <ClInclude Include="IngredientsTableBuilder.h" />
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="KnownIngredientsTable.h" />
     <ClInclude Include="KnownIngredientsTableBuilder.h" />

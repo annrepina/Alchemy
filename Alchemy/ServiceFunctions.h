@@ -8,7 +8,7 @@ using namespace std;
 #define NO_DELIM	-1
 
 // √енерирует случайные числа в диапазоне заданном пользователем min - max
-int randInRange(const int MIN, const int MAX);
+int randInRange(const int min, const int max);
 
 // –аздел€ет строку на подстроки по символу разделителю
 vector <string> splitForOneDelim(string str, char delim);

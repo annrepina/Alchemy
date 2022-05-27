@@ -103,30 +103,6 @@ void EffectBuilder::buildEffect(int lastIndex, string listOfEffects[], bool isPo
 	setIsPositive(isPositive);
 }
 
-//void EffectBuilder::buildPositiveEffect(int lastIndex)
-//{
-//	// Выбираем рандомно имя
-//	string name = chooseEffectName(lastIndex, listOfPositiveEffectsNames);
-//
-//	// Устанавливаем имя
-//	setName(name);
-//
-//	// Говорим, что эффект позитивный
-//	setIsPositive(true);
-//}
-//
-//void EffectBuilder::buildNegativeEffect(int lastIndex)
-//{
-//	// Выбираем рандомно имя
-//	string name = chooseEffectName(lastIndex, listOfNegativeEffectsNames);
-//
-//	// Устанавливаем имя
-//	setName(name);
-//
-//	// Говорим, что эффект позитивный
-//	setIsPositive(false);
-//}
-
 Effect* EffectBuilder::getResult()
 {
 	Effect* res = this->effect;
@@ -153,13 +129,13 @@ void EffectBuilder::clear()
 string EffectBuilder::chooseEffectName(int lastIndex, string listOfEffectsNames[])
 {
 	// Рандомно выбираем имя из списка
-	int NumberOfName = randInRange(0, lastIndex);
+	int numberOfName = randInRange(0, lastIndex);
 
 	// Присваиваем строке выбранное имя
-	string name = listOfEffectsNames[NumberOfName];
+	string name = listOfEffectsNames[numberOfName];
 
 	// Свопаем выбранный и последний элемент
-	swap(listOfEffectsNames[NumberOfName], listOfEffectsNames[lastIndex]);
+	swap(listOfEffectsNames[numberOfName], listOfEffectsNames[lastIndex]);
 
 	// Возвращаем имя
 	return name;

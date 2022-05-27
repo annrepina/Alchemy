@@ -8,7 +8,7 @@ Ingredient::Ingredient()
 	this->id = counter;
 	this->name = "";
 	this->price = 0.f;
-	this->effectsId.reserve(MAX_NUMBER_OF_EFFECTS);
+	this->effectsId.reserve(NUMBER_OF_EFFECTS);
 }
 
 Ingredient::~Ingredient()
@@ -34,7 +34,7 @@ void Ingredient::setPrice(float price)
 void Ingredient::addEffect(int effectId)
 {
 	// Если размер вектора меньше двух, то добавляем элемент
-	if (MAX_NUMBER_OF_EFFECTS < this->effectsId.size())
+	if (NUMBER_OF_EFFECTS < this->effectsId.size())
 		this->effectsId.push_back(effectId);
 
 	else

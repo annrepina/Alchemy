@@ -18,6 +18,11 @@ void AlchemyProgram::setEffectsTable(EffectsTable* effectsTable)
 	this->effectsTable = effectsTable;
 }
 
+void AlchemyProgram::setIngredientsTable(IngredientsTable* ingredientsTable)
+{
+	this->ingredientsTable = ingredientsTable;
+}
+
 Alchemist* AlchemyProgram::getAlchemist()
 {
 	return this->alchemist;

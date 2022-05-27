@@ -1,11 +1,11 @@
 #include "ServiceFunctions.h"
 
-int randInRange(const int MIN, const int MAX)
+int randInRange(const int min, const int max)
 {
 	int randomNumber;
 
 	// Присваивает randomNumber случайное число в диапазоне min - max
-	randomNumber = MIN + rand() % (MAX + 1 - MIN);
+	randomNumber = min + rand() % (max + 1 - min);
 
 	// Возвращает randomNumber
 	return randomNumber;

@@ -34,13 +34,16 @@ public:
 
 #pragma endregion Сеттеры
 
+	// Печать эффекта
+	void print();
+
 private:
 
-	// Счетчик эффектов
-	static int counter;
+	//// Счетчик эффектов
+	//static int counter;
 
-	// id эффекта
-	int id;
+	//// id эффекта
+	//int id;
 
 	// Название эффекта
 	string name;

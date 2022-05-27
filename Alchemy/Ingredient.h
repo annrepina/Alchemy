@@ -3,7 +3,7 @@
 #include "Effect.h"
 #include <vector>
 
-#define MAX_NUMBER_OF_EFFECTS 2
+#define NUMBER_OF_EFFECTS 2
 
 // Класс ингредиент
 class Ingredient

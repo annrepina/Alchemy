@@ -18,6 +18,12 @@ public:
 	// Деструктор
 	~Ingredient();
 
+	// Печать
+	void print();
+
+	// Получить id эффекта по номеру
+	int getEffectId(int number);
+
 	//// Конструктор с параметрами
 	//Ingredient(string name, float price, vector<Effect*> effects);
 
@@ -41,11 +47,11 @@ public:
 
 private:
 
-	// Счетчик ингредиентов
-	static int counter;
+	//// Счетчик ингредиентов
+	//static int counter;
 
-	// id Ингредиента
-	int id;
+	//// id Ингредиента
+	//int id;
 	
 	// Название ингредиента
 	string name;
@@ -53,7 +59,7 @@ private:
 	// Цена за ингредиент
 	float price;
 
-	// Массив эффектов из 2х ингредиентов
+	// Массив эффекторов из 2х ингредиентов
 	vector<int> effectsId;
 
 	//// Метод очистки памяти

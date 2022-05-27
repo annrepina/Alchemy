@@ -1,6 +1,7 @@
 #pragma once
 #include "Effect.h"
 
+#define TOTAL_NUMBER_OF_EFFECTS		55		// Общее кол-во эффектов
 #define NUMBER_OF_POSITIVE_EFFECTS	35		// Кол-во позитивных эффектов
 #define NUMBER_OF_NEGATIVE_EFFECTS	20		// Кол-во негативных эффектов
 

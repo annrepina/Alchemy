@@ -15,6 +15,9 @@ public:
 
 	IngredientsTable* getResult();
 
+	// Сеттер строителя ингредиентов
+	void setIngredientBuilder(IngredientBuilder* ingredientBuilder);
+
 	// Построить ингредиент
 	void buildIngredientsTable(AlchemyProgramParser* alchemyProgramParser);
 
@@ -31,5 +34,8 @@ private:
 
 	// Чистит память
 	void clear();
+
+	// Добавить ингредиенты в таблицу
+	void addIngredients(int numberOfIngredients);
 };
 

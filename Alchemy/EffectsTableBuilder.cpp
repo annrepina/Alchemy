@@ -12,7 +12,7 @@ EffectsTableBuilder::~EffectsTableBuilder()
 	clear();
 }
 
-void EffectsTableBuilder::buildEffectstable(AlchemyProgramParser* alchemyProgramParser)
+void EffectsTableBuilder::buildEffectsTable(AlchemyProgramParser* alchemyProgramParser)
 {
 	// ПАРСИМ
 
@@ -30,7 +30,7 @@ void EffectsTableBuilder::buildEffectstable(AlchemyProgramParser* alchemyProgram
 
 void EffectsTableBuilder::addEffects(int numberOfEffects, bool isPositive)
 {
-	// Последний индекс в списке позитивных эффектов
+	// Последний индекс в списке эффектов
 	int lastIndex = numberOfEffects - 1;
 
 	// В цикле добавляем эффекты в таблицу

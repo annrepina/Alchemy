@@ -5,7 +5,7 @@
 #define NUMBER_OF_INGREDIENTS		100		// Кол-во ингредиентов
 
 #define MIN_PRICE					4.f		// Минимальная цена ингредиента
-#define MAX_PRICE					135.f		// Максимальная цена ингредиента
+#define MAX_PRICE					135.f	// Максимальная цена ингредиента
 
 class IngredientBuilder
 {
@@ -20,10 +20,20 @@ public:
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
 
-	void buildIngredient(int lastIndex, int& lastEffectIndex);
+	// Получить размер таблицы 
+	int getEffectsTableSize();
+
+	// Геттер для таблицы эффектов
+	EffectsTable* getEffectsTable();
+
+	// Создать ингредиент
+	void buildIngredient(int lastIngredientNameIndex, int& lastEffectIndex);
 
 	// Добавить эффект
 	void addEffect(int effectId);
+
+	// Заполнить список имен эффектов
+	void fillEffectId();
 
 	// Получить результат
 	Ingredient* getResult();
@@ -33,13 +43,11 @@ private:
 	// Экземпляр ингредиента
 	Ingredient* ingredient;
 
+	// Таблица эффектов
 	EffectsTable* effectsTable;
 
 	// Выбрать имя эффекту
 	string chooseIngredientName(int lastIndex);
-
-	// Сгенерировать цену ингредиента
-	int generatePrice();
 
 #pragma region СЕТТЕРЫ
 
@@ -48,8 +56,6 @@ private:
 
 	// Задать цену
 	void setPrice(float price);
-
-
 
 #pragma endregion СЕТТЕРЫ
 
@@ -62,7 +68,10 @@ private:
 	// Список имен ингредиентов
 	static string listOfIngredientsNames[NUMBER_OF_INGREDIENTS];
 
-	//// Список имен эффектов
-	//static string listOfEffectsNames[55];
+	// Список имен эффектов
+	vector<int> effectsId;
+
+	// Кол-во ингредиентов
+	int numberOfIngredients;
 };
 

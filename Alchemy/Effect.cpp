@@ -35,7 +35,7 @@ void Effect::setIsPositive(bool isPositive)
 
 void Effect::print()
 {
-	cout << this->name << '\t' << this->isPositive;
+	cout << this->name << ' ' << this->isPositive;
 }
 
 //void Effect::setId(int id)

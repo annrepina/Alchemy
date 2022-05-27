@@ -7,7 +7,7 @@ class EffectsTable
 {
 public:
 
-	// 
+	// Конструктор по умолчанию
 	EffectsTable();
 
 	~EffectsTable();
@@ -18,6 +18,12 @@ public:
 	// Печать таблицы
 	void print();
 
+	// Геттер для размера
+	int getSize();
+
+	// Получить эффект по ключу
+	Effect* getEffectByKey(int key);
+
 private:
 
 	// Список эффектов
@@ -25,6 +31,9 @@ private:
 
 	// Id эффекта
 	static int id;
+
+	// Размер таблицы
+	int size;
 
 	// Список эффектов
 	map<int, Effect*> effectsWithId;

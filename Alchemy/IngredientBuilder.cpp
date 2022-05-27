@@ -121,6 +121,16 @@ void IngredientBuilder::setEffectsTable(EffectsTable* effectsTable)
 	this->effectsTable = effectsTable;
 }
 
+int IngredientBuilder::getEffectsTableSize()
+{
+	return this->effectsTable->getSize();
+}
+
+EffectsTable* IngredientBuilder::getEffectsTable()
+{
+	return this->effectsTable;
+}
+
 void IngredientBuilder::buildIngredient(int lastIngredientNameIndex, int& lastEffectIndex)
 {
 	string name = chooseIngredientName(lastIngredientNameIndex);
@@ -129,15 +139,43 @@ void IngredientBuilder::buildIngredient(int lastIngredientNameIndex, int& lastEf
 
 	int price = randInRange(MIN_PRICE, MAX_PRICE);
 
-	//int price = generatePrice();
-
 	setPrice(price);
 
+	// Создаем вектор эффектов
+	vector<int> tempEffectsId;
+
+	//// Итератор вектора
+	//vector<int>::iterator it;
+
+	// Добавление эффектов
 	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i, --lastEffectIndex)
 	{
-		int id = randInRange(0, lastEffectIndex);
+		// если закончились эффекты, то начинаем сначала
+		if (0 == lastEffectIndex)
+			lastEffectIndex = this->getEffectsTableSize() - 1;
 
-		addEffect(id);
+		int idIndex = randInRange(0, lastEffectIndex);
+
+		// если это уже не первый эффект
+		if (0 < i)
+		{
+			// Проверяем не добавлялся ли такой же до этого
+			if (find(tempEffectsId.begin(), tempEffectsId.end(), this->effectsId[idIndex]) != tempEffectsId.end())
+			{
+				--i;
+				++lastEffectIndex;
+				continue;
+			}
+		}
+
+		// Добавляем во временный вектор id
+		tempEffectsId.push_back(effectsId[idIndex]);
+
+		// Свопаем элементы в векторе
+		swap(this->effectsId[idIndex], this->effectsId[lastEffectIndex]);
+
+		// Добавляем id к вектору основному
+		addEffect(effectsId[idIndex]);
 	}
 }
 
@@ -180,13 +218,6 @@ string IngredientBuilder::chooseIngredientName(int lastIndex)
 	return name;
 }
 
-int IngredientBuilder::generatePrice()
-{
-	int price = randInRange(MIN_PRICE, MAX_PRICE);
-
-	return price;
-}
-
 void IngredientBuilder::reset()
 {
 	this->ingredient = new Ingredient();
@@ -198,5 +229,15 @@ void IngredientBuilder::clear()
 	{
 		delete this->ingredient;
 		this->ingredient = nullptr;
+	}
+}
+
+void IngredientBuilder::fillEffectId()
+{
+	int size = this->effectsTable->getSize();
+
+	for (int i = 1; i <= size; ++i)
+	{
+		this->effectsId.push_back(i);
 	}
 }

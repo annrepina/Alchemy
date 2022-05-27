@@ -24,7 +24,7 @@ AlchemyProgram* AlchemyProgramBuilder::getResult()
 void AlchemyProgramBuilder::setEffectsTable(AlchemyProgramParser* alchemyProgramParse)
 {
 	// Строитель создает таблицу
-	this->effectsTableBuilder->buildEffectstable(alchemyProgramParse);
+	this->effectsTableBuilder->buildEffectsTable(alchemyProgramParse);
 
 	// Добавляем таблицу в программу
 	this->alchemyProgram->setEffectsTable(this->effectsTableBuilder->getResult());

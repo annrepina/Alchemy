@@ -15,7 +15,7 @@ public:
 	~EffectsTableBuilder();
 
 	// Строит таблицу эффектов
-	void buildEffectstable(AlchemyProgramParser* alchemyProgramParser);
+	void buildEffectsTable(AlchemyProgramParser* alchemyProgramParser);
 
 	//// Добавить позитивные эффекты
 	//void addPositiveEffects(int numberOfEffects);

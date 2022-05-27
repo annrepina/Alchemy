@@ -16,15 +16,24 @@ IngredientsTable* IngredientsTableBuilder::getResult()
 	return this->ingredientsTable;
 }
 
+void IngredientsTableBuilder::setIngredientBuilder(IngredientBuilder* ingredientBuilder)
+{
+	this->ingredientBuilder = ingredientBuilder;
+}
+
 void IngredientsTableBuilder::buildIngredientsTable(AlchemyProgramParser* alchemyProgramParser)
 {
 	// Парсим
 
 	// ЕСЛИ док пустой
 
-	this->ingredientBuilder = new IngredientBuilder();
+	//this->ingredientBuilder = new IngredientBuilder();
 
-	//this-
+	//this->ingredientBuilder->setEffectsTable(effectsTable);
+
+	this->addIngredients(NUMBER_OF_INGREDIENTS);
+
+	this->ingredientsTable->setEffectsTable(this->ingredientBuilder->getEffectsTable());
 }
 
 void IngredientsTableBuilder::reset()
@@ -44,5 +53,29 @@ void IngredientsTableBuilder::clear()
 	{
 		delete this->ingredientBuilder;
 		this->ingredientBuilder = nullptr;
+	}
+}
+
+void IngredientsTableBuilder::addIngredients(int numberOfIngredients)
+{
+	// Последний индекс в списке ингредиентов
+	int lastIngredientNameIndex = numberOfIngredients - 1;
+
+	// Последний индекс в списке эффектов
+	int lastEffectsIndex = this->ingredientBuilder->getEffectsTableSize() - 1;
+
+	//this->ingredientBuilder.
+
+	// В цикле добавляем эффекты в таблицу
+	for (int i = 0; i < numberOfIngredients; ++i)
+	{
+		// Создаем ингредиент 
+		this->ingredientBuilder->buildIngredient(lastIngredientNameIndex, lastEffectsIndex);
+
+		// Добавляем ингредиент в таблицу
+		this->ingredientsTable->addIngredient(this->ingredientBuilder->getResult());
+
+		// Уменьшаем последний индекс
+		--lastIngredientNameIndex;
 	}
 }

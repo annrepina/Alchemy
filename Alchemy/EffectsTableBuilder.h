@@ -8,9 +8,14 @@ class EffectsTableBuilder
 {
 public:
 
+	// Конструктор по умолчанию
 	EffectsTableBuilder();
 
-	void setEffectstable(AlchemyProgramParser* alchemyProgramParser);
+	// Деструктор
+	~EffectsTableBuilder();
+
+	// Строит таблицу эффектов
+	void buildEffectstable(AlchemyProgramParser* alchemyProgramParser);
 
 	// Добавить эффекты
 	void addEffects(int numberOfEffects, bool isPositive);
@@ -21,11 +26,20 @@ public:
 	//// Добавить негативные эффекты
 	//void addNegativeEffects(int numberOfEffects);
 
+	// Получить результат
+	EffectsTable* getResult();
+
 private:
 
-	EffectsTable* effectstable;
+	EffectsTable* effectsTable;
 
 	EffectBuilder* effectBuilder;
+
+	// Сбрасывает до начальных установок
+	void reset();
+
+	// Очищает память
+	void clear();
 
 
 };

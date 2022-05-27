@@ -5,7 +5,7 @@
 //#include "Formatting.h"
 //#include "KeyBoard.h"
 #include "Alchemist.h"
-#include "AlchemicalUserInterface.h"
+#include "EffectsTableBuilder.h"
 
 //using namespace std;
 //
@@ -27,8 +27,8 @@ class AlchemyProgram
 {
 public:
 
-	//// Конструктор по умолчанию
-	//AlchemyProgram();
+	// Конструктор по умолчанию
+	AlchemyProgram();
 
 
 
@@ -37,13 +37,14 @@ public:
 
 private:
 
-	//// Алхимик (пользователь)
-	//Alchemist* alchemist;
+	// Алхимик (пользователь)
+	Alchemist* alchemist;
 
-	//// Экземпляр интерфейса
-	//AlchemicalUserInterface* alchemicalUserInterface;
+	// Таблица эффектов
+	EffectsTable* effectsTable;
 
-
+	// Строитель таблицы эффектов
+	EffectsTableBuilder* effectsTableBuilder;
 
 
 //	// Функция для предикатов

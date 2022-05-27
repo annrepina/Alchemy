@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="AlchemicalUserInterface.cpp" />
     <ClCompile Include="AlchemyProgram.cpp" />
+    <ClCompile Include="AlchemyProgramBuilder.cpp" />
     <ClCompile Include="AlchemyProgramParser.cpp" />
     <ClCompile Include="EffectBuilder.cpp" />
     <ClCompile Include="EffectsTable.cpp" />
@@ -163,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="AlchemicalUserInterface.h" />
     <ClInclude Include="AlchemyProgram.h" />
+    <ClInclude Include="AlchemyProgramBuilder.h" />
     <ClInclude Include="AlchemyProgramParser.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectBuilder.h" />

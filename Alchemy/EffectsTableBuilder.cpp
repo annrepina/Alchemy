@@ -2,11 +2,17 @@
 
 EffectsTableBuilder::EffectsTableBuilder()
 {
-	effectstable = new EffectsTable();
-	effectBuilder = new EffectBuilder();
+	reset();
+	//effectBuilder = new EffectBuilder();
+	effectBuilder = nullptr;
 }
 
-void EffectsTableBuilder::setEffectstable(AlchemyProgramParser* alchemyProgramParser)
+EffectsTableBuilder::~EffectsTableBuilder()
+{
+	clear();
+}
+
+void EffectsTableBuilder::buildEffectstable(AlchemyProgramParser* alchemyProgramParser)
 {
 	// ПАРСИМ
 
@@ -16,6 +22,10 @@ void EffectsTableBuilder::setEffectstable(AlchemyProgramParser* alchemyProgramPa
 
 	// Создаем нового строителя ингредиентов
 	effectBuilder = new EffectBuilder();
+
+	// Добавить эффекты
+	addEffects(NUMBER_OF_POSITIVE_EFFECTS, POSITIVE);
+	addEffects(NUMBER_OF_NEGATIVE_EFFECTS, NEGATIVE);
 }
 
 void EffectsTableBuilder::addEffects(int numberOfEffects, bool isPositive)
@@ -28,10 +38,39 @@ void EffectsTableBuilder::addEffects(int numberOfEffects, bool isPositive)
 	{
 		this->effectBuilder->buildEffect(lastIndex, isPositive);
 
-		this->effectstable->addEffect(this->effectBuilder->getResult());
+		this->effectsTable->addEffect(this->effectBuilder->getResult());
 
 		// Уменьшаем последний индекс
 		--lastIndex;
+	}
+}
+
+EffectsTable* EffectsTableBuilder::getResult()
+{
+	EffectsTable* res = this->effectsTable;
+
+	reset();
+
+	return res;
+}
+
+void EffectsTableBuilder::reset()
+{
+	effectsTable = new EffectsTable();
+}
+
+void EffectsTableBuilder::clear()
+{
+	if (nullptr != this->effectsTable)
+	{
+		delete this->effectsTable;
+		this->effectsTable = nullptr;
+	}
+
+	if (nullptr != this->effectBuilder)
+	{
+		delete this->effectBuilder;
+		this->effectBuilder = nullptr;
 	}
 }
 

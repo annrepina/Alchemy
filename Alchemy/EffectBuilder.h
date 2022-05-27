@@ -50,7 +50,7 @@ private:
 	// Чистит память (неиспользованный эффект)
 	void clear();
 
-	// Выбрать имя
+	// Выбрать имя эффекту
 	string chooseEffectName(int lastIndex, string listOfEffectsNames[]);
 
 	// Список имен положительных эффектов

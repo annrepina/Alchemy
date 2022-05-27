@@ -197,7 +197,7 @@ Ingredient* IngredientBuilder::getResult()
 
 void IngredientBuilder::reset()
 {
-	this->ingredient = new Ingredient;
+	this->ingredient = new Ingredient();
 }
 
 void IngredientBuilder::clear()

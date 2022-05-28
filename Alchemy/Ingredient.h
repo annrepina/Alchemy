@@ -29,8 +29,11 @@ public:
 
 #pragma region ГЕТТЕРЫ
 
-	// Получить id эффекта по номеру
-	int getEffectId(int number);
+	// Узнать известен ли пользователю эффект у данного ингредиента по id
+	bool getEffectIsKnown(int number);
+
+	// Получить итератор на начало ассоциативного массива
+	map<int, bool>::iterator getIterator();
 	
 	// Получить имя
 	string getName();

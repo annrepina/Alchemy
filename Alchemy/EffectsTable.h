@@ -11,13 +11,13 @@ public:
 	// Конструктор по умолчанию
 	EffectsTable();
 
-	~EffectsTable();
+	~EffectsTable() override;
 
 	// Добавить эффект
 	void addEffect(Effect* effect);
 
 	// Печать таблицы
-	void print();
+	void print() const override;
 
 	// Геттер для размера
 	int getSize();

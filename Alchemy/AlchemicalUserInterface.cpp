@@ -275,7 +275,8 @@ void AlchemicalUserInterface::fillAllMenu()
 
 void AlchemicalUserInterface::printTitle()
 {
-	titleXCoord = calculateXCoordInMiddle(title);
+	// Уменьшаем на 1 за счет рамки
+	titleXCoord = calculateXCoordInMiddle(title) - 1;
 
 	printFramedText(title, TITLE_Y_COORD, titleXCoord);
 }

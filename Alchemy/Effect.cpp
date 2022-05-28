@@ -33,6 +33,11 @@ void Effect::setIsPositive(bool isPositive)
 	this->isPositive = isPositive;
 }
 
+string Effect::getName()
+{
+	return this->name;
+}
+
 void Effect::print()
 {
 	cout << this->name << ' ' << this->isPositive;

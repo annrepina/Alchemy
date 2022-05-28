@@ -22,7 +22,7 @@ void EffectsTable::addEffect(Effect* effect)
 	++size;
 }
 
-void EffectsTable::print()
+void EffectsTable::print() const
 {
 	for (auto effect : effectsWithId)
 	{

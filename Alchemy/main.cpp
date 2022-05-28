@@ -35,29 +35,33 @@ int main()
 
     EffectsTable* table = effectsTableBuilder->getResult();
 
-    table->print();
+    //table->print();
 
-    delete effectsTableBuilder;
-    delete table;
+    //delete effectsTableBuilder;
+    //delete table;
 
-    // 
+     
 
-    //IngredientBuilder* ingredientBuilder = new IngredientBuilder();
+    IngredientBuilder* ingredientBuilder = new IngredientBuilder();
 
-    //ingredientBuilder->setEffectsTable(table);
+    ingredientBuilder->setEffectsTable(table);
 
-    //ingredientBuilder->fillEffectId();
+    ingredientBuilder->fillEffectId();
 
-    //IngredientsTableBuilder* ingredientsTableBuilder = new IngredientsTableBuilder();
+    IngredientsTableBuilder* ingredientsTableBuilder = new IngredientsTableBuilder();
 
-    //ingredientsTableBuilder->setIngredientBuilder(ingredientBuilder);
+    ingredientsTableBuilder->setIngredientBuilder(ingredientBuilder);
 
-    //ingredientsTableBuilder->buildIngredientsTable(&parser);
+    ingredientsTableBuilder->buildTable(&parser);
 
-    //IngredientsTable* ingredientsTable = ingredientsTableBuilder->getResult();
+    IngredientsTable* ingredientsTable = ingredientsTableBuilder->getResult();
 
 
-    //ingredientsTable->print();
+
+    ingredientsTable->calculateLength();
+    ingredientsTable->calculateXCoordForPrinting();
+
+    ingredientsTable->print();
 
 
     

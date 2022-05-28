@@ -5,6 +5,9 @@
 #include <map>
 
 #define NUMBER_OF_COLUMNS		6		// Кол-во колонок
+#define OUTER_BORDERS			2		// Внешние границы таблицы (левая и правая)
+
+#define MULTIPLIER				3		// Множитель для расчета длины таблицы
 
 // Таблица ингредиентов
 class IngredientsTable : public Table
@@ -25,6 +28,10 @@ public:
 	// Печать таблицы
 	void print() const override;
 
+
+	// Расчитать длину таблицы
+	void calculateLength();
+
 private:
 
 	// Id ингредиента
@@ -36,9 +43,10 @@ private:
 	// Таблица эффектов
 	EffectsTable* effectsTable;
 
+	// Чистит память
 	void clear();
 
-	void calculateLength();
+
 
 	// Вернуть наибольший id
 	int calculateMaxIdStrSize();
@@ -50,10 +58,10 @@ private:
 	int calculateMaxNumberStrSize();
 
 	// Посчитать размеры максимальных имен эффектов
-	void calculateMaxEffectsNamesSize();
+	int calculateMaxEffectNameSize();
 
-	// Хранит максимальные размеры имен эффектов
-	int effectsNameSizes[NUMBER_OF_EFFECTS];
+	//// Хранит максимальные размеры имен эффектов
+	//int effectsNameSizes[NUMBER_OF_EFFECTS];
 
 };
 

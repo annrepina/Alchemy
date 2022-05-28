@@ -7,8 +7,9 @@ int IngredientsTable::id = 0;
 IngredientsTable::IngredientsTable()
 {
 	this->effectsTable = nullptr;
-	this->title = "Существующие ингредиенты";
+	this->title = "Ингредиенты";
 	this->numberOfColumns = NUMBER_OF_COLUMNS;
+	//this->numberOfLines = (--this->ingredientsWithId.end())->first + 1;
 }
 
 IngredientsTable::~IngredientsTable()
@@ -27,31 +28,29 @@ void IngredientsTable::setEffectsTable(EffectsTable* effectsTable)
 
 void IngredientsTable::print() const
 {
-	//int size = this->ingredientsWithId.size();
+	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
+ 
+	// Печатаем шапку таблицы
+	printTopTableFrame(1, this->length - OUTER_BORDERS);
+	printLowerTableFrame(1, this->length - OUTER_BORDERS);
 
-	//for (int i = 0; i < size; ++i)
+
+
+
+	//for (auto ingredient : this->ingredientsWithId)
 	//{
-	//	cout << this->ingredientsWithId[i] << ' ';
+	//	cout << ingredient.first << ' ';
+	//	ingredient.second->print();
 
+	//	// печатаем эффекты
+	//	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
+	//	{
+	//		this->effectsTable->getEffectByKey(ingredient.second->getEffectId(i))->print();
+	//		cout << ' ';
+	//	}
 
+	//	cout << endl;
 	//}
-
-
-
-	for (auto ingredient : this->ingredientsWithId)
-	{
-		cout << ingredient.first << ' ';
-		ingredient.second->print();
-
-		// печатаем эффекты
-		for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
-		{
-			this->effectsTable->getEffectByKey(ingredient.second->getEffectId(i))->print();
-			cout << ' ';
-		}
-
-		cout << endl;
-	}
 }
 
 void IngredientsTable::clear()
@@ -68,8 +67,6 @@ void IngredientsTable::clear()
 
 void IngredientsTable::calculateLength()
 {
-	//this->length = this->numberOfColumns + 1;
-
 	int length;
 
 	// Длина наибольшего id
@@ -84,7 +81,13 @@ void IngredientsTable::calculateLength()
 	// Длина наибольшего кол-ва
 	length += calculateMaxNumberStrSize();
 
-	//length +=
+	// Длины наибольших эффектов
+	length += calculateMaxEffectNameSize() * NUMBER_OF_EFFECTS;
+
+	// Прибавляем границы и пробелы
+	length += NUMBER_OF_COLUMNS * MULTIPLIER + 1;
+
+	this->length = length;
 }
 
 int IngredientsTable::calculateMaxIdStrSize()
@@ -159,10 +162,28 @@ int IngredientsTable::calculateMaxNumberStrSize()
 	return strMaxNumberSize;
 }
 
-void IngredientsTable::calculateMaxEffectsNamesSize()
+int IngredientsTable::calculateMaxEffectNameSize()
 {
+	// Первый эффект в первом ингредиенте
+	int firstEffectId = this->ingredientsWithId.begin()->second->
+
+	int maxEffectNameSize = this->effectsTable->getEffectByKey(firstEffectId)->getName().size();
+
 	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
 	{
+		// Для каждого ингредиента
+		for (auto ingredient : this->ingredientsWithId)
+		{
+			// Id эффекта текущего ингредиента
+			int id = ingredient.second->getEffectIsKnown(i);
 
+			// Расчитываем длину имени эффекта с текущим id 
+			int effectNameSize = this->effectsTable->getEffectByKey(id)->getName().size();
+
+			if (maxEffectNameSize < effectNameSize)
+				maxEffectNameSize = effectNameSize;
+		}
 	}
+
+	return maxEffectNameSize;
 }

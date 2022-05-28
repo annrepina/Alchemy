@@ -158,8 +158,11 @@ string turnOffDECMode();
 // Возвращает ширину консоли
 int calculateConsoleWidth();
 
-// Возвращает координату х для печати текста hgjchtlbyt консоли
+// Возвращает координату х для печати текста посредине консоли
 int calculateXCoordInMiddle(string text);
+
+// Возвращает координату х для печати текста посредине консоли
+int calculateXCoordInMiddle(int textSize);
 
 #pragma region Функции для печати таблицы с ОДИНАКОВОЙ шириной колонок и строчек с высотой 1
 

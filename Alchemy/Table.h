@@ -4,6 +4,8 @@
 
 using namespace std;
 
+#define Y_COORD_FOR_PRINTING	10		// Координата Y для печати
+
 // Класс- таблица
 class Table
 {
@@ -12,27 +14,38 @@ public:
 	// Конструктор по умолчанию
 	Table();
 
+	// Виртуальный деструктор
+	virtual ~Table();
+
+	virtual void calculateXCoordForPrinting();
+
 protected:
 
 	// Название таблицы
 	string title;
 
-	// Кол-во колонок
+	// Кол-во столбцов
 	int numberOfColumns;
 
-	// Кол-во линий
-	int numberOfLines;
+	//// Кол-во строк
+	//int numberOfLines;
 
+	// Длина
 	int length;
 
-	virtual void print() const;
+	// Координат y для печати
+	int yCoordForPrinting;
 
-	//virtual void calculateLength() = 0;
+	// Координата х для печати
+	int xCoordForPrinting;
+
+	// Печать
+	virtual void print() const = 0;
+
+
+
 
 private:
-
-	
-
 
 };
 

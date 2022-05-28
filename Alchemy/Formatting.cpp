@@ -266,9 +266,16 @@ int calculateConsoleWidth()
 
 int calculateXCoordInMiddle(string text)
 {
-    int x = (calculateConsoleWidth() / 2) - (text.length() / 2);
+    int xCoord = (calculateConsoleWidth() / 2) - (text.length() / 2);
 
-    return x;
+    return xCoord;
+}
+
+int calculateXCoordInMiddle(int textSize)
+{
+    int xCoord = (calculateConsoleWidth() / 2) - (textSize / 2);
+
+    return xCoord;
 }
 
 void printTopTableFrame(int numberOfColumn, int columWidth)

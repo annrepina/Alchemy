@@ -24,14 +24,23 @@ void Ingredient::print()
 	cout << this->name << ' ' << this->price << ' ';
 }
 
-int Ingredient::getEffectId(int number)
+bool Ingredient::getEffectIsKnown(int number)
 {
 	if (NUMBER_OF_EFFECTS > number)
 	{
-		return this->effectsId[number];
+		int id = this->effectsId[number];
+		return id/*this->effectsId[number]*/;
 	}
 
 	return 0;
+}
+
+map<int, bool>::iterator Ingredient::getIterator()
+{
+	// Итератор на первый элемент
+	map<int, bool>::iterator iter = this->effectsId.begin();
+
+	return iter;
 }
 
 string Ingredient::getName()

@@ -29,10 +29,10 @@ public:
 	// Сеттер для булевой
 	void setIsPositive(bool isPositive);
 
-	//// Сеттер для айди
-	//void setId(int id);
-
 #pragma endregion Сеттеры
+
+	// Получить имя
+	string getName();
 
 	// Печать эффекта
 	void print();

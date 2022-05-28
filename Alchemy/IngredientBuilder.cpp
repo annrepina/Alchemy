@@ -104,17 +104,17 @@ string IngredientBuilder::listOfIngredientsNames[NUMBER_OF_INGREDIENTS] = {
 	"Пепел порождения",
 };
 
-IngredientBuilder::IngredientBuilder()
+IngredientBuilder::IngredientBuilder() : Builder()
 {
-	reset();
+	//reset();
 
 	this->effectsTable = nullptr;
 }
 
-IngredientBuilder::~IngredientBuilder()
-{
-	clear();
-}
+//IngredientBuilder::~IngredientBuilder()
+//{
+//	clear();
+//}
 
 void IngredientBuilder::setEffectsTable(EffectsTable* effectsTable)
 {
@@ -181,27 +181,27 @@ void IngredientBuilder::buildIngredient(int lastIngredientNameIndex, int& lastEf
 
 void IngredientBuilder::setName(string name)
 {
-	this->ingredient->setName(name);
+	this->element->setName(name);
 }
 
 void IngredientBuilder::setPrice(int price)
 {
-	this->ingredient->setPrice(price);
+	this->element->setPrice(price);
 }
 
 void IngredientBuilder::addEffect(int effectId)
 {
-	this->ingredient->addEffect(effectId);
+	this->element->addEffect(effectId);
 }
 
-Ingredient* IngredientBuilder::getResult()
-{
-	Ingredient* result = this->ingredient;
-
-	reset();
-
-	return result;
-}
+//Ingredient* IngredientBuilder::getResult()
+//{
+//	Ingredient* result = this->ingredient;
+//
+//	reset();
+//
+//	return result;
+//}
 
 string IngredientBuilder::chooseIngredientName(int lastIndex)
 {
@@ -218,19 +218,19 @@ string IngredientBuilder::chooseIngredientName(int lastIndex)
 	return name;
 }
 
-void IngredientBuilder::reset()
-{
-	this->ingredient = new Ingredient();
-}
-
-void IngredientBuilder::clear()
-{
-	if (this->ingredient != nullptr)
-	{
-		delete this->ingredient;
-		this->ingredient = nullptr;
-	}
-}
+//void IngredientBuilder::reset()
+//{
+//	this->ingredient = new Ingredient();
+//}
+//
+//void IngredientBuilder::clear()
+//{
+//	if (this->ingredient != nullptr)
+//	{
+//		delete this->ingredient;
+//		this->ingredient = nullptr;
+//	}
+//}
 
 void IngredientBuilder::fillEffectId()
 {

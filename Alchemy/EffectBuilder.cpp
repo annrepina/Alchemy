@@ -62,24 +62,24 @@ string EffectBuilder::listOfNegativeEffectsNames[NUMBER_OF_NEGATIVE_EFFECTS] = {
 	"”€звимость к €ду",
 };
 
-EffectBuilder::EffectBuilder()
+EffectBuilder::EffectBuilder() : Builder()
 {
-	reset();
+	//reset();
 }
 
-EffectBuilder::~EffectBuilder()
-{
-	clear();
-}
+//EffectBuilder::~EffectBuilder()
+//{
+//	clear();
+//}
 
 void EffectBuilder::setName(string name)
 {
-	this->effect->setName(name);
+	this->element->setName(name);
 }
 
 void EffectBuilder::setIsPositive(bool isPositive)
 {
-	this->effect->setIsPositive(isPositive);
+	this->element->setIsPositive(isPositive);
 }
 
 void EffectBuilder::buildEffect(int lastIndex, bool IsPositive)
@@ -103,28 +103,28 @@ void EffectBuilder::buildEffect(int lastIndex, string listOfEffects[], bool isPo
 	setIsPositive(isPositive);
 }
 
-Effect* EffectBuilder::getResult()
-{
-	Effect* res = this->effect;
+//Effect* EffectBuilder::getResult()
+//{
+//	Effect* res = this->effect;
+//
+//	reset();
+//
+//	return res;
+//}
 
-	reset();
-
-	return res;
-}
-
-void EffectBuilder::reset()
-{
-	effect = new Effect;
-}
-
-void EffectBuilder::clear()
-{
-	if (nullptr != this->effect)
-	{
-		delete this->effect;
-		this->effect = nullptr;
-	}
-}
+//void EffectBuilder::reset()
+//{
+//	effect = new Effect;
+//}
+//
+//void EffectBuilder::clear()
+//{
+//	if (nullptr != this->effect)
+//	{
+//		delete this->effect;
+//		this->effect = nullptr;
+//	}
+//}
 
 string EffectBuilder::chooseEffectName(int lastIndex, string listOfEffectsNames[])
 {

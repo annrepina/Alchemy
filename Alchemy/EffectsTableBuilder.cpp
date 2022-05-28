@@ -2,7 +2,7 @@
 
 EffectsTableBuilder::EffectsTableBuilder() : AlchemyTableBuilder()
 {
-	reset();
+	/*reset();*/
 	//effectBuilder = new EffectBuilder();
 	effectBuilder = nullptr;
 }
@@ -38,34 +38,36 @@ void EffectsTableBuilder::addEffects(int numberOfEffects, bool isPositive)
 	{
 		this->effectBuilder->buildEffect(lastIndex, isPositive);
 
-		this->effectsTable->addEffect(this->effectBuilder->getResult());
+		this->element->addEffect(this->effectBuilder->getResult());
 
 		// Уменьшаем последний индекс
 		--lastIndex;
 	}
 }
-
-EffectsTable* EffectsTableBuilder::getResult()
-{
-	EffectsTable* res = this->effectsTable;
-
-	reset();
-
-	return res;
-}
-
-void EffectsTableBuilder::reset()
-{
-	effectsTable = new EffectsTable();
-}
+//
+//EffectsTable* EffectsTableBuilder::getResult()
+//{
+//	EffectsTable* res = this->effectsTable;
+//
+//	reset();
+//
+//	return res;
+//}
+//
+//void EffectsTableBuilder::reset()
+//{
+//	effectsTable = new EffectsTable();
+//}
 
 void EffectsTableBuilder::clear()
 {
-	if (nullptr != this->effectsTable)
-	{
-		delete this->effectsTable;
-		this->effectsTable = nullptr;
-	}
+	//if (nullptr != this->effectsTable)
+	//{
+	//	delete this->effectsTable;
+	//	this->effectsTable = nullptr;
+	//}
+
+	AlchemyTableBuilder::clear();
 
 	if (nullptr != this->effectBuilder)
 	{

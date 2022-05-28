@@ -3,12 +3,16 @@
 #include "Builder.h"
 
 // Строитель таблицы
-class AlchemyTableBuilder : public Builder
+template <typename Tab>
+class AlchemyTableBuilder : public Builder<Tab>
 {
 public:
 
 	// Конструктор по умолчанию
-	AlchemyTableBuilder();
+	AlchemyTableBuilder() : Builder<Tab>()
+	{
+
+	}
 
 	//// Деструктор
 	//virtual ~AlchemyTableBuilder() = 0;

@@ -5,7 +5,7 @@
 #include "AlchemyTableBuilder.h"
 
 // Строитель таблицы эффектов
-class EffectsTableBuilder : public AlchemyTableBuilder
+class EffectsTableBuilder : public AlchemyTableBuilder<EffectsTable>
 {
 public:
 
@@ -24,20 +24,20 @@ public:
 	//// Добавить негативные эффекты
 	//void addNegativeEffects(int numberOfEffects);
 
-	// Получить результат
-	EffectsTable* getResult();
+	//// Получить результат
+	//EffectsTable* getResult();
 
 private:
 
-	EffectsTable* effectsTable;
+	//EffectsTable* effectsTable;
 
 	EffectBuilder* effectBuilder;
 
 	// Добавить эффекты
 	void addEffects(int numberOfEffects, bool isPositive);
 
-	// Сбрасывает до начальных установок
-	void reset() override;
+	//// Сбрасывает до начальных установок
+	//void reset() override;
 
 	// Очищает память
 	void clear() override;

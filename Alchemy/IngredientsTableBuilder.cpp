@@ -2,7 +2,7 @@
 
 IngredientsTableBuilder::IngredientsTableBuilder() : AlchemyTableBuilder()
 {
-	reset();
+	//reset();
 	this->ingredientBuilder = nullptr;
 }
 
@@ -11,10 +11,10 @@ IngredientsTableBuilder::~IngredientsTableBuilder()
 	clear();
 }
 
-IngredientsTable* IngredientsTableBuilder::getResult()
-{
-	return this->ingredientsTable;
-}
+//IngredientsTable* IngredientsTableBuilder::getResult()
+//{
+//	return this->ingredientsTable;
+//}
 
 void IngredientsTableBuilder::setIngredientBuilder(IngredientBuilder* ingredientBuilder)
 {
@@ -33,21 +33,23 @@ void IngredientsTableBuilder::buildTable(AlchemyProgramParser* alchemyProgramPar
 
 	this->addIngredients(NUMBER_OF_INGREDIENTS);
 
-	this->ingredientsTable->setEffectsTable(this->ingredientBuilder->getEffectsTable());
+	this->element->setEffectsTable(this->ingredientBuilder->getEffectsTable());
 }
 
-void IngredientsTableBuilder::reset()
-{
-	this->ingredientsTable = new IngredientsTable();
-}
+//void IngredientsTableBuilder::reset()
+//{
+//	this->ingredientsTable = new IngredientsTable();
+//}
 
 void IngredientsTableBuilder::clear()
 {
-	if (nullptr != this->ingredientsTable)
-	{
-		delete this->ingredientsTable;
-		this->ingredientsTable = nullptr;
-	}
+	//if (nullptr != this->ingredientsTable)
+	//{
+	//	delete this->ingredientsTable;
+	//	this->ingredientsTable = nullptr;
+	//}
+
+	AlchemyTableBuilder::clear();
 
 	if (nullptr != this->ingredientBuilder)
 	{
@@ -73,7 +75,7 @@ void IngredientsTableBuilder::addIngredients(int numberOfIngredients)
 		this->ingredientBuilder->buildIngredient(lastIngredientNameIndex, lastEffectsIndex);
 
 		// Добавляем ингредиент в таблицу
-		this->ingredientsTable->addIngredient(this->ingredientBuilder->getResult());
+		this->element->addIngredient(this->ingredientBuilder->getResult());
 
 		// Уменьшаем последний индекс
 		--lastIngredientNameIndex;

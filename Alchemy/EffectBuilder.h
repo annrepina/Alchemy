@@ -1,5 +1,6 @@
 #pragma once
 #include "Effect.h"
+#include "Builder.h"
 
 #define TOTAL_NUMBER_OF_EFFECTS		55		// Общее кол-во эффектов
 #define NUMBER_OF_POSITIVE_EFFECTS	35		// Кол-во позитивных эффектов
@@ -9,15 +10,15 @@
 #define NEGATIVE	false
 
 // Строитель эффектов
-class EffectBuilder
+class EffectBuilder : public Builder<Effect>
 {
 public:
 
 	// Конструктор по умолчанию
 	EffectBuilder();
 
-	// Деструктор
-	~EffectBuilder();
+	//// Деструктор
+	//~EffectBuilder();
 
 	// Сеттер для имени
 	void setName(string name);
@@ -37,19 +38,19 @@ public:
 	//// Создать негативныйэффект эффект
 	//void buildNegativeEffect(int lastIndex);
 
-	// Получить результат строительства
-	Effect* getResult();
+	//// Получить результат строительства
+	//Effect* getResult();
 
 private:
 
-	// Экземпляр эффекта
-	Effect* effect;
+	//// Экземпляр эффекта
+	//Effect* effect;
 
-	// Сбросить до начальных установок
-	void reset();
+	//// Сбросить до начальных установок
+	//void reset();
 
-	// Чистит память (неиспользованный эффект)
-	void clear();
+	//// Чистит память (неиспользованный эффект)
+	//void clear();
 
 	// Выбрать имя эффекту
 	string chooseEffectName(int lastIndex, string listOfEffectsNames[]);

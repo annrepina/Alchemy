@@ -1,8 +1,8 @@
 #include "AlchemyProgramBuilder.h"
 
-AlchemyProgramBuilder::AlchemyProgramBuilder()
+AlchemyProgramBuilder::AlchemyProgramBuilder() : Builder()
 {
-	reset();
+	/*reset();*/
 
 	this->effectsTableBuilder = new EffectsTableBuilder();
 
@@ -16,14 +16,14 @@ AlchemyProgramBuilder::~AlchemyProgramBuilder()
 	clear();
 }
 
-AlchemyProgram* AlchemyProgramBuilder::getResult()
-{
-	AlchemyProgram* res = this->alchemyProgram;
-
-	reset();
-
-	return res;
-}
+//AlchemyProgram* AlchemyProgramBuilder::getResult()
+//{
+//	AlchemyProgram* res = this->alchemyProgram;
+//
+//	reset();
+//
+//	return res;
+//}
 
 void AlchemyProgramBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgramParse)
 {
@@ -35,10 +35,10 @@ void AlchemyProgramBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyPro
 	this->effectsTableBuilder->buildTable(alchemyProgramParse);
 
 	// Присваиваем программе таблицу эффектов
-	this->alchemyProgram->setEffectsTable(this->effectsTableBuilder->getResult());
+	this->element->setEffectsTable(this->effectsTableBuilder->getResult());
 
 	// Присвоить строителю ингредиентов таблицу эффектов
-	this->ingredientBuilder->setEffectsTable(this->alchemyProgram->getEffectsTable());
+	this->ingredientBuilder->setEffectsTable(this->element->getEffectsTable());
 
 	// Заполняем список имен эффектов
 	this->ingredientBuilder->fillEffectId();
@@ -50,7 +50,7 @@ void AlchemyProgramBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyPro
 	this->ingredientsTableBuilder->buildTable(alchemyProgramParse);
 
 	// Присваиваем таблицу ингредиентов
-	this->alchemyProgram->setIngredientsTable(ingredientsTableBuilder->getResult());
+	this->element->setIngredientsTable(ingredientsTableBuilder->getResult());
 
 }
 
@@ -60,21 +60,18 @@ void AlchemyProgramBuilder::setEffectsTable(AlchemyProgramParser* alchemyProgram
 	this->effectsTableBuilder->buildTable(alchemyProgramParse);
 
 	// Добавляем таблицу в программу
-	this->alchemyProgram->setEffectsTable(this->effectsTableBuilder->getResult());
+	this->element->setEffectsTable(this->effectsTableBuilder->getResult());
 }
 
-void AlchemyProgramBuilder::reset()
-{
-	this->alchemyProgram = new AlchemyProgram();
-}
+//void AlchemyProgramBuilder::reset()
+//{
+//	this->alchemyProgram = new AlchemyProgram();
+//}
 
 void AlchemyProgramBuilder::clear()
 {
-	if (nullptr != this->alchemyProgram)
-	{
-		delete this->alchemyProgram;
-		this->alchemyProgram = nullptr;
-	}
+	// Вызываем ф-wb. у базового класса
+	Builder::clear();
 
 	if (nullptr != this->effectsTableBuilder)
 	{

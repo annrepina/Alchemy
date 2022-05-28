@@ -5,7 +5,7 @@
 #include "AlchemyTableBuilder.h"
 
 // Строитель таблицы ингредиентов
-class IngredientsTableBuilder : public AlchemyTableBuilder
+class IngredientsTableBuilder : public AlchemyTableBuilder<IngredientsTable>
 {
 public:
 
@@ -14,7 +14,7 @@ public:
 
 	~IngredientsTableBuilder() override;
 
-	IngredientsTable* getResult();
+	//IngredientsTable* getResult();
 
 	// Сеттер строителя ингредиентов
 	void setIngredientBuilder(IngredientBuilder* ingredientBuilder);
@@ -24,14 +24,14 @@ public:
 
 private:
 	
-	// Таблица ингредиентов
-	IngredientsTable* ingredientsTable;
+	//// Таблица ингредиентов
+	//IngredientsTable* ingredientsTable;
 
 	// Строитель ингредиентов
 	IngredientBuilder* ingredientBuilder;
 
-	// Сборосить до начальных установок
-	void reset() override;
+	//// Сборосить до начальных установок
+	//void reset() override;
 
 	// Чистит память
 	void clear() override;

@@ -3,8 +3,9 @@
 #include "AlchemyProgramParser.h"
 #include "EffectsTableBuilder.h"
 #include "IngredientsTableBuilder.h"
+#include "Builder.h"
 
-class AlchemyProgramBuilder
+class AlchemyProgramBuilder : public Builder<AlchemyProgram>
 {
 public:
 
@@ -12,10 +13,10 @@ public:
 	AlchemyProgramBuilder();
 
 	// Деструктор 
-	~AlchemyProgramBuilder();
+	~AlchemyProgramBuilder() override;
 
-	// Получить результа
-	AlchemyProgram* getResult();
+	//// Получить результа
+	//AlchemyProgram* getResult();
 
 	// Построить программу алхимии
 	void buildAlchemyProgram(AlchemyProgramParser* alchemyProgramParse);
@@ -25,8 +26,8 @@ public:
 
 private:
 
-	// Экземпляр программы алхимии
-	AlchemyProgram* alchemyProgram;
+	//// Экземпляр программы алхимии
+	//AlchemyProgram* alchemyProgram;
 
 	// Строитель таблицы эффектов
 	EffectsTableBuilder* effectsTableBuilder;
@@ -37,10 +38,10 @@ private:
 	// Строитель ингредиентов
 	IngredientBuilder* ingredientBuilder;
 
-	// Сбросить до начальных установок
-	void reset();
+	//// Сбросить до начальных установок
+	//void reset();
 
 	// Чистить память
-	void clear();
+	void clear() override;
 };
 

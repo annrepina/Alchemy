@@ -18,28 +18,29 @@ int main()
 
     srand(1);
 
-    //Alchemist alchemist;
+    //AlchemicalUserInterface userInterface;
 
-    AlchemicalUserInterface userInterface;
+    //userInterface.setTitle("Зельеварение");
 
-    userInterface.setTitle("Зельеварение");
-
-    userInterface.launchMainLoop();
+    //userInterface.launchMainLoop();
 
 
 
 
-    //AlchemyProgramParser parser;
+    AlchemyProgramParser parser;
 
-    //EffectsTableBuilder effectsTableBuilder;
+    EffectsTableBuilder* effectsTableBuilder = new EffectsTableBuilder();
 
-    //effectsTableBuilder.buildEffectsTable(&parser);
+    effectsTableBuilder->buildTable(&parser);
 
-    //EffectsTable* table = effectsTableBuilder.getResult();
+    EffectsTable* table = effectsTableBuilder->getResult();
 
-    //table->print();
+    table->print();
 
-    //// 
+    delete effectsTableBuilder;
+    delete table;
+
+    // 
 
     //IngredientBuilder* ingredientBuilder = new IngredientBuilder();
 

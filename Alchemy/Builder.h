@@ -18,7 +18,7 @@ public:
 		clear();
 	}
 
-	T* getResult() 
+	virtual T* getResult()
 	{
 		T* result = this->element;
 

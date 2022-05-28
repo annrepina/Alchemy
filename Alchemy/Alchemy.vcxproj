@@ -143,6 +143,7 @@
     <ClCompile Include="AlchemyProgram.cpp" />
     <ClCompile Include="AlchemyProgramBuilder.cpp" />
     <ClCompile Include="AlchemyProgramParser.cpp" />
+    <ClCompile Include="Builder.cpp" />
     <ClCompile Include="EffectBuilder.cpp" />
     <ClCompile Include="EffectsTable.cpp" />
     <ClCompile Include="EffectsTableBuilder.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="AlchemyProgram.h" />
     <ClInclude Include="AlchemyProgramBuilder.h" />
     <ClInclude Include="AlchemyProgramParser.h" />
+    <ClInclude Include="Builder.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectBuilder.h" />
     <ClInclude Include="EffectsTable.h" />

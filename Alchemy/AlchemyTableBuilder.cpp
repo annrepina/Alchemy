@@ -1,7 +1,7 @@
 #include "AlchemyTableBuilder.h"
 
-AlchemyTableBuilder::AlchemyTableBuilder()
+AlchemyTableBuilder::AlchemyTableBuilder() : 
 {
-	//reset();
+	reset();
 }
 

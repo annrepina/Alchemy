@@ -8,7 +8,8 @@ Ingredient::Ingredient()
 	//++counter;
 	//this->id = counter;
 	this->name = "";
-	this->price = 0.f;
+	this->price = 0;
+	this->number = 0;
 	//this->effectsId.shrink_to_fit(NUMBER_OF_EFFECTS);
 	this->effectsId.reserve(NUMBER_OF_EFFECTS);
 }
@@ -31,6 +32,11 @@ int Ingredient::getEffectId(int number)
 	}
 
 	return 0;
+}
+
+string Ingredient::getName()
+{
+	return this->name;
 }
 
 void Ingredient::setName(string name)

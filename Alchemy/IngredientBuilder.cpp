@@ -184,7 +184,7 @@ void IngredientBuilder::setName(string name)
 	this->ingredient->setName(name);
 }
 
-void IngredientBuilder::setPrice(float price)
+void IngredientBuilder::setPrice(int price)
 {
 	this->ingredient->setPrice(price);
 }

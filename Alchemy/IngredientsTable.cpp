@@ -7,6 +7,8 @@ int IngredientsTable::id = 0;
 IngredientsTable::IngredientsTable()
 {
 	this->effectsTable = nullptr;
+	this->title = "Существующие ингредиенты";
+	this->numberOfColumns = NUMBER_OF_COLUMNS;
 }
 
 IngredientsTable::~IngredientsTable()
@@ -23,7 +25,7 @@ void IngredientsTable::setEffectsTable(EffectsTable* effectsTable)
 	this->effectsTable = effectsTable;
 }
 
-void IngredientsTable::print()
+void IngredientsTable::print() const
 {
 	//int size = this->ingredientsWithId.size();
 
@@ -33,6 +35,8 @@ void IngredientsTable::print()
 
 
 	//}
+
+
 
 	for (auto ingredient : this->ingredientsWithId)
 	{
@@ -60,4 +64,73 @@ void IngredientsTable::clear()
 			ingredient.second = nullptr;
 		}
 	}
+}
+
+void IngredientsTable::calculateLength()
+{
+	//this->length = this->numberOfColumns + 1;
+
+	int length;
+
+	// Длина наибольшего id
+	length = calculateMaxStrIdSize();
+
+	// Длина наибольшего имени ингредиента
+	length += calculateMaxNameSize();
+
+	// Длина наибольшей цены
+	length += to_string(MAX_PRICE).size();
+
+	//length +=
+}
+
+int IngredientsTable::calculateMaxStrIdSize()
+{
+	// Последний id
+	int maxId;
+
+	// Последний id в виде строки
+	string strMaxId;
+
+	// Размер строки последнего id 
+	int maxStrIdSize;
+
+	//map<int, Ingredient*>::reverse_iterator rit;
+
+	//rit = this->ingredientsWithId.rbegin();
+
+	//biggest = rit->first;
+
+	maxId = (--this->ingredientsWithId.end())->first;
+
+	strMaxId = to_string(maxId);
+
+	maxStrIdSize = strMaxId.size();
+
+	return maxStrIdSize;
+}
+
+int IngredientsTable::calculateMaxNameSize()
+{
+	// Присваеваем самому длинному размеру размер имени первого ингредиента в map
+	int maxNameSize = this->ingredientsWithId.begin()->second->getName().size();
+
+	// Для каждого ингредиента
+	for (auto ingredient : this->ingredientsWithId)
+	{
+		// Присваиваем размер имени текущего элемента
+		int size = ingredient.second->getName().size();
+
+		if (maxNameSize < size)
+			maxNameSize = size;
+	}
+
+	return maxNameSize;
+}
+
+int IngredientsTable::calculateMaxNumber()
+{
+
+
+	return 0;
 }

@@ -3,7 +3,10 @@
 #include "Effect.h"
 #include <vector>
 
-#define NUMBER_OF_EFFECTS 2
+#define NUMBER_OF_EFFECTS			2		// Кол-во эффектов
+
+#define MIN_PRICE					4		// Минимальная цена ингредиента
+#define MAX_PRICE					135		// Максимальная цена ингредиента
 
 // Класс ингредиент
 class Ingredient
@@ -21,8 +24,15 @@ public:
 	// Печать
 	void print();
 
+#pragma region ГЕТТЕРЫ
+
 	// Получить id эффекта по номеру
 	int getEffectId(int number);
+	
+	// Получить имя
+	string getName();
+
+#pragma endregion ГЕТТЕРЫ
 
 	//// Конструктор с параметрами
 	//Ingredient(string name, float price, vector<Effect*> effects);
@@ -57,7 +67,10 @@ private:
 	string name;
 
 	// Цена за ингредиент
-	float price;
+	int price;
+
+	// Кол-во
+	int number;
 
 	// Массив эффекторов из 2х ингредиентов
 	vector<int> effectsId;

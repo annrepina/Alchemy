@@ -25,7 +25,7 @@ string AlchemicalUserInterface::listOfBuyingIngredientsMenuItems[NUMBER_OF_MAIN_
 	"Покупка новых ингредиентов, которых нет в списке"
 };
 
-AlchemicalUserInterface::AlchemicalUserInterface()
+AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 {
 	//this->alchemist = new Alchemist();
 	//this->ingredientBuilder = new IngredientBuilder();

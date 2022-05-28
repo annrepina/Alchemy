@@ -4,8 +4,8 @@
 
 #define NUMBER_OF_INGREDIENTS		100		// Кол-во ингредиентов
 
-#define MIN_PRICE					4.f		// Минимальная цена ингредиента
-#define MAX_PRICE					135.f	// Максимальная цена ингредиента
+//#define MIN_PRICE					4		// Минимальная цена ингредиента
+//#define MAX_PRICE					135		// Максимальная цена ингредиента
 
 class IngredientBuilder
 {
@@ -55,7 +55,7 @@ private:
 	void setName(string name);
 
 	// Задать цену
-	void setPrice(float price);
+	void setPrice(int price);
 
 #pragma endregion СЕТТЕРЫ
 

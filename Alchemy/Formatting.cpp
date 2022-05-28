@@ -341,3 +341,7 @@ void printLowerTableFrame(int numberOfColumn, int columWidth)
 
     cout << turnOffDECMode();
 }
+
+void printTopTableFrame(int numberOfColumn, vector<int> columnWidth)
+{
+}

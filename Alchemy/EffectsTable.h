@@ -1,9 +1,10 @@
 #pragma once
 #include "Effect.h"
+#include "Table.h"
 #include <map>
 
 // Таблица эффектов ингредиентов
-class EffectsTable
+class EffectsTable : public Table
 {
 public:
 

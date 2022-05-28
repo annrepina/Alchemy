@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <vector>
 
 using namespace std;
 
@@ -160,7 +161,7 @@ int calculateConsoleWidth();
 // Возвращает координату х для печати текста hgjchtlbyt консоли
 int calculateXCoordInMiddle(string text);
 
-#pragma region Функции для печати таблицы с одинаковой шириной колонок и строчек с высотой 1
+#pragma region Функции для печати таблицы с ОДИНАКОВОЙ шириной колонок и строчек с высотой 1
 
 // Печатает верхнюю рамку таблицы
 void printTopTableFrame(int numberOfColumn, int columWidth);
@@ -171,10 +172,14 @@ void printInnerTableFrame(int numberOfColumn, int columWidth);
 // Печатает нижнюю рамку таблицы
 void printLowerTableFrame(int numberOfColumn, int columWidth);
 
-#pragma endregion
+#pragma endregion Функции для печати таблицы с ОДИНАКОВОЙ шириной колонок и строчек с высотой 1
 
+#pragma region Функции для печати таблицы с РАЗНОЙ шириной колонок и строчек с высотой 1
 
+// Печатает верхнюю рамку таблицы
+void printTopTableFrame(int numberOfColumn, vector <int> columnWidth);
 
+#pragma endregion Функции для печати таблицы с РАЗНОЙ шириной колонок и строчек с высотой 1
 
 
 

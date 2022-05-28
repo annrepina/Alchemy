@@ -1,10 +1,13 @@
 #pragma once
 #include "Ingredient.h"
 #include "EffectsTable.h"
+#include "Table.h"
 #include <map>
 
+#define NUMBER_OF_COLUMNS		6		// Кол-во колонок
+
 // Таблица ингредиентов
-class IngredientsTable
+class IngredientsTable : public Table
 {
 public:
 
@@ -20,7 +23,7 @@ public:
 	void setEffectsTable(EffectsTable* effectsTable);
 
 	// Печать таблицы
-	void print();
+	void print() const override;
 
 private:
 
@@ -34,6 +37,17 @@ private:
 	EffectsTable* effectsTable;
 
 	void clear();
+
+	void calculateLength() override;
+
+	// Вернуть наибольший id
+	int calculateMaxStrIdSize();
+
+	// Вернуть самое длинное название ингредиента
+	int calculateMaxNameSize();
+
+	// Вернуть наибольшее кол-во ингредиентов
+	int calculateMaxNumber();
 
 };
 

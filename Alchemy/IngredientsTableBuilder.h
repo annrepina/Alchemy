@@ -2,16 +2,17 @@
 #include "IngredientsTable.h"
 #include "IngredientBuilder.h"
 #include "AlchemyProgramParser.h"
+#include "AlchemyTableBuilder.h"
 
 // Строитель таблицы ингредиентов
-class IngredientsTableBuilder
+class IngredientsTableBuilder : public AlchemyTableBuilder
 {
 public:
 
 	// Конструктор по умолчанию
 	IngredientsTableBuilder();
 
-	~IngredientsTableBuilder();
+	~IngredientsTableBuilder() override;
 
 	IngredientsTable* getResult();
 
@@ -19,7 +20,7 @@ public:
 	void setIngredientBuilder(IngredientBuilder* ingredientBuilder);
 
 	// Построить ингредиент
-	void buildIngredientsTable(AlchemyProgramParser* alchemyProgramParser);
+	void buildTable(AlchemyProgramParser* alchemyProgramParser) override;
 
 private:
 	
@@ -30,12 +31,15 @@ private:
 	IngredientBuilder* ingredientBuilder;
 
 	// Сборосить до начальных установок
-	void reset();
+	void reset() override;
 
 	// Чистит память
-	void clear();
+	void clear() override;
 
 	// Добавить ингредиенты в таблицу
 	void addIngredients(int numberOfIngredients);
+
+	//// Расчитать длину таблицы
+	//void calculateLength() override;
 };
 

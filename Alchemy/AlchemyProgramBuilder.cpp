@@ -32,7 +32,7 @@ void AlchemyProgramBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyPro
 	// Если док пустой
 
 	// Строим таблицу эффектов
-	this->effectsTableBuilder->buildEffectsTable(alchemyProgramParse);
+	this->effectsTableBuilder->buildTable(alchemyProgramParse);
 
 	// Присваиваем программе таблицу эффектов
 	this->alchemyProgram->setEffectsTable(this->effectsTableBuilder->getResult());
@@ -47,7 +47,7 @@ void AlchemyProgramBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyPro
 	this->ingredientsTableBuilder->setIngredientBuilder(ingredientBuilder);
 
 	// Строим таблицу ингредиентов
-	this->ingredientsTableBuilder->buildIngredientsTable(alchemyProgramParse);
+	this->ingredientsTableBuilder->buildTable(alchemyProgramParse);
 
 	// Присваиваем таблицу ингредиентов
 	this->alchemyProgram->setIngredientsTable(ingredientsTableBuilder->getResult());
@@ -57,7 +57,7 @@ void AlchemyProgramBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyPro
 void AlchemyProgramBuilder::setEffectsTable(AlchemyProgramParser* alchemyProgramParse)
 {
 	// Строитель создает таблицу
-	this->effectsTableBuilder->buildEffectsTable(alchemyProgramParse);
+	this->effectsTableBuilder->buildTable(alchemyProgramParse);
 
 	// Добавляем таблицу в программу
 	this->alchemyProgram->setEffectsTable(this->effectsTableBuilder->getResult());

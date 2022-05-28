@@ -90,6 +90,9 @@
     <ClCompile Include="TableWithMap.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="AlchemyTableBuilder.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Effect.h">
@@ -162,6 +165,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="TableWithMap.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="AlchemyTableBuilder.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

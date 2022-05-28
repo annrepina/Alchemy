@@ -73,7 +73,7 @@ void IngredientsTable::calculateLength()
 	int length;
 
 	// Длина наибольшего id
-	length = calculateMaxStrIdSize();
+	length = calculateMaxIdStrSize();
 
 	// Длина наибольшего имени ингредиента
 	length += calculateMaxNameSize();
@@ -81,10 +81,13 @@ void IngredientsTable::calculateLength()
 	// Длина наибольшей цены
 	length += to_string(MAX_PRICE).size();
 
+	// Длина наибольшего кол-ва
+	length += calculateMaxNumberStrSize();
+
 	//length +=
 }
 
-int IngredientsTable::calculateMaxStrIdSize()
+int IngredientsTable::calculateMaxIdStrSize()
 {
 	// Последний id
 	int maxId;
@@ -128,9 +131,38 @@ int IngredientsTable::calculateMaxNameSize()
 	return maxNameSize;
 }
 
-int IngredientsTable::calculateMaxNumber()
+int IngredientsTable::calculateMaxNumberStrSize()
 {
+	// мах кол-во ингредиентов
+	int maxNumberSize = this->ingredientsWithId.begin()->second->getNumber();
 
+	// мах кол-во ингредиентов в виде строки
+	string strMaxNumber;
 
-	return 0;
+	// Размер строки мах кол-ва ингредиентов 
+	int strMaxNumberSize;
+
+	// Для каждого ингредиента
+	for (auto ingredient : this->ingredientsWithId)
+	{
+		// Присваиваем кол-вj текущего элемента
+		int number = ingredient.second->getNumber();
+
+		if (maxNumberSize < number)
+			maxNumberSize = number;
+	}
+
+	strMaxNumber = to_string(maxNumberSize);
+
+	strMaxNumberSize = strMaxNumber.size();
+
+	return strMaxNumberSize;
+}
+
+void IngredientsTable::calculateMaxEffectsNamesSize()
+{
+	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
+	{
+
+	}
 }

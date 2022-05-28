@@ -11,7 +11,7 @@ Ingredient::Ingredient()
 	this->price = 0;
 	this->number = 0;
 	//this->effectsId.shrink_to_fit(NUMBER_OF_EFFECTS);
-	this->effectsId.reserve(NUMBER_OF_EFFECTS);
+	//this->effectsId.reserve(NUMBER_OF_EFFECTS);
 }
 
 Ingredient::~Ingredient()
@@ -39,6 +39,11 @@ string Ingredient::getName()
 	return this->name;
 }
 
+int Ingredient::getNumber()
+{
+	return this->number;
+}
+
 void Ingredient::setName(string name)
 {
 	this->name = name;
@@ -53,7 +58,7 @@ void Ingredient::addEffect(int effectId)
 {
 	// Если размер вектора меньше двух, то добавляем элемент
 	if (NUMBER_OF_EFFECTS > this->effectsId.size())
-		this->effectsId.push_back(effectId);
+		this->effectsId.emplace(effectId, false);
 
 	else
 		return;

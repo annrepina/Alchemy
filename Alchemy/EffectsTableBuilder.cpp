@@ -1,6 +1,6 @@
 #include "EffectsTableBuilder.h"
 
-EffectsTableBuilder::EffectsTableBuilder()
+EffectsTableBuilder::EffectsTableBuilder() : AlchemyTableBuilder()
 {
 	reset();
 	//effectBuilder = new EffectBuilder();
@@ -12,7 +12,7 @@ EffectsTableBuilder::~EffectsTableBuilder()
 	clear();
 }
 
-void EffectsTableBuilder::buildEffectsTable(AlchemyProgramParser* alchemyProgramParser)
+void EffectsTableBuilder::buildTable(AlchemyProgramParser* alchemyProgramParser)
 {
 	// оюпяхл
 

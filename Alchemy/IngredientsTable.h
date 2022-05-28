@@ -38,16 +38,22 @@ private:
 
 	void clear();
 
-	void calculateLength() override;
+	void calculateLength();
 
 	// Вернуть наибольший id
-	int calculateMaxStrIdSize();
+	int calculateMaxIdStrSize();
 
 	// Вернуть самое длинное название ингредиента
 	int calculateMaxNameSize();
 
 	// Вернуть наибольшее кол-во ингредиентов
-	int calculateMaxNumber();
+	int calculateMaxNumberStrSize();
+
+	// Посчитать размеры максимальных имен эффектов
+	void calculateMaxEffectsNamesSize();
+
+	// Хранит максимальные размеры имен эффектов
+	int effectsNameSizes[NUMBER_OF_EFFECTS];
 
 };
 

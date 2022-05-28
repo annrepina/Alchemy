@@ -27,7 +27,7 @@ protected:
 
 	virtual void print() const;
 
-	virtual void calculateLength() = 0;
+	//virtual void calculateLength() = 0;
 
 private:
 

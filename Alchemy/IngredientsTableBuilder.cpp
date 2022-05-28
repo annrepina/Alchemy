@@ -1,6 +1,6 @@
 #include "IngredientsTableBuilder.h"
 
-IngredientsTableBuilder::IngredientsTableBuilder()
+IngredientsTableBuilder::IngredientsTableBuilder() : AlchemyTableBuilder()
 {
 	reset();
 	this->ingredientBuilder = nullptr;
@@ -21,7 +21,7 @@ void IngredientsTableBuilder::setIngredientBuilder(IngredientBuilder* ingredient
 	this->ingredientBuilder = ingredientBuilder;
 }
 
-void IngredientsTableBuilder::buildIngredientsTable(AlchemyProgramParser* alchemyProgramParser)
+void IngredientsTableBuilder::buildTable(AlchemyProgramParser* alchemyProgramParser)
 {
 	// Парсим
 
@@ -79,3 +79,24 @@ void IngredientsTableBuilder::addIngredients(int numberOfIngredients)
 		--lastIngredientNameIndex;
 	}
 }
+
+//void IngredientsTableBuilder::calculateLength()
+//{
+//
+//	int length;
+//
+//	// Длина наибольшего id
+//	length = calculateMaxIdStrSize();
+//
+//	// Длина наибольшего имени ингредиента
+//	length += calculateMaxNameSize();
+//
+//	// Длина наибольшей цены
+//	length += to_string(MAX_PRICE).size();
+//
+//	// Длина наибольшего кол-ва
+//	length += calculateMaxNumberStrSize();
+//
+//	//length +=
+//
+//}

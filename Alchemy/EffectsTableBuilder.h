@@ -2,20 +2,21 @@
 #include "EffectsTable.h"
 #include "AlchemyProgramParser.h"
 #include "EffectBuilder.h"
+#include "AlchemyTableBuilder.h"
 
 // Строитель таблицы эффектов
-class EffectsTableBuilder
+class EffectsTableBuilder : public AlchemyTableBuilder
 {
 public:
 
 	// Конструктор по умолчанию
 	EffectsTableBuilder();
 
-	// Деструктор
-	~EffectsTableBuilder();
+	//// Деструктор
+	~EffectsTableBuilder() override;
 
 	// Строит таблицу эффектов
-	void buildEffectsTable(AlchemyProgramParser* alchemyProgramParser);
+	void buildTable(AlchemyProgramParser* alchemyProgramParser) override;
 
 	//// Добавить позитивные эффекты
 	//void addPositiveEffects(int numberOfEffects);
@@ -36,11 +37,10 @@ private:
 	void addEffects(int numberOfEffects, bool isPositive);
 
 	// Сбрасывает до начальных установок
-	void reset();
+	void reset() override;
 
 	// Очищает память
-	void clear();
-
+	void clear() override;
 
 };
 

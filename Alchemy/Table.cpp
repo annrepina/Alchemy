@@ -3,7 +3,7 @@
 Table::Table()
 {
 	this->title = "";
-	this->tableLength = 0;
+	this->length = 0;
 	this->numberOfColumns = 0;
 	this->numberOfLines = 0;
 }

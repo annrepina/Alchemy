@@ -1,12 +1,15 @@
 #pragma once
 
 #include "Effect.h"
-#include <vector>
+//#include <vector>
+#include <map>
 
 #define NUMBER_OF_EFFECTS			2		// Кол-во эффектов
 
 #define MIN_PRICE					4		// Минимальная цена ингредиента
 #define MAX_PRICE					135		// Максимальная цена ингредиента
+
+#define UNKNOWN						false	// Неизвестный пользователю эффект	
 
 // Класс ингредиент
 class Ingredient
@@ -31,6 +34,9 @@ public:
 	
 	// Получить имя
 	string getName();
+
+	// Получить кол-во
+	int getNumber();
 
 #pragma endregion ГЕТТЕРЫ
 
@@ -72,8 +78,11 @@ private:
 	// Кол-во
 	int number;
 
-	// Массив эффекторов из 2х ингредиентов
-	vector<int> effectsId;
+	//// Массив эффекторов из 2х ингредиентов
+	//vector<int> effectsId;
+
+	// Массив эффектов из 2х ингредиентов и их значений известности игроку
+	map<int, bool> effectsId;
 
 	//// Метод очистки памяти
 	//void clear();

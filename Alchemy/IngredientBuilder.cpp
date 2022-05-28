@@ -171,11 +171,11 @@ void IngredientBuilder::buildIngredient(int lastIngredientNameIndex, int& lastEf
 		// Добавляем во временный вектор id
 		tempEffectsId.push_back(effectsId[idIndex]);
 
-		// Свопаем элементы в векторе
-		swap(this->effectsId[idIndex], this->effectsId[lastEffectIndex]);
-
 		// Добавляем id к вектору основному
 		addEffect(effectsId[idIndex]);
+
+		// Свопаем элементы в векторе
+		swap(this->effectsId[idIndex], this->effectsId[lastEffectIndex]);
 	}
 }
 

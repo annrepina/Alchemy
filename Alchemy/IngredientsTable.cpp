@@ -164,18 +164,52 @@ int IngredientsTable::calculateMaxNumberStrSize()
 
 int IngredientsTable::calculateMaxEffectNameSize()
 {
-	// Первый эффект в первом ингредиенте
-	int firstEffectId = this->ingredientsWithId.begin()->second->
+	// Итератор на map 
+	map<int, bool>::iterator firstIter;
+
+	// Id-ключ первого элемента map
+	int firstEffectId;
+
+	// Итератор на первый эффект в первом ингредиенте
+	firstIter = this->ingredientsWithId.begin()->second->getIterator();
+
+	// Присваиваем id
+	firstEffectId = firstIter->first;
 
 	int maxEffectNameSize = this->effectsTable->getEffectByKey(firstEffectId)->getName().size();
 
-	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
+
+
+	//int size = this->ingredientsWithId.size();
+
+	//for (int i = 0; i < size; ++i)
+	//{
+	//	// Для каждого ингредиента получаю свой итератор, указывающий на 1ый элемент
+	//	map<int, bool>::iterator iter = ingredient.second->getIterator();
+
+	//	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i, ++iter)
+	//	{
+	//		// Id эффекта текущего ингредиента по соотв итератору
+	//		int id = iter->first;
+
+	//		// Расчитываем длину имени эффекта с текущим id 
+	//		int effectNameSize = this->effectsTable->getEffectByKey(id)->getName().size();
+
+	//		if (maxEffectNameSize < effectNameSize)
+	//			maxEffectNameSize = effectNameSize;
+	//	}
+	//}
+
+	// Для каждого ингредиента
+	for (auto ingredient : this->ingredientsWithId)
 	{
-		// Для каждого ингредиента
-		for (auto ingredient : this->ingredientsWithId)
+		// Для каждого ингредиента получаю свой итератор, указывающий на 1ый элемент
+		map<int, bool>::iterator iter = ingredient.second->getIterator();
+
+		for (int i = 0; i < NUMBER_OF_EFFECTS; ++i, ++iter)
 		{
-			// Id эффекта текущего ингредиента
-			int id = ingredient.second->getEffectIsKnown(i);
+			// Id эффекта текущего ингредиента по соотв итератору
+			int id = iter->first;
 
 			// Расчитываем длину имени эффекта с текущим id 
 			int effectNameSize = this->effectsTable->getEffectByKey(id)->getName().size();

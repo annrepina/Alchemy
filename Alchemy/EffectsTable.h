@@ -17,7 +17,7 @@ public:
 	void addEffect(Effect* effect);
 
 	// Печать таблицы
-	void print() const override;
+	void print() override;
 
 	// Геттер для размера
 	int getSize();

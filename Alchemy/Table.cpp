@@ -7,6 +7,7 @@ Table::Table()
 	this->numberOfColumns = 0;
 	//this->numberOfLines = 0;
 	this->yCoordForPrinting = Y_COORD_FOR_PRINTING;
+	this->xCoordForPrinting = 0;
 }
 
 Table::~Table()

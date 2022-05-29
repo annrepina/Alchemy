@@ -18,22 +18,22 @@ int main()
 
     srand(1);
 
-    //AlchemicalUserInterface userInterface;
+    AlchemicalUserInterface userInterface;
 
-    //userInterface.setTitle("Зельеварение");
+    userInterface.setTitle("Зельеварение");
 
-    //userInterface.launchMainLoop();
-
-
+    userInterface.launchMainLoop();
 
 
-    AlchemyProgramParser parser;
 
-    EffectsTableBuilder* effectsTableBuilder = new EffectsTableBuilder();
 
-    effectsTableBuilder->buildTable(&parser);
+    //AlchemyProgramParser parser;
 
-    EffectsTable* table = effectsTableBuilder->getResult();
+    //EffectsTableBuilder* effectsTableBuilder = new EffectsTableBuilder();
+
+    //effectsTableBuilder->buildTable(&parser);
+
+    //EffectsTable* table = effectsTableBuilder->getResult();
 
     //table->print();
 
@@ -42,26 +42,26 @@ int main()
 
      
 
-    IngredientBuilder* ingredientBuilder = new IngredientBuilder();
+    //IngredientBuilder* ingredientBuilder = new IngredientBuilder();
 
-    ingredientBuilder->setEffectsTable(table);
+    //ingredientBuilder->setEffectsTable(table);
 
-    ingredientBuilder->fillEffectId();
+    //ingredientBuilder->fillEffectId();
 
-    IngredientsTableBuilder* ingredientsTableBuilder = new IngredientsTableBuilder();
+    //IngredientsTableBuilder* ingredientsTableBuilder = new IngredientsTableBuilder();
 
-    ingredientsTableBuilder->setIngredientBuilder(ingredientBuilder);
+    //ingredientsTableBuilder->setIngredientBuilder(ingredientBuilder);
 
-    ingredientsTableBuilder->buildTable(&parser);
+    //ingredientsTableBuilder->buildTable(&parser);
 
-    IngredientsTable* ingredientsTable = ingredientsTableBuilder->getResult();
+    //IngredientsTable* ingredientsTable = ingredientsTableBuilder->getResult();
 
 
 
-    ingredientsTable->calculateLength();
-    ingredientsTable->calculateXCoordForPrinting();
+    //ingredientsTable->calculateLength();
+    //ingredientsTable->calculateXCoordForPrinting();
 
-    ingredientsTable->print();
+    //ingredientsTable->print();
 
 
     

@@ -40,7 +40,7 @@ protected:
 	int xCoordForPrinting;
 
 	// Печать
-	virtual void print() const = 0;
+	virtual void print() = 0;
 
 
 

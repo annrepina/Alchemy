@@ -33,6 +33,11 @@ EffectsTable* AlchemyProgram::getEffectsTable()
 	return this->effectsTable;
 }
 
+void AlchemyProgram::printIngredientsTable()
+{
+	this->ingredientsTable->print();
+}
+
 //void AlchemyProgram::printTitle()
 //{
 //	this->setXCoord();

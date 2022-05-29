@@ -52,6 +52,8 @@ void AlchemyProgramBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyPro
 	// Присваиваем таблицу ингредиентов
 	this->element->setIngredientsTable(ingredientsTableBuilder->getResult());
 
+	
+
 }
 
 void AlchemyProgramBuilder::setEffectsTable(AlchemyProgramParser* alchemyProgramParse)

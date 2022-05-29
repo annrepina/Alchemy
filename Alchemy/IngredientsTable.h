@@ -26,7 +26,7 @@ public:
 	void setEffectsTable(EffectsTable* effectsTable);
 
 	// Печать таблицы
-	void print() const override;
+	void print() override;
 
 
 	// Расчитать длину таблицы

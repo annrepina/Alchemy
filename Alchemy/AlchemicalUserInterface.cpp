@@ -248,13 +248,18 @@ void AlchemicalUserInterface::buyIngredientsFromList()
 {
 	cout << goToXY(Y_COORD_AFTER_MENU_TITLE, STANDARD_CURSOR_X_COORD);
 
-	cout << "Введите id ингредиента: ";
+	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
 
+	printColoredText("Введите id ингредиента: ", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+	//cout << endl;
 
+	//cout << "Введите id ингредиента: ";
 
-	int id;
+	//int id;
 
-	cin >> id;
+	//cin >> id;
+
+	this->alchemyProgram->printIngredientsTable();
 	
 	
 }

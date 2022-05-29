@@ -26,12 +26,37 @@ void IngredientsTable::setEffectsTable(EffectsTable* effectsTable)
 	this->effectsTable = effectsTable;
 }
 
-void IngredientsTable::print() const
+void IngredientsTable::print() 
 {
-	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
+	//cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
+
+	// Перейти по координатам и увеличить Y
+	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
  
 	// Печатаем шапку таблицы
 	printTopTableFrame(1, this->length - OUTER_BORDERS);
+
+	// Координата для печати
+	int xCoord = calculateXCoordInMiddle(title);
+
+	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
+
+	cout << VERTICAL_LINE;
+
+	cout << goToXY(this->yCoordForPrinting, xCoord);
+
+	cout << title;
+
+	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting + length - 1);
+
+	//cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting + length - 1);
+
+	cout << VERTICAL_LINE;
+
+	//cout << goToXY(this->yCoordForPrinting + 1, this->xCoordForPrinting);
+
+	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+
 	printLowerTableFrame(1, this->length - OUTER_BORDERS);
 
 

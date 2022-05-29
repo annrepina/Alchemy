@@ -58,6 +58,14 @@ public:
 	//// Запуск главного цикла программы
 	//void launchMainLoop();
 
+#pragma region МЕТОДЫ ПЕЧАТИ
+
+
+	void printIngredientsTable();
+
+#pragma endregion МЕТОДЫ ПЕЧАТИ
+
+
 private:
 
 	// Алхимик (пользователь)

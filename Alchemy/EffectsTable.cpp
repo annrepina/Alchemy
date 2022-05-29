@@ -6,6 +6,7 @@ int EffectsTable::id = 0;
 EffectsTable::EffectsTable()
 {
 	this->size = 0;
+	this->title = "Ёффекты";
 }
 
 EffectsTable::~EffectsTable()
@@ -14,7 +15,7 @@ EffectsTable::~EffectsTable()
 }
 
 
-void EffectsTable::addEffect(Effect* effect)
+void EffectsTable::add(Effect* effect)
 {
 	//this->effects.push_back(effect);
 	this->effectsWithId.emplace(++id, effect);

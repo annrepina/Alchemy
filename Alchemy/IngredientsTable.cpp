@@ -8,7 +8,7 @@ IngredientsTable::IngredientsTable()
 {
 	this->effectsTable = nullptr;
 	this->title = "Ингредиенты";
-	this->numberOfColumns = NUMBER_OF_COLUMNS;
+	//this->numberOfColumns = NUMBER_OF_COLUMNS;
 	//this->numberOfLines = (--this->ingredientsWithId.end())->first + 1;
 }
 
@@ -76,6 +76,11 @@ void IngredientsTable::print()
 
 	//	cout << endl;
 	//}
+}
+
+map<int, Ingredient*>::iterator IngredientsTable::getEndIterator()
+{
+	return --this->ingredientsWithId.end();
 }
 
 void IngredientsTable::clear()

@@ -4,7 +4,7 @@
 #include <map>
 
 // Таблица эффектов ингредиентов
-class EffectsTable : public Table
+class EffectsTable : public Table<Effect>
 {
 public:
 
@@ -14,10 +14,10 @@ public:
 	~EffectsTable() override;
 
 	// Добавить эффект
-	void addEffect(Effect* effect);
+	void add(Effect* effect) override;
 
 	// Печать таблицы
-	void print() override;
+	void print();
 
 	// Геттер для размера
 	int getSize();
@@ -26,9 +26,6 @@ public:
 	Effect* getEffectByKey(int key);
 
 private:
-
-	// Список эффектов
-	//vector<Effect*> effects;
 
 	// Id эффекта
 	static int id;

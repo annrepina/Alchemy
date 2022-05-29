@@ -9,6 +9,7 @@ using namespace std;
 #include "EffectsTableBuilder.h"
 #include "AlchemicalUserInterface.h"
 #include "IngredientsTableBuilder.h"
+#include "IngredientsTablePrinter.h"
 //#include <consoleapi2.h>
 
 int main()
@@ -64,6 +65,13 @@ int main()
     //ingredientsTable->print();
 
 
+
+
+    IngredientsTablePrinter printer;
+
+    IngredientsTable* table = new IngredientsTable();
+
+    printer.print(table);
     
 }
 

@@ -4,7 +4,12 @@ IngredientsTablePrinter::IngredientsTablePrinter() : TablePrinter()
 {
 }
 
-void IngredientsTablePrinter::calculateLength()
+void IngredientsTablePrinter::print(IngredientsTable* ingredientsTable)
+{
+	calculateLength(ingredientsTable);
+}
+
+void IngredientsTablePrinter::calculateLength(IngredientsTable* ingredientsTable)
 {
 	int length;
 
@@ -29,7 +34,7 @@ void IngredientsTablePrinter::calculateLength()
 	this->tableLength = length;
 }
 
-int IngredientsTablePrinter::calculateMaxIdStrSize()
+int IngredientsTablePrinter::calculateMaxIdStrSize(Table* table)
 {
 	// Последний id
 	int maxId;
@@ -45,6 +50,8 @@ int IngredientsTablePrinter::calculateMaxIdStrSize()
 	//rit = this->ingredientsWithId.rbegin();
 
 	//biggest = rit->first;
+
+	maxId = (table.getEndIterator())
 
 	maxId = (--this->ingredientsWithId.end())->first;
 

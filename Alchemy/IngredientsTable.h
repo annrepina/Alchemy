@@ -4,8 +4,8 @@
 #include "Table.h"
 #include <map>
 
-//#define NUMBER_OF_COLUMNS		6		// Кол-во колонок
-//#define OUTER_BORDERS			2		// Внешние границы таблицы (левая и правая)
+//#define NUMBER_OF_COLUMNS			6		// Кол-во колонок
+//#define OUTER_BORDERS				2		// Внешние границы таблицы (левая и правая)
 
 //#define MULTIPLIER				3		// Множитель для расчета длины таблицы
 
@@ -26,7 +26,10 @@ public:
 	void setEffectsTable(EffectsTable* effectsTable);
 
 	// Печать таблицы
-	void print() override;
+	void print();
+
+	// Получить итератор на последний элемент в map
+	map<int, Ingredient*>::iterator getEndIterator();
 
 
 	// Расчитать длину таблицы

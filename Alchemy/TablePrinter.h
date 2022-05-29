@@ -1,27 +1,39 @@
 #pragma once
-#include "Table.h"
+//#include "Table.h"
 
 // Класс-шаблон печатающий что-либо
-//template <typename PrintableObj>
+template <typename PrintableObj>
 class TablePrinter
 {
 public:
 
-	TablePrinter();
+	TablePrinter()
+	{
 
-	virtual ~TablePrinter();
+	}
+
+	virtual ~TablePrinter()
+	{
+
+	}
+
+	virtual void print(PrintableObj* printableObj)
+	{
+
+	}
 
 protected:
 
-	virtual void print(Table* printableObj);
-
-	virtual void calculateLength() = 0;
+	virtual void calculateLength(PrintableObj* printableObj) = 0;
 
 	int xCoordForTablePrinting;
 
 	int tableLength;
 
-	virtual void calculateXCoordForPrinting(Table* printableObj);
+	virtual void calculateXCoordForPrinting(PrintableObj* printableObj)
+	{
+		this->xCoordForTablePrinting = calculateXCoordInMiddle(this->tableLength);
+	}
 
 private:
 
@@ -32,4 +44,44 @@ private:
 
 
 };
+
+
+
+
+//// Класс-шаблон печатающий что-либо
+////template <typename PrintableObj>
+//class TablePrinter
+//{
+//public:
+//
+//	TablePrinter();
+//
+//	virtual ~TablePrinter();
+//
+//	virtual void print(Table* printableObj);
+//
+//protected:
+//
+//
+//
+//	virtual void calculateLength(Table* printableObj) = 0;
+//
+//	int xCoordForTablePrinting;
+//
+//	int tableLength;
+//
+//	virtual void calculateXCoordForPrinting(Table* printableObj);
+//
+//private:
+//
+//
+//
+//
+//
+//
+//
+//};
+
+
+
 

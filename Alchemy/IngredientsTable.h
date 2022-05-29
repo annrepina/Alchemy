@@ -4,10 +4,10 @@
 #include "Table.h"
 #include <map>
 
-#define NUMBER_OF_COLUMNS		6		// Кол-во колонок
-#define OUTER_BORDERS			2		// Внешние границы таблицы (левая и правая)
+//#define NUMBER_OF_COLUMNS		6		// Кол-во колонок
+//#define OUTER_BORDERS			2		// Внешние границы таблицы (левая и правая)
 
-#define MULTIPLIER				3		// Множитель для расчета длины таблицы
+//#define MULTIPLIER				3		// Множитель для расчета длины таблицы
 
 // Таблица ингредиентов
 class IngredientsTable : public Table
@@ -30,7 +30,9 @@ public:
 
 
 	// Расчитать длину таблицы
-	void calculateLength();
+	//void calculateLength();
+
+
 
 private:
 
@@ -48,17 +50,17 @@ private:
 
 
 
-	// Вернуть наибольший id
-	int calculateMaxIdStrSize();
+	//// Вернуть наибольший id
+	//int calculateMaxIdStrSize();
 
-	// Вернуть самое длинное название ингредиента
-	int calculateMaxNameSize();
+	//// Вернуть самое длинное название ингредиента
+	//int calculateMaxNameSize();
 
-	// Вернуть наибольшее кол-во ингредиентов
-	int calculateMaxNumberStrSize();
+	//// Вернуть наибольшее кол-во ингредиентов
+	//int calculateMaxNumberStrSize();
 
-	// Посчитать размеры максимальных имен эффектов
-	int calculateMaxEffectNameSize();
+	//// Посчитать размеры максимальных имен эффектов
+	//int calculateMaxEffectNameSize();
 
 	//// Хранит максимальные размеры имен эффектов
 	//int effectsNameSizes[NUMBER_OF_EFFECTS];

@@ -19,6 +19,8 @@ public:
 
 	virtual void calculateXCoordForPrinting();
 
+
+
 protected:
 
 	// Название таблицы

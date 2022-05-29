@@ -46,6 +46,8 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 
 	// создаем новый экземпляр
 	this->alchemyProgramParser = new AlchemyProgramParser();
+
+	this->printer = new Printer();
 }
 
 void AlchemicalUserInterface::launchMainLoop()

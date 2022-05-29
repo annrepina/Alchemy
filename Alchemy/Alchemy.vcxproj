@@ -151,6 +151,7 @@
     <ClCompile Include="Formatting.cpp" />
     <ClCompile Include="IngredientsTable.cpp" />
     <ClCompile Include="IngredientsTableBuilder.cpp" />
+    <ClCompile Include="IngredientsTablePrinter.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="KnownIngredientsTable.cpp" />
     <ClCompile Include="KnownIngredientsTableBuilder.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="IngredientDirector.cpp" />
     <ClCompile Include="Alchemist.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="TablePrinter.cpp" />
     <ClCompile Include="ServiceFunctions.cpp" />
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="AlchemyTableBuilder.cpp" />
@@ -185,10 +187,12 @@
     <ClInclude Include="Alchemist.h" />
     <ClInclude Include="IngredientsTable.h" />
     <ClInclude Include="IngredientsTableBuilder.h" />
+    <ClInclude Include="IngredientsTablePrinter.h" />
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="KnownIngredientsTable.h" />
     <ClInclude Include="KnownIngredientsTableBuilder.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="TablePrinter.h" />
     <ClInclude Include="ServiceFunctions.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="AlchemyTableBuilder.h" />

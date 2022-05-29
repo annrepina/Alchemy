@@ -27,6 +27,11 @@ public:
 
 	virtual void add(T* element) = 0;
 
+	string getTitle() 
+	{
+		return this->title;
+	}
+
 protected:
 
 	// Название таблицы

@@ -47,7 +47,7 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	// создаем новый экземпляр
 	this->alchemyProgramParser = new AlchemyProgramParser();
 
-	this->printer = new Printer();
+	this->printer = new IngredientsTablePrinter();
 }
 
 void AlchemicalUserInterface::launchMainLoop()
@@ -261,8 +261,9 @@ void AlchemicalUserInterface::buyIngredientsFromList()
 
 	//cin >> id;
 
-	this->alchemyProgram->printIngredientsTable();
-	
+	this->printer->print(this->alchemyProgram->getIngredientsTable());
+
+	//this->alchemyProgram->printIngredientsTable();
 	
 }
 

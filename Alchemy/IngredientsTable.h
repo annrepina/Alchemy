@@ -10,26 +10,35 @@
 //#define MULTIPLIER				3		// Множитель для расчета длины таблицы
 
 // Таблица ингредиентов
-class IngredientsTable : public Table
+class IngredientsTable : public Table<Ingredient>
 {
 public:
 
 	// Конструктор по умолчанию
 	IngredientsTable();
 
-	~IngredientsTable();
+	~IngredientsTable() override;
 
 	// Добавить ингредиент в таблицу
-	void addIngredient(Ingredient* ingredient);
+	void add(Ingredient* ingredient) override;
 
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
 
-	// Печать таблицы
-	void print();
+	//// Печать таблицы
+	//void print();
 
 	// Получить итератор на последний элемент в map
 	map<int, Ingredient*>::iterator getEndIterator();
+
+	// Получить итератор на первый элемент в map
+	map<int, Ingredient*>::iterator getStartIterator();
+
+	// Получить map
+	map<int, Ingredient*> getIngredientsWithId();
+
+	// Получить таблицу эффектов
+	EffectsTable* getEffectsTable();
 
 
 	// Расчитать длину таблицы

@@ -3,7 +3,7 @@
 //#include "Alchemist.h"
 //#include "IngredientBuilder.h"
 #include "AlchemyProgramBuilder.h"
-#include "Printer.h"
+#include "IngredientsTablePrinter.h"
 //#include "AlchemyProgram.h"
 
 // Координаты
@@ -81,7 +81,7 @@ private:
 	AlchemyProgramParser* alchemyProgramParser;
 
 	// Принтер
-	Printer* printer;
+	IngredientsTablePrinter* printer;
 
 	// Настроить программу Алхимии
 	void setAlchemyProgram();

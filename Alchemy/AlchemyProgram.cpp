@@ -33,10 +33,15 @@ EffectsTable* AlchemyProgram::getEffectsTable()
 	return this->effectsTable;
 }
 
-void AlchemyProgram::printIngredientsTable()
+IngredientsTable* AlchemyProgram::getIngredientsTable()
 {
-	this->ingredientsTable->print();
+	return this->ingredientsTable;
 }
+
+//void AlchemyProgram::printIngredientsTable()
+//{
+//	this->ingredientsTable->print();
+//}
 
 //void AlchemyProgram::printTitle()
 //{

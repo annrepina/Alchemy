@@ -166,7 +166,6 @@
     <ClCompile Include="ServiceFunctions.cpp" />
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="AlchemyTableBuilder.cpp" />
-    <ClCompile Include="TableWithMap.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,7 +195,6 @@
     <ClInclude Include="ServiceFunctions.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="AlchemyTableBuilder.h" />
-    <ClInclude Include="TableWithMap.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

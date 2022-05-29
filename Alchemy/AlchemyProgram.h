@@ -53,6 +53,8 @@ public:
 	// Геттер для таблицы эффектов
 	EffectsTable* getEffectsTable();
 
+	IngredientsTable* getIngredientsTable();
+
 #pragma endregion ГЕТТЕРЫ
 
 	//// Запуск главного цикла программы
@@ -61,7 +63,7 @@ public:
 #pragma region МЕТОДЫ ПЕЧАТИ
 
 
-	void printIngredientsTable();
+	//void printIngredientsTable();
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 

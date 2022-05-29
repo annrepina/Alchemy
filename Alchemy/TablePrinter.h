@@ -1,15 +1,21 @@
 #pragma once
-//#include "Table.h"
+#include "Formatting.h"
+
+#define Y_COORD_FOR_PRINTING		10		// Координата Y для печати
 
 // Класс-шаблон печатающий что-либо
-template <typename PrintableObj>
+template <typename PrintableTable>
 class TablePrinter
 {
 public:
 
 	TablePrinter()
 	{
-
+		this->numberOfColumns = 0;
+		this->numberOfLines = 0;
+		this->tableLength = 0;
+		this->xCoordForPrinting = 0;
+		this->yCoordForPrinting = Y_COORD_FOR_PRINTING;
 	}
 
 	virtual ~TablePrinter()
@@ -17,22 +23,32 @@ public:
 
 	}
 
-	virtual void print(PrintableObj* printableObj)
-	{
-
-	}
+	virtual void print(PrintableTable* table) = 0;
 
 protected:
 
-	virtual void calculateLength(PrintableObj* printableObj) = 0;
+	virtual void calculateLength(PrintableTable* table) = 0;
 
-	int xCoordForTablePrinting;
+	virtual int calculateMaxIdStrSize(PrintableTable* table) = 0;
+
+	virtual int calculateMaxNameSize(PrintableTable* table) = 0;
+
+	int xCoordForPrinting;
 
 	int tableLength;
 
-	virtual void calculateXCoordForPrinting(PrintableObj* printableObj)
+	// Кол-во столбцов
+	int numberOfColumns;
+
+	// Кол-во строк
+	int numberOfLines;
+
+	// Координат y для печати
+	int yCoordForPrinting;
+
+	virtual void calculateXCoordForPrinting()
 	{
-		this->xCoordForTablePrinting = calculateXCoordInMiddle(this->tableLength);
+		this->xCoordForPrinting = calculateXCoordInMiddle(this->tableLength);
 	}
 
 private:

@@ -38,7 +38,7 @@ void EffectsTableBuilder::addEffects(int numberOfEffects, bool isPositive)
 	{
 		this->effectBuilder->buildEffect(lastIndex, isPositive);
 
-		this->element->addEffect(this->effectBuilder->getResult());
+		this->element->add(this->effectBuilder->getResult());
 
 		// Уменьшаем последний индекс
 		--lastIndex;

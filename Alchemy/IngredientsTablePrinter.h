@@ -15,9 +15,6 @@ public:
 
 	void print(IngredientsTable* ingredientsTable) override;
 
-
-	
-
 protected:
 
 private:
@@ -25,16 +22,16 @@ private:
 	void calculateLength(IngredientsTable* ingredientsTable) override;
 
 	// Вернуть наибольший id
-	int calculateMaxIdStrSize(Table* table);
+	int calculateMaxIdStrSize(IngredientsTable* table) override;
 
 	// Вернуть самое длинное название ингредиента
-	int calculateMaxNameSize();
+	int calculateMaxNameSize(IngredientsTable* table) override;
 
 	// Вернуть наибольшее кол-во ингредиентов
-	int calculateMaxNumberStrSize();
+	int calculateMaxNumberStrSize(IngredientsTable* table);
 
 	// Посчитать размеры максимальных имен эффектов
-	int calculateMaxEffectNameSize();
+	int calculateMaxEffectNameSize(IngredientsTable* table);
 
 
 };

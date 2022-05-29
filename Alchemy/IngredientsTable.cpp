@@ -14,9 +14,10 @@ IngredientsTable::IngredientsTable()
 
 IngredientsTable::~IngredientsTable()
 {
+	clear();
 }
 
-void IngredientsTable::addIngredient(Ingredient* ingredient)
+void IngredientsTable::add(Ingredient* ingredient)
 {
 	this->ingredientsWithId.emplace(++id, ingredient);
 }
@@ -26,61 +27,76 @@ void IngredientsTable::setEffectsTable(EffectsTable* effectsTable)
 	this->effectsTable = effectsTable;
 }
 
-void IngredientsTable::print() 
-{
-	//cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
-
-	// Перейти по координатам и увеличить Y
-	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
- 
-	// Печатаем шапку таблицы
-	printTopTableFrame(1, this->length - OUTER_BORDERS);
-
-	// Координата для печати
-	int xCoord = calculateXCoordInMiddle(title);
-
-	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
-
-	cout << VERTICAL_LINE;
-
-	cout << goToXY(this->yCoordForPrinting, xCoord);
-
-	cout << title;
-
-	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting + length - 1);
-
-	//cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting + length - 1);
-
-	cout << VERTICAL_LINE;
-
-	//cout << goToXY(this->yCoordForPrinting + 1, this->xCoordForPrinting);
-
-	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
-
-	printLowerTableFrame(1, this->length - OUTER_BORDERS);
-
-
-
-
-	//for (auto ingredient : this->ingredientsWithId)
-	//{
-	//	cout << ingredient.first << ' ';
-	//	ingredient.second->print();
-
-	//	// печатаем эффекты
-	//	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
-	//	{
-	//		this->effectsTable->getEffectByKey(ingredient.second->getEffectId(i))->print();
-	//		cout << ' ';
-	//	}
-
-	//	cout << endl;
-	//}
-}
+//void IngredientsTable::print() 
+//{
+//	//cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
+//
+//	// Перейти по координатам и увеличить Y
+//	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+// 
+//	// Печатаем шапку таблицы
+//	printTopTableFrame(1, this->length - OUTER_BORDERS);
+//
+//	// Координата для печати
+//	int xCoord = calculateXCoordInMiddle(title);
+//
+//	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
+//
+//	cout << VERTICAL_LINE;
+//
+//	cout << goToXY(this->yCoordForPrinting, xCoord);
+//
+//	cout << title;
+//
+//	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting + length - 1);
+//
+//	//cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting + length - 1);
+//
+//	cout << VERTICAL_LINE;
+//
+//	//cout << goToXY(this->yCoordForPrinting + 1, this->xCoordForPrinting);
+//
+//	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+//
+//	printLowerTableFrame(1, this->length - OUTER_BORDERS);
+//
+//
+//
+//
+//	//for (auto ingredient : this->ingredientsWithId)
+//	//{
+//	//	cout << ingredient.first << ' ';
+//	//	ingredient.second->print();
+//
+//	//	// печатаем эффекты
+//	//	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
+//	//	{
+//	//		this->effectsTable->getEffectByKey(ingredient.second->getEffectId(i))->print();
+//	//		cout << ' ';
+//	//	}
+//
+//	//	cout << endl;
+//	//}
+//}
 
 map<int, Ingredient*>::iterator IngredientsTable::getEndIterator()
 {
 	return --this->ingredientsWithId.end();
+}
+
+map<int, Ingredient*>::iterator IngredientsTable::getStartIterator()
+{
+	return this->ingredientsWithId.begin();
+}
+
+map<int, Ingredient*> IngredientsTable::getIngredientsWithId()
+{
+	return this->ingredientsWithId;
+}
+
+EffectsTable* IngredientsTable::getEffectsTable()
+{
+	return this->effectsTable;
 }
 
 void IngredientsTable::clear()
@@ -119,7 +135,7 @@ void IngredientsTable::clear()
 //
 //	this->length = length;
 //}
-
+//
 //int IngredientsTable::calculateMaxIdStrSize()
 //{
 //	// Последний id

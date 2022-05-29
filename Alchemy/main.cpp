@@ -67,11 +67,11 @@ int main()
 
 
 
-    IngredientsTablePrinter printer;
+    //IngredientsTablePrinter printer;
 
-    IngredientsTable* table = new IngredientsTable();
+    //IngredientsTable* table = new IngredientsTable();
 
-    printer.print(table);
+    //printer.print(table);
     
 }
 

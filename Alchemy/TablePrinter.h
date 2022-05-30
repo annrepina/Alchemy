@@ -27,11 +27,8 @@ public:
 
 protected:
 
-	virtual void calculateLength(PrintableTable* table) = 0;
-
-	virtual int calculateMaxIdStrSize(PrintableTable* table) = 0;
-
-	virtual int calculateMaxNameSize(PrintableTable* table) = 0;
+	// Координат y для печати
+	int yCoordForPrinting;
 
 	int xCoordForPrinting;
 
@@ -43,13 +40,20 @@ protected:
 	// Кол-во строк
 	int numberOfLines;
 
-	// Координат y для печати
-	int yCoordForPrinting;
+	virtual void calculateLength(PrintableTable* table) = 0;
+
+	virtual int calculateMaxIdStrSize(PrintableTable* table) = 0;
+
+	virtual int calculateMaxNameSize(PrintableTable* table) = 0;
 
 	virtual void calculateXCoordForPrinting()
 	{
 		this->xCoordForPrinting = calculateXCoordInMiddle(this->tableLength);
 	}
+
+	// Печать шапки таблицы
+	virtual void printTableHeader(PrintableTable* table) = 0;
+
 
 private:
 

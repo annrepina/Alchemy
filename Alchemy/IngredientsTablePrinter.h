@@ -33,6 +33,7 @@ private:
 	// Посчитать размеры максимальных имен эффектов
 	int calculateMaxEffectNameSize(IngredientsTable* table);
 
-
+	// Печать шапки таблицы
+	void printTableHeader(IngredientsTable* table) override;
 };
 

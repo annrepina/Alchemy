@@ -9,35 +9,10 @@ void IngredientsTablePrinter::print(IngredientsTable* ingredientsTable)
 	calculateLength(ingredientsTable);
 
 	calculateXCoordForPrinting();
+	
+	printTableHeader(ingredientsTable);
 
-	// Перейти по координатам и увеличить Y
-	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
 
-	// Печатаем шапку таблицы
-	printTopTableFrame(1, this->tableLength - OUTER_BORDERS);
-
-	// Координата для печати
-	int xCoord = calculateXCoordInMiddle(ingredientsTable->getTitle());
-
-	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
-
-	cout << VERTICAL_LINE;
-
-	cout << goToXY(this->yCoordForPrinting, xCoord);
-
-	cout << ingredientsTable->getTitle();
-
-	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting + this->tableLength - 1);
-
-	//cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting + length - 1);
-
-	cout << VERTICAL_LINE;
-
-	//cout << goToXY(this->yCoordForPrinting + 1, this->xCoordForPrinting);
-
-	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
-
-	printLowerTableFrame(1, this->tableLength - OUTER_BORDERS);
 }
 
 void IngredientsTablePrinter::calculateLength(IngredientsTable* ingredientsTable)
@@ -204,4 +179,33 @@ int IngredientsTablePrinter::calculateMaxEffectNameSize(IngredientsTable* table)
 	}
 
 	return maxEffectNameSize;
+}
+
+void IngredientsTablePrinter::printTableHeader(IngredientsTable* table)
+{
+	// Координата для печати названия
+	int xCoord = calculateXCoordInMiddle(table->getTitle());
+
+	// Перейти по координатам и увеличить Y
+	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+
+	// Печатаем шапку таблицы
+	printTopTableFrame(1, this->tableLength - OUTER_BORDERS);
+
+	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
+
+	cout << VERTICAL_LINE;
+
+	// Координаты для печати названия табл
+	cout << goToXY(this->yCoordForPrinting, xCoord);
+
+	cout << table->getTitle();
+
+	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting + this->tableLength - 1);
+
+	cout << VERTICAL_LINE;
+
+	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+
+	printLowerTableFrame(1, this->tableLength - OUTER_BORDERS);
 }

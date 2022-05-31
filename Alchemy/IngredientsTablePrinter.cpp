@@ -13,6 +13,7 @@ void IngredientsTablePrinter::print(IngredientsTable* ingredientsTable)
 	printTableHeader(ingredientsTable);
 
 
+
 }
 
 void IngredientsTablePrinter::calculateLength(IngredientsTable* ingredientsTable)
@@ -181,6 +182,25 @@ int IngredientsTablePrinter::calculateMaxEffectNameSize(IngredientsTable* table)
 	return maxEffectNameSize;
 }
 
+vector<int> IngredientsTablePrinter::calculateColumnWidth(IngredientsTable* table)
+{
+	// Значения ширин колонки
+	vector <int> columnWidth;
+
+	// Считаем ширину столбца с id
+	int idColumnWidth = calculateMaxIdStrSize(table) + GAPS;
+
+	columnWidth.push_back(idColumnWidth);
+
+	int nameColumnWidth = calculateMaxNameSize(table) + GAPS;
+
+	columnWidth.push_back(nameColumnWidth);
+
+	int priceColumnWidth = ca
+
+	return columnWidth;
+}
+
 void IngredientsTablePrinter::printTableHeader(IngredientsTable* table)
 {
 	// Координата для печати названия
@@ -189,7 +209,7 @@ void IngredientsTablePrinter::printTableHeader(IngredientsTable* table)
 	// Перейти по координатам и увеличить Y
 	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
 
-	// Печатаем шапку таблицы
+	// Печатаем верхнюю границу таблицы
 	printTopTableFrame(1, this->tableLength - OUTER_BORDERS);
 
 	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);

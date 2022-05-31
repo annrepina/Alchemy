@@ -70,8 +70,8 @@ using namespace std;
 #define LOWER_RIGHT_CORNER			"j"      // верхний правый угол
 #define SYMBOL_T_WORD				"w"		 // сивол '┬'
 #define SYMBOL_TURNED_T_WORD		"v"		 // сивол '┴'
-#define SYMBOL_FIRST_HALF_H_WORD	"t"		 // сивол '├'
-#define SYMBOL_SECOND_HALF_H_WORD	"u"		 // сивол '┤'
+#define SYMBOL_FIRST_HALF_H_LETTER	"t"		 // сивол '├'
+#define SYMBOL_SECOND_HALF_H_LETTER	"u"		 // сивол '┤'
 #define SYMBOL_CROSS				"n"		 // сивол '┼'
 #define CELL						"a"      // клетка
 
@@ -182,9 +182,18 @@ void printLowerTableFrame(int numberOfColumn, int columWidth);
 // Печатает верхнюю рамку таблицы
 void printTopTableFrame(int numberOfColumn, vector <int> columnWidth);
 
+// ечатает внутреннюю границу таблицы
+void printInnerTableFrame(int numberOfColumn, vector <int> columnWidth);
+
 #pragma endregion Функции для печати таблицы с РАЗНОЙ шириной колонок и строчек с высотой 1
 
 
+#pragma region ФУНКЦИИ ДЛЯ ПЕЧАТИ ТАБЛИЦЫ 
 
+void printInnerTableFrame(int columnWidth);
+
+
+
+#pragma endregion ФУНКЦИИ ДЛЯ ПЕЧАТИ ТАБЛИЦЫ 
 
 

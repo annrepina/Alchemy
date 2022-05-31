@@ -6,6 +6,12 @@
 
 #define NUMBER_OF_COLUMNS		6		// Кол-во колонок
 #define OUTER_BORDERS			2		// Внешние границы таблицы (левая и правая)
+#define GAPS					2		// Кол-во пробелов в столбце (1 слева и 1 справа)
+
+
+
+
+// Очередность столбцов id name price effect1 effect2 number
 
 class IngredientsTablePrinter : public TablePrinter<IngredientsTable>
 {
@@ -32,6 +38,10 @@ private:
 
 	// Посчитать размеры максимальных имен эффектов
 	int calculateMaxEffectNameSize(IngredientsTable* table);
+
+	// Расчитывает ширину каждого столбца и возвращает вектор
+	vector<int> calculateColumnWidth(IngredientsTable* table) override;
+
 
 	// Печать шапки таблицы
 	void printTableHeader(IngredientsTable* table) override;

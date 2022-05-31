@@ -313,16 +313,16 @@ void printInnerTableFrame(int numberOfColumn, int columWidth)
         }
         else
         {
-            cout << SYMBOL_FIRST_HALF_H_WORD;
+            cout << SYMBOL_FIRST_HALF_H_LETTER;
         }
 
-        for (int i = 0; i < columWidth; ++i)
+        for (int j = 0; j < columWidth; ++j)
         {
             cout << HORIZONTAL_LINE;
         }
     }
 
-    cout << SYMBOL_SECOND_HALF_H_WORD;
+    cout << SYMBOL_SECOND_HALF_H_LETTER;
 }
 
 void printLowerTableFrame(int numberOfColumn, int columWidth)
@@ -351,4 +351,52 @@ void printLowerTableFrame(int numberOfColumn, int columWidth)
 
 void printTopTableFrame(int numberOfColumn, vector<int> columnWidth)
 {
+}
+
+void printInnerTableFrame(int numberOfColumn, vector<int> columnWidth)
+{
+    cout << turnOnDECMode();
+
+    for (int i = 0; i < numberOfColumn; ++i)
+    {
+        // если это не первый и не последний индекс
+        if (FIRST_INDEX != i)
+        {
+            cout << SYMBOL_CROSS;
+        }
+        else
+        {
+            cout << SYMBOL_FIRST_HALF_H_LETTER;
+        }
+
+        for (int j = 0; j < columnWidth[i]; ++j)
+        {
+            cout << HORIZONTAL_LINE;
+        }
+    }
+
+    cout << SYMBOL_SECOND_HALF_H_LETTER;
+}
+
+void printInnerTableFrame(int columnWidth)
+{
+    cout << turnOnDECMode();
+
+
+    // если это не первый и не последний индекс
+    if (FIRST_INDEX != i)
+    {
+        cout << SYMBOL_CROSS;
+    }
+    else
+    {
+        cout << SYMBOL_FIRST_HALF_H_LETTER;
+    }
+
+    for (int i = 0; i < columWidth; ++i)
+    {
+        cout << HORIZONTAL_LINE;
+    }
+
+    cout << SYMBOL_SECOND_HALF_H_LETTER;
 }

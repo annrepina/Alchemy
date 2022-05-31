@@ -27,11 +27,13 @@ public:
 
 protected:
 
-	// Координат y для печати
+	// Координата Y для печати
 	int yCoordForPrinting;
 
+	// Координата X для печати
 	int xCoordForPrinting;
 
+	// Длина таблицы
 	int tableLength;
 
 	// Кол-во столбцов
@@ -40,16 +42,30 @@ protected:
 	// Кол-во строк
 	int numberOfLines;
 
+	// Вектор с шириной каждого столбца
+	vector<int> columnWidth;
+
+#pragma region МЕТОДЫ РАСЧЕТА
+
 	virtual void calculateLength(PrintableTable* table) = 0;
 
 	virtual int calculateMaxIdStrSize(PrintableTable* table) = 0;
 
 	virtual int calculateMaxNameSize(PrintableTable* table) = 0;
 
+	// Расчитывает ширину каждого столбца и возвращает вектор
+	virtual vector<int> calculateColumnWidth(PrintableTable* table) = 0;
+
 	virtual void calculateXCoordForPrinting()
 	{
 		this->xCoordForPrinting = calculateXCoordInMiddle(this->tableLength);
 	}
+
+#pragma endregion МЕТОДЫ РАСЧЕТА
+
+
+
+
 
 	// Печать шапки таблицы
 	virtual void printTableHeader(PrintableTable* table) = 0;

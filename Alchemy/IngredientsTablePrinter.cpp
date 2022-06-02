@@ -20,6 +20,14 @@ void IngredientsTablePrinter::calculateLength(IngredientsTable* ingredientsTable
 {
 	int length;
 
+	for(auto wid)
+
+
+
+
+
+
+
 	// Длина наибольшего id
 	length = calculateMaxIdStrSize(ingredientsTable);
 
@@ -190,13 +198,31 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth(IngredientsTable* tabl
 	// Считаем ширину столбца с id
 	int idColumnWidth = calculateMaxIdStrSize(table) + GAPS;
 
+	// Добавляем ширину колонки с id
 	columnWidth.push_back(idColumnWidth);
 
+	// Считаем ширину столбца с именем
 	int nameColumnWidth = calculateMaxNameSize(table) + GAPS;
 
+	// Добавляем ширину столбца с именем
 	columnWidth.push_back(nameColumnWidth);
 
-	int priceColumnWidth = ca
+	// Считаем ширину столбца с ценой
+	int priceColumnWidth = to_string(MAX_PRICE).size();
+
+	columnWidth.push_back(priceColumnWidth);
+
+	int effectColumnWidth = calculateMaxEffectNameSize(table) + GAPS;
+	
+	// Добавляем ширину в вектор столько раз, сколько эффектов
+	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
+	{
+		columnWidth.push_back(effectColumnWidth);
+	}
+
+	int numberColumnWidth = calculateMaxNumberStrSize(table);
+
+	columnWidth.push_back(numberColumnWidth);
 
 	return columnWidth;
 }

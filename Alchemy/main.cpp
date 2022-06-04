@@ -72,6 +72,8 @@ int main()
     //IngredientsTable* table = new IngredientsTable();
 
     //printer.print(table);
+
+    //calculateConsoleWidth();
     
 }
 

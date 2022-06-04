@@ -14,7 +14,7 @@ public:
 	TablePrinter()
 	{
 		this->numberOfColumns = 0;
-		this->numberOfLines = 5;
+		this->numberOfLines = 0;
 		this->tableWidth = 0;
 		this->xCoordForPrinting = 0;
 		this->yCoordForPrinting = Y_COORD_FOR_PRINTING;
@@ -27,6 +27,8 @@ public:
 
 	virtual void print(PrintableTable* table)
 	{
+		//cout << "\x1b[3;9000r";
+
 		this->columnWidthValues = calculateColumnWidth(table);
 
 		this->tableWidth = calculateWidth(table);
@@ -34,6 +36,52 @@ public:
 		this->xCoordForPrinting = calculateXCoordForPrinting();
 
 		this->numberOfColumns = this->columnWidthValues.size();
+
+		this->numberOfLines = calculateNumberOfLines(table); 
+
+		HANDLE hStdout;
+
+		CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
+
+		SMALL_RECT srctScrollRect, srctClipRect;
+
+		CHAR_INFO chiFill;
+
+		COORD coordDest;
+
+		hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+
+		GetConsoleScreenBufferInfo(hStdout, &csbiInfo);
+
+		srctScrollRect.Top = csbiInfo.dwSize.Y - 16;
+
+		srctScrollRect.Bottom = csbiInfo.dwSize.Y - 1;
+
+		srctScrollRect.Left = 0;
+
+		srctScrollRect.Right = csbiInfo.dwSize.X - 1;
+
+		coordDest.X = 0;
+
+		coordDest.Y = csbiInfo.dwSize.Y - 17;
+
+		srctClipRect = srctScrollRect;
+
+		chiFill.Attributes = BACKGROUND_GREEN | FOREGROUND_RED;
+
+		chiFill.Char.UnicodeChar = ' ';
+
+		ScrollConsoleScreenBuffer(
+
+			hStdout,         // screen buffer handle
+
+			&srctScrollRect, // scrolling rectangle
+
+			&srctClipRect,   // clipping rectangle
+
+			coordDest,       // top left destination cell
+
+			& chiFill);       // fill character and color
 
 		printHeader(table);
 		
@@ -61,6 +109,9 @@ protected:
 	vector<int> columnWidthValues;
 
 #pragma region МЕТОДЫ РАСЧЕТА
+
+	// Рассчитать кол-во строк в таблице
+	virtual int calculateNumberOfLines(PrintableTable* table) = 0;
 
 	virtual int calculateWidth(PrintableTable* table) = 0;
 
@@ -142,18 +193,24 @@ protected:
 		// По кол-ву колонок
 		for (int i = 0; i < this->numberOfLines; ++i)
 		{
-			goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+			//goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
 
 			printInnerVerticalLines();
 
-			goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+			cout << endl;
+
+			//goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
 
 			if (i == this->numberOfLines - 1)
 			{
-
+				printLowerTableFrame(this->columnWidthValues);
 			}
+			else 
+				printInnerTableFrame(this->columnWidthValues);
 
-			printInnerTableFrame(this->columnWidthValues);
+			cout << endl;
+
+			//cout << "\x1b[1T";
 		}
 
 
@@ -178,7 +235,32 @@ protected:
 
 private:
 
+	//// Печатает нижнюю рамку таблицы
+	//void printLowerTableFrame()
+	//{
+	//	cout << turnOnDECMode();
 
+	//	cout << LOWER_LEFT_CORNER;
+
+	//	for (int j = 0; j < numberOfColumns; ++j)
+	//	{
+	//		for (int i = 0; i < this->columnWidthValues[j]; ++i)
+	//		{
+	//			cout << HORIZONTAL_LINE;
+	//		}
+
+	//		if ((numberOfColumns - 1) != j)
+	//		{
+	//			cout << SYMBOL_TURNED_T_WORD;
+	//		}
+	//		else
+	//		{
+	//			cout << LOWER_RIGHT_CORNER;
+	//		}
+	//	}
+
+	//	cout << turnOffDECMode();
+	//}
 
 };
 

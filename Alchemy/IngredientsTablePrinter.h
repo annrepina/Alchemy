@@ -25,8 +25,11 @@ protected:
 
 private:
 	
+	// Рассчитать кол-во строк в таблице
+	int calculateNumberOfLines(IngredientsTable* table) override;
+
 	// Рассчитать ширину таблицы
-	int calculateWidth(IngredientsTable* ingredientsTable) override;
+	int calculateWidth(IngredientsTable* table) override;
 
 	// Вернуть наибольший id
 	int calculateMaxIdStrSize(IngredientsTable* table) override;

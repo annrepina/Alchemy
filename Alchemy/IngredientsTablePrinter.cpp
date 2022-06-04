@@ -17,6 +17,14 @@ IngredientsTablePrinter::IngredientsTablePrinter() : TablePrinter()
 //	printInnerFrame(table);
 //}
 
+int IngredientsTablePrinter::calculateNumberOfLines(IngredientsTable* table)
+{
+	//  ол-во строк равно кол-ву ингредиентов
+	int numberOfLines = table->getIngredientsWithId().size();
+
+	return numberOfLines;
+}
+
 int IngredientsTablePrinter::calculateWidth(IngredientsTable* ingredientsTable)
 {
 	int totalWidth = 0;
@@ -220,7 +228,7 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth(IngredientsTable* tabl
 		columnWidth.push_back(effectColumnWidth);
 	}
 
-	int numberColumnWidth = calculateMaxNumberStrSize(table);
+	int numberColumnWidth = calculateMaxNumberStrSize(table) + GAPS;
 
 	columnWidth.push_back(numberColumnWidth);
 

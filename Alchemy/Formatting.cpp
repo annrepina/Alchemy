@@ -259,7 +259,9 @@ int calculateConsoleWidth()
     GetConsoleScreenBufferInfo(hOut, &consoleSize);   
 
     // получает ширину консоли в байтах 
-    consoleWidth = consoleSize.dwSize.X;           
+    consoleWidth = consoleSize.dwSize.X;      
+
+    int consoleLength = consoleSize.dwSize.Y;
 
     return consoleWidth;
 }
@@ -381,6 +383,34 @@ void printInnerTableFrame(/*int numberOfColumn, */vector<int> columnWidth)
     }
 
     cout << SYMBOL_SECOND_HALF_H_LETTER;
+}
+
+void printLowerTableFrame(vector<int> columnWidthValues)
+{
+    int numberOfColumns = columnWidthValues.size();
+
+    cout << turnOnDECMode();
+
+    cout << LOWER_LEFT_CORNER;
+
+    for (int j = 0; j < numberOfColumns; ++j)
+    {
+        for (int i = 0; i < columnWidthValues[j]; ++i)
+        {
+            cout << HORIZONTAL_LINE;
+        }
+
+        if ((numberOfColumns - 1) != j)
+        {
+            cout << SYMBOL_TURNED_T_WORD;
+        }
+        else
+        {
+            cout << LOWER_RIGHT_CORNER;
+        }
+    }
+
+    cout << turnOffDECMode();
 }
 
 //void printInnerTableFrame(int columnWidth)

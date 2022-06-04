@@ -19,13 +19,14 @@ public:
 
 	IngredientsTablePrinter();
 
-	void print(IngredientsTable* ingredientsTable) override;
+	//void print(IngredientsTable* ingredientsTable) override;
 
 protected:
 
 private:
-
-	void calculateLength(IngredientsTable* ingredientsTable) override;
+	
+	// Рассчитать ширину таблицы
+	int calculateWidth(IngredientsTable* ingredientsTable) override;
 
 	// Вернуть наибольший id
 	int calculateMaxIdStrSize(IngredientsTable* table) override;
@@ -42,8 +43,12 @@ private:
 	// Расчитывает ширину каждого столбца и возвращает вектор
 	vector<int> calculateColumnWidth(IngredientsTable* table) override;
 
+	//// Печать шапки таблицы
+	//void printHeader(IngredientsTable* table) override;
 
-	// Печать шапки таблицы
-	void printTableHeader(IngredientsTable* table) override;
+	
+
+	// Печать внутренней рамки таблицы
+	//void printInnerFrame(IngredientsTable* table) override;
 };
 

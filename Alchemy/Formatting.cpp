@@ -278,6 +278,7 @@ int calculateXCoordInMiddle(int textSize)
     return xCoord;
 }
 
+
 void printTopTableFrame(int numberOfColumn, int columWidth)
 {
     cout << turnOnDECMode() << TOP_LEFT_CORNER;
@@ -349,18 +350,20 @@ void printLowerTableFrame(int numberOfColumn, int columWidth)
     cout << turnOffDECMode();
 }
 
-void printTopTableFrame(int numberOfColumn, vector<int> columnWidth)
-{
-}
+//void printTopTableFrame(int numberOfColumn, vector<int> columnWidth)
+//{
+//}
 
-void printInnerTableFrame(int numberOfColumn, vector<int> columnWidth)
+void printInnerTableFrame(/*int numberOfColumn, */vector<int> columnWidth)
 {
+    int numberOfColumn = columnWidth.size();
+
     cout << turnOnDECMode();
 
-    for (int i = 0; i < numberOfColumn; ++i)
+    for (int k = 0; k < numberOfColumn; ++k)
     {
-        // если это не первый и не последний индекс
-        if (FIRST_INDEX != i)
+        // если это не первый индекс
+        if (FIRST_INDEX != k)
         {
             cout << SYMBOL_CROSS;
         }
@@ -369,7 +372,7 @@ void printInnerTableFrame(int numberOfColumn, vector<int> columnWidth)
             cout << SYMBOL_FIRST_HALF_H_LETTER;
         }
 
-        for (int j = 0; j < columnWidth[i]; ++j)
+        for (int j = 0; j < columnWidth[k]; ++j)
         {
             cout << HORIZONTAL_LINE;
         }
@@ -378,25 +381,25 @@ void printInnerTableFrame(int numberOfColumn, vector<int> columnWidth)
     cout << SYMBOL_SECOND_HALF_H_LETTER;
 }
 
-void printInnerTableFrame(int columnWidth)
-{
-    cout << turnOnDECMode();
-
-
-    // если это не первый и не последний индекс
-    if (FIRST_INDEX != i)
-    {
-        cout << SYMBOL_CROSS;
-    }
-    else
-    {
-        cout << SYMBOL_FIRST_HALF_H_LETTER;
-    }
-
-    for (int i = 0; i < columWidth; ++i)
-    {
-        cout << HORIZONTAL_LINE;
-    }
-
-    cout << SYMBOL_SECOND_HALF_H_LETTER;
-}
+//void printInnerTableFrame(int columnWidth)
+//{
+//    cout << turnOnDECMode();
+//
+//
+//    // если это не первый и не последний индекс
+//    if (FIRST_INDEX != i)
+//    {
+//        cout << SYMBOL_CROSS;
+//    }
+//    else
+//    {
+//        cout << SYMBOL_FIRST_HALF_H_LETTER;
+//    }
+//
+//    for (int i = 0; i < columWidth; ++i)
+//    {
+//        cout << HORIZONTAL_LINE;
+//    }
+//
+//    cout << SYMBOL_SECOND_HALF_H_LETTER;
+//}

@@ -4,49 +4,49 @@ IngredientsTablePrinter::IngredientsTablePrinter() : TablePrinter()
 {
 }
 
-void IngredientsTablePrinter::print(IngredientsTable* ingredientsTable)
+//void IngredientsTablePrinter::print(IngredientsTable* table)
+//{
+//	this->columnWidthValues = calculateColumnWidth(table);
+//
+//	this->tableWidth = calculateWidth(table);
+//
+//	this->xCoordForPrinting = calculateXCoordForPrinting();
+//	
+//	printHeader(table);
+//
+//	printInnerFrame(table);
+//}
+
+int IngredientsTablePrinter::calculateWidth(IngredientsTable* ingredientsTable)
 {
-	calculateLength(ingredientsTable);
+	int totalWidth = 0;
 
-	calculateXCoordForPrinting();
-	
-	printTableHeader(ingredientsTable);
+	for (auto width : this->columnWidthValues)
+	{
+		totalWidth += width;
+	}
 
+	totalWidth += NUMBER_OF_COLUMNS + 1;
 
+	//// Длина наибольшего id
+	//width = calculateMaxIdStrSize(ingredientsTable);
 
-}
+	//// Длина наибольшего имени ингредиента
+	//totalWidth += calculateMaxNameSize(ingredientsTable);
 
-void IngredientsTablePrinter::calculateLength(IngredientsTable* ingredientsTable)
-{
-	int length;
+	//// Длина наибольшей цены
+	//totalWidth += to_string(MAX_PRICE).size();
 
-	for(auto wid)
+	//// Длина наибольшего кол-ва
+	//totalWidth += calculateMaxNumberStrSize(ingredientsTable);
 
+	//// Длины наибольших эффектов
+	//totalWidth += calculateMaxEffectNameSize(ingredientsTable) * NUMBER_OF_EFFECTS;
 
+	//// Прибавляем границы и пробелы
+	//totalWidth += NUMBER_OF_COLUMNS * MULTIPLIER + 1;
 
-
-
-
-
-	// Длина наибольшего id
-	length = calculateMaxIdStrSize(ingredientsTable);
-
-	// Длина наибольшего имени ингредиента
-	length += calculateMaxNameSize(ingredientsTable);
-
-	// Длина наибольшей цены
-	length += to_string(MAX_PRICE).size();
-
-	// Длина наибольшего кол-ва
-	length += calculateMaxNumberStrSize(ingredientsTable);
-
-	// Длины наибольших эффектов
-	length += calculateMaxEffectNameSize(ingredientsTable) * NUMBER_OF_EFFECTS;
-
-	// Прибавляем границы и пробелы
-	length += NUMBER_OF_COLUMNS * MULTIPLIER + 1;
-
-	this->tableLength = length;
+	return totalWidth;
 }
 
 int IngredientsTablePrinter::calculateMaxIdStrSize(IngredientsTable* ingredientsTable)
@@ -227,31 +227,44 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth(IngredientsTable* tabl
 	return columnWidth;
 }
 
-void IngredientsTablePrinter::printTableHeader(IngredientsTable* table)
-{
-	// Координата для печати названия
-	int xCoord = calculateXCoordInMiddle(table->getTitle());
+//void IngredientsTablePrinter::printHeader(IngredientsTable* table)
+//{
+//	// Координата для печати названия
+//	int xCoord = calculateXCoordInMiddle(table->getTitle());
+//
+//	// Перейти по координатам и увеличить Y
+//	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+//
+//	// Печатаем верхнюю границу таблицы
+//	printTopTableFrame(1, this->tableWidth - OUTER_BORDERS);
+//
+//	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
+//
+//	cout << VERTICAL_LINE;
+//
+//	// Координаты для печати названия табл
+//	cout << goToXY(this->yCoordForPrinting, xCoord);
+//
+//	cout << table->getTitle();
+//
+//	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting + this->tableWidth - 1);
+//
+//	cout << VERTICAL_LINE;
+//
+//	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+//
+//
+//
+//	printLowerTableFrame(1, this->tableWidth - OUTER_BORDERS);
+//}
 
-	// Перейти по координатам и увеличить Y
-	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
-
-	// Печатаем верхнюю границу таблицы
-	printTopTableFrame(1, this->tableLength - OUTER_BORDERS);
-
-	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
-
-	cout << VERTICAL_LINE;
-
-	// Координаты для печати названия табл
-	cout << goToXY(this->yCoordForPrinting, xCoord);
-
-	cout << table->getTitle();
-
-	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting + this->tableLength - 1);
-
-	cout << VERTICAL_LINE;
-
-	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
-
-	printLowerTableFrame(1, this->tableLength - OUTER_BORDERS);
-}
+//void IngredientsTablePrinter::printInnerFrame(IngredientsTable* table)
+//{
+//	// По кол-ву колонок
+//	for (int i = 0; i < this->numberOfLines; ++i)
+//	{
+//		goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+//
+//		printInnerTableFrame(this->columnWidthValues);
+//	}
+//}

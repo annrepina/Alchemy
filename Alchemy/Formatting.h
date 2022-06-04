@@ -179,18 +179,18 @@ void printLowerTableFrame(int numberOfColumn, int columWidth);
 
 #pragma region Функции для печати таблицы с РАЗНОЙ шириной колонок и строчек с высотой 1
 
-// Печатает верхнюю рамку таблицы
-void printTopTableFrame(int numberOfColumn, vector <int> columnWidth);
+//// Печатает верхнюю рамку таблицы
+//void printTopTableFrame(int numberOfColumn, vector <int> columnWidth);
 
 // ечатает внутреннюю границу таблицы
-void printInnerTableFrame(int numberOfColumn, vector <int> columnWidth);
+void printInnerTableFrame(/*int numberOfColumn, */vector <int> columnWidth);
 
 #pragma endregion Функции для печати таблицы с РАЗНОЙ шириной колонок и строчек с высотой 1
 
 
 #pragma region ФУНКЦИИ ДЛЯ ПЕЧАТИ ТАБЛИЦЫ 
 
-void printInnerTableFrame(int columnWidth);
+//void printInnerTableFrame(int columnWidth);
 
 
 

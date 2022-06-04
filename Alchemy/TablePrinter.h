@@ -144,12 +144,19 @@ protected:
 		{
 			goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
 
-			printInnerTableFrame(this->columnWidthValues);
+			printInnerVerticalLines();
 
 			goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
 
-			printInnerVerticalLines();
+			if (i == this->numberOfLines - 1)
+			{
+
+			}
+
+			printInnerTableFrame(this->columnWidthValues);
 		}
+
+
 	}
 
 	virtual void printInnerVerticalLines()

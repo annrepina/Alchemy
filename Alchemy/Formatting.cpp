@@ -358,6 +358,8 @@ void printInnerTableFrame(/*int numberOfColumn, */vector<int> columnWidth)
 {
     int numberOfColumn = columnWidth.size();
 
+    //int numberBeforeLast = numberOfColumn
+
     cout << turnOnDECMode();
 
     for (int k = 0; k < numberOfColumn; ++k)

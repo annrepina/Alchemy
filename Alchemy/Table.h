@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define Y_COORD_FOR_PRINTING	10		// Координата Y для печати
+#define Y_COORD_FOR_FRAME_PRINTING	10		// Координата Y для печати
 
 // Класс- таблица
 template<typename T>

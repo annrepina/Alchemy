@@ -4,12 +4,13 @@
 
 #define MULTIPLIER				3		// Множитель для расчета длины таблицы
 
-#define NUMBER_OF_COLUMNS		6		// Кол-во колонок
+//#define NUMBER_OF_COLUMNS		6		// Кол-во колонок
 #define OUTER_BORDERS			2		// Внешние границы таблицы (левая и правая)
 #define GAPS					2		// Кол-во пробелов в столбце (1 слева и 1 справа)
 
 
-
+#define PRICE_LENGTH				4		// Длина слова "Цена"
+#define NUMBER_LENGTH				6		// Длина слова "Кол-во"
 
 // Очередность столбцов id name price effect1 effect2 number
 
@@ -20,6 +21,8 @@ public:
 	IngredientsTablePrinter();
 
 	//void print(IngredientsTable* ingredientsTable) override;
+
+	void print(IngredientsTable* table) override;
 
 protected:
 
@@ -45,6 +48,14 @@ private:
 
 	// Расчитывает ширину каждого столбца и возвращает вектор
 	vector<int> calculateColumnWidth(IngredientsTable* table) override;
+
+
+
+	// Печать шапки таблицы
+	void printHeader() override;
+
+	// Печать содержимого таблицы
+	void printContent(IngredientsTable* table, int page) override;
 
 	//// Печать шапки таблицы
 	//void printHeader(IngredientsTable* table) override;

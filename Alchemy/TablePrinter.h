@@ -1,9 +1,16 @@
 #pragma once
 #include "Formatting.h"
 
-#define Y_COORD_FOR_PRINTING		10		// Координата Y для печати
+#define Y_COORD_FOR_FRAME_PRINTING			10		// Координата Y для печати рамки таблицы 
+#define Y_COORD_FOR_CONTENT_PRINTING		13		// Координата Y для печати содержимого таблицы
 
-#define OUTER_BORDERS			2		// Внешние границы таблицы (левая и правая)
+#define OUTER_BORDERS				2		// Внешние границы таблицы (левая и правая)
+
+#define NUMBER_OF_LINES_ON_PAGE		11		// Кол-во строк на одной странице
+#define NUMBER_OF_COLUMNS			6		// Кол-во колонок
+
+#define GAPS					2		// Кол-во пробелов в столбце (1 слева и 1 справа)
+
 
 // Класс-шаблон печатающий что-либо
 template <typename PrintableTable>
@@ -16,8 +23,10 @@ public:
 		this->numberOfColumns = 0;
 		this->numberOfLines = 0;
 		this->tableWidth = 0;
-		this->xCoordForPrinting = 0;
-		this->yCoordForPrinting = Y_COORD_FOR_PRINTING;
+		this->xCoordForFramePrinting = 0;
+		this->xCoordForContentPrinting = 0;
+		this->yCoordForFramePrinting = Y_COORD_FOR_FRAME_PRINTING;
+		this->yCoordForContentPrinting = Y_COORD_FOR_CONTENT_PRINTING;
 	}
 
 	virtual ~TablePrinter()
@@ -33,68 +42,37 @@ public:
 
 		this->tableWidth = calculateWidth(table);
 
-		this->xCoordForPrinting = calculateXCoordForPrinting();
+		this->xCoordForFramePrinting = calculateXCoordForPrinting();
 
 		this->numberOfColumns = this->columnWidthValues.size();
 
 		this->numberOfLines = calculateNumberOfLines(table); 
 
-		HANDLE hStdout;
+		this->xCoordsForContentPrinting = calculateXCoordsForContentPrinting();
 
-		CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
-
-		SMALL_RECT srctScrollRect, srctClipRect;
-
-		CHAR_INFO chiFill;
-
-		COORD coordDest;
-
-		hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-
-		GetConsoleScreenBufferInfo(hStdout, &csbiInfo);
-
-		srctScrollRect.Top = csbiInfo.dwSize.Y - 16;
-
-		srctScrollRect.Bottom = csbiInfo.dwSize.Y - 1;
-
-		srctScrollRect.Left = 0;
-
-		srctScrollRect.Right = csbiInfo.dwSize.X - 1;
-
-		coordDest.X = 0;
-
-		coordDest.Y = csbiInfo.dwSize.Y - 17;
-
-		srctClipRect = srctScrollRect;
-
-		chiFill.Attributes = BACKGROUND_GREEN | FOREGROUND_RED;
-
-		chiFill.Char.UnicodeChar = ' ';
-
-		ScrollConsoleScreenBuffer(
-
-			hStdout,         // screen buffer handle
-
-			&srctScrollRect, // scrolling rectangle
-
-			&srctClipRect,   // clipping rectangle
-
-			coordDest,       // top left destination cell
-
-			& chiFill);       // fill character and color
-
-		printHeader(table);
+		printTitle(table);
 		
 		printInnerFrame();
+
+
 	}
 
 protected:
 
-	// Координата Y для печати
-	int yCoordForPrinting;
+	// Координата Y для печати рамки таблицы
+	int yCoordForFramePrinting;
 
-	// Координата X для печати
-	int xCoordForPrinting;
+	// Y координата для печати содержимого таблицы
+	int yCoordForContentPrinting;
+
+	// Координата X для печати рамки таблицы
+	int xCoordForFramePrinting;
+
+	// Х координата для печати содержимого таблицы
+	int xCoordForContentPrinting;
+
+	// Вектор координат х для печати содержимого таблицы
+	vector<int> xCoordsForContentPrinting;
 
 	// Длина таблицы
 	int tableWidth;
@@ -119,6 +97,23 @@ protected:
 
 	virtual int calculateMaxNameSize(PrintableTable* table) = 0;
 
+	virtual vector<int> calculateXCoordsForContentPrinting()
+	{
+		int startCoord = xCoordForFramePrinting + GAPS; 
+
+		vector <int> coords;
+
+		coords.push_back(startCoord);
+
+		for (int i = 1; i < this->numberOfColumns; ++i)
+		{
+			startCoord += this->columnWidthValues[i - 1] /*- GAPS) + GAPS */ + 1;
+			coords.push_back(startCoord);
+		}
+
+		return coords;
+	}
+
 	// Расчитывает ширину каждого столбца и возвращает вектор
 	virtual vector<int> calculateColumnWidth(PrintableTable* table) = 0;
 
@@ -133,32 +128,32 @@ protected:
 
 #pragma endregion МЕТОДЫ РАСЧЕТА
 
-	// Печать шапки таблицы
-	virtual void printHeader(PrintableTable* table) 
+	// Печать названия таблицы
+	virtual void printTitle(PrintableTable* table) 
 	{
 		// Координата для печати названия
 		int xCoord = calculateXCoordInMiddle(table->getTitle());
 
 		// Перейти по координатам и увеличить Y
-		goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+		goToCoordAndIncreaseY(this->yCoordForFramePrinting, this->xCoordForFramePrinting);
 
 		// Печатаем верхнюю границу таблицы
 		printTopTableFrame(1, this->tableWidth - OUTER_BORDERS);
 
-		cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
+		cout << goToXY(this->yCoordForFramePrinting, this->xCoordForFramePrinting);
 
 		cout << VERTICAL_LINE;
 
 		// Координаты для печати названия табл
-		cout << goToXY(this->yCoordForPrinting, xCoord);
+		cout << goToXY(this->yCoordForFramePrinting, xCoord);
 
 		cout << table->getTitle();
 
-		goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting + this->tableWidth - 1);
+		goToCoordAndIncreaseY(this->yCoordForFramePrinting, this->xCoordForFramePrinting + this->tableWidth - 1);
 
 		cout << VERTICAL_LINE;
 
-		goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+		goToCoordAndIncreaseY(this->yCoordForFramePrinting, this->xCoordForFramePrinting);
 
 		printLowerLineOfHeader(table);
 
@@ -190,30 +185,30 @@ protected:
 	// Печатать внутреннюю рамку таблицы
 	virtual void printInnerFrame()
 	{
+		//// Одна колонка для шапки таблицы
+		//int numberOfLines = this->numberOfLines + 1;
+
 		// По кол-ву колонок
-		for (int i = 0; i < this->numberOfLines; ++i)
+		for (int i = 0; i < NUMBER_OF_LINES_ON_PAGE; ++i)
 		{
-			//goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+			goToCoordAndIncreaseY(this->yCoordForFramePrinting, this->xCoordForFramePrinting);
 
 			printInnerVerticalLines();
 
-			cout << endl;
+			//cout << endl;
 
-			//goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
+			goToCoordAndIncreaseY(this->yCoordForFramePrinting, this->xCoordForFramePrinting);
 
-			if (i == this->numberOfLines - 1)
+			if (i == NUMBER_OF_LINES_ON_PAGE - 1)
 			{
 				printLowerTableFrame(this->columnWidthValues);
 			}
 			else 
 				printInnerTableFrame(this->columnWidthValues);
-
-			cout << endl;
-
-			//cout << "\x1b[1T";
 		}
 
-
+		// Обнуляем координату Y
+		this->yCoordForFramePrinting = Y_COORD_FOR_FRAME_PRINTING;
 	}
 
 	virtual void printInnerVerticalLines()
@@ -232,6 +227,12 @@ protected:
 
 		cout << VERTICAL_LINE << turnOffDECMode();
 	}
+
+	// Печать содержимого таблицы по страницам
+	virtual void printContent(PrintableTable* table, int page) = 0;
+
+	// Печать шапки таблицы
+	virtual void printHeader() = 0;
 
 private:
 

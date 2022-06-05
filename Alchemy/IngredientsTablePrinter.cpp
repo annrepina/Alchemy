@@ -216,7 +216,7 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth(IngredientsTable* tabl
 	columnWidth.push_back(nameColumnWidth);
 
 	// Считаем ширину столбца с ценой
-	int priceColumnWidth = to_string(MAX_PRICE).size();
+	int priceColumnWidth = PRICE_LENGTH + GAPS;
 
 	columnWidth.push_back(priceColumnWidth);
 
@@ -228,11 +228,36 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth(IngredientsTable* tabl
 		columnWidth.push_back(effectColumnWidth);
 	}
 
-	int numberColumnWidth = calculateMaxNumberStrSize(table) + GAPS;
+	//int numberColumnWidth = calculateMaxNumberStrSize(table) + GAPS;
+
+	int numberColumnWidth = NUMBER_LENGTH + GAPS;
 
 	columnWidth.push_back(numberColumnWidth);
 
 	return columnWidth;
+}
+
+void IngredientsTablePrinter::print(IngredientsTable* table)
+{
+	TablePrinter::print(table);
+
+	this->printHeader();
+}
+
+void IngredientsTablePrinter::printHeader()
+{
+	string namesOfColumns[NUMBER_OF_COLUMNS] = { "Id", "Имя", "Цена", "Эффект 1", "Эффект 2", "Кол-во" };
+
+	for (int i = 0; i < this->numberOfColumns; ++i)
+	{
+		cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[i]);
+
+		cout << namesOfColumns[i];
+	}
+}
+
+void IngredientsTablePrinter::printContent(IngredientsTable* table, int page)
+{
 }
 
 //void IngredientsTablePrinter::printHeader(IngredientsTable* table)

@@ -12,6 +12,8 @@
 #define PRICE_LENGTH				4		// Длина слова "Цена"
 #define NUMBER_LENGTH				6		// Длина слова "Кол-во"
 
+#define UNKNOWN_EFFECT				"НЕИЗВЕСТНО"	// если эффект у данного ингредиента неизветстен
+
 // Очередность столбцов id name price effect1 effect2 number
 
 class IngredientsTablePrinter : public TablePrinter<IngredientsTable>
@@ -22,7 +24,7 @@ public:
 
 	//void print(IngredientsTable* ingredientsTable) override;
 
-	void print(IngredientsTable* table) override;
+	void print(IngredientsTable* table, int page) override;
 
 protected:
 

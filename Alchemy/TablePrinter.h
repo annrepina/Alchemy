@@ -3,7 +3,7 @@
 
 #define Y_COORD_FOR_FRAME_PRINTING			10		// Координата Y для печати рамки таблицы 
 #define Y_COORD_FOR_HEADER_PRINTING			13		// Координата Y для печати шапки таблицы
-#define Y_COORD_FOR_CONTENT_PRINTING		14		// Координата Y для печати содержимого таблицы
+#define Y_COORD_FOR_CONTENT_PRINTING		15		// Координата Y для печати содержимого таблицы
 
 
 #define OUTER_BORDERS				2		// Внешние границы таблицы (левая и правая)
@@ -13,6 +13,8 @@
 #define NUMBER_OF_COLUMNS			6		// Кол-во колонок
 
 #define GAPS						2		// Кол-во пробелов в столбце (1 слева и 1 справа)
+
+#define FIRST_PAGE					1		// Первая страница таблицы
 
 
 // Класс-шаблон печатающий что-либо
@@ -30,6 +32,7 @@ public:
 		this->xCoordForContentPrinting = 0;
 		this->yCoordForFramePrinting = Y_COORD_FOR_FRAME_PRINTING;
 		this->yCoordForContentPrinting = Y_COORD_FOR_HEADER_PRINTING;
+		this->page = 1;
 	}
 
 	virtual ~TablePrinter()
@@ -37,9 +40,11 @@ public:
 
 	}
 
-	virtual void print(PrintableTable* table)
+	virtual void print(PrintableTable* table, int page)
 	{
 		//cout << "\x1b[3;9000r";
+
+		setPage(page);
 
 		this->columnWidthValues = calculateColumnWidth(table);
 
@@ -85,6 +90,9 @@ protected:
 
 	// Кол-во строк
 	int numberOfLines;
+
+	// Страница таблицы
+	int page;
 
 	// Вектор с шириной каждого столбца
 	vector<int> columnWidthValues;
@@ -133,7 +141,7 @@ protected:
 	}
 
 	// заполнить вектор с содержимым таблицы
-	virtual void fillInTableContent(IngredientsTable* table) = 0;
+	virtual void fillInTableContent(PrintableTable* table) = 0;
 
 #pragma endregion МЕТОДЫ РАСЧЕТА
 
@@ -244,6 +252,11 @@ protected:
 	virtual void printHeader() = 0;
 
 private:
+
+	void setPage(int page)
+	{
+		this->page = page;
+	}
 
 	//// Печатает нижнюю рамку таблицы
 	//void printLowerTableFrame()

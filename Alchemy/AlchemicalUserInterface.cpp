@@ -248,11 +248,13 @@ void AlchemicalUserInterface::buyIngredients()
 
 void AlchemicalUserInterface::buyIngredientsFromList()
 {
+	string choice = "¬ведите id ингредиента: ";
+
 	cout << goToXY(Y_COORD_AFTER_MENU_TITLE, STANDARD_CURSOR_X_COORD);
 
 	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
 
-	printColoredText("¬ведите id ингредиента: ", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+	printColoredText(choice, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 	//cout << endl;
 
 	//cout << "¬ведите id ингредиента: ";
@@ -261,9 +263,10 @@ void AlchemicalUserInterface::buyIngredientsFromList()
 
 	//cin >> id;
 
-	this->printer->print(this->alchemyProgram->getIngredientsTable());
+	this->printer->print(this->alchemyProgram->getIngredientsTable(), FIRST_PAGE);
 
-	//this->alchemyProgram->printIngredientsTable();
+	// перейти по координате дл€ выбора
+	cout << goToXY(Y_COORD_AFTER_MENU_TITLE, choice.size() + 1);
 	
 }
 
@@ -372,4 +375,11 @@ void AlchemicalUserInterface::printMenuTitle(string title)
 
 	printColoredText(title, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
 	cout << endl;
+}
+
+bool AlchemicalUserInterface::isPageChoiceFalse(int key)
+{
+	bool res = VK_LEFT != key && VK_RIGHT != key && VK_ESCAPE != key && VK_RETURN != key;
+
+	return res;
 }

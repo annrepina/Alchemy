@@ -199,4 +199,11 @@ private:
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 
+#pragma region ПРЕДИКАТЫ
+
+	// Неправилный выбор страницы
+	bool isPageChoiceFalse(int key);
+
+#pragma endregion ПРЕДИКАТЫ
+
 };

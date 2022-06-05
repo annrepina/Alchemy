@@ -27,6 +27,8 @@ public:
 protected:
 
 private:
+
+#pragma region МЕТОДЫ РАСЧЕТА
 	
 	// Рассчитать кол-во строк в таблице
 	int calculateNumberOfLines(IngredientsTable* table) override;
@@ -49,7 +51,9 @@ private:
 	// Расчитывает ширину каждого столбца и возвращает вектор
 	vector<int> calculateColumnWidth(IngredientsTable* table) override;
 
+#pragma endregion МЕТОДЫ РАСЧЕТА
 
+#pragma region МЕТОДЫ ПЕЧАТИ
 
 	// Печать шапки таблицы
 	void printHeader() override;
@@ -57,10 +61,13 @@ private:
 	// Печать содержимого таблицы
 	void printContent(IngredientsTable* table, int page) override;
 
+#pragma endregion МЕТОДЫ ПЕЧАТИ
+
+	// заполнить вектор с содержимым таблицы
+	void fillInTableContent(IngredientsTable* table) override;
+
 	//// Печать шапки таблицы
 	//void printHeader(IngredientsTable* table) override;
-
-	
 
 	// Печать внутренней рамки таблицы
 	//void printInnerFrame(IngredientsTable* table) override;

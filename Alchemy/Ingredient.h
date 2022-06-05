@@ -33,13 +33,16 @@ public:
 	bool getEffectIsKnown(int number);
 
 	// Получить итератор на начало ассоциативного массива
-	map<int, bool>::iterator getIterator();
+	map<int, bool>::iterator getIteratorOfEffectsId();
 	
 	// Получить имя
 	string getName();
 
 	// Получить кол-во
 	int getNumber();
+
+	// Геттер для цены
+	int getPrice();
 
 #pragma endregion ГЕТТЕРЫ
 

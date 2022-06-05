@@ -2,14 +2,17 @@
 #include "Formatting.h"
 
 #define Y_COORD_FOR_FRAME_PRINTING			10		// Координата Y для печати рамки таблицы 
-#define Y_COORD_FOR_CONTENT_PRINTING		13		// Координата Y для печати содержимого таблицы
+#define Y_COORD_FOR_HEADER_PRINTING			13		// Координата Y для печати шапки таблицы
+#define Y_COORD_FOR_CONTENT_PRINTING		14		// Координата Y для печати содержимого таблицы
+
 
 #define OUTER_BORDERS				2		// Внешние границы таблицы (левая и правая)
 
 #define NUMBER_OF_LINES_ON_PAGE		11		// Кол-во строк на одной странице
+#define NUMBER_OF_CONTENT_LINES		10		// Кол-во строк с содержимым
 #define NUMBER_OF_COLUMNS			6		// Кол-во колонок
 
-#define GAPS					2		// Кол-во пробелов в столбце (1 слева и 1 справа)
+#define GAPS						2		// Кол-во пробелов в столбце (1 слева и 1 справа)
 
 
 // Класс-шаблон печатающий что-либо
@@ -26,7 +29,7 @@ public:
 		this->xCoordForFramePrinting = 0;
 		this->xCoordForContentPrinting = 0;
 		this->yCoordForFramePrinting = Y_COORD_FOR_FRAME_PRINTING;
-		this->yCoordForContentPrinting = Y_COORD_FOR_CONTENT_PRINTING;
+		this->yCoordForContentPrinting = Y_COORD_FOR_HEADER_PRINTING;
 	}
 
 	virtual ~TablePrinter()
@@ -86,6 +89,9 @@ protected:
 	// Вектор с шириной каждого столбца
 	vector<int> columnWidthValues;
 
+	// Вектор стрингов с содержимым таблицы
+	vector< vector <string> > tableContent;
+
 #pragma region МЕТОДЫ РАСЧЕТА
 
 	// Рассчитать кол-во строк в таблице
@@ -125,6 +131,9 @@ protected:
 
 		return xCoordForPrinting;
 	}
+
+	// заполнить вектор с содержимым таблицы
+	virtual void fillInTableContent(IngredientsTable* table) = 0;
 
 #pragma endregion МЕТОДЫ РАСЧЕТА
 

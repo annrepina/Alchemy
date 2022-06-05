@@ -145,7 +145,7 @@ int IngredientsTablePrinter::calculateMaxEffectNameSize(IngredientsTable* table)
 	int firstEffectId;
 
 	// Итератор на первый эффект в первом ингредиенте
-	firstIter = table->getStartIterator()->second->getIterator();
+	firstIter = table->getStartIterator()->second->getIteratorOfEffectsId();
 
 	// Присваиваем id
 	firstEffectId = firstIter->first;
@@ -180,7 +180,7 @@ int IngredientsTablePrinter::calculateMaxEffectNameSize(IngredientsTable* table)
 	for (auto ingredient : ingredientsWithId)
 	{
 		// Для каждого ингредиента получаю свой итератор, указывающий на 1ый элемент
-		map<int, bool>::iterator iter = ingredient.second->getIterator();
+		map<int, bool>::iterator iter = ingredient.second->getIteratorOfEffectsId();
 
 		for (int i = 0; i < NUMBER_OF_EFFECTS; ++i, ++iter)
 		{
@@ -258,6 +258,69 @@ void IngredientsTablePrinter::printHeader()
 
 void IngredientsTablePrinter::printContent(IngredientsTable* table, int page)
 {
+	int border = page * NUMBER_OF_CONTENT_LINES;
+
+	// сбрасываем координату
+	this->yCoordForContentPrinting = Y_COORD_FOR_CONTENT_PRINTING;
+
+	// Итератор на начало 
+	map<int, Ingredient*>::iterator iter = table->getStartIterator();
+
+	for (int i = 0; i < this->numberOfLines && i < border; ++i)
+	{
+		cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[i]);
+
+		cout << table->getStartIterator();
+
+
+	}
+}
+
+void IngredientsTablePrinter::fillInTableContent(IngredientsTable* table)
+{
+	// Итератор на начало map в таблице
+	map<int, Ingredient*>::iterator iter = table->getStartIterator();
+
+	// Целое значение
+	int intValue;
+
+	// Строковое значение
+	string strValue;
+
+	// Итератор на map 
+	map<int, bool>::iterator firstIter;
+
+	// получаем map
+	//map<int, Ingredient*> ingredientsWithId = table->getIngredientsWithId();
+
+	for (int i = 0; i < this->numberOfLines; ++i)
+	{
+		// добываем id
+		intValue = iter->first;
+
+		// Добавляем в первый вектор id
+		this->tableContent[i].push_back(to_string(intValue));
+
+		// добываем имя
+		strValue = iter->second->getName();
+
+		// Добавляем в первый вектор имя
+		this->tableContent[i].push_back(strValue);
+
+		// добываем цену
+		intValue = iter->second->getPrice();
+
+		// Добавляем цену 
+		this->tableContent[i].push_back(to_string(intValue));
+
+		for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
+		{
+
+		}
+		// увеличиваем итератор
+		++iter;
+
+	}
 }
 
 //void IngredientsTablePrinter::printHeader(IngredientsTable* table)

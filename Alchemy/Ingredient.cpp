@@ -35,7 +35,7 @@ bool Ingredient::getEffectIsKnown(int number)
 	return 0;
 }
 
-map<int, bool>::iterator Ingredient::getIterator()
+map<int, bool>::iterator Ingredient::getIteratorOfEffectsId()
 {
 	// Итератор на первый элемент
 	map<int, bool>::iterator iter = this->effectsId.begin();
@@ -51,6 +51,11 @@ string Ingredient::getName()
 int Ingredient::getNumber()
 {
 	return this->number;
+}
+
+int Ingredient::getPrice()
+{
+	return this->price;
 }
 
 void Ingredient::setName(string name)

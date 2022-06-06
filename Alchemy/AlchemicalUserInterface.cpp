@@ -177,6 +177,8 @@ int AlchemicalUserInterface::chooseId(string strChoice, TableCode code)
 {
 	int id = 0;
 
+	string value = "";
+
 	// перейти по координате для выбора
 	cout << goToXY(Y_COORD_AFTER_MENU_TITLE, strChoice.size() + 1);
 
@@ -188,7 +190,7 @@ int AlchemicalUserInterface::chooseId(string strChoice, TableCode code)
 	{
 		map<int, Ingredient*>::iterator iter = this->alchemyProgram->getIngredientsTable()->getEndIterator();
 
-		checkInput(id, 1, iter->first, strChoice);
+		id = checkInput(value, 1, iter->first);
 	}
 	else
 	{

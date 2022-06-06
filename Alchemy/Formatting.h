@@ -78,6 +78,9 @@ using namespace std;
 /* Индексы */
 #define FIRST_INDEX					 0		 // Первый индекс
 
+/* Кол-во символов для стирания */
+#define ONE_HUNDRED_SYMBOLS			"100"	// Сто символов (для ф-ции стирания)
+
 // Устанавливает курсор в определенные координаты
 string goToXY(int yCoord, int xCoord);
 
@@ -92,6 +95,9 @@ void printNull(int parametr);
 
 // Стирает вывод на экране в зависимости от параметра
 string eraseOnScreen(string param);
+
+// Стирает опр кол-во символов на экране
+string eraseSymbolsOnScreen(string param);
 
 // Изменяет фон экрана (работает только с параметрами в 16-чной системе исчесления)
 string changeScreenBackground(string r, string g, string b);

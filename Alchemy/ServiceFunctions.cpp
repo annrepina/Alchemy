@@ -76,3 +76,25 @@ int findDelimetrIndexes(const char delimetr, const size_t length, const string s
 
 	return delimetrIndex;
 }
+
+
+bool tryParseToInt(string& value)
+{
+	bool res = true;
+
+	cin >> value;
+
+	// содержит в себе индекс первого символа не €вл€ющегос€ цифрой
+	size_t nonDigitIndex;
+
+	// ищет первое несовпадение с 0123456789, на тот случай, если пользователь ввел символ не цифру
+	nonDigitIndex = value.find_first_not_of("0123456789");
+
+	// если нашли хоть одну не цифру в строке (string::npos = -1)
+	if (nonDigitIndex != string::npos)
+	{
+		res = false;
+	}
+
+	return res;
+}

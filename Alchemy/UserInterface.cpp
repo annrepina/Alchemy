@@ -24,30 +24,51 @@ void UserInterface::eraseScreenAfterTitle() const
 	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
 }
 
-void UserInterface::checkInput(int& value, int min, int max, string strChoice)
+int UserInterface::checkInput(string& value, int min, int max)
 {
-	cin >> value;
+	// не ввели всякие символы вместо числа
+	bool succes; 
 
-	// пока не попадает в диапазон
-	while (value < min || max < value)
+	int intValue;
+
+	do
 	{
-		int numberOfSymbols = to_string(value).size();
+		succes = tryParseToInt(value);
 
-		cout << goToXY(Y_COORD_AFTER_MENU_TITLE, strChoice.size() + 1 /*+ numberOfSymbols*/);
+		if (!succes)
+		{
+			printError(Y_COORD_AFTER_MENU_TITLE, 1);
 
-		string a = "\x1b[" + to_string(numberOfSymbols) + "P";
-		//string a = "\x1b[" + to_string(numberOfSymbols) + "X";
+			continue;
+		}
 
+		// переводит строку в инт
+		intValue = stoi(value);
 
-		cout << a;
+		// если не попадаем в диапазон
+		if (intValue < min || max < intValue)
+		{
+			printError(Y_COORD_AFTER_MENU_TITLE, 1);
+		}
+		else
+		{
+			break;
+		}
 
-		//for (int i = 0; i < numberOfSymbols; ++i)
-		//{
-		//	cout << '\x1b[ <n> P';
-		//}
+	} while (true);
 
-		cin >> value;
-	}
+	return intValue;
+}
+
+void UserInterface::printError(int yCoord, int xCoord)
+{
+	cout << goToXY(yCoord, xCoord);
+
+	string a = "\x1b[100X";
+
+	cout << eraseSymbolsOnScreen(ONE_HUNDRED_SYMBOLS);
+
+	printColoredText("Вы ввели недопустимое значение, попробуйте снова: ", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 }
 
 bool UserInterface::isMenuChoiceFalse(int key)

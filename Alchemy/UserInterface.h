@@ -4,6 +4,7 @@
 #include <functional>
 #include <map>
 #include "Formatting.h"
+#include "ServiceFunctions.h"
 #include "KeyBoard.h"
 
 using namespace std;
@@ -28,6 +29,8 @@ using std::placeholders::_1;
 
 
 #define NUMBER_OF_MAIN_MENU_ITEMS	6		// Количество главных пунктов меню в интерфейсе вместе с "выберите"
+
+
 
 
 // Класс - Пользовательский интерфейс
@@ -71,7 +74,7 @@ protected:
 	void eraseScreenAfterTitle() const;
 
 	// Проверка ввода
-	void checkInput(int& value, int min, int max, string strChoice);
+	int checkInput(string& value, int min, int max);
 
 	//// Расчитывает координату Х для заголовков
 	//void setXCoordInMiddle();
@@ -95,6 +98,9 @@ protected:
 
 	// Печать прощания
 	virtual void printBye() = 0;
+
+	// Печать ошибки из-за некорректного вводпа
+	virtual void printError(int yCoord, int xCoord);
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 

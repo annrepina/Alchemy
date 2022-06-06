@@ -34,6 +34,13 @@ string eraseOnScreen(string param)
     return res;
 }
 
+string eraseSymbolsOnScreen(string param)
+{
+    string res = "\x1b[" + param + "X";
+
+    return string();
+}
+
 string changeScreenBackground(string r, string g, string b)
 {
     // задание зеленого цвета с помощью rgb

@@ -15,3 +15,6 @@ vector <string> splitForOneDelim(string str, char delim);
 
 // Ќаходит индексы делиметров и заносит их в вектор
 int findDelimetrIndexes(const char delimetr, const size_t length, const string str);
+
+// ѕопытатьс€ привести к инту
+bool tryParseToInt(string& value);

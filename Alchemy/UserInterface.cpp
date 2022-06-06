@@ -24,6 +24,32 @@ void UserInterface::eraseScreenAfterTitle() const
 	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
 }
 
+void UserInterface::checkInput(int& value, int min, int max, string strChoice)
+{
+	cin >> value;
+
+	// пока не попадает в диапазон
+	while (value < min || max < value)
+	{
+		int numberOfSymbols = to_string(value).size();
+
+		cout << goToXY(Y_COORD_AFTER_MENU_TITLE, strChoice.size() + 1 /*+ numberOfSymbols*/);
+
+		string a = "\x1b[" + to_string(numberOfSymbols) + "P";
+		//string a = "\x1b[" + to_string(numberOfSymbols) + "X";
+
+
+		cout << a;
+
+		//for (int i = 0; i < numberOfSymbols; ++i)
+		//{
+		//	cout << '\x1b[ <n> P';
+		//}
+
+		cin >> value;
+	}
+}
+
 bool UserInterface::isMenuChoiceFalse(int key)
 {
 	return key != VK_1 && key != VK_2 && key != VK_NUMPAD1 && key != VK_NUMPAD2 && key != VK_ESCAPE;
@@ -98,7 +124,7 @@ void UserInterface::checkMenuChoice() const
 	while (this->func(key));
 }
 
-void UserInterface::checkArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu)
+void UserInterface::checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu)
 {
 	// если граничная координата не равна текущей
 	if (borderYCoord != this->currentYCursorCoord)

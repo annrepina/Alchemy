@@ -11,7 +11,8 @@ using namespace std;
 using std::placeholders::_1;
 
 // Координаты
-#define Y_COORD_AFTER_TITLE		4		// Координата Y после названя программы
+#define Y_COORD_AFTER_TITLE				4		// Координата Y после названя программы
+#define Y_COORD_AFTER_MENU_TITLE		9		// Координата Y после печати заголовка меню
 
 // Коды клавиш
 #define VK_1					0x31	// Клавиша 1
@@ -64,10 +65,13 @@ protected:
 	void checkMenuChoice() const;
 
 	// Проверка выбора стрелочек вверх/вниз
-	void checkArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu);
+	void checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu);
 
 	// Очищает на консоли всё, кроме названия программы
 	void eraseScreenAfterTitle() const;
+
+	// Проверка ввода
+	void checkInput(int& value, int min, int max, string strChoice);
 
 	//// Расчитывает координату Х для заголовков
 	//void setXCoordInMiddle();

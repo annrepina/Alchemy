@@ -21,6 +21,8 @@
 #define NUMBER_OF_MAIN_MENU_ITEMS		2		// Кол-во пунктов в главном меню
 #define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	6		// Кол-во пунктов в алхимическом меню
 
+#define FIRST_PAGE						1		// Первая страница таблицы
+
 class AlchemicalUserInterface : public UserInterface
 {
 public:
@@ -32,6 +34,8 @@ public:
 	void launchMainLoop() override;
 
 private:
+
+#pragma region КОДЫ
 
 	// Коды меню
 	enum MenuCode
@@ -49,6 +53,7 @@ private:
 		ReadInstructions
 	};
 
+	// Коды алхимического меню
 	enum AlchemicalMenuCode
 	{
 		MakingPotions = MAIN_MENU_Y_COORD,
@@ -59,17 +64,27 @@ private:
 		WorkingWithTables
 	};
 
+	// Коды меню инструкций
 	enum InstructionsMenuCode
 	{
 		Return = MAIN_MENU_Y_COORD,
 		Exit
 	};
 
+	// Коды меню покупки ингредиентов
 	enum BuyingIngredientsMenuCode 
 	{
 		ChooseFromList = MAIN_MENU_Y_COORD,
 		CreateNewIngredient
 	};
+
+	enum TableCode
+	{
+		IngredientsTable,
+		PotionsTable
+	};
+
+#pragma endregion 
 
 	// Программа - алхимия
 	AlchemyProgram* alchemyProgram;
@@ -80,8 +95,8 @@ private:
 	// Парсер для программы алхимии
 	AlchemyProgramParser* alchemyProgramParser;
 
-	// Принтер
-	IngredientsTablePrinter* printer;
+	// Принтер для печати таблицы ингредиентов
+	IngredientsTablePrinter* ingredientsTableprinter;
 
 	// Настроить программу Алхимии
 	void setAlchemyProgram();
@@ -144,8 +159,16 @@ private:
 	// Принять решение
 	void chooseMenuItem(map <int, string> menu);
 
+	// Выбрать страницу таблицы
+	void choosePage(int page, TableCode code);
+
+	// Выбрать Id из таблицы
+	int chooseId(string strChoice, TableCode code);
+
 	// Сделать выбор пункта меню
 	void makeChoice();
+
+#pragma region ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 
 	// Проверка выбора в главном меню
 	void checkMainMenu();
@@ -158,6 +181,11 @@ private:
 
 	// Проверка выбора пункта в меню покупки ингредиентов
 	void checkBuyingIngredientsMenu();
+
+	// Проверить горизонтальные стрелки
+	bool checkHorizontalArrowChoice(int& page, TableCode code, int keyCode);
+
+#pragma endregion ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 
 	// Заниматься алхимией
 	void doAlchemy();
@@ -196,6 +224,12 @@ private:
 
 	// Печать названия Меню
 	void printMenuTitle(string title);
+
+	// Печать меню выбора страницы
+	void printPageMenu(int page);
+
+	// Печать страниц таблиц в цикле
+	void printTablePagesInLoop(TableCode code, int& page);
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 

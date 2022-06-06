@@ -14,7 +14,7 @@
 
 #define GAPS						2		// Кол-во пробелов в столбце (1 слева и 1 справа)
 
-#define FIRST_PAGE					1		// Первая страница таблицы
+
 
 
 // Класс-шаблон печатающий что-либо
@@ -65,6 +65,18 @@ public:
 
 	}
 
+	// Получить кол-во колонок
+	int getNumberOfColumns()
+	{
+		return this->numberOfColumns;
+	}
+
+	// Получить кол=во строк
+	int getNumberOfLines()
+	{
+		return this->numberOfLines;
+	}
+
 protected:
 
 	// Координата Y для печати рамки таблицы
@@ -106,6 +118,8 @@ protected:
 	virtual int calculateNumberOfLines(PrintableTable* table) = 0;
 
 	virtual int calculateWidth(PrintableTable* table) = 0;
+
+	virtual int calculateMaxId(PrintableTable* table) = 0;
 
 	virtual int calculateMaxIdStrSize(PrintableTable* table) = 0;
 
@@ -258,35 +272,5 @@ private:
 		this->page = page;
 	}
 
-	//// Печатает нижнюю рамку таблицы
-	//void printLowerTableFrame()
-	//{
-	//	cout << turnOnDECMode();
-
-	//	cout << LOWER_LEFT_CORNER;
-
-	//	for (int j = 0; j < numberOfColumns; ++j)
-	//	{
-	//		for (int i = 0; i < this->columnWidthValues[j]; ++i)
-	//		{
-	//			cout << HORIZONTAL_LINE;
-	//		}
-
-	//		if ((numberOfColumns - 1) != j)
-	//		{
-	//			cout << SYMBOL_TURNED_T_WORD;
-	//		}
-	//		else
-	//		{
-	//			cout << LOWER_RIGHT_CORNER;
-	//		}
-	//	}
-
-	//	cout << turnOffDECMode();
-	//}
 
 };
-
-
-
-

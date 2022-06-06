@@ -38,6 +38,9 @@ private:
 	// –ассчитать ширину таблицы
 	int calculateWidth(IngredientsTable* table) override;
 
+	// посчитать максимальное id
+	int calculateMaxId(IngredientsTable* table) override;
+
 	// ¬ернуть наибольший id
 	int calculateMaxIdStrSize(IngredientsTable* table) override;
 

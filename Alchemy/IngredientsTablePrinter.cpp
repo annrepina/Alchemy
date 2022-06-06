@@ -4,19 +4,6 @@ IngredientsTablePrinter::IngredientsTablePrinter() : TablePrinter()
 {
 }
 
-//void IngredientsTablePrinter::print(IngredientsTable* table)
-//{
-//	this->columnWidthValues = calculateColumnWidth(table);
-//
-//	this->tableWidth = calculateWidth(table);
-//
-//	this->xCoordForPrinting = calculateXCoordForPrinting();
-//	
-//	printHeader(table);
-//
-//	printInnerFrame(table);
-//}
-
 int IngredientsTablePrinter::calculateNumberOfLines(IngredientsTable* table)
 {
 	// Кол-во строк равно кол-ву ингредиентов
@@ -36,48 +23,27 @@ int IngredientsTablePrinter::calculateWidth(IngredientsTable* ingredientsTable)
 
 	totalWidth += NUMBER_OF_COLUMNS + 1;
 
-	//// Длина наибольшего id
-	//width = calculateMaxIdStrSize(ingredientsTable);
-
-	//// Длина наибольшего имени ингредиента
-	//totalWidth += calculateMaxNameSize(ingredientsTable);
-
-	//// Длина наибольшей цены
-	//totalWidth += to_string(MAX_PRICE).size();
-
-	//// Длина наибольшего кол-ва
-	//totalWidth += calculateMaxNumberStrSize(ingredientsTable);
-
-	//// Длины наибольших эффектов
-	//totalWidth += calculateMaxEffectNameSize(ingredientsTable) * NUMBER_OF_EFFECTS;
-
-	//// Прибавляем границы и пробелы
-	//totalWidth += NUMBER_OF_COLUMNS * MULTIPLIER + 1;
-
 	return totalWidth;
+}
+
+int IngredientsTablePrinter::calculateMaxId(IngredientsTable* table)
+{
+	// Последний id
+	int maxId = (table->getEndIterator())->first;
+
+	return maxId;
 }
 
 int IngredientsTablePrinter::calculateMaxIdStrSize(IngredientsTable* ingredientsTable)
 {
 	// Последний id
-	int maxId;
+	int maxId = calculateMaxId(ingredientsTable);
 
 	// Последний id в виде строки
 	string strMaxId;
 
 	// Размер строки последнего id 
 	int maxStrIdSize;
-
-	//map<int, Ingredient*>::reverse_iterator rit;
-
-	//rit = this->ingredientsWithId.rbegin();
-
-	//biggest = rit->first;
-
-	//ingredientsTable->getEndIterator()
-
-
-	maxId = (--ingredientsTable->getEndIterator())->first;
 
 	strMaxId = to_string(maxId);
 
@@ -152,28 +118,6 @@ int IngredientsTablePrinter::calculateMaxEffectNameSize(IngredientsTable* table)
 
 	int maxEffectNameSize = table->getEffectsTable()->getEffectByKey(firstEffectId)->getName().size();
 
-
-
-	//int size = this->ingredientsWithId.size();
-
-	//for (int i = 0; i < size; ++i)
-	//{
-	//	// Для каждого ингредиента получаю свой итератор, указывающий на 1ый элемент
-	//	map<int, bool>::iterator iter = ingredient.second->getIterator();
-
-	//	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i, ++iter)
-	//	{
-	//		// Id эффекта текущего ингредиента по соотв итератору
-	//		int id = iter->first;
-
-	//		// Расчитываем длину имени эффекта с текущим id 
-	//		int effectNameSize = this->effectsTable->getEffectByKey(id)->getName().size();
-
-	//		if (maxEffectNameSize < effectNameSize)
-	//			maxEffectNameSize = effectNameSize;
-	//	}
-	//}
-
 	map<int, Ingredient*> ingredientsWithId = table->getIngredientsWithId();
 
 	// Для каждого ингредиента
@@ -247,12 +191,16 @@ void IngredientsTablePrinter::print(IngredientsTable* table, int page)
 
 	this->printContent(table, page);
 
-	cout << "Страница " << page << " <-- Перейти на предыдущую страницу\t Перейти на следующую страницу -->";
+	//printColoredText("Страница " + to_string(page), R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+
+	//cout << "\t<-- Перейти на предыдущую страницу\t Перейти на следующую страницу -->\tENTER Подтвердить выбор страницы";
 }
 
 void IngredientsTablePrinter::printHeader()
 {
 	string namesOfColumns[NUMBER_OF_COLUMNS] = { "Id", "Имя", "Цена", "Эффект 1", "Эффект 2", "Кол-во" };
+
+	this->yCoordForContentPrinting = Y_COORD_FOR_HEADER_PRINTING;
 
 	for (int i = 0; i < this->numberOfColumns; ++i)
 	{
@@ -272,7 +220,14 @@ void IngredientsTablePrinter::printContent(IngredientsTable* table, int page)
 	//// Итератор на начало 
 	//map<int, Ingredient*>::iterator iter = table->getStartIterator();
 
-	for (int i = 0; i < this->numberOfLines && i < border; ++i)
+	int i = 0;
+
+	if (page > 1)
+	{
+		i = (page - 1) * NUMBER_OF_CONTENT_LINES;
+	}
+
+	for (; i < this->numberOfLines && i < border; ++i)
 	{
 		for (int j = 0; j < this->numberOfColumns; ++j)
 		{
@@ -372,45 +327,3 @@ void IngredientsTablePrinter::fillInTableContent(IngredientsTable* table)
 		++iter;
 	}
 }
-
-//void IngredientsTablePrinter::printHeader(IngredientsTable* table)
-//{
-//	// Координата для печати названия
-//	int xCoord = calculateXCoordInMiddle(table->getTitle());
-//
-//	// Перейти по координатам и увеличить Y
-//	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
-//
-//	// Печатаем верхнюю границу таблицы
-//	printTopTableFrame(1, this->tableWidth - OUTER_BORDERS);
-//
-//	cout << goToXY(this->yCoordForPrinting, this->xCoordForPrinting);
-//
-//	cout << VERTICAL_LINE;
-//
-//	// Координаты для печати названия табл
-//	cout << goToXY(this->yCoordForPrinting, xCoord);
-//
-//	cout << table->getTitle();
-//
-//	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting + this->tableWidth - 1);
-//
-//	cout << VERTICAL_LINE;
-//
-//	goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
-//
-//
-//
-//	printLowerTableFrame(1, this->tableWidth - OUTER_BORDERS);
-//}
-
-//void IngredientsTablePrinter::printInnerFrame(IngredientsTable* table)
-//{
-//	// По кол-ву колонок
-//	for (int i = 0; i < this->numberOfLines; ++i)
-//	{
-//		goToCoordAndIncreaseY(this->yCoordForPrinting, this->xCoordForPrinting);
-//
-//		printInnerTableFrame(this->columnWidthValues);
-//	}
-//}

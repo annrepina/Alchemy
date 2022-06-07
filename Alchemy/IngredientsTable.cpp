@@ -89,14 +89,19 @@ map<int, Ingredient*>::iterator IngredientsTable::getStartIterator()
 	return this->ingredientsWithId.begin();
 }
 
-map<int, Ingredient*> IngredientsTable::getIngredientsWithId()
-{
-	return this->ingredientsWithId;
-}
+//map<int, Ingredient*> IngredientsTable::getIngredientsWithId()
+//{
+//	return this->ingredientsWithId;
+//}
 
 EffectsTable* IngredientsTable::getEffectsTable()
 {
 	return this->effectsTable;
+}
+
+Ingredient* IngredientsTable::getIngredientById(int id)
+{
+	return this->ingredientsWithId[id];
 }
 
 void IngredientsTable::clear()

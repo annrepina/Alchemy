@@ -6,7 +6,7 @@ using namespace std;
 
 // Стартовые показатели алхимика
 #define START_LEVEL			0
-#define START_UP_CAPITAL	100
+#define START_UP_CAPITAL	5000
 
 // Макисмальные показатели алхимика
 #define MAX_LEVEL			100
@@ -36,6 +36,9 @@ public:
 
 	// Геттер для имени
 	string getName();
+
+	// Геттер для капитала
+	int getCapital();
 
 #pragma endregion Геттеры 
 

@@ -25,8 +25,7 @@ public:
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
 
-	//// Печать таблицы
-	//void print();
+#pragma region ГЕТТЕРЫ
 
 	// Получить итератор на последний элемент в map
 	map<int, Ingredient*>::iterator getEndIterator();
@@ -34,15 +33,16 @@ public:
 	// Получить итератор на первый элемент в map
 	map<int, Ingredient*>::iterator getStartIterator();
 
-	// Получить map
-	map<int, Ingredient*> getIngredientsWithId();
+	//// Получить map
+	//map<int, Ingredient*> getIngredientsWithId();
 
 	// Получить таблицу эффектов
 	EffectsTable* getEffectsTable();
 
+	// Получить ингредиент по id 
+	Ingredient* getIngredientById(int id);
 
-	// Расчитать длину таблицы
-	//void calculateLength();
+#pragma endregion ГЕТТЕРЫ
 
 
 

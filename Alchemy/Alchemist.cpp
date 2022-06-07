@@ -28,6 +28,11 @@ string Alchemist::getName()
 	return this->name;
 }
 
+int Alchemist::getCapital()
+{
+	return this->сapital;
+}
+
 void Alchemist::increaseAlchemistLevel()
 {
 	// увеличиваем на 1

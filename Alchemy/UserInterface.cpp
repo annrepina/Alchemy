@@ -37,7 +37,9 @@ int UserInterface::checkInput(string& value, int min, int max)
 
 		if (!succes)
 		{
-			printError(Y_COORD_AFTER_MENU_TITLE, 1);
+			string textOfError = "Вы ввели недопустимое значение, попробуйте снова: ";
+
+			printError(Y_COORD_AFTER_MENU_TITLE, 1, textOfError);
 
 			continue;
 		}
@@ -48,7 +50,9 @@ int UserInterface::checkInput(string& value, int min, int max)
 		// если не попадаем в диапазон
 		if (intValue < min || max < intValue)
 		{
-			printError(Y_COORD_AFTER_MENU_TITLE, 1);
+			string textOfError = "Данного значения не существует в таблице, попробуйте снова: ";
+
+			printError(Y_COORD_AFTER_MENU_TITLE, 1, textOfError);
 		}
 		else
 		{
@@ -60,13 +64,13 @@ int UserInterface::checkInput(string& value, int min, int max)
 	return intValue;
 }
 
-void UserInterface::printError(int yCoord, int xCoord)
+void UserInterface::printError(int yCoord, int xCoord, string textOfError)
 {
 	cout << goToXY(yCoord, xCoord);
 
 	cout << eraseSymbolsOnScreen(ONE_HUNDRED_SYMBOLS);
 
-	printColoredText("Вы ввели недопустимое значение, попробуйте снова: ", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+	printColoredText(textOfError, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 }
 
 bool UserInterface::isMenuChoiceFalse(int key)

@@ -100,7 +100,7 @@ protected:
 	virtual void printBye() = 0;
 
 	// Печать ошибки из-за некорректного вводпа
-	virtual void printError(int yCoord, int xCoord);
+	virtual void printError(int yCoord, int xCoord, string textOfError);
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 

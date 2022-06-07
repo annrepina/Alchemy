@@ -372,7 +372,7 @@ void AlchemicalUserInterface::buyIngredientsFromList()
 	// начальна€ страница таблицы
 	int page = FIRST_PAGE;
 
-	string choice = "¬ведите id ингредиента: ";
+	string choice = "¬ведите є ингредиента: ";
 
 	// ‘лаг ддл€ выхода из цикла
 	bool exit = false;
@@ -392,10 +392,19 @@ void AlchemicalUserInterface::buyIngredientsFromList()
 
 	int id = chooseId(choice, TableCode::IngredientsTable);
 
+	tryAddIngredientFromList(id);
 
-	//// перейти по координате дл€ выбора
-	//cout << goToXY(Y_COORD_AFTER_MENU_TITLE, choice.size() + 1);
+
 	
+}
+
+void AlchemicalUserInterface::tryAddIngredientFromList(int id)
+{
+	// если 
+	if (this->alchemyProgram->getAlchemist()->getCapital() >= this->alchemyProgram->getIngredientsTable()->getIngredientById(id)->getPrice())
+	{
+
+	}
 }
 
 void AlchemicalUserInterface::eraseScreenAfterAlchemist()

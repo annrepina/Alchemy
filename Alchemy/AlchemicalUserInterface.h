@@ -196,6 +196,9 @@ private:
 	// Покупка ингредиентов из имеющегося списка
 	void buyIngredientsFromList();
 
+	// Попробовать добавить ингредиент из списка
+	void tryAddIngredientFromList(int id);
+
 	// Стирает с консоли все после печати алхимика
 	void eraseScreenAfterAlchemist();
 

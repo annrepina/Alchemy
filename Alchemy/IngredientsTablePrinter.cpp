@@ -7,7 +7,7 @@ IngredientsTablePrinter::IngredientsTablePrinter() : TablePrinter()
 int IngredientsTablePrinter::calculateNumberOfLines(IngredientsTable* table)
 {
 	// Кол-во строк равно кол-ву ингредиентов
-	int numberOfLines = table->getIngredientsWithId().size();
+	int numberOfLines = table->getEndIterator()->first;
 
 	return numberOfLines;
 }
@@ -57,13 +57,14 @@ int IngredientsTablePrinter::calculateMaxNameSize(IngredientsTable* table)
 	// Присваеваем самому длинному размеру размер имени первого ингредиента в map
 	int maxNameSize = table->getStartIterator()->second->getName().size();
 
-	map<int, Ingredient*> ingredientsWithId = table->getIngredientsWithId();
+	map<int, Ingredient*>::iterator startIter = table->getStartIterator();
 
-	// Для каждого ингредиента
-	for (auto ingredient : ingredientsWithId)
+	map<int, Ingredient*>::iterator endIter = ++table->getEndIterator();
+
+	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{
 		// Присваиваем размер имени текущего элемента
-		int size = ingredient.second->getName().size();
+		int size = i->second->getName().size();
 
 		if (maxNameSize < size)
 			maxNameSize = size;
@@ -75,7 +76,7 @@ int IngredientsTablePrinter::calculateMaxNameSize(IngredientsTable* table)
 int IngredientsTablePrinter::calculateMaxNumberStrSize(IngredientsTable* table)
 {
 	// мах кол-во ингредиентов
-	int maxNumberSize = table->getStartIterator()->second->getNumber();
+	int maxNumber = table->getStartIterator()->second->getNumber();
 
 	// мах кол-во ингредиентов в виде строки
 	string strMaxNumber;
@@ -83,19 +84,20 @@ int IngredientsTablePrinter::calculateMaxNumberStrSize(IngredientsTable* table)
 	// Размер строки мах кол-ва ингредиентов 
 	int strMaxNumberSize;
 
-	map<int, Ingredient*> ingredientsWithId = table->getIngredientsWithId();
+	map<int, Ingredient*>::iterator startIter = table->getStartIterator();
 
-	// Для каждого ингредиента
-	for (auto ingredient : ingredientsWithId)
+	map<int, Ingredient*>::iterator endIter = ++table->getEndIterator();
+
+	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{
 		// Присваиваем кол-вj текущего элемента
-		int number = ingredient.second->getNumber();
+		int number = i->second->getNumber();
 
-		if (maxNumberSize < number)
-			maxNumberSize = number;
+		if (maxNumber < number)
+			maxNumber = number;
 	}
 
-	strMaxNumber = to_string(maxNumberSize);
+	strMaxNumber = to_string(maxNumber);
 
 	strMaxNumberSize = strMaxNumber.size();
 
@@ -105,31 +107,26 @@ int IngredientsTablePrinter::calculateMaxNumberStrSize(IngredientsTable* table)
 int IngredientsTablePrinter::calculateMaxEffectNameSize(IngredientsTable* table)
 {
 	// Итератор на map 
-	map<int, bool>::iterator firstIter;
+	map<int, bool>::iterator firstIter = table->getStartIterator()->second->getIteratorOfEffectsId();
 
 	// Id-ключ первого элемента map
-	int firstEffectId;
-
-	// Итератор на первый эффект в первом ингредиенте
-	firstIter = table->getStartIterator()->second->getIteratorOfEffectsId();
-
-	// Присваиваем id
-	firstEffectId = firstIter->first;
+	int firstEffectId = firstIter->first;
 
 	int maxEffectNameSize = table->getEffectsTable()->getEffectByKey(firstEffectId)->getName().size();
 
-	map<int, Ingredient*> ingredientsWithId = table->getIngredientsWithId();
+	map<int, Ingredient*>::iterator startIter = table->getStartIterator();
 
-	// Для каждого ингредиента
-	for (auto ingredient : ingredientsWithId)
+	map<int, Ingredient*>::iterator endIter = ++table->getEndIterator();
+
+	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{
-		// Для каждого ингредиента получаю свой итератор, указывающий на 1ый элемент
-		map<int, bool>::iterator iter = ingredient.second->getIteratorOfEffectsId();
+		// Для каждого ингредиента получаю свой итератор на map из эффектов, указывающий на 1ый элемент
+		map<int, bool>::iterator effectIter = i->second->getIteratorOfEffectsId();
 
-		for (int i = 0; i < NUMBER_OF_EFFECTS; ++i, ++iter)
+		for (int i = 0; i < NUMBER_OF_EFFECTS; ++i, ++effectIter)
 		{
 			// Id эффекта текущего ингредиента по соотв итератору
-			int id = iter->first;
+			int id = effectIter->first;
 
 			// Расчитываем длину имени эффекта с текущим id 
 			int effectNameSize = table->getEffectsTable()->getEffectByKey(id)->getName().size();
@@ -190,15 +187,11 @@ void IngredientsTablePrinter::print(IngredientsTable* table, int page)
 	this->fillInTableContent(table);
 
 	this->printContent(table, page);
-
-	//printColoredText("Страница " + to_string(page), R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
-
-	//cout << "\t<-- Перейти на предыдущую страницу\t Перейти на следующую страницу -->\tENTER Подтвердить выбор страницы";
 }
 
 void IngredientsTablePrinter::printHeader()
 {
-	string namesOfColumns[NUMBER_OF_COLUMNS] = { "Id", "Имя", "Цена", "Эффект 1", "Эффект 2", "Кол-во" };
+	string namesOfColumns[NUMBER_OF_COLUMNS] = { "№", "Имя", "Цена", "Эффект 1", "Эффект 2", "Кол-во" };
 
 	this->yCoordForContentPrinting = Y_COORD_FOR_HEADER_PRINTING;
 
@@ -258,9 +251,6 @@ void IngredientsTablePrinter::fillInTableContent(IngredientsTable* table)
 
 	// Известен ли игроку эффект данного ингредиента
 	bool isEffectKnown;
-
-	// получаем map
-	//map<int, Ingredient*> ingredientsWithId = table->getIngredientsWithId();
 
 	for (int i = 0; i < this->numberOfLines; ++i)
 	{

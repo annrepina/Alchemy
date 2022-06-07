@@ -38,7 +38,7 @@ string eraseSymbolsOnScreen(string param)
 {
     string res = "\x1b[" + param + "X";
 
-    return string();
+    return res;
 }
 
 string changeScreenBackground(string r, string g, string b)

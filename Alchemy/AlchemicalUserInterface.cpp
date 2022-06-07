@@ -386,20 +386,9 @@ void AlchemicalUserInterface::buyIngredientsFromList()
 
 	printTablePagesInLoop(TableCode::IngredientsTable, page);
 
+	// если был нажат esc
 	if (true == exitFlag)
 		return;
-
-	//do
-	//{
-	//	this->ingredientsTableprinter->print(this->alchemyProgram->getIngredientsTable(), page);
-
-	//	printPageMenu(page);
-
-	//	choosePage(page, TableCode::IngredientsTable, exit);
-
-	//} while (false == exit);
-
-
 
 	int id = chooseId(choice, TableCode::IngredientsTable);
 

@@ -64,8 +64,6 @@ void UserInterface::printError(int yCoord, int xCoord)
 {
 	cout << goToXY(yCoord, xCoord);
 
-	string a = "\x1b[100X";
-
 	cout << eraseSymbolsOnScreen(ONE_HUNDRED_SYMBOLS);
 
 	printColoredText("Вы ввели недопустимое значение, попробуйте снова: ", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
@@ -76,22 +74,12 @@ bool UserInterface::isMenuChoiceFalse(int key)
 	return key != VK_1 && key != VK_2 && key != VK_NUMPAD1 && key != VK_NUMPAD2 && key != VK_ESCAPE;
 }
 
-//bool UserInterface::isContinue(int key)
-//{
-//	return VK_RETURN != key && VK_ESCAPE != key;
-//}
-
 bool UserInterface::isArrowKeyFalse(int key)
 {
 	bool res = VK_UP != key && VK_DOWN != key && VK_ESCAPE != key && VK_RETURN != key;
 
 	return res;
 }
-
-//void UserInterface::setXCoordInMiddle()
-//{
-//	titleXCoord = (calculateConsoleWidth() / 2) - (title.length() / 2);
-//}
 
 void UserInterface::printMenu(map <int, string> menu) const
 {

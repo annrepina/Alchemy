@@ -152,6 +152,9 @@ void printTextWithBackground(string text, string r, string g, string b);
 // Печать цветного текста
 void printColoredText(string text, string r, string g, string b);
 
+// Печать цветного текста по координатам
+void printColoredTextByCoords(string text, string r, string g, string b, int yCoord, int xCoord);
+
 // переходит по координатам, а после увеличивает Y координату
 void goToCoordAndIncreaseY(int& yCoord, int xCoord);
 

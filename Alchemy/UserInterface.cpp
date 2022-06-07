@@ -24,7 +24,7 @@ void UserInterface::eraseScreenAfterTitle() const
 	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
 }
 
-int UserInterface::checkInput(string& value, int min, int max)
+int UserInterface::checkInput(string& value, int min, int max, string textOfRangeError, int yCoord)
 {
 	// не ввели всякие символы вместо числа
 	bool succes; 
@@ -39,7 +39,7 @@ int UserInterface::checkInput(string& value, int min, int max)
 		{
 			string textOfError = "Вы ввели недопустимое значение, попробуйте снова: ";
 
-			printError(Y_COORD_AFTER_MENU_TITLE, 1, textOfError);
+			printError(yCoord, 1, textOfError);
 
 			continue;
 		}
@@ -50,9 +50,7 @@ int UserInterface::checkInput(string& value, int min, int max)
 		// если не попадаем в диапазон
 		if (intValue < min || max < intValue)
 		{
-			string textOfError = "Данного значения не существует в таблице, попробуйте снова: ";
-
-			printError(Y_COORD_AFTER_MENU_TITLE, 1, textOfError);
+			printError(yCoord, 1, textOfRangeError);
 		}
 		else
 		{

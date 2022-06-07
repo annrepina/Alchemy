@@ -68,6 +68,11 @@ void Ingredient::setPrice(float price)
 	this->price = price;
 }
 
+void Ingredient::setNumber(int number)
+{
+	this->number = number;
+}
+
 void Ingredient::addEffect(int effectId)
 {
 	// Если размер вектора меньше двух, то добавляем элемент
@@ -76,5 +81,10 @@ void Ingredient::addEffect(int effectId)
 
 	else
 		return;
+}
+
+void Ingredient::increaseNumber(int number)
+{
+	this->number += number;
 }
 

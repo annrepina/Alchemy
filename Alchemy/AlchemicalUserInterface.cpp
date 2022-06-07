@@ -186,11 +186,13 @@ int AlchemicalUserInterface::chooseId(string strChoice, TableCode code)
 
 	//checkInput(id, 1, iter->first, strChoice);
 
-	if (code == TableCode::IngredientsTable)
+	if (code == TableCode::IngredientTable)
 	{
 		map<int, Ingredient*>::iterator iter = this->alchemyProgram->getIngredientsTable()->getEndIterator();
 
-		id = checkInput(value, 1, iter->first);
+		string errorText = "Данного значения не существует в таблице, попробуйте снова: ";
+
+		id = checkInput(value, 1, iter->first, errorText, Y_COORD_AFTER_MENU_TITLE);
 	}
 	else
 	{
@@ -198,6 +200,31 @@ int AlchemicalUserInterface::chooseId(string strChoice, TableCode code)
 	}
 
 	return id;
+}
+
+int AlchemicalUserInterface::chooseNumber(string strChoice, TableCode code)
+{
+	int number = 0;
+
+	string value = "";
+
+	if (code == TableCode::IngredientTable)
+	{
+		// перейти по координате для выбора
+		cout << goToXY(Y_COORD_AFTER_MENU_TITLE + 1, strChoice.size() + 1);
+
+		map<int, Ingredient*>::iterator iter = this->alchemyProgram->getIngredientsTable()->getEndIterator();
+
+		string errorText = "Данное значение не подходит, попробуйте снова: ";
+
+		number = checkInput(value, 1, MAX_INT, errorText, Y_COORD_AFTER_MENU_TITLE + 1);
+	}
+	else
+	{
+
+	}
+
+	return number;
 }
 
 void AlchemicalUserInterface::makeChoice()
@@ -326,7 +353,7 @@ bool AlchemicalUserInterface::checkHorizontalArrowChoice(int& page, TableCode co
 	else
 	{
 		// Если рассматриваем таблицу ингредиентов
-		if (code == TableCode::IngredientsTable)
+		if (code == TableCode::IngredientTable)
 		{
 			int numberOfLines = ingredientsTableprinter->getNumberOfLines();
 
@@ -372,39 +399,75 @@ void AlchemicalUserInterface::buyIngredientsFromList()
 	// начальная страница таблицы
 	int page = FIRST_PAGE;
 
-	string choice = "Введите № ингредиента: ";
+	string choiceIngredient = "Введите № ингредиента: ";
+
+	string choiceNumber = "Введите кол-во ингредиентов: ";
 
 	// Флаг ддля выхода из цикла
 	bool exit = false;
 
-	cout << goToXY(Y_COORD_AFTER_MENU_TITLE, STANDARD_CURSOR_X_COORD);
+	printColoredTextByCoords(choiceIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE, STANDARD_CURSOR_X_COORD);
 
-	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+	//cout << goToXY(Y_COORD_AFTER_MENU_TITLE, STANDARD_CURSOR_X_COORD);
 
-	printColoredText(choice, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+	//cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
 
+	//printColoredText(choiceIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 
-	printTablePagesInLoop(TableCode::IngredientsTable, page);
+	printColoredTextByCoords(choiceNumber, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE + 1, STANDARD_CURSOR_X_COORD);
+
+	//cout << goToXY(Y_COORD_AFTER_MENU_TITLE + 1, STANDARD_CURSOR_X_COORD);
+
+	//cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+
+	//printColoredText(choiceNumber, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+
+	printTablePagesInLoop(TableCode::IngredientTable, page);
 
 	// если был нажат esc
 	if (true == exitFlag)
 		return;
 
-	int id = chooseId(choice, TableCode::IngredientsTable);
+	int id = chooseId(choiceIngredient, TableCode::IngredientTable);
 
-	tryAddIngredientFromList(id);
+	int number = chooseNumber(choiceNumber, TableCode::IngredientTable);
+
+	tryAddIngredientFromList(id, number);
 
 
 	
 }
 
-void AlchemicalUserInterface::tryAddIngredientFromList(int id)
+bool AlchemicalUserInterface::tryAddIngredientFromList(int id, int number)
 {
-	// если 
-	if (this->alchemyProgram->getAlchemist()->getCapital() >= this->alchemyProgram->getIngredientsTable()->getIngredientById(id)->getPrice())
+	bool res = false;
+
+	// таблица ингредиентов
+	IngredientsTable* ingredientsTable = this->alchemyProgram->getIngredientsTable();
+
+	// Этот ингредиент, полученный по id 
+	Ingredient* ingredient = ingredientsTable->getIngredientById(id);
+
+	// деньги алхимика
+	int capital = this->alchemyProgram->getAlchemist()->getCapital();
+
+	// расходы
+	int cost = ingredient->getPrice() * number;
+
+	// если денег у алхимика больше или равно цене ингредиента
+	if (capital >= cost)
+	{
+		ingredient->increaseNumber(number);
+
+		capital -= cost;
+	}
+	// если денег недостаточно
+	else
 	{
 
 	}
+
+	return res;
 }
 
 void AlchemicalUserInterface::eraseScreenAfterAlchemist()
@@ -505,6 +568,12 @@ void AlchemicalUserInterface::printMenuTitle(string title)
 
 void AlchemicalUserInterface::printPageMenu(int page)
 {
+	string strPage = "Страница " + to_string(page + 1);
+
+	int numberOfSymbols = strPage.size();
+
+	cout << eraseSymbolsOnScreen(to_string(numberOfSymbols));
+
 	printColoredText("Страница " + to_string(page), R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 
 	cout << "\t<-- Перейти на предыдущую страницу\t Перейти на следующую страницу -->\tENTER Подтвердить выбор страницы";
@@ -512,13 +581,13 @@ void AlchemicalUserInterface::printPageMenu(int page)
 
 void AlchemicalUserInterface::printTablePagesInLoop(TableCode code, int& page)
 {
-	if (code == TableCode::IngredientsTable)
+	if (code == TableCode::IngredientTable)
 	{
 		this->ingredientsTableprinter->print(this->alchemyProgram->getIngredientsTable(), page);
 
 		printPageMenu(page);
 
-		choosePage(page, TableCode::IngredientsTable);
+		choosePage(page, TableCode::IngredientTable);
 	}
 	else
 	{

@@ -59,6 +59,9 @@ public:
 	// Сеттер для цены
 	void setPrice(float price);
 
+	// Геттер для кол-ва
+	void setNumber(int number);
+
 	//// Сеттер для id
 	//void setId(int id);
 
@@ -66,6 +69,9 @@ public:
 
 	// Добавить эффект
 	void addEffect(int effectId);
+
+	// Увеличить кол-во ингредиента на опред число
+	void increaseNumber(int number);
 
 private:
 

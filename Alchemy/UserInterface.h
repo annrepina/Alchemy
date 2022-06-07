@@ -74,7 +74,7 @@ protected:
 	void eraseScreenAfterTitle() const;
 
 	// Проверка ввода
-	int checkInput(string& value, int min, int max);
+	int checkInput(string& value, int min, int max, string textOfRangeError, int yCoord);
 
 	//// Расчитывает координату Х для заголовков
 	//void setXCoordInMiddle();

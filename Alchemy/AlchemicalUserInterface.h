@@ -23,6 +23,8 @@
 
 #define FIRST_PAGE						1		// Первая страница таблицы
 
+#define MAX_INT							2147483647	// Самое большое число int 
+
 class AlchemicalUserInterface : public UserInterface
 {
 public:
@@ -80,8 +82,8 @@ private:
 
 	enum TableCode
 	{
-		IngredientsTable,
-		PotionsTable
+		IngredientTable,
+		PotionTable
 	};
 
 #pragma endregion 
@@ -100,12 +102,6 @@ private:
 
 	// Настроить программу Алхимии
 	void setAlchemyProgram();
-
-	// Алхимик (пользователь)
-	//Alchemist* alchemist;
-
-	//// Строитель ингредиентов
-	//IngredientBuilder* ingredientBuilder;
 
 	// Список строк - пунктов главного меню
 	static string listOfMainMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
@@ -165,6 +161,9 @@ private:
 	// Выбрать Id из таблицы
 	int chooseId(string strChoice, TableCode code);
 
+	// Вбрать кол-во ингредиента или зелья
+	int chooseNumber(string strChoice, TableCode code);
+
 	// Сделать выбор пункта меню
 	void makeChoice();
 
@@ -196,8 +195,8 @@ private:
 	// Покупка ингредиентов из имеющегося списка
 	void buyIngredientsFromList();
 
-	// Попробовать добавить ингредиент из списка
-	void tryAddIngredientFromList(int id);
+	// Попробовать добавить опр. кол-во ингредиента из списка
+	bool tryAddIngredientFromList(int id, int number);
 
 	// Стирает с консоли все после печати алхимика
 	void eraseScreenAfterAlchemist();

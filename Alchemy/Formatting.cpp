@@ -229,6 +229,15 @@ void printColoredText(string text, string r, string g, string b)
     cout << resetColorParams();
 }
 
+void printColoredTextByCoords(string text, string r, string g, string b, int yCoord, int xCoord)
+{
+    cout << goToXY(yCoord, xCoord);
+
+    cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+
+    printColoredText(text, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+}
+
 void goToCoordAndIncreaseY(int& yCoord, int xCoord)
 {
     cout << goToXY(yCoord, xCoord);

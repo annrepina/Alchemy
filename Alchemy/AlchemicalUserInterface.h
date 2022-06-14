@@ -12,18 +12,26 @@
 #define Y_COORD_AFTER_ALCHEMIST			8		// Координата Y после печати алхимика
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
 //#define INSTRUCTIONS_Y_COORD			10
-#define Y_COORD_AFTER_MENU_TITLE		9		// Координата Y после печати заголовка меню
+#define Y_COORD_AFTER_MENU_TITLE_1		9		// Координата Y первая после печати заголовка меню
+#define Y_COORD_AFTER_MENU_TITLE_2		10		// Координата Y вторая после печати заголовка меню
+#define Y_COORD_AFTER_MENU_TITLE_3		11		// Координата Y третья после печати заголовка меню
+#define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
+#define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
+
 #define STANDARD_CURSOR_X_COORD			0		// Стандартная координата X курсора 
 
 
 
 // Кол-ва
 #define NUMBER_OF_MAIN_MENU_ITEMS		2		// Кол-во пунктов в главном меню
-#define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	6		// Кол-во пунктов в алхимическом меню
+#define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	7		// Кол-во пунктов в алхимическом меню
+#define NUMBER_OF_BUYING_MENU_ITEMS		3		// Кол-во пунктов в меню покупки ингредиентов
 
 #define FIRST_PAGE						1		// Первая страница таблицы
 
 #define MAX_INT							2147483647	// Самое большое число int 
+
+#define TWO_LINES						2		// Две строчки
 
 class AlchemicalUserInterface : public UserInterface
 {
@@ -45,7 +53,8 @@ private:
 		MainMenu, 
 		AlchemicalMenu,
 		InstructionsMenu,
-		BuyingIngredientsMenu
+		BuyingIngredientsMenu,
+		BuyingFaultMenu
 	};
 
 	// Коды пунктов в главном меню
@@ -63,13 +72,14 @@ private:
 		SellingIngredients,
 		EatingIngredients,
 		SellingPotions,
-		WorkingWithTables
+		WorkingWithTables, 
+		AlcReturn
 	};
 
 	// Коды меню инструкций
 	enum InstructionsMenuCode
 	{
-		Return = MAIN_MENU_Y_COORD,
+		InstrReturn = MAIN_MENU_Y_COORD,
 		Exit
 	};
 
@@ -78,6 +88,13 @@ private:
 	{
 		ChooseFromList = MAIN_MENU_Y_COORD,
 		CreateNewIngredient
+	};
+
+	// Коды меню ошибки во время покупки ингредиентов
+	enum BuyingFaultMenuCode
+	{
+		СhooseAnotherIngredient = MAIN_MENU_Y_COORD, 
+		ChangeNumberOfIngredient
 	};
 
 	enum TableCode
@@ -122,10 +139,16 @@ private:
 	map <int, string> instructionsMenu;
 
 	// Список строк - пунктов меню покупки ингредиентов
-	static string listOfBuyingIngredientsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
+	static string listOfBuyingIngredientsMenuItems[NUMBER_OF_BUYING_MENU_ITEMS];
 	
 	// Ассоциативный массив координат и "кнопок" меню покупки ингредиентов
 	map<int, string> buyingIngredientsMenu;
+
+	// Список строк - пунктов меню ошибки при покупке ингредиентов
+	static string listOfBuyingFaultMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
+
+	// Ассоциативный массив координат и пунктов меню ошибки во время покупки ингредиентов
+	map <int, string> buyingFaultMenu;
 
 	// Флаг для выхода из главного цикла
 	bool exitFlag;
@@ -150,6 +173,9 @@ private:
 	// Название меню покупки ингредиентов
 	string buyingIngredientsMenuTitle;
 
+	// Название меню ошибки во время покупки ингредиентов
+	string buingFaultMenuTitle;
+
 #pragma endregion НАЗВАНИЕ ЗАГОЛОВКОВ
 
 	// Принять решение
@@ -165,21 +191,24 @@ private:
 	int chooseNumber(string strChoice, TableCode code);
 
 	// Сделать выбор пункта меню
-	void makeChoice();
+	void makeChoice(bool& innerExitFlag);
 
 #pragma region ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 
 	// Проверка выбора в главном меню
-	void checkMainMenu();
+	void checkMainMenu(bool& innerExitFlag);
 
 	// Проверка выбора в меню инструкций
-	void checkInstructionsMenu();
+	void checkInstructionsMenu(bool& innerExitFlag);
 
 	// Проверка выбоа меню в меню алхимии
-	void checkAlchemicalMenu();
+	void checkAlchemicalMenu(bool& innerExitFlag);
 
 	// Проверка выбора пункта в меню покупки ингредиентов
-	void checkBuyingIngredientsMenu();
+	void checkBuyingIngredientsMenu(bool& innerExitFlag);
+
+	// Проверка выбора пункта в меню ошибки при покупки ингредиентов из списка 
+	void checkBuyingFaultMenu();
 
 	// Проверить горизонтальные стрелки
 	bool checkHorizontalArrowChoice(int& page, TableCode code, int keyCode);

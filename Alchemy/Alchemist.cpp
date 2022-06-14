@@ -50,6 +50,11 @@ void Alchemist::increaseCapital(int value)
 	this->ñapital += value;
 }
 
+void Alchemist::decreaseCapital(int value)
+{
+	this->ñapital -= value;
+}
+
 void Alchemist::print()
 {
 	cout << "Àëõèìèê: " << this->name << endl

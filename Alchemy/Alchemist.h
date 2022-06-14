@@ -51,6 +51,9 @@ public:
 	// Увеличить капитал пользователя на указанную сумму
 	void increaseCapital(int value);
 
+	// Уменьшить капитал пользователя на указанное число
+	void decreaseCapital(int value);
+
 	// Печать данных алхимика
 	void print();
 

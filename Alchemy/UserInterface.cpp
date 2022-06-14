@@ -120,6 +120,23 @@ map<int, string> UserInterface::fillMenuMap(const int numberOfItems, const strin
 	return menu;
 }
 
+map<int, string> UserInterface::fillMenuMap(const int numberOfItems, const string listOfItems[], int yCoord)
+{
+	// Стартовый ключ в ассоциативном массиве
+	int startKey = yCoord;
+
+	// Создаем ассоциативный массив
+	map<int, string> menu;
+
+	// Заполняем ассоциативный массив
+	for (int i = 0; i < numberOfItems; ++i, ++startKey)
+	{
+		menu.emplace(startKey, listOfItems[i]);
+	}
+
+	return menu;
+}
+
 void UserInterface::checkMenuChoice() const
 {
 	// нажатая клавиша

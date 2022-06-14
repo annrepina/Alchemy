@@ -13,7 +13,7 @@ using std::placeholders::_1;
 
 // Координаты
 #define Y_COORD_AFTER_TITLE				4		// Координата Y после названя программы
-#define Y_COORD_AFTER_MENU_TITLE		9		// Координата Y после печати заголовка меню
+#define Y_COORD_AFTER_MENU_TITLE_1		9		// Координата Y после печати заголовка меню
 
 // Коды клавиш
 #define VK_1					0x31	// Клавиша 1
@@ -63,6 +63,9 @@ protected:
 
 	// Заполнить ассоциативный массив меню действий
 	virtual map<int, string> fillMenuMap(const int numberOfItems, const string listOfItems[]);
+
+	// Пергегрузка функции заполнения ассоциативного масссива с координатами
+	virtual map<int, string> fillMenuMap(const int numberOfItems, const string listOfItems[], int yCoord);
 
 	// Проверка выбора в меню
 	void checkMenuChoice() const;

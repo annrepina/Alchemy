@@ -599,7 +599,6 @@ void AlchemicalUserInterface::printInstructions()
 	menuCode = MenuCode::InstructionsMenu;
 
 	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-	//this->boundaryYCoord = MAIN_MENU_Y_COORD;
 
 	printMenuInLoop(instructionsMenu, instructionsMenuTitle);
 }
@@ -638,6 +637,7 @@ void AlchemicalUserInterface::printMenuTitle(string title)
 	cout << goToXY(this->currentYCursorCoord - TWO_LINES, currentXCursorCoord);
 
 	printColoredText(title, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+
 	cout << endl;
 }
 

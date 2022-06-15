@@ -10,6 +10,7 @@ using namespace std;
 #include "AlchemicalUserInterface.h"
 #include "IngredientsTableBuilder.h"
 #include "IngredientsTablePrinter.h"
+#include "MainMenu.h"
 //#include <consoleapi2.h>
 
 int main()
@@ -20,13 +21,13 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    srand(1);
+    //srand(1);
 
     AlchemicalUserInterface userInterface;
 
-    userInterface.setTitle("Зельеварение");
+    //userInterface.setTitle("Зельеварение");
 
-    userInterface.launchMainLoop();
+    //userInterface.launchMainLoop();
 
 
 
@@ -77,6 +78,8 @@ int main()
     //printer.print(table);
 
     //calculateConsoleWidth();
+
+    MainMenu mainMenu(&userInterface);
     
 }
 

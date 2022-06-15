@@ -57,6 +57,8 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	this->alchemyProgramParser = new AlchemyProgramParser();
 
 	this->ingredientsTableprinter = new IngredientsTablePrinter();
+
+	//this->
 }
 
 void AlchemicalUserInterface::launchMainLoop()
@@ -437,6 +439,9 @@ bool AlchemicalUserInterface::checkHorizontalArrowChoice(int& page, TableCode co
 
 void AlchemicalUserInterface::doAlchemy()
 {
+	// Флаг для выхода из цикла
+	bool innerExitFlag = false;
+
 	do
 	{
 		this->currentYCursorCoord = MAIN_MENU_Y_COORD;
@@ -445,7 +450,7 @@ void AlchemicalUserInterface::doAlchemy()
 
 		printMenuInLoop(alchemicalMenu, alchemicalMenuTitle);
 
-	} while (exitFlag == false);
+	} while (exitFlag == false && innerExitFlag == false);
 }
 
 void AlchemicalUserInterface::buyIngredients()

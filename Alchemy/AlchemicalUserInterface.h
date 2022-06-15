@@ -4,22 +4,19 @@
 //#include "IngredientBuilder.h"
 #include "AlchemyProgramBuilder.h"
 #include "IngredientsTablePrinter.h"
-//#include "AlchemyProgram.h"
+#include "MenuState.h"
 
 // Координаты
 #define TITLE_Y_COORD					1		// Координаты Y курсора для печати названия программы
 #define EXIT_Y_COORD					2		// Координата Y кнопки выхода
 #define Y_COORD_AFTER_ALCHEMIST			8		// Координата Y после печати алхимика
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
-//#define INSTRUCTIONS_Y_COORD			10
 #define Y_COORD_AFTER_MENU_TITLE_1		9		// Координата Y первая после печати заголовка меню
 #define Y_COORD_AFTER_MENU_TITLE_2		10		// Координата Y вторая после печати заголовка меню
 #define Y_COORD_AFTER_MENU_TITLE_3		11		// Координата Y третья после печати заголовка меню
 #define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
 #define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
-
 #define STANDARD_CURSOR_X_COORD			0		// Стандартная координата X курсора 
-
 
 
 // Кол-ва
@@ -117,6 +114,9 @@ private:
 	// Принтер для печати таблицы ингредиентов
 	IngredientsTablePrinter* ingredientsTableprinter;
 
+	// Состояние меню
+	MenuState* menuState;
+
 	// Настроить программу Алхимии
 	void setAlchemyProgram();
 
@@ -152,9 +152,6 @@ private:
 
 	// Флаг для выхода из главного цикла
 	bool exitFlag;
-
-	//// Координата X для инструкций
-	//int instructionsXCoord;
 
 	// Граничная координата Y для управления стрелками
 	int boundaryYCoord;

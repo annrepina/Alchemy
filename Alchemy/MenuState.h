@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include <iostream>
+#include "Formatting.h"
+//#include "AlchemicalUserInterface.h"
 
 using namespace std;
 
@@ -31,6 +34,9 @@ protected:
 
 	// Название меню
 	string title;
+
+	// Печать название меню
+	virtual void printMenuTitle();
 
 private:
 

@@ -47,6 +47,12 @@ public:
 	// задать название программы
 	void setTitle(const string title);
 
+	// Текущая координата Х
+	int currentXCursorCoord;
+
+	// Текущая координата Y
+	int currentYCursorCoord;
+
 protected:
 
 	// Название программы
@@ -117,18 +123,8 @@ protected:
 
 #pragma endregion ПРЕДИКАТЫ
 
-#pragma region КООРДИНАТЫ
-
 	// Координата Х - печати названия программы
 	int titleXCoord;
-
-	// Текущая координата Х
-	int currentXCursorCoord;
-
-	// Текущая координата Y
-	int currentYCursorCoord;
-
-#pragma endregion КООРДИНАТЫ
 
 private:
 

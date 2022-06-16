@@ -80,6 +80,9 @@ void AlchemicalUserInterface::launchMainLoop()
 		// —брасываем по умолчанию координату
 		this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 
+		// ¬ытащила из принтћею“айтл
+		eraseScreenAfterAlchemist();
+
 		printMenuInLoop(mainMenu, mainMenuTitle);
 
 	} while (exitFlag == false);	
@@ -635,7 +638,7 @@ void AlchemicalUserInterface::printAlchemist()
 
 void AlchemicalUserInterface::printMenuTitle(string title)
 {
-	eraseScreenAfterAlchemist();
+	//eraseScreenAfterAlchemist();
 
 	this->currentXCursorCoord = calculateXCoordInMiddle(title);
 

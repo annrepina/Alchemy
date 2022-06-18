@@ -5,7 +5,6 @@ string AlchemicalUserInterface::listOfMainMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] =
 	"Читать инструкцию к программе"
 };
 
-// Возможно добавить меню "Перейти в инструкцию"
 string AlchemicalUserInterface::listOfALchemicalMenuItems[NUMBER_OF_ALCHEMICAL_MENU_ITEMS] = {
 	"Создание зелий",
 	"Покупка ингредиентов",
@@ -58,7 +57,7 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 
 	this->ingredientsTableprinter = new IngredientsTablePrinter();
 
-	//this->
+	this->state = new MainMenu();
 }
 
 void AlchemicalUserInterface::launchMainLoop()
@@ -71,23 +70,52 @@ void AlchemicalUserInterface::launchMainLoop()
 
 	printExitButton();
 
+	//do
+	//{
+	//	printAlchemist();
+
+	//	menuCode = MenuCode::MainMenu;
+
+	//	// Сбрасываем по умолчанию координату
+	//	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+
+	//	// Вытащила из принтМенюТайтл
+	//	eraseScreenAfterAlchemist();
+
+	//	printMenuInLoop(mainMenu, mainMenuTitle);
+
+	//} while (exitFlag == false);	
+
 	do
 	{
 		printAlchemist();
 
-		menuCode = MenuCode::MainMenu;
+		//menuCode = MenuCode::MainMenu;
 
-		// Сбрасываем по умолчанию координату
-		this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+		//// Сбрасываем по умолчанию координату
+		//this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 
-		// Вытащила из принтМеюТайтл
+		// Вытащила из принтМенюТайтл
 		eraseScreenAfterAlchemist();
+
+		
 
 		printMenuInLoop(mainMenu, mainMenuTitle);
 
-	} while (exitFlag == false);	
+	} while (exitFlag == false);
+
 
 	printBye();
+}
+
+int AlchemicalUserInterface::getBoundaryYCoord()
+{
+	return this->boundaryYCoord;
+}
+
+void AlchemicalUserInterface::setState(MenuState* state)
+{
+	this->state = state;
 }
 
 void AlchemicalUserInterface::setAlchemyProgram()
@@ -290,6 +318,11 @@ void AlchemicalUserInterface::makeChoice(bool& innerExitFlag)
 			checkBuyingFaultMenu();
 		}
 	}
+}
+
+void AlchemicalUserInterface::makeChoice()
+{
+
 }
 
 void AlchemicalUserInterface::checkMainMenu(bool& innerExitFlag)

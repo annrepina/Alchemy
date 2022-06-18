@@ -79,7 +79,7 @@ int main()
 
     //calculateConsoleWidth();
 
-    MainMenu mainMenu(&userInterface);
+    MainMenuState mainMenu(&userInterface);
     
 }
 

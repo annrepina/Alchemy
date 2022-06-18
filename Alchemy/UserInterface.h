@@ -6,6 +6,8 @@
 #include "Formatting.h"
 #include "ServiceFunctions.h"
 #include "KeyBoard.h"
+//#include "MenuState.h"
+//#include "MenuState.h"
 
 using namespace std;
 
@@ -44,22 +46,57 @@ public:
 	// Цикл программы
 	virtual void launchMainLoop() = 0;
 
+	// Функция для предикатов
+	function<bool(int)> func;
+
+#pragma region СЕТТЕРЫ
+
 	// задать название программы
 	void setTitle(const string title);
 
-	// Текущая координата Х
-	int currentXCursorCoord;
+	// Сеттер для текущей координаты Y
+	void setCurrentYCursorCoord(int yCoord);
 
-	// Текущая координата Y
-	int currentYCursorCoord;
+	// Сеттер для функции
+	void setFunc(function<bool(int)> func);
+
+#pragma endregion СЕТТЕРЫ
+
+#pragma region ГЕТТЕРЫ
+
+	// Геттер для получения текущей координаты Y
+	int getCurrentYCursorCoord();
+
+	// Геттер для получения текущей координаты X
+	int getCurrentXCursorCoord();
+
+	// Получить функцию
+	function<bool(int)> getFunc();
+
+	// Получить клаву
+	KeyBoard* getKeyBoard();
+
+#pragma endregion ГЕТТЕРЫ
+
+	// Не были ли нажаты кнопки стрелок?
+	bool isArrowKeyFalse(int key);
+
+	// Проверка выбора в меню
+	void checkMenuChoice() const;
+
+	//// Проверка выбора стрелочек вверх/вниз
+	//void checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu);
 
 protected:
+
+	//// Состояние меню
+	//MenuState* state;
 
 	// Название программы
 	string title;
 
-	// Функция для предикатов
-	function<bool(int)> func;
+	//// Функция для предикатов
+	//function<bool(int)> func;
 
 	// Экземпляр клавиатуры
 	KeyBoard* keyBoard;
@@ -73,12 +110,6 @@ protected:
 	// Пергегрузка функции заполнения ассоциативного масссива с координатами
 	virtual map<int, string> fillMenuMap(const int numberOfItems, const string listOfItems[], int yCoord);
 
-	// Проверка выбора в меню
-	void checkMenuChoice() const;
-
-	// Проверка выбора стрелочек вверх/вниз
-	void checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu);
-
 	// Очищает на консоли всё, кроме названия программы
 	void eraseScreenAfterTitle() const;
 
@@ -87,6 +118,8 @@ protected:
 
 	//// Расчитывает координату Х для заголовков
 	//void setXCoordInMiddle();
+
+
 
 #pragma region МЕТОДЫ ПЕЧАТИ
 
@@ -118,13 +151,18 @@ protected:
 	// Предикат для выбора пользователя в главном меню
 	bool isMenuChoiceFalse(int key);
 
-	// Не были ли нажаты кнопки стрелок?
-	bool isArrowKeyFalse(int key);
+
 
 #pragma endregion ПРЕДИКАТЫ
 
 	// Координата Х - печати названия программы
 	int titleXCoord;
+
+	// Текущая координата Х
+	int currentXCursorCoord;
+
+	// Текущая координата Y
+	int currentYCursorCoord;
 
 private:
 

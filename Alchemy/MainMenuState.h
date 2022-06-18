@@ -1,18 +1,20 @@
 #pragma once
 #include "MenuState.h"
 
-class MainMenu : public MenuState
+class MainMenuState : public MenuState
 {
 public:
 
 	// Конструктор по умолчанию
-	MainMenu();
+	MainMenuState();
 
 	// Конструктор с параметрами
-	MainMenu(AlchemicalUserInterface* alchemicalUserInterface);
+	MainMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
 	// Печать меню
 	void printMenu() override;
+
+	void setListOfStates() override;
 	 
 protected:
 

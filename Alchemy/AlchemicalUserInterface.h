@@ -4,7 +4,7 @@
 //#include "IngredientBuilder.h"
 #include "AlchemyProgramBuilder.h"
 #include "IngredientsTablePrinter.h"
-#include "MenuState.h"
+#include "MainMenuState.h"
 
 // Координаты
 #define TITLE_Y_COORD					1		// Координаты Y курсора для печати названия программы
@@ -39,6 +39,20 @@ public:
 
 	// Запуск главного цикла программы
 	void launchMainLoop() override;
+
+#pragma region ГЕТТЕРЫ
+
+	// Получить граничную координату Y
+	int getBoundaryYCoord();
+
+#pragma endregion ГЕТТЕРЫ
+
+#pragma region CЕТТЕРЫ
+
+	// Установить состояние
+	void setState(MenuState* state);
+
+#pragma endregion CЕТТЕРЫ
 
 private:
 
@@ -115,7 +129,7 @@ private:
 	IngredientsTablePrinter* ingredientsTableprinter;
 
 	// Состояние меню
-	MenuState* menuState;
+	MenuState* state;
 
 	// Настроить программу Алхимии
 	void setAlchemyProgram();
@@ -189,6 +203,8 @@ private:
 
 	// Сделать выбор пункта меню
 	void makeChoice(bool& innerExitFlag);
+
+	void makeChoice();
 
 #pragma region ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 

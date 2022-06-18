@@ -10,11 +10,23 @@ UserInterface::UserInterface()
 	this->currentYCursorCoord = 0;
 
 	this->keyBoard = this->keyBoard->getInstance();
+
+	//this->state = new MainMenu(*this);
 }
 
 void UserInterface::setTitle(string title)
 {
 	this->title = title;
+}
+
+void UserInterface::setCurrentYCursorCoord(int yCoord)
+{
+	this->currentYCursorCoord = yCoord;
+}
+
+void UserInterface::setFunc(function<bool(int)> func)
+{
+	this->func = func;
 }
 
 void UserInterface::eraseScreenAfterTitle() const
@@ -60,6 +72,26 @@ int UserInterface::checkInput(string& value, int min, int max, string textOfRang
 	} while (true);
 
 	return intValue;
+}
+
+int UserInterface::getCurrentYCursorCoord()
+{
+	return this->currentYCursorCoord;
+}
+
+int UserInterface::getCurrentXCursorCoord()
+{
+	return this->currentXCursorCoord;
+}
+
+function<bool(int)> UserInterface::getFunc()
+{
+	return this->func;
+}
+
+KeyBoard* UserInterface::getKeyBoard()
+{
+	return this->keyBoard;
 }
 
 void UserInterface::printError(int yCoord, int xCoord, string textOfError)
@@ -152,31 +184,31 @@ void UserInterface::checkMenuChoice() const
 	while (this->func(key));
 }
 
-void UserInterface::checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu)
-{
-	// если граничная координата не равна текущей
-	if (borderYCoord != this->currentYCursorCoord)
-	{
-		// Если кнопка вниз
-		if (VK_DOWN == keyCode)
-		{
-			// Печатаем пункт меню без выделения
-			cout << menu[currentYCursorCoord];
-
-			// увеличиваем координаты
-			++this->currentYCursorCoord;
-		}
-		// если кнопка вверх
-		else
-			// уменьшаем координаты
-			--this->currentYCursorCoord;
-
-		// Переходим по координатам
-		cout << goToXY(this->currentYCursorCoord, 0);
-
-		printMenu(menu);
-
-		// Возвращаемся в координаты
-		cout << goToXY(currentYCursorCoord, 0);
-	}
-}
+//void UserInterface::checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu)
+//{
+//	// если граничная координата не равна текущей
+//	if (borderYCoord != this->currentYCursorCoord)
+//	{
+//		// Если кнопка вниз
+//		if (VK_DOWN == keyCode)
+//		{
+//			// Печатаем пункт меню без выделения
+//			cout << menu[currentYCursorCoord];
+//
+//			// увеличиваем координаты
+//			++this->currentYCursorCoord;
+//		}
+//		// если кнопка вверх
+//		else
+//			// уменьшаем координаты
+//			--this->currentYCursorCoord;
+//
+//		// Переходим по координатам
+//		cout << goToXY(this->currentYCursorCoord, 0);
+//
+//		printMenu(menu);
+//
+//		// Возвращаемся в координаты
+//		cout << goToXY(currentYCursorCoord, 0);
+//	}
+//}

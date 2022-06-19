@@ -2,13 +2,14 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <functional>
 #include "Formatting.h"
+#include "ServiceFunctions.h"
 //#include "AlchemicalUserInterface.h"
 
 using namespace std;
 
-// Кол-ва
-#define NUMBER_OF_MAIN_MENU_ITEMS		2		// Кол-во пунктов в главном меню
+
 
 // Координаты
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
@@ -25,6 +26,12 @@ public:
 	// Конструктор с параметром
 	MenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
+	// Конструктор копирования
+	MenuState(MenuState const& copyMenuState);
+
+	// Перегрузка оператора присваивания
+	MenuState& operator = (MenuState const& right);
+
 	// Деструктор
 	virtual ~MenuState();
 
@@ -34,7 +41,19 @@ public:
 	// Печать мееню
 	virtual void printMenu();
 
+	// Задать список состояний
+	virtual void setListOfStates();
+
+	virtual void setListOfCreatingFunctions();
+
+	void fillMenuStates();
+
+	virtual MenuState* getNextState();
+
+
 protected:
+
+
 
 	// Экземпляр интерфейса
 	AlchemicalUserInterface* alchemicalUserInterface;
@@ -53,7 +72,10 @@ protected:
 	int boundaryYCoord;
 
 	// Флаг для выхода из главного цикла
-	bool exitFlag;
+	//bool exitFlag;
+
+	// кол-во состояний
+	int numberOfStates;
 
 	// Печать название меню
 	virtual void printMenuTitle();
@@ -67,16 +89,22 @@ protected:
 	// Ассоциативный массив состояний
 	std::map<int, MenuState*> menuStates;
 
-	std::map<int, string> str;
+	//// Map функций, которые создают стейты
+	//map<int, function<MenuState* ()> > stateCreatingFunctions;
+
+	//vector< function<MenuState* (MenuState&)> > listOfCreatingFunctions;
+
+	//std::map<int, string> str;
 
 	// Список состояний этого меню
-	MenuState* listOfStates[NUMBER_OF_MAIN_MENU_ITEMS];
+	vector<MenuState*> listOfStates;
 
-	// Задать список состояний
-	virtual void setListOfStates() = 0;
+
 
 	// Проверка выбора стрелочек вверх/вниз
 	void checkVerticalArrowsChoice(int borderYCoord, int keyCode);
+
+	virtual void clear();
 
 private:
 

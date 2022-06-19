@@ -57,7 +57,7 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 
 	this->ingredientsTableprinter = new IngredientsTablePrinter();
 
-	this->state = new MainMenu();
+	this->state = new MainMenuState(this);
 }
 
 void AlchemicalUserInterface::launchMainLoop()
@@ -98,9 +98,11 @@ void AlchemicalUserInterface::launchMainLoop()
 		// Вытащила из принтМенюТайтл
 		eraseScreenAfterAlchemist();
 
-		
+		//this->state->setListOfStates();
 
-		printMenuInLoop(mainMenu, mainMenuTitle);
+		this->state->printMenu();
+
+		//printMenuInLoop(mainMenu, mainMenuTitle);
 
 	} while (exitFlag == false);
 
@@ -113,9 +115,28 @@ int AlchemicalUserInterface::getBoundaryYCoord()
 	return this->boundaryYCoord;
 }
 
+bool AlchemicalUserInterface::getExitFlag()
+{
+	return this->exitFlag;
+}
+
 void AlchemicalUserInterface::setState(MenuState* state)
 {
-	this->state = state;
+	if (state != nullptr)
+	{
+		if (this->state != nullptr)
+		{
+			delete this->state;
+			this->state = nullptr;
+		}
+
+		this->state = &bufferState;
+	}
+}
+
+void AlchemicalUserInterface::setExitFlag(bool exitFlag)
+{
+	this->exitFlag = exitFlag;
 }
 
 void AlchemicalUserInterface::setAlchemyProgram()
@@ -143,14 +164,14 @@ void AlchemicalUserInterface::chooseMenuItem(map <int, string> menu)
 			case VK_UP:
 			{
 				// Проверяем стрелочки
-				checkVerticalArrowsChoice(boundaryYCoord, VK_UP, menu);
+				//checkVerticalArrowsChoice(boundaryYCoord, VK_UP, menu);
 			}
 			break;
 
 			case VK_DOWN:
 			{
 				// Проверяем стрелочки
-				checkVerticalArrowsChoice(boundaryYCoord + menu.size() - 1, VK_DOWN, menu);
+				//checkVerticalArrowsChoice(boundaryYCoord + menu.size() - 1, VK_DOWN, menu);
 			}
 			break;
 
@@ -289,7 +310,7 @@ void AlchemicalUserInterface::makeChoice(bool& innerExitFlag)
 {
 	switch (menuCode)
 	{
-		case MenuCode::MainMenu:
+		case MenuCode::MainMenu1:
 		{
 			checkMainMenu(innerExitFlag);
 		}

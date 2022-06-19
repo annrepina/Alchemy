@@ -10,7 +10,7 @@ using namespace std;
 #include "AlchemicalUserInterface.h"
 #include "IngredientsTableBuilder.h"
 #include "IngredientsTablePrinter.h"
-#include "MainMenu.h"
+#include "MainMenuState.h"
 //#include <consoleapi2.h>
 
 int main()
@@ -21,13 +21,15 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
+    //MainMenuState* state = new MainMenuState();
+
     //srand(1);
 
     AlchemicalUserInterface userInterface;
 
-    //userInterface.setTitle("Зельеварение");
+    userInterface.setTitle("Зельеварение");
 
-    //userInterface.launchMainLoop();
+    userInterface.launchMainLoop();
 
 
 

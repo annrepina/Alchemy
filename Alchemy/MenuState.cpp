@@ -11,7 +11,8 @@ MenuState::MenuState()
 	this->goToTitle = "";
 	this->alchemicalUserInterface = nullptr;
 	this->boundaryYCoord = MAIN_MENU_Y_COORD;
-	this->exitFlag = false; 
+	//this->exitFlag = false;
+	this->numberOfStates = 0;
 }
 
 MenuState::MenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState()
@@ -19,8 +20,33 @@ MenuState::MenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuSta
 	this->alchemicalUserInterface = alchemicalUserInterface;
 }
 
+MenuState::MenuState(MenuState const& copyMenuState)
+{
+	this->alchemicalUserInterface = copyMenuState.alchemicalUserInterface;
+	this->boundaryYCoord = copyMenuState.boundaryYCoord;
+	this->goToTitle = copyMenuState.goToTitle;
+	this->numberOfStates = copyMenuState.numberOfStates;
+	this->title = copyMenuState.title;
+}
+
+MenuState& MenuState::operator=(MenuState const& right)
+{
+	if (right.alchemicalUserInterface != nullptr)
+	{
+		this->alchemicalUserInterface = right.alchemicalUserInterface;
+		this->boundaryYCoord = right.boundaryYCoord;
+		this->goToTitle = right.goToTitle;
+		this->numberOfStates = right.numberOfStates;
+		this->title = right.title;
+	}
+	// TODO: вставьте здесь оператор return
+
+	return *this;
+}
+
 MenuState::~MenuState()
 {
+
 }
 
 void MenuState::setAlchemicalUserInterface(AlchemicalUserInterface* alchemicalUserInterface)
@@ -30,6 +56,10 @@ void MenuState::setAlchemicalUserInterface(AlchemicalUserInterface* alchemicalUs
 
 void MenuState::printMenu()
 {
+	this->setListOfStates();
+
+	fillMap<MenuState*>(menuStates, listOfStates, this->currentYCursorCoordState, this->numberOfStates);
+
 	printMenuTitle();
 
 	printColoredText("Выберите действие:", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
@@ -41,8 +71,40 @@ void MenuState::printMenu()
 
 	chooseMenuItem();
 
-	this->alchemicalUserInterface->setState(this->menuStates[this->currentYCursorCoordState]);
+	this->alchemicalUserInterface->setState(this->);
 }
+
+void MenuState::setListOfStates()
+{
+}
+
+void MenuState::setListOfCreatingFunctions()
+{
+}
+
+void MenuState::fillMenuStates()
+{
+	// Стартовый ключ в ассоциативном массиве
+	int startKey = this->currentYCursorCoordState;
+
+	//// Создаем ассоциативный массив
+	//map<int, string> menu;
+
+	// Заполняем ассоциативный массив
+	for (int i = 0; i < this->numberOfStates; ++i, ++startKey)
+	{
+		menuStates.emplace(startKey, this->listOfStates[i]);
+	}
+
+	//return map<int, MenuState*>();
+}
+
+MenuState* MenuState::getNextState()
+{
+	return nullptr;
+}
+
+
 
 void MenuState::printMenuTitle()
 {
@@ -73,7 +135,7 @@ void MenuState::printMenuItems()
 
 	// Стартовый ключ в ассоциативном массиве
 	//int border = yCoord + menu.size();
-	int border = this->currentYCursorCoordState + this->menuStates.size();
+	int border = this->boundaryYCoord + this->menuStates.size();
 
 	// Печатаем ассоциативный массив
 	for (int i = this->currentYCursorCoordState; i < border; ++i)
@@ -94,6 +156,7 @@ void MenuState::chooseMenuItem()
 {
 	this->alchemicalUserInterface->setFunc(std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this->alchemicalUserInterface, _1));
 
+	//this->alchemicalUserInterface->setFunc(AlchemicalUserInterface::isArrowKeyFalse(1));
 	//this->func = std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this, _1);
 
 	//// Флаг для возвращения в предыдущее меню, но не выход из программы
@@ -143,11 +206,12 @@ void MenuState::chooseMenuItem()
 
 		case VK_ESCAPE:
 		{
-			exitFlag = true;
+			this->alchemicalUserInterface->setExitFlag(true);
+			//exitFlag = true;
 		}
 		break;
 		}
-	} while (false == exitFlag && false == innerExitFlag);
+	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
 }
 
 void MenuState::checkVerticalArrowsChoice(int borderYCoord, int keyCode)
@@ -159,7 +223,7 @@ void MenuState::checkVerticalArrowsChoice(int borderYCoord, int keyCode)
 		if (VK_DOWN == keyCode)
 		{
 			// Печатаем пункт меню без выделения
-			cout << menuStates[currentYCursorCoordState];
+			cout << menuStates[currentYCursorCoordState]->goToTitle;
 
 			// увеличиваем координаты
 			++this->currentYCursorCoordState;
@@ -172,9 +236,20 @@ void MenuState::checkVerticalArrowsChoice(int borderYCoord, int keyCode)
 		// Переходим по координатам
 		cout << goToXY(this->currentYCursorCoordState, 0);
 
-		printMenu();
+		printMenuItems();
 
 		// Возвращаемся в координаты
 		cout << goToXY(currentYCursorCoordState, 0);
 	}
 }
+
+void MenuState::clear()
+{
+	for (auto state : this->listOfStates)
+	{
+		delete state;
+
+		state = nullptr;
+	}
+}
+

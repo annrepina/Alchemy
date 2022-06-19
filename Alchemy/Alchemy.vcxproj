@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AlchemicalMenuState.cpp" />
     <ClCompile Include="AlchemicalUserInterface.cpp" />
     <ClCompile Include="AlchemyProgram.cpp" />
     <ClCompile Include="AlchemyProgramBuilder.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="EffectsTableBuilder.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Formatting.cpp" />
+    <ClCompile Include="InstructionsMenuState.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="IngredientsTable.cpp" />
@@ -169,6 +171,7 @@
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlchemicalMenuState.h" />
     <ClInclude Include="AlchemicalUserInterface.h" />
     <ClInclude Include="AlchemyProgram.h" />
     <ClInclude Include="AlchemyProgramBuilder.h" />
@@ -180,6 +183,7 @@
     <ClInclude Include="EffectsTableBuilder.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Formatting.h" />
+    <ClInclude Include="InstructionsMenuState.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="Ingredient.h" />

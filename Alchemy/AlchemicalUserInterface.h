@@ -45,12 +45,16 @@ public:
 	// Получить граничную координату Y
 	int getBoundaryYCoord();
 
+	bool getExitFlag();
+
 #pragma endregion ГЕТТЕРЫ
 
 #pragma region CЕТТЕРЫ
 
 	// Установить состояние
 	void setState(MenuState* state);
+
+	void setExitFlag(bool exitFlag);
 
 #pragma endregion CЕТТЕРЫ
 
@@ -61,7 +65,7 @@ private:
 	// Коды меню
 	enum MenuCode
 	{
-		MainMenu, 
+		MainMenu1, 
 		AlchemicalMenu,
 		InstructionsMenu,
 		BuyingIngredientsMenu,

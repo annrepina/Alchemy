@@ -130,7 +130,7 @@ void AlchemicalUserInterface::setState(MenuState* state)
 			this->state = nullptr;
 		}
 
-		this->state = &bufferState;
+		this->state = state;
 	}
 }
 

@@ -9,7 +9,7 @@ public:
 
 	InstructionsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
-	~InstructionsMenuState();
+	~InstructionsMenuState() override;
 
 	void setListOfStates() override;
 

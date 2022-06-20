@@ -20,8 +20,8 @@
 
 
 // Кол-ва
-#define NUMBER_OF_MAIN_MENU_ITEMS		2		// Кол-во пунктов в главном меню
-#define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	7		// Кол-во пунктов в алхимическом меню
+//#define NUMBER_OF_MAIN_MENU_ITEMS		2		// Кол-во пунктов в главном меню
+//#define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	7		// Кол-во пунктов в алхимическом меню
 #define NUMBER_OF_BUYING_MENU_ITEMS		3		// Кол-во пунктов в меню покупки ингредиентов
 
 #define FIRST_PAGE						1		// Первая страница таблицы

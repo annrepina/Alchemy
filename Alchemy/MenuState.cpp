@@ -56,6 +56,9 @@ void MenuState::setAlchemicalUserInterface(AlchemicalUserInterface* alchemicalUs
 
 void MenuState::printMenu()
 {
+	// Сбрасываем координату каждый раз заходя в метод печати
+	currentYCursorCoordState = MAIN_MENU_Y_COORD;
+
 	this->setListOfStates();
 
 	fillMap<MenuState*>(menuStates, listOfStates, this->currentYCursorCoordState, this->numberOfStates);
@@ -71,38 +74,38 @@ void MenuState::printMenu()
 
 	chooseMenuItem();
 
-	this->alchemicalUserInterface->setState(this->);
+	this->alchemicalUserInterface->setState(this->getNextState());
 }
 
-void MenuState::setListOfStates()
-{
-}
+//void MenuState::setListOfStates()
+//{
+//}
 
-void MenuState::setListOfCreatingFunctions()
-{
-}
+//void MenuState::setListOfCreatingFunctions()
+//{
+//}
 
-void MenuState::fillMenuStates()
-{
-	// Стартовый ключ в ассоциативном массиве
-	int startKey = this->currentYCursorCoordState;
+//void MenuState::fillMenuStates()
+//{
+//	// Стартовый ключ в ассоциативном массиве
+//	int startKey = this->currentYCursorCoordState;
+//
+//	//// Создаем ассоциативный массив
+//	//map<int, string> menu;
+//
+//	// Заполняем ассоциативный массив
+//	for (int i = 0; i < this->numberOfStates; ++i, ++startKey)
+//	{
+//		menuStates.emplace(startKey, this->listOfStates[i]);
+//	}
+//
+//	//return map<int, MenuState*>();
+//}
 
-	//// Создаем ассоциативный массив
-	//map<int, string> menu;
-
-	// Заполняем ассоциативный массив
-	for (int i = 0; i < this->numberOfStates; ++i, ++startKey)
-	{
-		menuStates.emplace(startKey, this->listOfStates[i]);
-	}
-
-	//return map<int, MenuState*>();
-}
-
-MenuState* MenuState::getNextState()
-{
-	return nullptr;
-}
+//MenuState* MenuState::getNextState()
+//{
+//	return nullptr;
+//}
 
 
 

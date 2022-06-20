@@ -8,6 +8,7 @@ AlchemicalMenuState::AlchemicalMenuState(AlchemicalUserInterface* alchemicalUser
 {
 	this->title = "Меню алхимии";
 	this->goToTitle = "Алхимичить";
+	this->numberOfStates = NUMBER_OF_ALCHEMICAL_MENU_ITEMS;
 }
 
 AlchemicalMenuState::~AlchemicalMenuState()
@@ -18,6 +19,15 @@ AlchemicalMenuState::~AlchemicalMenuState()
 void AlchemicalMenuState::setListOfStates()
 {
 
+}
+
+void AlchemicalMenuState::setListOfCreatingFunctions()
+{
+}
+
+MenuState* AlchemicalMenuState::getNextState()
+{
+	return nullptr;
 }
 
 //void AlchemicalMenuState::clear()

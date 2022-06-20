@@ -16,6 +16,7 @@ using namespace std;
 
 class AlchemicalUserInterface;
 
+template <typename T>
 class MenuState
 {
 public:
@@ -41,19 +42,16 @@ public:
 	// Печать мееню
 	virtual void printMenu();
 
-	// Задать список состояний
-	virtual void setListOfStates();
-
-	virtual void setListOfCreatingFunctions();
-
-	void fillMenuStates();
-
-	virtual MenuState* getNextState();
-
+	//void fillMenuStates();
 
 protected:
 
+	virtual MenuState* getNextState() = 0;
 
+	// Задать список состояний
+	virtual void setListOfStates() = 0;
+
+	virtual void setListOfCreatingFunctions() = 0;
 
 	// Экземпляр интерфейса
 	AlchemicalUserInterface* alchemicalUserInterface;
@@ -99,7 +97,7 @@ protected:
 	// Список состояний этого меню
 	vector<MenuState*> listOfStates;
 
-
+	vector< function<MenuState* (T&)> > listOfCreatingFunctions;
 
 	// Проверка выбора стрелочек вверх/вниз
 	void checkVerticalArrowsChoice(int borderYCoord, int keyCode);
@@ -107,5 +105,7 @@ protected:
 	virtual void clear();
 
 private:
+
+
 
 };

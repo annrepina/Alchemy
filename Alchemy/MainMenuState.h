@@ -21,10 +21,6 @@ public:
 	// Печать меню
 	void printMenu() override;
 
-	void setListOfStates() override;
-
-	void setListOfCreatingFunctions() override; 
-
 	AlchemicalMenuState* createAlchemicalMenuState();
 
 	InstructionsMenuState* createInstructionsMenuState();
@@ -45,6 +41,10 @@ protected:
 
 
 private:
+
+	void setListOfStates() override;
+
+	void setListOfCreatingFunctions() override; 
 };
 
 

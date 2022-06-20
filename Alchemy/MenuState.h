@@ -16,7 +16,6 @@ using namespace std;
 
 class AlchemicalUserInterface;
 
-template <typename T>
 class MenuState
 {
 public:
@@ -39,19 +38,12 @@ public:
 	// Задаем интерфейс
 	virtual void setAlchemicalUserInterface(AlchemicalUserInterface* alchemicalUserInterface);
 
-	// Печать мееню
+	// Печать меню
 	virtual void printMenu();
 
 	//void fillMenuStates();
 
 protected:
-
-	virtual MenuState* getNextState() = 0;
-
-	// Задать список состояний
-	virtual void setListOfStates() = 0;
-
-	virtual void setListOfCreatingFunctions() = 0;
 
 	// Экземпляр интерфейса
 	AlchemicalUserInterface* alchemicalUserInterface;
@@ -62,18 +54,26 @@ protected:
 	// Название меню при переходе в него
 	string goToTitle;
 
+	// текущая координата Y курсора 
 	static int currentYCursorCoordState;
 
+	// текущая координата X курсора 
 	static int currentXCursorCoordState;
 
 	// Граничная координата Y для управления стрелками
 	int boundaryYCoord;
 
-	// Флаг для выхода из главного цикла
-	//bool exitFlag;
-
-	// кол-во состояний
+	// кол-во состояний у данного состояния
 	int numberOfStates;
+
+	// Получить следующее состояние
+	virtual MenuState* getNextState() = 0;
+
+	// Задать список состояний
+	virtual void setListOfStates() = 0;
+
+	// Задать список создающих стейты функций
+	virtual void setListOfCreatingFunctions() = 0;
 
 	// Печать название меню
 	virtual void printMenuTitle();
@@ -87,25 +87,15 @@ protected:
 	// Ассоциативный массив состояний
 	std::map<int, MenuState*> menuStates;
 
-	//// Map функций, которые создают стейты
-	//map<int, function<MenuState* ()> > stateCreatingFunctions;
-
-	//vector< function<MenuState* (MenuState&)> > listOfCreatingFunctions;
-
-	//std::map<int, string> str;
-
 	// Список состояний этого меню
 	vector<MenuState*> listOfStates;
-
-	vector< function<MenuState* (T&)> > listOfCreatingFunctions;
 
 	// Проверка выбора стрелочек вверх/вниз
 	void checkVerticalArrowsChoice(int borderYCoord, int keyCode);
 
+	// Очистить память
 	virtual void clear();
 
 private:
-
-
 
 };

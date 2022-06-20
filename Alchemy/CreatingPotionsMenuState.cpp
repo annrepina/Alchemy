@@ -11,3 +11,7 @@ CreatingPotionsMenuState::CreatingPotionsMenuState(AlchemicalUserInterface* alch
 CreatingPotionsMenuState::~CreatingPotionsMenuState()
 {
 }
+
+void CreatingPotionsMenuState::printMenu()
+{
+}

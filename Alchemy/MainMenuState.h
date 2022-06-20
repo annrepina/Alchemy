@@ -16,32 +16,33 @@ public:
 	// Конструктор с параметрами
 	MainMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
+	// Деструктор
 	~MainMenuState() override;
 
 	// Печать меню
 	void printMenu() override;
 
-	AlchemicalMenuState* createAlchemicalMenuState();
-
-	InstructionsMenuState* createInstructionsMenuState();
-
-	// Map функций, которые создают стейты
-	map<int, function<MenuState* (MainMenuState&)> > stateCreatingFunctions;
-
-	void fillStateCreatingFunctions();
-
-	vector< function<MenuState* (MainMenuState&)> > listOfCreatingFunctions;
-
-	MenuState* getNextState() override;
-
-	//void clear() override;
-	 
-protected:
-
-
-
 private:
 
+	// Map функций, которые создают стейты и их ключи - координаты пунктов меню
+	map<int, function<MenuState* (MainMenuState&)> > stateCreatingFunctions;
+
+	// Вектор функций, которые создают стейты
+	vector< function<MenuState* (MainMenuState&)> > listOfCreatingFunctions;
+
+	// Создать состояние - алхимическое меню
+	AlchemicalMenuState* createAlchemicalMenuState();
+
+	// Создать состояние - меню инструкций
+	InstructionsMenuState* createInstructionsMenuState();
+
+	// Заполнить map функций, которые создают стейты и их ключи
+	void fillStateCreatingFunctions();
+
+	// Получить следующее состояние
+	MenuState* getNextState() override;
+
+	// 
 	void setListOfStates() override;
 
 	void setListOfCreatingFunctions() override; 

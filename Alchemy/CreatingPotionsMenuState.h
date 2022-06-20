@@ -14,7 +14,18 @@ public:
 	// Печать меню
 	void printMenu() override;
 
+	// Map функций, которые создают стейты
+	map<int, function<MenuState* (MainMenuState&)> > stateCreatingFunctions;
+
+	void fillStateCreatingFunctions();
+
+	vector< function<MenuState* (MainMenuState&)> > listOfCreatingFunctions;
+
+	MenuState* getNextState() override;
+
 private:
+
+
 
 
 };

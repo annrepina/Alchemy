@@ -1,24 +1,18 @@
 #pragma once
 #include "MenuState.h"
-#include "CreatingPotionsMenuState.h"
 
-#define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	7		// Кол-во пунктов в алхимическом меню
-
-class AlchemicalMenuState : public MenuState
+class BuyingIngredientsMenuState : public MenuState
 {
 public:
 
-	// Конструктор по умолчанию
-	AlchemicalMenuState();
+	BuyingIngredientsMenuState();
 
-	AlchemicalMenuState(AlchemicalUserInterface* alchemicalUserInterface);
+	BuyingIngredientsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
-	~AlchemicalMenuState() override;
+	~BuyingIngredientsMenuState() override;
 
 	// Печать меню
 	void printMenu() override;
-
-protected:
 
 private:
 
@@ -32,18 +26,19 @@ private:
 	void setListOfCreatingFunctions() override;
 
 	// Map функций, которые создают стейты и их ключи - координаты пунктов меню
-	map<int, function<MenuState* (AlchemicalMenuState&)> > stateCreatingFunctions;
+	map<int, function<MenuState* (BuyingIngredientsMenuState&)> > stateCreatingFunctions;
 
 	// Заполнить map функций, которые создают стейты и их ключи
 	void fillStateCreatingFunctions();
 
 	// Вектор функций, которые создают стейты
-	vector< function<MenuState* (AlchemicalMenuState&)> > listOfCreatingFunctions;
+	vector< function<MenuState* (BuyingIngredientsMenuState&)> > listOfCreatingFunctions;
 
 	//// Создать состояние - алхимическое меню
 	//AlchemicalMenuState* createAlchemicalMenuState();
 
 	//// Создать состояние - меню инструкций
 	//InstructionsMenuState* createInstructionsMenuState();
+
 };
 

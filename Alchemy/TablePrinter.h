@@ -15,8 +15,6 @@
 #define GAPS						2		// Кол-во пробелов в столбце (1 слева и 1 справа)
 
 
-
-
 // Класс-шаблон печатающий что-либо
 template <typename PrintableTable>
 class TablePrinter
@@ -271,6 +269,4 @@ private:
 	{
 		this->page = page;
 	}
-
-
 };

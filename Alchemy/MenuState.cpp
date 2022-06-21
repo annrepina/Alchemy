@@ -46,7 +46,7 @@ MenuState& MenuState::operator=(MenuState const& right)
 
 MenuState::~MenuState()
 {
-
+	clear();
 }
 
 void MenuState::setAlchemicalUserInterface(AlchemicalUserInterface* alchemicalUserInterface)

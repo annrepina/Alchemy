@@ -24,8 +24,20 @@ public:
 
 private:
 
+	// Получить следующее состояние
+	MenuState* getNextState() override;
+
+	// Задать список состояний
+	void setListOfStates() override;
+
+	// Задать список создающих стейты функций
+	void setListOfCreatingFunctions() override; 
+
 	// Map функций, которые создают стейты и их ключи - координаты пунктов меню
 	map<int, function<MenuState* (MainMenuState&)> > stateCreatingFunctions;
+
+	// Заполнить map функций, которые создают стейты и их ключи
+	void fillStateCreatingFunctions();
 
 	// Вектор функций, которые создают стейты
 	vector< function<MenuState* (MainMenuState&)> > listOfCreatingFunctions;
@@ -35,17 +47,6 @@ private:
 
 	// Создать состояние - меню инструкций
 	InstructionsMenuState* createInstructionsMenuState();
-
-	// Заполнить map функций, которые создают стейты и их ключи
-	void fillStateCreatingFunctions();
-
-	// Получить следующее состояние
-	MenuState* getNextState() override;
-
-	// 
-	void setListOfStates() override;
-
-	void setListOfCreatingFunctions() override; 
 };
 
 

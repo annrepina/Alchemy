@@ -5,11 +5,8 @@
 #include <functional>
 #include "Formatting.h"
 #include "ServiceFunctions.h"
-//#include "AlchemicalUserInterface.h"
 
 using namespace std;
-
-
 
 // Координаты
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий

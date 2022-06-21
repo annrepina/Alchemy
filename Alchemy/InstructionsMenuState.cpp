@@ -22,6 +22,10 @@ void InstructionsMenuState::printMenu()
 	// —брасываем координату каждый раз заход€ в метод печати
 	currentYCursorCoordState = MAIN_MENU_Y_COORD;
 
+	setListOfCreatingFunctions();
+
+	fillMap<function<MenuState* (InstructionsMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
+
 	cout << goToXY(this->currentYCursorCoordState + 1, STANDARD_CURSOR_X_COORD);
 
 	cout << "ќзнакомьтесь с инструкцией к программе";
@@ -31,7 +35,7 @@ void InstructionsMenuState::printMenu()
 
 MenuState* InstructionsMenuState::getNextState()
 {
-	return nullptr;
+	return this->stateCreatingFunctions[currentYCursorCoordState](*this);
 }
 
 void InstructionsMenuState::setListOfStates()

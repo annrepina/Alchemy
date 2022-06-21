@@ -7,10 +7,10 @@ ReturnMenuState::ReturnMenuState(MenuState* previousMenuState, AlchemicalUserInt
     this->goToTitle = "Назад";
 }
 
-ReturnMenuState::~ReturnMenuState()
-{
-    clear();
-}
+//ReturnMenuState::~ReturnMenuState()
+//{
+//    clear();
+//}
 
 void ReturnMenuState::printMenu()
 {

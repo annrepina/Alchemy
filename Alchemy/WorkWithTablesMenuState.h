@@ -9,7 +9,7 @@ public:
 
 	WorkWithTablesMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
-	~WorkWithTablesMenuState() override;
+	//~WorkWithTablesMenuState() override;
 
 	// Печать меню
 	void printMenu() override;

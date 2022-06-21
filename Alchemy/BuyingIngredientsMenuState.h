@@ -9,7 +9,7 @@ public:
 
 	BuyingIngredientsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
-	~BuyingIngredientsMenuState() override;
+	//~BuyingIngredientsMenuState() override;
 
 	// Печать меню
 	void printMenu() override;

@@ -11,10 +11,10 @@ WorkWithTablesMenuState::WorkWithTablesMenuState(AlchemicalUserInterface* alchem
 	this->numberOfStates = 0;
 }
 
-WorkWithTablesMenuState::~WorkWithTablesMenuState()
-{
-	clear();
-}
+//WorkWithTablesMenuState::~WorkWithTablesMenuState()
+//{
+//	clear();
+//}
 
 void WorkWithTablesMenuState::printMenu()
 {

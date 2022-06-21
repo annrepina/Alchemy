@@ -11,10 +11,10 @@ CreatingPotionsMenuState::CreatingPotionsMenuState(AlchemicalUserInterface* alch
     this->numberOfStates = 0;
 }
 
-CreatingPotionsMenuState::~CreatingPotionsMenuState()
-{
-    clear();
-}
+//CreatingPotionsMenuState::~CreatingPotionsMenuState()
+//{
+//    clear();
+//}
 
 void CreatingPotionsMenuState::printMenu()
 {

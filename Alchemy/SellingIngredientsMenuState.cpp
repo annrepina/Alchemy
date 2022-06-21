@@ -11,10 +11,10 @@ SellingIngredientsMenuState::SellingIngredientsMenuState(AlchemicalUserInterface
 	this->numberOfStates = 0;
 }
 
-SellingIngredientsMenuState::~SellingIngredientsMenuState()
-{
-	clear();
-}
+//SellingIngredientsMenuState::~SellingIngredientsMenuState()
+//{
+//	clear();
+//}
 
 void SellingIngredientsMenuState::printMenu()
 {

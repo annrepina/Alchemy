@@ -7,7 +7,7 @@ public:
 
 	ReturnMenuState(MenuState* previousMenuState, AlchemicalUserInterface* alchemicalUserInterface);
 
-	~ReturnMenuState() override;
+	//~ReturnMenuState() override;
 
 	// Печать меню
 	void printMenu() override;

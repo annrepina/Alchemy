@@ -22,7 +22,7 @@ public:
 
 	AlchemicalMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
-	~AlchemicalMenuState() override;
+	//~AlchemicalMenuState() override;
 
 	// Печать меню
 	void printMenu() override;

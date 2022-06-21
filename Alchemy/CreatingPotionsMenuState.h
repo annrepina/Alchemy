@@ -11,8 +11,8 @@ public:
 	// Конструктор с параметрами
 	CreatingPotionsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
-	// Деструктор
-	~CreatingPotionsMenuState() override;
+	//// Деструктор
+	//~CreatingPotionsMenuState() override;
 
 	// Печать меню
 	void printMenu() override;

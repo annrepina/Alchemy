@@ -9,7 +9,7 @@ public:
 
 	EatingIngredientsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 	
-	~EatingIngredientsMenuState() override;
+	//~EatingIngredientsMenuState() override;
 
 	// Печать меню
 	void printMenu() override;

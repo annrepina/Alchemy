@@ -12,10 +12,10 @@ AlchemicalMenuState::AlchemicalMenuState(AlchemicalUserInterface* alchemicalUser
 	this->numberOfStates = NUMBER_OF_ALCHEMICAL_MENU_ITEMS;
 }
 
-AlchemicalMenuState::~AlchemicalMenuState()
-{
-	clear();
-}
+//AlchemicalMenuState::~AlchemicalMenuState()
+//{
+//	clear();
+//}
 
 void AlchemicalMenuState::printMenu()
 {

@@ -6,7 +6,7 @@ SellingIngredientsMenuState::SellingIngredientsMenuState()
 
 SellingIngredientsMenuState::SellingIngredientsMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
 {
-	this->title = "Меню продажи ингредиентов";
+	this->title = "Продажа ингредиентов";
 	this->goToTitle = "Продать ингредиенты";
 	this->numberOfStates = 0;
 }
@@ -33,6 +33,3 @@ void SellingIngredientsMenuState::setListOfCreatingFunctions()
 {
 }
 
-void SellingIngredientsMenuState::fillStateCreatingFunctions()
-{
-}

@@ -105,19 +105,22 @@
     <ClCompile Include="InstructionsMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="CreatingPotionsMenuState.cpp">
+    <ClCompile Include="BuyingIngredientsFromListMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="BuyingIngredientsMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="SellingIngredientsMenuState.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuStateTemp.cpp">
+    <ClCompile Include="CreatingPotionsMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="EatingIngredientsMenuState.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnMenuState.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="SellingIngredientsMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="SellingPotionsMenuState.cpp">
@@ -126,7 +129,7 @@
     <ClCompile Include="WorkWithTablesMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="ReturnMenuState.cpp">
+    <ClCompile Include="BuyNewIngredientsMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -218,19 +221,22 @@
     <ClInclude Include="InstructionsMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="CreatingPotionsMenuState.h">
+    <ClInclude Include="BuyingIngredientsFromListMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="BuyingIngredientsMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="SellingIngredientsMenuState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuStateTemp.h">
+    <ClInclude Include="CreatingPotionsMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="EatingIngredientsMenuState.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnMenuState.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="SellingIngredientsMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="SellingPotionsMenuState.h">
@@ -239,7 +245,7 @@
     <ClInclude Include="WorkWithTablesMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ReturnMenuState.h">
+    <ClInclude Include="BuyNewIngredientsMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

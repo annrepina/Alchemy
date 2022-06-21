@@ -1,5 +1,12 @@
 #pragma once
 #include "MenuState.h"
+#include "ServiceFunctions.h"
+#include "BuyingIngredientsFromListMenuState.h"
+#include "BuyNewIngredientsMenuState.h"
+
+#define NUMBER_OF_BUYING_MENU_ITEMS		3		// Кол-во пунктов в меню покупки ингредиентов
+
+class AlchemicalMenuState;
 
 class BuyingIngredientsMenuState : public MenuState
 {
@@ -28,17 +35,17 @@ private:
 	// Map функций, которые создают стейты и их ключи - координаты пунктов меню
 	map<int, function<MenuState* (BuyingIngredientsMenuState&)> > stateCreatingFunctions;
 
-	// Заполнить map функций, которые создают стейты и их ключи
-	void fillStateCreatingFunctions();
-
 	// Вектор функций, которые создают стейты
 	vector< function<MenuState* (BuyingIngredientsMenuState&)> > listOfCreatingFunctions;
 
-	//// Создать состояние - алхимическое меню
-	//AlchemicalMenuState* createAlchemicalMenuState();
+	// Создать состояние - меню покупки зелий из списка
+	BuyingIngredientsFromListMenuState* createBuyingIngredientsFromListMenuState();
 
-	//// Создать состояние - меню инструкций
-	//InstructionsMenuState* createInstructionsMenuState();
+	// Создать состояние - меню инструкций
+	BuyNewIngredientsMenuState* createBuyNewIngredientsMenuState();
+
+	// Создать состояние - меню назад
+	ReturnMenuState* createReturnMenuState();
 
 };
 

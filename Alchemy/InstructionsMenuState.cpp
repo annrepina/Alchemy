@@ -7,8 +7,8 @@ InstructionsMenuState::InstructionsMenuState()
 
 InstructionsMenuState::InstructionsMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
 {
-	this->title = "Инструкции к программе \"Зельеварение\"";
-	this->goToTitle = "Читать инструкцию к программе";
+	this->title = "Наставления начинающему алхимику";
+	this->goToTitle = "Читать наставления начинающему алхимику";
 	this->numberOfStates = NUMBER_OF_INSTRUCIONS_MENU_ITEMS;
 }
 
@@ -48,17 +48,17 @@ void InstructionsMenuState::setListOfCreatingFunctions()
 	this->listOfCreatingFunctions.push_back(&InstructionsMenuState::createReturnMenuState);
 }
 
-void InstructionsMenuState::fillStateCreatingFunctions()
-{
-	// Стартовый ключ в ассоциативном массиве
-	int startKey = this->currentYCursorCoordState;
-
-	// Заполняем ассоциативный массив
-	for (int i = 0; i < this->numberOfStates; ++i, ++startKey)
-	{
-		stateCreatingFunctions.emplace(startKey, this->listOfCreatingFunctions[i]);
-	}
-}
+//void InstructionsMenuState::fillStateCreatingFunctions()
+//{
+//	// Стартовый ключ в ассоциативном массиве
+//	int startKey = this->currentYCursorCoordState;
+//
+//	// Заполняем ассоциативный массив
+//	for (int i = 0; i < this->numberOfStates; ++i, ++startKey)
+//	{
+//		stateCreatingFunctions.emplace(startKey, this->listOfCreatingFunctions[i]);
+//	}
+//}
 
 ReturnMenuState* InstructionsMenuState::createReturnMenuState()
 {

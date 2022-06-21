@@ -7,7 +7,7 @@ AlchemicalMenuState::AlchemicalMenuState()
 
 AlchemicalMenuState::AlchemicalMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
 {
-	this->title = "Меню алхимии";
+	this->title = "Алхимия";
 	this->goToTitle = "Алхимичить";
 	this->numberOfStates = NUMBER_OF_ALCHEMICAL_MENU_ITEMS;
 }
@@ -56,17 +56,17 @@ MenuState* AlchemicalMenuState::getNextState()
 	return this->stateCreatingFunctions[currentYCursorCoordState](*this);
 }
 
-void AlchemicalMenuState::fillStateCreatingFunctions()
-{
-	// Стартовый ключ в ассоциативном массиве
-	int startKey = this->currentYCursorCoordState;
-
-	// Заполняем ассоциативный массив
-	for (int i = 0; i < this->numberOfStates; ++i, ++startKey)
-	{
-		stateCreatingFunctions.emplace(startKey, this->listOfCreatingFunctions[i]);
-	}
-}
+//void AlchemicalMenuState::fillStateCreatingFunctions()
+//{
+//	// Стартовый ключ в ассоциативном массиве
+//	int startKey = this->currentYCursorCoordState;
+//
+//	// Заполняем ассоциативный массив
+//	for (int i = 0; i < this->numberOfStates; ++i, ++startKey)
+//	{
+//		stateCreatingFunctions.emplace(startKey, this->listOfCreatingFunctions[i]);
+//	}
+//}
 
 CreatingPotionsMenuState* AlchemicalMenuState::createCreatingPotionsMenuState()
 {

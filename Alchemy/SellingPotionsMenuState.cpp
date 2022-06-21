@@ -6,8 +6,8 @@ SellingPotionsMenuState::SellingPotionsMenuState()
 
 SellingPotionsMenuState::SellingPotionsMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
 {
-	this->title = "Меню продажи ингредиентов";
-	this->goToTitle = "Продать ингредиенты";
+	this->title = "Продажа зелий";
+	this->goToTitle = "Продать зелья";
 	this->numberOfStates = 0;
 }
 
@@ -30,9 +30,5 @@ void SellingPotionsMenuState::setListOfStates()
 }
 
 void SellingPotionsMenuState::setListOfCreatingFunctions()
-{
-}
-
-void SellingPotionsMenuState::fillStateCreatingFunctions()
 {
 }

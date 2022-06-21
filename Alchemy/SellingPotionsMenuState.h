@@ -28,9 +28,6 @@ private:
 	// Map функций, которые создают стейты и их ключи - координаты пунктов меню
 	map<int, function<MenuState* (SellingPotionsMenuState&)> > stateCreatingFunctions;
 
-	// Заполнить map функций, которые создают стейты и их ключи
-	void fillStateCreatingFunctions();
-
 	// Вектор функций, которые создают стейты
 	vector< function<MenuState* (SellingPotionsMenuState&)> > listOfCreatingFunctions;
 

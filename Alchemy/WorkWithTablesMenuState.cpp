@@ -6,8 +6,8 @@ WorkWithTablesMenuState::WorkWithTablesMenuState()
 
 WorkWithTablesMenuState::WorkWithTablesMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
 {
-	this->title = "Работа с таблицами";
-	this->goToTitle = "Работать с таблицами";
+	this->title = "Работа с инвентарем";
+	this->goToTitle = "Работать с инвентарем";
 	this->numberOfStates = 0;
 }
 
@@ -33,6 +33,3 @@ void WorkWithTablesMenuState::setListOfCreatingFunctions()
 {
 }
 
-void WorkWithTablesMenuState::fillStateCreatingFunctions()
-{
-}

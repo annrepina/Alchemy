@@ -6,7 +6,7 @@ EatingIngredientsMenuState::EatingIngredientsMenuState()
 
 EatingIngredientsMenuState::EatingIngredientsMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
 {
-	this->title = "Меню поедания ингредиентов";
+	this->title = "Съешь ингредиент";
 	this->goToTitle = "Съесть ингредиент";
 	this->numberOfStates = 0;
 }
@@ -30,9 +30,5 @@ void EatingIngredientsMenuState::setListOfStates()
 }
 
 void EatingIngredientsMenuState::setListOfCreatingFunctions()
-{
-}
-
-void EatingIngredientsMenuState::fillStateCreatingFunctions()
 {
 }

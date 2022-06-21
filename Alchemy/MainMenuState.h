@@ -17,7 +17,7 @@ public:
 	MainMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
 	// Деструктор
-	~MainMenuState() override;
+	//~MainMenuState() override;
 
 	// Печать меню
 	void printMenu() override;

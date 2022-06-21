@@ -106,7 +106,6 @@ void AlchemicalUserInterface::launchMainLoop()
 
 	} while (exitFlag == false);
 
-
 	printBye();
 }
 

@@ -81,7 +81,8 @@ int main()
 
     //calculateConsoleWidth();
 
-    MainMenuState mainMenu(&userInterface);
-    
+    //MainMenuState* mainMenu = new MainMenuState(&userInterface);
+    //mainMenu->printMenu();
+    //delete mainMenu;
 }
 

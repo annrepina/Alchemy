@@ -1,20 +1,15 @@
 #pragma once
 #include "MenuState.h"
-#include "ReturnMenuState.h"
 
-#define NUMBER_OF_INSTRUCIONS_MENU_ITEMS	1		// Кол-во пунктов в меню инструкций
-
-class MainMenuState;
-
-class InstructionsMenuState : public MenuState
+class WorkWithTablesMenuState : public MenuState
 {
 public:
 
-	InstructionsMenuState();
+	WorkWithTablesMenuState();
 
-	InstructionsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
+	WorkWithTablesMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
-	//~InstructionsMenuState() override;
+	~WorkWithTablesMenuState() override;
 
 	// Печать меню
 	void printMenu() override;
@@ -31,16 +26,16 @@ private:
 	void setListOfCreatingFunctions() override;
 
 	// Map функций, которые создают стейты и их ключи - координаты пунктов меню
-	map<int, function<MenuState* (InstructionsMenuState&)> > stateCreatingFunctions;
+	map<int, function<MenuState* (WorkWithTablesMenuState&)> > stateCreatingFunctions;
 
 	// Заполнить map функций, которые создают стейты и их ключи
 	void fillStateCreatingFunctions();
 
 	// Вектор функций, которые создают стейты
-	vector< function<MenuState* (InstructionsMenuState&)> > listOfCreatingFunctions;
+	vector< function<MenuState* (WorkWithTablesMenuState&)> > listOfCreatingFunctions;
 
-	// Создать состояние - меню назад
-	ReturnMenuState* createReturnMenuState();
+	//// Создать состояние - алхимическое меню
+	//AlchemicalMenuState* createAlchemicalMenuState();
 
 	//// Создать состояние - меню инструкций
 	//InstructionsMenuState* createInstructionsMenuState();

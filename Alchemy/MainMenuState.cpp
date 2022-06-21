@@ -11,10 +11,10 @@ MainMenuState::MainMenuState(AlchemicalUserInterface* alchemicalUserInterface) :
 	this->numberOfStates = NUMBER_OF_MAIN_MENU_ITEMS;
 }
 
-MainMenuState::~MainMenuState()
-{
-	clear();
-}
+//MainMenuState::~MainMenuState()
+//{
+//	clear();
+//}
 
 //void MainMenuState::printMenu()
 //{
@@ -23,6 +23,9 @@ MainMenuState::~MainMenuState()
 
 void MainMenuState::printMenu()
 {
+	// Сбрасываем координату каждый раз заходя в метод печати
+	currentYCursorCoordState = MAIN_MENU_Y_COORD;
+
 	setListOfCreatingFunctions();
 
 	fillMap<function<MenuState* (MainMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);

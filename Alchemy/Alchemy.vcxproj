@@ -168,6 +168,7 @@
     <ClCompile Include="Alchemist.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuStateTemp.cpp" />
+    <ClCompile Include="ReturnMenuState.cpp" />
     <ClCompile Include="SellingIngredientsMenuState.cpp" />
     <ClCompile Include="SellingPotionsMenuState.cpp" />
     <ClCompile Include="TablePrinter.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="AlchemyTableBuilder.cpp" />
     <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="WorkWithTablesMenuState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlchemicalMenuState.h" />
@@ -205,6 +207,7 @@
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuStateTemp.h" />
+    <ClInclude Include="ReturnMenuState.h" />
     <ClInclude Include="SellingIngredientsMenuState.h" />
     <ClInclude Include="SellingPotionsMenuState.h" />
     <ClInclude Include="TablePrinter.h" />
@@ -212,6 +215,7 @@
     <ClInclude Include="Table.h" />
     <ClInclude Include="AlchemyTableBuilder.h" />
     <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="WorkWithTablesMenuState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

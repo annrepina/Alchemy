@@ -16,7 +16,7 @@
 #define Y_COORD_AFTER_MENU_TITLE_3		11		//  оордината Y треть€ после печати заголовка меню
 #define Y_COORD_AFTER_MENU_TITLE_4		12		//  оордината Y четверта€ после печати заголовка меню
 #define Y_COORD_AFTER_MENU_TITLE_4		12		//  оордината Y четверта€ после печати заголовка меню
-#define STANDARD_CURSOR_X_COORD			0		// —тандартна€ координата X курсора 
+//#define STANDARD_CURSOR_X_COORD			0		// —тандартна€ координата X курсора 
 
 
 //  ол-ва

@@ -4,7 +4,7 @@ SellingPotionsMenuState::SellingPotionsMenuState()
 {
 }
 
-SellingPotionsMenuState::SellingPotionsMenuState(AlchemicalUserInterface* alchemicalUserInterface)
+SellingPotionsMenuState::SellingPotionsMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
 {
 	this->title = "Меню продажи ингредиентов";
 	this->goToTitle = "Продать ингредиенты";

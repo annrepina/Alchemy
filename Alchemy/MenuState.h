@@ -10,6 +10,7 @@ using namespace std;
 
 // Координаты
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
+#define STANDARD_CURSOR_X_COORD			0		// Стандартная координата X курсора 
 
 class AlchemicalUserInterface;
 

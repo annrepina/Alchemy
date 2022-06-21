@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ int findDelimetrIndexes(const char delimetr, const size_t length, const string s
 bool tryParseToInt(string& value);
 
 template<typename T>
-void fillMap(map<int, T> map, vector <T> vector, int startKey, int border)
+void fillMap(map<int, T>& map, vector <T> vector, int startKey, int border)
 {
 	// Заполняем ассоциативный массив
 	for (int i = 0; i < border; ++i, ++startKey)

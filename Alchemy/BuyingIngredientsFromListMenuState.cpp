@@ -18,6 +18,7 @@ BuyingIngredientsFromListMenuState::BuyingIngredientsFromListMenuState(Alchemica
 
 void BuyingIngredientsFromListMenuState::printMenu()
 {
+
 }
 
 MenuState* BuyingIngredientsFromListMenuState::getNextState()

@@ -2,6 +2,8 @@
 #include "MenuState.h"
 #include "ReturnMenuState.h"
 
+#define FIRST_PAGE						1		// Первая страница таблицы
+
 class BuyingIngredientsMenuState;
 
 // Класс - состояние меню покупки ингредиентов из списка

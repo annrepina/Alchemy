@@ -26,7 +26,7 @@ void BuyingIngredientsMenuState::printMenu()
 
     fillMap<function<MenuState* (BuyingIngredientsMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
 
-
+    MenuState::printMenu();
 }
 
 void BuyingIngredientsMenuState::setListOfStates()
@@ -60,6 +60,6 @@ ReturnMenuState* BuyingIngredientsMenuState::createReturnMenuState()
 
 MenuState* BuyingIngredientsMenuState::getNextState()
 {
-    return nullptr;
+    return this->stateCreatingFunctions[currentYCursorCoordState](*this);
 }
 

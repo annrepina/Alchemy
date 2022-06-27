@@ -1,5 +1,6 @@
 #include "BuyingIngredientsFromListMenuState.h"
 #include "BuyingIngredientsMenuState.h"
+#include "AlchemicalUserInterface.h"
 
 BuyingIngredientsFromListMenuState::BuyingIngredientsFromListMenuState()
 {
@@ -18,7 +19,52 @@ BuyingIngredientsFromListMenuState::BuyingIngredientsFromListMenuState(Alchemica
 
 void BuyingIngredientsFromListMenuState::printMenu()
 {
+	// —брасываем координату каждый раз заход€ в метод печати
+	currentYCursorCoordState = MAIN_MENU_Y_COORD;
 
+	setListOfCreatingFunctions();
+
+	fillMap<function<MenuState* (BuyingIngredientsFromListMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
+
+	// начальна€ страница таблицы
+	int page = FIRST_PAGE;
+
+	string choiceIngredient = "¬ведите є ингредиента: ";
+
+	string choiceNumber = "¬ведите кол-во ингредиентов: ";
+
+	// ‘лаг ддл€ выхода из цикла
+	bool exit = false;
+
+	printColoredTextByCoords(choiceIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
+
+	//cout << goToXY(Y_COORD_AFTER_MENU_TITLE, STANDARD_CURSOR_X_COORD);
+
+	//cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+
+	//printColoredText(choiceIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+
+	printColoredTextByCoords(choiceNumber, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
+
+	//cout << goToXY(Y_COORD_AFTER_MENU_TITLE + 1, STANDARD_CURSOR_X_COORD);
+
+	//cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+
+	//printColoredText(choiceNumber, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+
+	this->alchemicalUserInterface->printTablePagesInLoop(AlchemicalUserInterface::TableCode::IngredientTable, page);
+
+	//printTablePagesInLoop(TableCode::IngredientTable, page);
+
+	// если был нажат esc
+	if (true == this->alchemicalUserInterface->getExitFlag())
+		return;
+
+	int id = this->alchemicalUserInterface->chooseId(choiceIngredient, AlchemicalUserInterface::TableCode::IngredientTable);
+
+	int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable);
+
+	this->alchemicalUserInterface->tryAddIngredientFromList(id, number);
 }
 
 MenuState* BuyingIngredientsFromListMenuState::getNextState()

@@ -1,8 +1,10 @@
 #pragma once
 #include "MenuState.h"
 #include "ReturnMenuState.h"
+#include "ServiceFunctions.h"
 
 #define FIRST_PAGE						1		// Первая страница таблицы
+//#define INGREDIENTS_TABLE				0		// Таблица ингредиентов
 
 class BuyingIngredientsMenuState;
 

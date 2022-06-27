@@ -11,11 +11,11 @@
 #define EXIT_Y_COORD					2		// Координата Y кнопки выхода
 #define Y_COORD_AFTER_ALCHEMIST			8		// Координата Y после печати алхимика
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
-#define Y_COORD_AFTER_MENU_TITLE_1		9		// Координата Y первая после печати заголовка меню
-#define Y_COORD_AFTER_MENU_TITLE_2		10		// Координата Y вторая после печати заголовка меню
-#define Y_COORD_AFTER_MENU_TITLE_3		11		// Координата Y третья после печати заголовка меню
-#define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
-#define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
+//#define Y_COORD_AFTER_MENU_TITLE_1		9		// Координата Y первая после печати заголовка меню
+//#define Y_COORD_AFTER_MENU_TITLE_2		10		// Координата Y вторая после печати заголовка меню
+//#define Y_COORD_AFTER_MENU_TITLE_3		11		// Координата Y третья после печати заголовка меню
+//#define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
+//#define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
 //#define STANDARD_CURSOR_X_COORD			0		// Стандартная координата X курсора 
 
 
@@ -58,65 +58,79 @@ public:
 
 #pragma endregion CЕТТЕРЫ
 
-private:
-
-#pragma region КОДЫ
-
-	// Коды меню
-	enum MenuCode
-	{
-		MainMenu1, 
-		AlchemicalMenu,
-		InstructionsMenu,
-		BuyingIngredientsMenu,
-		BuyingFaultMenu
-	};
-
-	// Коды пунктов в главном меню
-	enum MainMenuCode
-	{
-		DoAlchemy = MAIN_MENU_Y_COORD,
-		ReadInstructions
-	};
-
-	// Коды алхимического меню
-	enum AlchemicalMenuCode
-	{
-		MakingPotions = MAIN_MENU_Y_COORD,
-		BuyingIngredients,
-		SellingIngredients,
-		EatingIngredients,
-		SellingPotions,
-		WorkingWithTables, 
-		AlcReturn
-	};
-
-	// Коды меню инструкций
-	enum InstructionsMenuCode
-	{
-		InstrReturn = MAIN_MENU_Y_COORD,
-		Exit
-	};
-
-	// Коды меню покупки ингредиентов
-	enum BuyingIngredientsMenuCode 
-	{
-		ChooseFromList = MAIN_MENU_Y_COORD,
-		CreateNewIngredient
-	};
-
-	// Коды меню ошибки во время покупки ингредиентов
-	enum BuyingFaultMenuCode
-	{
-		СhooseAnotherIngredient = MAIN_MENU_Y_COORD, 
-		ChangeNumberOfIngredient
-	};
-
 	enum TableCode
 	{
 		IngredientTable,
 		PotionTable
 	};
+
+	// Печать страниц таблиц в цикле
+	void printTablePagesInLoop(TableCode code, int& page);
+
+	// Выбрать Id из таблицы
+	int chooseId(string strChoice, TableCode code);
+
+	// Вбрать кол-во ингредиента или зелья
+	int chooseNumber(string strChoice, TableCode code);
+
+	// Попробовать добавить опр. кол-во ингредиента из списка
+	bool tryAddIngredientFromList(int id, int number);
+
+private:
+
+#pragma region КОДЫ
+
+	//// Коды меню
+	//enum MenuCode
+	//{
+	//	MainMenu1, 
+	//	AlchemicalMenu,
+	//	InstructionsMenu,
+	//	BuyingIngredientsMenu,
+	//	BuyingFaultMenu
+	//};
+
+	//// Коды пунктов в главном меню
+	//enum MainMenuCode
+	//{
+	//	DoAlchemy = MAIN_MENU_Y_COORD,
+	//	ReadInstructions
+	//};
+
+	//// Коды алхимического меню
+	//enum AlchemicalMenuCode
+	//{
+	//	MakingPotions = MAIN_MENU_Y_COORD,
+	//	BuyingIngredients,
+	//	SellingIngredients,
+	//	EatingIngredients,
+	//	SellingPotions,
+	//	WorkingWithTables, 
+	//	AlcReturn
+	//};
+
+	//// Коды меню инструкций
+	//enum InstructionsMenuCode
+	//{
+	//	InstrReturn = MAIN_MENU_Y_COORD,
+	//	Exit
+	//};
+
+	//// Коды меню покупки ингредиентов
+	//enum BuyingIngredientsMenuCode 
+	//{
+	//	ChooseFromList = MAIN_MENU_Y_COORD,
+	//	CreateNewIngredient
+	//};
+
+	//// Коды меню ошибки во время покупки ингредиентов
+	//enum BuyingFaultMenuCode
+	//{
+	//	СhooseAnotherIngredient = MAIN_MENU_Y_COORD, 
+	//	ChangeNumberOfIngredient
+	//};
+
+
 
 #pragma endregion 
 
@@ -199,12 +213,6 @@ private:
 	// Выбрать страницу таблицы
 	void choosePage(int page, TableCode code);
 
-	// Выбрать Id из таблицы
-	int chooseId(string strChoice, TableCode code);
-
-	// Вбрать кол-во ингредиента или зелья
-	int chooseNumber(string strChoice, TableCode code);
-
 	// Сделать выбор пункта меню
 	void makeChoice(bool& innerExitFlag);
 
@@ -241,9 +249,6 @@ private:
 	// Покупка ингредиентов из имеющегося списка
 	void buyIngredientsFromList();
 
-	// Попробовать добавить опр. кол-во ингредиента из списка
-	bool tryAddIngredientFromList(int id, int number);
-
 	// Стирает с консоли все после печати алхимика
 	void eraseScreenAfterAlchemist();
 
@@ -275,9 +280,6 @@ private:
 
 	// Печать меню выбора страницы
 	void printPageMenu(int page);
-
-	// Печать страниц таблиц в цикле
-	void printTablePagesInLoop(TableCode code, int& page);
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 

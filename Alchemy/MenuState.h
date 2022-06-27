@@ -11,6 +11,10 @@ using namespace std;
 //  оординаты
 #define MAIN_MENU_Y_COORD				10		//  оордината Y меню действий
 #define STANDARD_CURSOR_X_COORD			0		// —тандартна€ координата X курсора 
+#define Y_COORD_AFTER_MENU_TITLE_1		9		//  оордината Y перва€ после печати заголовка меню
+#define Y_COORD_AFTER_MENU_TITLE_2		10		//  оордината Y втора€ после печати заголовка меню
+#define Y_COORD_AFTER_MENU_TITLE_3		11		//  оордината Y треть€ после печати заголовка меню
+#define Y_COORD_AFTER_MENU_TITLE_4		12		//  оордината Y четверта€ после печати заголовка меню
 
 class AlchemicalUserInterface;
 

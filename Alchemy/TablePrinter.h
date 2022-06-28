@@ -269,4 +269,14 @@ private:
 	{
 		this->page = page;
 	}
+
+	// Очистить содержимое контента таблицы
+	void clearTableContent()
+	{
+		for (auto strVector : this->tableContent)
+		{
+			delete strVector;
+		}
+	}
 };
+

@@ -3,6 +3,7 @@
 #include "EffectsTable.h"
 #include "Table.h"
 #include <map>
+#include "IObservable.h"
 
 //#define NUMBER_OF_COLUMNS			6		// Кол-во колонок
 //#define OUTER_BORDERS				2		// Внешние границы таблицы (левая и правая)
@@ -10,7 +11,7 @@
 //#define MULTIPLIER				3		// Множитель для расчета длины таблицы
 
 // Таблица ингредиентов
-class IngredientsTable : public Table<Ingredient>
+class IngredientsTable : public Table<Ingredient>, IObservable
 {
 public:
 
@@ -44,7 +45,11 @@ public:
 
 #pragma endregion ГЕТТЕРЫ
 
+	void subscribe(IObserver* observer) override;
 
+	void unsubscribe(IObserver* observer) override;
+
+	void Notify(int id) override;
 
 private:
 

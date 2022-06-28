@@ -1,36 +1,36 @@
 #include "AlchemicalUserInterface.h"
 
-string AlchemicalUserInterface::listOfMainMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] = {
-	"Алхимичить",
-	"Читать инструкцию к программе"
-};
+//string AlchemicalUserInterface::listOfMainMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] = {
+//	"Алхимичить",
+//	"Читать инструкцию к программе"
+//};
 
-string AlchemicalUserInterface::listOfALchemicalMenuItems[NUMBER_OF_ALCHEMICAL_MENU_ITEMS] = {
-	"Создание зелий",
-	"Покупка ингредиентов",
-	"Продажа ингредиентов",
-	"Поедание ингредиентов",
-	"Продажа зелий",
-	"Работа с таблицами",
-	"Назад"
-};
-
-string AlchemicalUserInterface::listOfInstructionsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] = {
-	"Назад",
-	"Выйти из программы"
-};
-
-string AlchemicalUserInterface::listOfBuyingIngredientsMenuItems[NUMBER_OF_BUYING_MENU_ITEMS] = {
-	"Покупка ингредиентов из имеющегося списка",
-	"Покупка новых ингредиентов, которых нет в списке",
-	"Назад"
-};
-
-string AlchemicalUserInterface::listOfBuyingFaultMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] =
-{
-	"Выбрать другой ингредиент.",
-	"Выбрать другое кол-во ингредиента"
-};
+//string AlchemicalUserInterface::listOfALchemicalMenuItems[NUMBER_OF_ALCHEMICAL_MENU_ITEMS] = {
+//	"Создание зелий",
+//	"Покупка ингредиентов",
+//	"Продажа ингредиентов",
+//	"Поедание ингредиентов",
+//	"Продажа зелий",
+//	"Работа с таблицами",
+//	"Назад"
+//};
+//
+//string AlchemicalUserInterface::listOfInstructionsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] = {
+//	"Назад",
+//	"Выйти из программы"
+//};
+//
+//string AlchemicalUserInterface::listOfBuyingIngredientsMenuItems[NUMBER_OF_BUYING_MENU_ITEMS] = {
+//	"Покупка ингредиентов из имеющегося списка",
+//	"Покупка новых ингредиентов, которых нет в списке",
+//	"Назад"
+//};
+//
+//string AlchemicalUserInterface::listOfBuyingFaultMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] =
+//{
+//	"Выбрать другой ингредиент.",
+//	"Выбрать другое кол-во ингредиента"
+//};
 
 AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 {
@@ -47,10 +47,10 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	this->buingFaultMenuTitle = "Недостаточно средств для покупки ингредиента №";
 
 	// Программа - алхимия
-	this->alchemyProgram = nullptr;
+	this->alchemyLogic = nullptr;
 
 	// Строитель для алхимической программы
-	this->alchemyProgramBuilder = new AlchemyProgramBuilder();
+	this->alchemyLogicBuilder = new AlchemyLogicBuilder();
 
 	// создаем новый экземпляр
 	this->alchemyProgramParser = new AlchemyProgramParser();
@@ -62,9 +62,9 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 
 void AlchemicalUserInterface::launchMainLoop()
 {
-	setAlchemyProgram();
+	setAlchemyLogic();
 
-	fillAllMenu();
+	//fillAllMenu();
 
 	printTitle();
 
@@ -138,57 +138,57 @@ void AlchemicalUserInterface::setExitFlag(bool exitFlag)
 	this->exitFlag = exitFlag;
 }
 
-void AlchemicalUserInterface::setAlchemyProgram()
+void AlchemicalUserInterface::setAlchemyLogic()
 {
 	// Создать программу Алхимии
-	this->alchemyProgramBuilder->buildAlchemyProgram(this->alchemyProgramParser);
+	this->alchemyLogicBuilder->buildAlchemyProgram(this->alchemyProgramParser);
 
 	// Присвоить результат программе алхимии
-	this->alchemyProgram = this->alchemyProgramBuilder->getResult();
+	this->alchemyLogic = this->alchemyLogicBuilder->getResult();
 }
 
-void AlchemicalUserInterface::chooseMenuItem(map <int, string> menu)
-{
-	this->func = std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this, _1);
-
-	// Флаг для возвращения в предыдущее меню, но не выход из программы
-	bool innerExitFlag = false;
-
-	do {
-		// Проверяем нажатую кнопку
-		checkMenuChoice();
-
-		switch (this->keyBoard->getPressedKey())
-		{
-			case VK_UP:
-			{
-				// Проверяем стрелочки
-				//checkVerticalArrowsChoice(boundaryYCoord, VK_UP, menu);
-			}
-			break;
-
-			case VK_DOWN:
-			{
-				// Проверяем стрелочки
-				//checkVerticalArrowsChoice(boundaryYCoord + menu.size() - 1, VK_DOWN, menu);
-			}
-			break;
-
-			case VK_RETURN:
-			{
-				// Сделать выбор пункта меню
-				makeChoice(innerExitFlag);// !! Осуществление действий
-			}
-			break;
-
-			case VK_ESCAPE:
-			{
-				exitFlag = true;
-			}
-			break;
-		}
-	} while (false == exitFlag && false == innerExitFlag);
-}
+//void AlchemicalUserInterface::chooseMenuItem(map <int, string> menu)
+//{
+//	this->func = std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this, _1);
+//
+//	// Флаг для возвращения в предыдущее меню, но не выход из программы
+//	bool innerExitFlag = false;
+//
+//	do {
+//		// Проверяем нажатую кнопку
+//		checkMenuChoice();
+//
+//		switch (this->keyBoard->getPressedKey())
+//		{
+//			case VK_UP:
+//			{
+//				// Проверяем стрелочки
+//				//checkVerticalArrowsChoice(boundaryYCoord, VK_UP, menu);
+//			}
+//			break;
+//
+//			case VK_DOWN:
+//			{
+//				// Проверяем стрелочки
+//				//checkVerticalArrowsChoice(boundaryYCoord + menu.size() - 1, VK_DOWN, menu);
+//			}
+//			break;
+//
+//			case VK_RETURN:
+//			{
+//				//// Сделать выбор пункта меню
+//				//makeChoice(innerExitFlag);// !! Осуществление действий
+//			}
+//			break;
+//
+//			case VK_ESCAPE:
+//			{
+//				exitFlag = true;
+//			}
+//			break;
+//		}
+//	} while (false == exitFlag && false == innerExitFlag);
+//}
 
 void AlchemicalUserInterface::choosePage(int page, TableCode code)
 {
@@ -254,13 +254,13 @@ int AlchemicalUserInterface::chooseId(string strChoice, TableCode code)
 	// перейти по координате для выбора
 	cout << goToXY(Y_COORD_AFTER_MENU_TITLE_1, strChoice.size() + 1);
 
-	map<int, Ingredient*>::iterator iter = this->alchemyProgram->getIngredientsTable()->getEndIterator();
+	map<int, Ingredient*>::iterator iter = this->alchemyLogic->getIngredientsTable()->getEndIterator();
 
 	//checkInput(id, 1, iter->first, strChoice);
 
 	if (code == TableCode::IngredientTable)
 	{
-		map<int, Ingredient*>::iterator iter = this->alchemyProgram->getIngredientsTable()->getEndIterator();
+		map<int, Ingredient*>::iterator iter = this->alchemyLogic->getIngredientsTable()->getEndIterator();
 
 		string errorText = "Данного значения не существует в таблице, попробуйте снова: ";
 
@@ -285,7 +285,7 @@ int AlchemicalUserInterface::chooseNumber(string strChoice, TableCode code)
 		// перейти по координате для выбора
 		cout << goToXY(Y_COORD_AFTER_MENU_TITLE_2, strChoice.size() + 1);
 
-		map<int, Ingredient*>::iterator iter = this->alchemyProgram->getIngredientsTable()->getEndIterator();
+		map<int, Ingredient*>::iterator iter = this->alchemyLogic->getIngredientsTable()->getEndIterator();
 
 		string errorText = "Данное значение не подходит, попробуйте снова: ";
 
@@ -305,154 +305,154 @@ int AlchemicalUserInterface::chooseNumber(string strChoice, TableCode code)
 	return number;
 }
 
-void AlchemicalUserInterface::makeChoice(bool& innerExitFlag)
-{
-	switch (menuCode)
-	{
-		case MenuCode::MainMenu1:
-		{
-			checkMainMenu(innerExitFlag);
-		}
-		break;
+//void AlchemicalUserInterface::makeChoice(bool& innerExitFlag)
+//{
+//	switch (menuCode)
+//	{
+//		case MenuCode::MainMenu1:
+//		{
+//			checkMainMenu(innerExitFlag);
+//		}
+//		break;
+//
+//		case MenuCode::AlchemicalMenu:
+//		{
+//			checkAlchemicalMenu(innerExitFlag);
+//		}
+//		break;
+//
+//		case MenuCode::InstructionsMenu:
+//		{
+//			checkInstructionsMenu(innerExitFlag);
+//		}
+//		break;
+//
+//		case MenuCode::BuyingIngredientsMenu:
+//		{
+//			checkBuyingIngredientsMenu(innerExitFlag);
+//		}
+//		break;
+//
+//		case MenuCode::BuyingFaultMenu:
+//		{
+//			checkBuyingFaultMenu();
+//		}
+//	}
+//}
 
-		case MenuCode::AlchemicalMenu:
-		{
-			checkAlchemicalMenu(innerExitFlag);
-		}
-		break;
+//void AlchemicalUserInterface::makeChoice()
+//{
+//
+//}
 
-		case MenuCode::InstructionsMenu:
-		{
-			checkInstructionsMenu(innerExitFlag);
-		}
-		break;
+//void AlchemicalUserInterface::checkMainMenu(bool& innerExitFlag)
+//{
+//	switch (this->currentYCursorCoord)
+//	{
+//		case MainMenuCode::DoAlchemy:
+//		{
+//			doAlchemy();
+//		}
+//		break;
+//
+//		case MainMenuCode::ReadInstructions:
+//		{
+//			printInstructions();
+//		}
+//		break;
+//	}
+//
+//	innerExitFlag = true;
+//}
 
-		case MenuCode::BuyingIngredientsMenu:
-		{
-			checkBuyingIngredientsMenu(innerExitFlag);
-		}
-		break;
+//void AlchemicalUserInterface::checkInstructionsMenu(bool& innerExitFlag)
+//{
+//	switch (this->currentYCursorCoord)
+//	{
+//		case InstructionsMenuCode::InstrReturn:
+//		{
+//			//this->menuCode = MenuCode::MainMenu;
+//			//this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+//
+//			//eraseScreenAfterAlchemist();
+//
+//			//printMenuInLoop(mainMenu, mainMenuTitle);
+//
+//			innerExitFlag = true;
+//		}
+//		break;
+//
+//		case InstructionsMenuCode::Exit:
+//		{
+//			this->exitFlag = true;
+//		}
+//		break;
+//	}
+//}
 
-		case MenuCode::BuyingFaultMenu:
-		{
-			checkBuyingFaultMenu();
-		}
-	}
-}
+//void AlchemicalUserInterface::checkAlchemicalMenu(bool& innerExitFlag)
+//{
+//	switch (this->currentYCursorCoord)
+//	{
+//		case AlchemicalMenuCode::MakingPotions:
+//		{
+//
+//		}
+//		break;
+//
+//		case AlchemicalMenuCode::BuyingIngredients:
+//		{
+//			buyIngredients();
+//		}
+//		break;
+//
+//
+//
+//		case AlchemicalMenuCode::AlcReturn:
+//		{
+//			innerExitFlag = true;
+//		}
+//		break;
+//	}
+//}
 
-void AlchemicalUserInterface::makeChoice()
-{
+//void AlchemicalUserInterface::checkBuyingIngredientsMenu(bool& innerExitFlag)
+//{
+//	switch (this->currentYCursorCoord)
+//	{
+//		case BuyingIngredientsMenuCode::ChooseFromList:
+//		{
+//			buyIngredientsFromList();
+//		}
+//		break;
+//
+//		case BuyingIngredientsMenuCode::CreateNewIngredient:
+//		{
+//
+//		}
+//		break;
+//	}
+//
+//	innerExitFlag = true;
+//}
 
-}
-
-void AlchemicalUserInterface::checkMainMenu(bool& innerExitFlag)
-{
-	switch (this->currentYCursorCoord)
-	{
-		case MainMenuCode::DoAlchemy:
-		{
-			doAlchemy();
-		}
-		break;
-
-		case MainMenuCode::ReadInstructions:
-		{
-			printInstructions();
-		}
-		break;
-	}
-
-	innerExitFlag = true;
-}
-
-void AlchemicalUserInterface::checkInstructionsMenu(bool& innerExitFlag)
-{
-	switch (this->currentYCursorCoord)
-	{
-		case InstructionsMenuCode::InstrReturn:
-		{
-			//this->menuCode = MenuCode::MainMenu;
-			//this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-
-			//eraseScreenAfterAlchemist();
-
-			//printMenuInLoop(mainMenu, mainMenuTitle);
-
-			innerExitFlag = true;
-		}
-		break;
-
-		case InstructionsMenuCode::Exit:
-		{
-			this->exitFlag = true;
-		}
-		break;
-	}
-}
-
-void AlchemicalUserInterface::checkAlchemicalMenu(bool& innerExitFlag)
-{
-	switch (this->currentYCursorCoord)
-	{
-		case AlchemicalMenuCode::MakingPotions:
-		{
-
-		}
-		break;
-
-		case AlchemicalMenuCode::BuyingIngredients:
-		{
-			buyIngredients();
-		}
-		break;
-
-
-
-		case AlchemicalMenuCode::AlcReturn:
-		{
-			innerExitFlag = true;
-		}
-		break;
-	}
-}
-
-void AlchemicalUserInterface::checkBuyingIngredientsMenu(bool& innerExitFlag)
-{
-	switch (this->currentYCursorCoord)
-	{
-		case BuyingIngredientsMenuCode::ChooseFromList:
-		{
-			buyIngredientsFromList();
-		}
-		break;
-
-		case BuyingIngredientsMenuCode::CreateNewIngredient:
-		{
-
-		}
-		break;
-	}
-
-	innerExitFlag = true;
-}
-
-void AlchemicalUserInterface::checkBuyingFaultMenu()
-{
-	switch (this->currentYCursorCoord)
-	{
-		case BuyingFaultMenuCode::СhooseAnotherIngredient:
-		{
-			//chooseAnotherIngredient();
-		}
-		break;
-
-		case BuyingFaultMenuCode::ChangeNumberOfIngredient:
-		{
-			//changeNumberOfIngredient();
-		}
-		break;
-	}
-}
+//void AlchemicalUserInterface::checkBuyingFaultMenu()
+//{
+//	switch (this->currentYCursorCoord)
+//	{
+//		case BuyingFaultMenuCode::СhooseAnotherIngredient:
+//		{
+//			//chooseAnotherIngredient();
+//		}
+//		break;
+//
+//		case BuyingFaultMenuCode::ChangeNumberOfIngredient:
+//		{
+//			//changeNumberOfIngredient();
+//		}
+//		break;
+//	}
+//}
 
 bool AlchemicalUserInterface::checkHorizontalArrowChoice(int& page, TableCode code, int keyCode)
 {
@@ -493,31 +493,31 @@ bool AlchemicalUserInterface::checkHorizontalArrowChoice(int& page, TableCode co
 	}
 }
 
-void AlchemicalUserInterface::doAlchemy()
-{
-	// Флаг для выхода из цикла
-	bool innerExitFlag = false;
+//void AlchemicalUserInterface::doAlchemy()
+//{
+//	// Флаг для выхода из цикла
+//	bool innerExitFlag = false;
+//
+//	do
+//	{
+//		this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+//
+//		this->menuCode = MenuCode::AlchemicalMenu;
+//
+//		printMenuInLoop(alchemicalMenu, alchemicalMenuTitle);
+//
+//	} while (exitFlag == false && innerExitFlag == false);
+//}
 
-	do
-	{
-		this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-
-		this->menuCode = MenuCode::AlchemicalMenu;
-
-		printMenuInLoop(alchemicalMenu, alchemicalMenuTitle);
-
-	} while (exitFlag == false && innerExitFlag == false);
-}
-
-void AlchemicalUserInterface::buyIngredients()
-{
-	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-	//this->boundaryYCoord = MAIN_MENU_Y_COORD;
-
-	this->menuCode = MenuCode::BuyingIngredientsMenu;
-
-	printMenuInLoop(buyingIngredientsMenu, alchemicalMenuTitle);
-}
+//void AlchemicalUserInterface::buyIngredients()
+//{
+//	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+//	//this->boundaryYCoord = MAIN_MENU_Y_COORD;
+//
+//	this->menuCode = MenuCode::BuyingIngredientsMenu;
+//
+//	printMenuInLoop(buyingIngredientsMenu, alchemicalMenuTitle);
+//}
 
 void AlchemicalUserInterface::buyIngredientsFromList()
 {
@@ -569,13 +569,13 @@ bool AlchemicalUserInterface::tryAddIngredientFromList(int id, int number)
 	bool res = false;
 
 	// таблица ингредиентов
-	IngredientsTable* ingredientsTable = this->alchemyProgram->getIngredientsTable();
+	IngredientsTable* ingredientsTable = this->alchemyLogic->getIngredientsTable();
 
 	// Этот ингредиент, полученный по id 
 	Ingredient* ingredient = ingredientsTable->getIngredientById(id);
 
 	// Получаем алхимика
-	Alchemist* alchemist = this->alchemyProgram->getAlchemist();
+	Alchemist* alchemist = this->alchemyLogic->getAlchemist();
 
 	// деньги алхимика
 	int capital = alchemist->getCapital();
@@ -588,7 +588,7 @@ bool AlchemicalUserInterface::tryAddIngredientFromList(int id, int number)
 	{
 		ingredient->increaseNumber(number);
 
-		alchemist->decreaseCapital(number);
+		alchemist->decreaseCapital(cost);
 	}
 	// если денег недостаточно
 	else
@@ -598,9 +598,9 @@ bool AlchemicalUserInterface::tryAddIngredientFromList(int id, int number)
 		// Создаем название меню
 		string menuTitle = this->buingFaultMenuTitle + to_string(id);
 
-		MenuCode menuCode = MenuCode::BuyingFaultMenu;
+		//MenuCode menuCode = MenuCode::BuyingFaultMenu;
 
-		printMenuInLoop(buyingFaultMenu, menuTitle);
+		//printMenuInLoop(buyingFaultMenu, menuTitle);
 	}
 
 	return res;
@@ -612,14 +612,14 @@ void AlchemicalUserInterface::eraseScreenAfterAlchemist()
 	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
 }
 
-void AlchemicalUserInterface::fillAllMenu()
-{
-	mainMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfMainMenuItems);
-	alchemicalMenu = fillMenuMap(NUMBER_OF_ALCHEMICAL_MENU_ITEMS, listOfALchemicalMenuItems);
-	instructionsMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfInstructionsMenuItems);
-	buyingIngredientsMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfBuyingIngredientsMenuItems);
-	this->buyingFaultMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfBuyingFaultMenuItems/* Y_COORD_AFTER_MENU_TITLE_4*/);
-}
+//void AlchemicalUserInterface::fillAllMenu()
+//{
+//	mainMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfMainMenuItems);
+//	alchemicalMenu = fillMenuMap(NUMBER_OF_ALCHEMICAL_MENU_ITEMS, listOfALchemicalMenuItems);
+//	instructionsMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfInstructionsMenuItems);
+//	buyingIngredientsMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfBuyingIngredientsMenuItems);
+//	this->buyingFaultMenu = fillMenuMap(NUMBER_OF_MAIN_MENU_ITEMS, listOfBuyingFaultMenuItems/* Y_COORD_AFTER_MENU_TITLE_4*/);
+//}
 
 void AlchemicalUserInterface::printTitle()
 {
@@ -652,17 +652,17 @@ void AlchemicalUserInterface::printMenuInLoop(map<int, string> menu, string menu
 
 	cout << goToXY(currentYCursorCoord, STANDARD_CURSOR_X_COORD);
 	
-	chooseMenuItem(menu);
+	//chooseMenuItem(menu);
 }
 
-void AlchemicalUserInterface::printInstructions()
-{
-	menuCode = MenuCode::InstructionsMenu;
-
-	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-
-	printMenuInLoop(instructionsMenu, instructionsMenuTitle);
-}
+//void AlchemicalUserInterface::printInstructions()
+//{
+//	menuCode = MenuCode::InstructionsMenu;
+//
+//	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+//
+//	printMenuInLoop(instructionsMenu, instructionsMenuTitle);
+//}
 
 void AlchemicalUserInterface::printBye()
 {
@@ -674,19 +674,19 @@ void AlchemicalUserInterface::printBye()
 void AlchemicalUserInterface::printAlchemist()
 {
 	// Если файл пустой и имя пустое
-	if ("" == this->alchemyProgram->getAlchemist()->getName())
+	if ("" == this->alchemyLogic->getAlchemist()->getName())
 	{
 		string name;
 
 		cout << "Введите ваше имя: ";
 		cin >> name;
 
-		this->alchemyProgram->getAlchemist()->setName(name);
+		this->alchemyLogic->getAlchemist()->setName(name);
 	}
 
 	eraseScreenAfterTitle();
 
-	this->alchemyProgram->getAlchemist()->print();
+	this->alchemyLogic->getAlchemist()->print();
 }
 
 void AlchemicalUserInterface::printMenuTitle(string title)
@@ -719,7 +719,7 @@ void AlchemicalUserInterface::printTablePagesInLoop(TableCode code, int& page)
 {
 	if (code == TableCode::IngredientTable)
 	{
-		this->ingredientsTableprinter->print(this->alchemyProgram->getIngredientsTable(), page);
+		this->ingredientsTableprinter->print(this->alchemyLogic->getIngredientsTable(), page);
 
 		printPageMenu(page);
 

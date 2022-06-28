@@ -1,19 +1,19 @@
 #pragma once
-#include "AlchemyProgram.h"
+#include "AlchemyLogic.h"
 #include "AlchemyProgramParser.h"
 #include "EffectsTableBuilder.h"
 #include "IngredientsTableBuilder.h"
 #include "Builder.h"
 
-class AlchemyProgramBuilder : public Builder<AlchemyProgram>
+class AlchemyLogicBuilder : public Builder<AlchemyLogic>
 {
 public:
 
 	// Строитель по умолчанию
-	AlchemyProgramBuilder();
+	AlchemyLogicBuilder();
 
 	// Деструктор 
-	~AlchemyProgramBuilder() override;
+	~AlchemyLogicBuilder() override;
 
 	//// Получить результа
 	//AlchemyProgram* getResult();

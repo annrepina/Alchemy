@@ -25,12 +25,12 @@
 //#define VK_ESCAPE				0x1B	// Клавиша ESC
 //#define VK_RETURN				0x0D	// Клавиша Enter
 
-class AlchemyProgram
+class AlchemyLogic
 {
 public:
 
 	// Конструктор по умолчанию
-	AlchemyProgram();
+	AlchemyLogic();
 
 #pragma region СЕТТЕРЫ
 

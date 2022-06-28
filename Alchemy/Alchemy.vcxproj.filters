@@ -33,7 +33,7 @@
     <ClCompile Include="Alchemist.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="AlchemyProgram.cpp">
+    <ClCompile Include="AlchemyLogic.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
@@ -69,7 +69,7 @@
     <ClCompile Include="ServiceFunctions.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="AlchemyProgramBuilder.cpp">
+    <ClCompile Include="AlchemyLogicBuilder.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="IngredientsTable.cpp">
@@ -132,6 +132,12 @@
     <ClCompile Include="BuyNewIngredientsMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="IObserver.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="IObservable.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Effect.h">
@@ -149,7 +155,7 @@
     <ClInclude Include="Alchemist.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="AlchemyProgram.h">
+    <ClInclude Include="AlchemyLogic.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
@@ -185,7 +191,7 @@
     <ClInclude Include="ServiceFunctions.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="AlchemyProgramBuilder.h">
+    <ClInclude Include="AlchemyLogicBuilder.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="IngredientsTable.h">
@@ -246,6 +252,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="BuyNewIngredientsMenuState.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IObserver.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IObservable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

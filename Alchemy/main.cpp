@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include "AlchemyProgram.h"
+#include "AlchemyLogic.h"
 #include "FileReader.h"
 #include <ctime>
 

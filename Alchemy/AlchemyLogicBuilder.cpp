@@ -1,6 +1,6 @@
-#include "AlchemyProgramBuilder.h"
+#include "AlchemyLogicBuilder.h"
 
-AlchemyProgramBuilder::AlchemyProgramBuilder() : Builder()
+AlchemyLogicBuilder::AlchemyLogicBuilder() : Builder()
 {
 	/*reset();*/
 
@@ -11,7 +11,7 @@ AlchemyProgramBuilder::AlchemyProgramBuilder() : Builder()
 	this->ingredientBuilder = new IngredientBuilder();
 }
 
-AlchemyProgramBuilder::~AlchemyProgramBuilder()
+AlchemyLogicBuilder::~AlchemyLogicBuilder()
 {
 	clear();
 }
@@ -25,7 +25,7 @@ AlchemyProgramBuilder::~AlchemyProgramBuilder()
 //	return res;
 //}
 
-void AlchemyProgramBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgramParse)
+void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgramParse)
 {
 	/// Парсим
 
@@ -56,7 +56,7 @@ void AlchemyProgramBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyPro
 
 }
 
-void AlchemyProgramBuilder::setEffectsTable(AlchemyProgramParser* alchemyProgramParse)
+void AlchemyLogicBuilder::setEffectsTable(AlchemyProgramParser* alchemyProgramParse)
 {
 	// Строитель создает таблицу
 	this->effectsTableBuilder->buildTable(alchemyProgramParse);
@@ -70,7 +70,7 @@ void AlchemyProgramBuilder::setEffectsTable(AlchemyProgramParser* alchemyProgram
 //	this->alchemyProgram = new AlchemyProgram();
 //}
 
-void AlchemyProgramBuilder::clear()
+void AlchemyLogicBuilder::clear()
 {
 	// Вызываем ф-wb. у базового класса
 	Builder::clear();

@@ -1,8 +1,8 @@
-#include "AlchemyProgram.h"
+#include "AlchemyLogic.h"
 
 
 
-AlchemyProgram::AlchemyProgram()
+AlchemyLogic::AlchemyLogic()
 {
 	this->alchemist = new Alchemist();
 
@@ -13,27 +13,27 @@ AlchemyProgram::AlchemyProgram()
 	
 }
 
-void AlchemyProgram::setEffectsTable(EffectsTable* effectsTable)
+void AlchemyLogic::setEffectsTable(EffectsTable* effectsTable)
 {
 	this->effectsTable = effectsTable;
 }
 
-void AlchemyProgram::setIngredientsTable(IngredientsTable* ingredientsTable)
+void AlchemyLogic::setIngredientsTable(IngredientsTable* ingredientsTable)
 {
 	this->ingredientsTable = ingredientsTable;
 }
 
-Alchemist* AlchemyProgram::getAlchemist()
+Alchemist* AlchemyLogic::getAlchemist()
 {
 	return this->alchemist;
 }
 
-EffectsTable* AlchemyProgram::getEffectsTable()
+EffectsTable* AlchemyLogic::getEffectsTable()
 {
 	return this->effectsTable;
 }
 
-IngredientsTable* AlchemyProgram::getIngredientsTable()
+IngredientsTable* AlchemyLogic::getIngredientsTable()
 {
 	return this->ingredientsTable;
 }

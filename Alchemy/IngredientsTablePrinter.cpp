@@ -4,6 +4,13 @@ IngredientsTablePrinter::IngredientsTablePrinter() : TablePrinter()
 {
 }
 
+void IngredientsTablePrinter::update(int id)
+{
+	this->tableContent[id].clear();
+
+	fillInTableContentForOneElement(id, IngredientsTable * table);
+}
+
 int IngredientsTablePrinter::calculateNumberOfLines(IngredientsTable* table)
 {
 	// Кол-во строк равно кол-ву ингредиентов
@@ -316,4 +323,68 @@ void IngredientsTablePrinter::fillInTableContent(IngredientsTable* table)
 		// увеличиваем итератор
 		++iter;
 	}
+}
+
+void IngredientsTablePrinter::fillInTableContentForOneElement(int id, IngredientsTable* table)
+{
+	Ingredient* ingredient = table->getIngredientById(id);
+
+	// Известен ли игроку эффект данного ингредиента
+	bool isEffectKnown;
+
+	// Целое значение
+	int intValue;
+
+	// id эффекта ингредиента
+	int effectId;
+
+	// Строковое значение
+	string strValue;
+
+	// Добавляем в вектор id
+	this->tableContent[id].push_back(to_string(id));
+
+	// Строковое значение
+	strValue = ingredient->getName();
+
+	// добавляем имя
+	this->tableContent[id].push_back(strValue);
+
+	intValue = ingredient->getPrice();
+
+	this->tableContent[id].push_back(to_string(intValue));
+
+	// для каждого ингредиента
+	for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
+	{
+		// Итератор на map с эффектами у ингредиента
+		map<int, bool>::iterator effectIter = ingredient->getIteratorOfEffectsId();
+
+		// Добываем булеву
+		isEffectKnown = effectIter->second;
+
+		// имя эффекта
+		string effectName;
+
+		// если имя игроку известно
+		if (isEffectKnown)
+		{
+			// Присваиваем id
+			effectId = effectIter->first;
+
+			// Присваиваем имя
+			effectName = table->getEffectsTable()->getEffectByKey(effectId)->getName();
+		}
+		else
+			effectName = UNKNOWN_EFFECT;
+
+		// Добавляем имя эффекта 
+		this->tableContent[id].push_back(effectName);
+
+		++effectIter;
+	}
+
+	intValue = ingredient->getNumber();
+
+	this->tableContent[id].push_back(to_string(intValue));
 }

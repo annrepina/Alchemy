@@ -1,0 +1,26 @@
+#pragma once
+#include "IObserver.h"
+#include <vector>
+
+using namespace std;
+
+class IObservable
+{
+public:
+
+	IObservable();
+
+	virtual ~IObservable() {};
+
+	virtual void subscribe(IObserver* observer) = 0;
+
+	virtual void unsubscribe(IObserver* observer) = 0;
+
+	virtual void Notify(int id) = 0;
+
+protected:
+
+	vector<IObserver*> observerList;
+
+};
+

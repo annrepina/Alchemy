@@ -2,7 +2,7 @@
 #include "UserInterface.h"
 //#include "Alchemist.h"
 //#include "IngredientBuilder.h"
-#include "AlchemyProgramBuilder.h"
+#include "AlchemyLogicBuilder.h"
 #include "IngredientsTablePrinter.h"
 #include "MainMenuState.h"
 
@@ -135,10 +135,10 @@ private:
 #pragma endregion 
 
 	// Программа - алхимия
-	AlchemyProgram* alchemyProgram;
+	AlchemyLogic* alchemyLogic;
 
 	// Строитель для алхимической программы
-	AlchemyProgramBuilder* alchemyProgramBuilder;
+	AlchemyLogicBuilder* alchemyLogicBuilder;
 
 	// Парсер для программы алхимии
 	AlchemyProgramParser* alchemyProgramParser;
@@ -150,37 +150,37 @@ private:
 	MenuState* state;
 
 	// Настроить программу Алхимии
-	void setAlchemyProgram();
+	void setAlchemyLogic();
 
-	// Список строк - пунктов главного меню
-	static string listOfMainMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
+	//// Список строк - пунктов главного меню
+	//static string listOfMainMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
 
-	// Ассоциативный массив координат и "кнопок" главного меню
-	map <int, string> mainMenu;
+	//// Ассоциативный массив координат и "кнопок" главного меню
+	//map <int, string> mainMenu;
 
-	// Список строк - пунктов меню алхимии
-	static string listOfALchemicalMenuItems[NUMBER_OF_ALCHEMICAL_MENU_ITEMS];
+	//// Список строк - пунктов меню алхимии
+	//static string listOfALchemicalMenuItems[NUMBER_OF_ALCHEMICAL_MENU_ITEMS];
 
-	// Ассоциативный массив координат и "кнопок" меню алхимии
-	map <int, string> alchemicalMenu;
+	//// Ассоциативный массив координат и "кнопок" меню алхимии
+	//map <int, string> alchemicalMenu;
 
-	// Список строк - пунктов меню инструкций
-	static string listOfInstructionsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
+	//// Список строк - пунктов меню инструкций
+	//static string listOfInstructionsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
 
-	// Ассоциативный массив координат и "кнопок" меню инструкций
-	map <int, string> instructionsMenu;
+	//// Ассоциативный массив координат и "кнопок" меню инструкций
+	//map <int, string> instructionsMenu;
 
-	// Список строк - пунктов меню покупки ингредиентов
-	static string listOfBuyingIngredientsMenuItems[NUMBER_OF_BUYING_MENU_ITEMS];
-	
-	// Ассоциативный массив координат и "кнопок" меню покупки ингредиентов
-	map<int, string> buyingIngredientsMenu;
+	//// Список строк - пунктов меню покупки ингредиентов
+	//static string listOfBuyingIngredientsMenuItems[NUMBER_OF_BUYING_MENU_ITEMS];
+	//
+	//// Ассоциативный массив координат и "кнопок" меню покупки ингредиентов
+	//map<int, string> buyingIngredientsMenu;
 
-	// Список строк - пунктов меню ошибки при покупке ингредиентов
-	static string listOfBuyingFaultMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
+	//// Список строк - пунктов меню ошибки при покупке ингредиентов
+	//static string listOfBuyingFaultMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
 
-	// Ассоциативный массив координат и пунктов меню ошибки во время покупки ингредиентов
-	map <int, string> buyingFaultMenu;
+	//// Ассоциативный массив координат и пунктов меню ошибки во время покупки ингредиентов
+	//map <int, string> buyingFaultMenu;
 
 	// Флаг для выхода из главного цикла
 	bool exitFlag;
@@ -207,44 +207,44 @@ private:
 
 #pragma endregion НАЗВАНИЕ ЗАГОЛОВКОВ
 
-	// Принять решение
-	void chooseMenuItem(map <int, string> menu);
+	//// Принять решение
+	//void chooseMenuItem(map <int, string> menu);
 
 	// Выбрать страницу таблицы
 	void choosePage(int page, TableCode code);
 
-	// Сделать выбор пункта меню
-	void makeChoice(bool& innerExitFlag);
+	//// Сделать выбор пункта меню
+	//void makeChoice(bool& innerExitFlag);
 
-	void makeChoice();
+	//void makeChoice();
 
 #pragma region ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 
-	// Проверка выбора в главном меню
-	void checkMainMenu(bool& innerExitFlag);
+	//// Проверка выбора в главном меню
+	//void checkMainMenu(bool& innerExitFlag);
 
-	// Проверка выбора в меню инструкций
-	void checkInstructionsMenu(bool& innerExitFlag);
+	//// Проверка выбора в меню инструкций
+	//void checkInstructionsMenu(bool& innerExitFlag);
 
-	// Проверка выбоа меню в меню алхимии
-	void checkAlchemicalMenu(bool& innerExitFlag);
+	//// Проверка выбоа меню в меню алхимии
+	//void checkAlchemicalMenu(bool& innerExitFlag);
 
-	// Проверка выбора пункта в меню покупки ингредиентов
-	void checkBuyingIngredientsMenu(bool& innerExitFlag);
+	//// Проверка выбора пункта в меню покупки ингредиентов
+	//void checkBuyingIngredientsMenu(bool& innerExitFlag);
 
-	// Проверка выбора пункта в меню ошибки при покупки ингредиентов из списка 
-	void checkBuyingFaultMenu();
+	//// Проверка выбора пункта в меню ошибки при покупки ингредиентов из списка 
+	//void checkBuyingFaultMenu();
 
 	// Проверить горизонтальные стрелки
 	bool checkHorizontalArrowChoice(int& page, TableCode code, int keyCode);
 
 #pragma endregion ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 
-	// Заниматься алхимией
-	void doAlchemy();
+	//// Заниматься алхимией
+	//void doAlchemy();
 
-	// Покупка ингредиентов
-	void buyIngredients();
+	//// Покупка ингредиентов
+	//void buyIngredients();
 
 	// Покупка ингредиентов из имеющегося списка
 	void buyIngredientsFromList();
@@ -252,8 +252,8 @@ private:
 	// Стирает с консоли все после печати алхимика
 	void eraseScreenAfterAlchemist();
 
-	// Заполнить все меню
-	void fillAllMenu();
+	//// Заполнить все меню
+	//void fillAllMenu();
 
 #pragma region МЕТОДЫ ПЕЧАТИ
 
@@ -266,8 +266,8 @@ private:
 	// Печать главного меню в цикле
 	void printMenuInLoop(map<int, string> menu, string menuTitle) override;
 
-	// Печать инструкций
-	void printInstructions() override;
+	//// Печать инструкций
+	//void printInstructions() override;
 
 	// Печать прощания
 	void printBye() override;

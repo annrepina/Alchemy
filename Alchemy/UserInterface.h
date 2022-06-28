@@ -135,8 +135,8 @@ protected:
 	// Печать главного меню в цикле
 	virtual void printMenuInLoop(map<int, string> menu, string menuTitle) = 0;
 
-	// Печать инструкций
-	virtual void printInstructions() = 0;
+	//// Печать инструкций
+	//virtual void printInstructions() = 0;
 
 	// Печать прощания
 	virtual void printBye() = 0;

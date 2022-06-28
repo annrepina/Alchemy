@@ -1,6 +1,7 @@
 #pragma once
 #include "TablePrinter.h"
 #include "IngredientsTable.h"
+#include "IObserver.h"
 
 #define MULTIPLIER				3		// Множитель для расчета длины таблицы
 
@@ -16,7 +17,7 @@
 
 // Очередность столбцов id name price effect1 effect2 number
 
-class IngredientsTablePrinter : public TablePrinter<IngredientsTable>
+class IngredientsTablePrinter : public TablePrinter<IngredientsTable>, IObserver
 {
 public:
 
@@ -26,9 +27,13 @@ public:
 
 	void print(IngredientsTable* table, int page) override;
 
+	
+
 protected:
 
 private:
+
+	void update(int id) override;
 
 #pragma region МЕТОДЫ РАСЧЕТА
 	
@@ -70,6 +75,9 @@ private:
 
 	// заполнить вектор с содержимым таблицы
 	void fillInTableContent(IngredientsTable* table) override;
+
+	// заполнить один элемент вектора содержимым таблицы
+	void fillInTableContentForOneElement(int id, IngredientsTable* table);
 
 	//// Печать шапки таблицы
 	//void printHeader(IngredientsTable* table) override;

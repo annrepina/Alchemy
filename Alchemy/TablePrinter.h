@@ -1,9 +1,10 @@
 #pragma once
 #include "Formatting.h"
+//#include "Table.h"
 
-#define Y_COORD_FOR_FRAME_PRINTING			11		// Координата Y для печати рамки таблицы 
-#define Y_COORD_FOR_HEADER_PRINTING			14		// Координата Y для печати шапки таблицы
-#define Y_COORD_FOR_CONTENT_PRINTING		16		// Координата Y для печати содержимого таблицы
+#define Y_COORD_FOR_FRAME_PRINTING			12		// Координата Y для печати рамки таблицы 
+#define Y_COORD_FOR_HEADER_PRINTING			15		// Координата Y для печати шапки таблицы
+#define Y_COORD_FOR_CONTENT_PRINTING		17		// Координата Y для печати содержимого таблицы
 
 
 #define OUTER_BORDERS				2		// Внешние границы таблицы (левая и правая)
@@ -23,6 +24,7 @@ public:
 
 	TablePrinter()
 	{
+		this->table = nullptr;
 		this->numberOfColumns = 0;
 		this->numberOfLines = 0;
 		this->tableWidth = 0;
@@ -38,25 +40,25 @@ public:
 
 	}
 
-	virtual void print(PrintableTable* table, int page)
+	virtual void print(int page)
 	{
 		//cout << "\x1b[3;9000r";
 
 		setPage(page);
 
-		this->columnWidthValues = calculateColumnWidth(table);
+		this->columnWidthValues = calculateColumnWidth();
 
-		this->tableWidth = calculateWidth(table);
+		this->tableWidth = calculateWidth();
 
 		this->xCoordForFramePrinting = calculateXCoordForPrinting();
 
 		this->numberOfColumns = this->columnWidthValues.size();
 
-		this->numberOfLines = calculateNumberOfLines(table); 
+		this->numberOfLines = calculateNumberOfLines(); 
 
 		this->xCoordsForContentPrinting = calculateXCoordsForContentPrinting();
 
-		printTitle(table);
+		printTitle();
 		
 		printInnerFrame();
 
@@ -75,7 +77,16 @@ public:
 		return this->numberOfLines;
 	}
 
+	// Задать таблицу
+	virtual void setTable(PrintableTable* table)
+	{
+		this->table = table;
+	}
+
 protected:
+
+	// Печатаемая таблица
+	PrintableTable* table;
 
 	// Координата Y для печати рамки таблицы
 	int yCoordForFramePrinting;
@@ -113,15 +124,18 @@ protected:
 #pragma region МЕТОДЫ РАСЧЕТА
 
 	// Рассчитать кол-во строк в таблице
-	virtual int calculateNumberOfLines(PrintableTable* table) = 0;
+	virtual int calculateNumberOfLines() = 0;
 
-	virtual int calculateWidth(PrintableTable* table) = 0;
+	virtual int calculateWidth() = 0;
 
-	virtual int calculateMaxId(PrintableTable* table) = 0;
+	virtual int calculateMaxId() = 0;
 
-	virtual int calculateMaxIdStrSize(PrintableTable* table) = 0;
+	virtual int calculateMaxIdStrSize() = 0;
 
-	virtual int calculateMaxNameSize(PrintableTable* table) = 0;
+	virtual int calculateMaxNameSize() = 0;
+
+	// Вернуть наибольшее кол-во элементов
+	virtual int calculateMaxNumberStrSize() = 0;
 
 	virtual vector<int> calculateXCoordsForContentPrinting()
 	{
@@ -141,7 +155,7 @@ protected:
 	}
 
 	// Расчитывает ширину каждого столбца и возвращает вектор
-	virtual vector<int> calculateColumnWidth(PrintableTable* table) = 0;
+	virtual vector<int> calculateColumnWidth() = 0;
 
 	virtual int calculateXCoordForPrinting()
 	{
@@ -152,13 +166,15 @@ protected:
 		return xCoordForPrinting;
 	}
 
-	// заполнить вектор с содержимым таблицы
-	virtual void fillInTableContent(PrintableTable* table) = 0;
+
 
 #pragma endregion МЕТОДЫ РАСЧЕТА
 
+	// заполнить вектор с содержимым таблицы
+	virtual void fillInTableContent() = 0;
+
 	// Печать названия таблицы
-	virtual void printTitle(PrintableTable* table) 
+	virtual void printTitle() 
 	{
 		// Координата для печати названия
 		int xCoord = calculateXCoordInMiddle(table->getTitle());
@@ -184,12 +200,12 @@ protected:
 
 		goToCoordAndIncreaseY(this->yCoordForFramePrinting, this->xCoordForFramePrinting);
 
-		printLowerLineOfHeader(table);
+		printLowerLineOfHeader();
 
 		//printLowerTableFrame(1, this->tableWidth - OUTER_BORDERS);
 	}
 
-	virtual void printLowerLineOfHeader(PrintableTable* table)
+	virtual void printLowerLineOfHeader()
 	{
 		cout << turnOnDECMode();
 
@@ -258,7 +274,7 @@ protected:
 	}
 
 	// Печать содержимого таблицы по страницам
-	virtual void printContent(PrintableTable* table, int page) = 0;
+	virtual void printContent(int page) = 0;
 
 	// Печать шапки таблицы
 	virtual void printHeader() = 0;

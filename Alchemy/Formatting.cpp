@@ -235,7 +235,7 @@ void printColoredTextByCoords(string text, string r, string g, string b, int yCo
 
     cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
 
-    printColoredText(text, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+    printColoredText(text, r, g, b);
 }
 
 void goToCoordAndIncreaseY(int& yCoord, int xCoord)

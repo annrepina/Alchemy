@@ -33,22 +33,8 @@ public:
 	// Добавить эффект
 	void addEffect(int effectId);
 
-	// Заполнить список имен эффектов
+	// Заполнить список id эффектов
 	void fillEffectId();
-
-	//// Получить результат
-	//Ingredient* getResult();
-
-private:
-
-	//// Экземпляр ингредиента
-	//Ingredient* ingredient;
-
-	// Таблица эффектов
-	EffectsTable* effectsTable;
-
-	// Выбрать имя эффекту
-	string chooseIngredientName(int lastIndex);
 
 #pragma region СЕТТЕРЫ
 
@@ -60,6 +46,14 @@ private:
 
 #pragma endregion СЕТТЕРЫ
 
+private:
+
+	// Таблица эффектов
+	EffectsTable* effectsTable;
+
+	// Выбрать имя эффекту
+	string chooseIngredientName(int lastIndex);
+
 	//// Сбросить до начальных установок
 	//void reset();
 
@@ -69,10 +63,7 @@ private:
 	// Список имен ингредиентов
 	static string listOfIngredientsNames[NUMBER_OF_INGREDIENTS];
 
-	// Список имен эффектов
+	// Список id эффектов
 	vector<int> effectsId;
-
-	//// Кол-во ингредиентов
-	//int numberOfIngredients;
 };
 

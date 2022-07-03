@@ -141,11 +141,8 @@ void IngredientBuilder::buildIngredient(int lastIngredientNameIndex, int& lastEf
 
 	setPrice(price);
 
-	// Создаем вектор эффектов
+	// Создаем вектор id эффектов
 	vector<int> tempEffectsId;
-
-	//// Итератор вектора
-	//vector<int>::iterator it;
 
 	// Добавление эффектов
 	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i, --lastEffectIndex)

@@ -16,11 +16,13 @@ public:
 
 	virtual void unsubscribe(IObserver* observer) = 0;
 
-	virtual void Notify(int id) = 0;
+	virtual void notify(int id) = 0;
+
+	vector<IObserver*> observerList;
 
 protected:
 
-	vector<IObserver*> observerList;
+
 
 };
 

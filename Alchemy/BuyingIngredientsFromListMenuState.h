@@ -22,10 +22,13 @@ public:
 	// Печать меню
 	void printMenu() override;
 
-private:
-
 	// Получить следующее состояние
 	MenuState* getNextState() override;
+
+private:
+
+	//// Индекс для функций в map
+	//int index;
 
 	// Задать список состояний
 	void setListOfStates() override;

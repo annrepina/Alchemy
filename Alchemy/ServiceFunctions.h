@@ -18,14 +18,19 @@ vector <string> splitForOneDelim(string str, char delim);
 int findDelimetrIndexes(const char delimetr, const size_t length, const string str);
 
 // Попытаться привести к инту
-bool tryParseToInt(string& value);
+bool tryParseToInt(string value);
 
 template<typename T>
 void fillMap(map<int, T>& map, vector <T> vector, int startKey, int border)
 {
-	// Заполняем ассоциативный массив
-	for (int i = 0; i < border; ++i, ++startKey)
+	// если ассоциативный массив пустой
+	if (map.empty())
 	{
-		map.emplace(startKey, vector[i]);
+		// Заполняем ассоциативный массив
+		for (int i = 0; i < border; ++i, ++startKey)
+		{
+			map.emplace(startKey, vector[i]);
+		}
 	}
+
 }

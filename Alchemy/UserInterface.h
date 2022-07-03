@@ -32,7 +32,7 @@ using std::placeholders::_1;
 
 #define NUMBER_OF_MAIN_MENU_ITEMS	6		// Количество главных пунктов меню в интерфейсе вместе с "выберите"
 
-
+#define EXIT_INT					-1		// Значения int в случае выхода
 
 
 // Класс - Пользовательский интерфейс
@@ -83,6 +83,9 @@ public:
 
 	// Проверка выбора в меню
 	void checkMenuChoice() const;
+
+	// Была ли нажата клавиша выхода?
+	bool isEscKeyPressed();
 
 	//// Проверка выбора стрелочек вверх/вниз
 	//void checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu);

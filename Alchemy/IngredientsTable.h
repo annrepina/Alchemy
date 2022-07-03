@@ -11,7 +11,7 @@
 //#define MULTIPLIER				3		// Множитель для расчета длины таблицы
 
 // Таблица ингредиентов
-class IngredientsTable : public Table<Ingredient>, IObservable
+class IngredientsTable : public Table<Ingredient>, public IObservable
 {
 public:
 
@@ -49,7 +49,7 @@ public:
 
 	void unsubscribe(IObserver* observer) override;
 
-	void Notify(int id) override;
+	void notify(int id) override;
 
 private:
 

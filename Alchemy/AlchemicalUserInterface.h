@@ -5,6 +5,7 @@
 #include "AlchemyLogicBuilder.h"
 #include "IngredientsTablePrinter.h"
 #include "MainMenuState.h"
+#include "IObserver.h"
 
 // Координаты
 #define TITLE_Y_COORD					1		// Координаты Y курсора для печати названия программы
@@ -47,6 +48,8 @@ public:
 
 	bool getExitFlag();
 
+	AlchemyLogic* getAlchemyLogic();
+
 #pragma endregion ГЕТТЕРЫ
 
 #pragma region CЕТТЕРЫ
@@ -54,7 +57,7 @@ public:
 	// Установить состояние
 	void setState(MenuState* state);
 
-	void setExitFlag(bool exitFlag);
+	void setExitFlag(bool exit);
 
 #pragma endregion CЕТТЕРЫ
 
@@ -73,8 +76,8 @@ public:
 	// Вбрать кол-во ингредиента или зелья
 	int chooseNumber(string strChoice, TableCode code);
 
-	// Попробовать добавить опр. кол-во ингредиента из списка
-	bool tryAddIngredientFromList(int id, int number);
+	//// Попробовать добавить опр. кол-во ингредиента из списка
+	//bool tryAddIngredientFromList(int id, int number);
 
 private:
 
@@ -246,8 +249,8 @@ private:
 	//// Покупка ингредиентов
 	//void buyIngredients();
 
-	// Покупка ингредиентов из имеющегося списка
-	void buyIngredientsFromList();
+	//// Покупка ингредиентов из имеющегося списка
+	//void buyIngredientsFromList();
 
 	// Стирает с консоли все после печати алхимика
 	void eraseScreenAfterAlchemist();

@@ -17,19 +17,15 @@
 
 // Очередность столбцов id name price effect1 effect2 number
 
-class IngredientsTablePrinter : public TablePrinter<IngredientsTable>, IObserver
+class IngredientsTablePrinter : public TablePrinter<IngredientsTable>, public IObserver
 {
 public:
 
 	IngredientsTablePrinter();
 
-	//void print(IngredientsTable* ingredientsTable) override;
+	~IngredientsTablePrinter() override;
 
-	void print(IngredientsTable* table, int page) override;
-
-	
-
-protected:
+	void print(int page) override;
 
 private:
 
@@ -38,28 +34,28 @@ private:
 #pragma region МЕТОДЫ РАСЧЕТА
 	
 	// Рассчитать кол-во строк в таблице
-	int calculateNumberOfLines(IngredientsTable* table) override;
+	int calculateNumberOfLines() override;
 
 	// Рассчитать ширину таблицы
-	int calculateWidth(IngredientsTable* table) override;
+	int calculateWidth() override;
 
 	// посчитать максимальное id
-	int calculateMaxId(IngredientsTable* table) override;
+	int calculateMaxId() override;
 
 	// Вернуть наибольший id
-	int calculateMaxIdStrSize(IngredientsTable* table) override;
+	int calculateMaxIdStrSize() override;
 
 	// Вернуть самое длинное название ингредиента
-	int calculateMaxNameSize(IngredientsTable* table) override;
+	int calculateMaxNameSize() override;
 
 	// Вернуть наибольшее кол-во ингредиентов
-	int calculateMaxNumberStrSize(IngredientsTable* table);
+	int calculateMaxNumberStrSize() override;
 
 	// Посчитать размеры максимальных имен эффектов
-	int calculateMaxEffectNameSize(IngredientsTable* table);
+	int calculateMaxEffectNameSize();
 
 	// Расчитывает ширину каждого столбца и возвращает вектор
-	vector<int> calculateColumnWidth(IngredientsTable* table) override;
+	vector<int> calculateColumnWidth() override;
 
 #pragma endregion МЕТОДЫ РАСЧЕТА
 
@@ -69,15 +65,15 @@ private:
 	void printHeader() override;
 
 	// Печать содержимого таблицы
-	void printContent(IngredientsTable* table, int page) override;
+	void printContent(int page) override;
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 
 	// заполнить вектор с содержимым таблицы
-	void fillInTableContent(IngredientsTable* table) override;
+	void fillInTableContent() override;
 
 	// заполнить один элемент вектора содержимым таблицы
-	void fillInTableContentForOneElement(int id, IngredientsTable* table);
+	void fillInTableContentForOneElement(int id);
 
 	//// Печать шапки таблицы
 	//void printHeader(IngredientsTable* table) override;

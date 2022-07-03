@@ -16,6 +16,8 @@ using namespace std;
 #define Y_COORD_AFTER_MENU_TITLE_3		11		//  оордината Y треть€ после печати заголовка меню
 #define Y_COORD_AFTER_MENU_TITLE_4		12		//  оордината Y четверта€ после печати заголовка меню
 
+#define EXIT_INT						-1
+
 class AlchemicalUserInterface;
 
 class MenuState
@@ -43,6 +45,9 @@ public:
 	// ѕечать меню
 	virtual void printMenu();
 
+	// ѕолучить следующее состо€ние
+	virtual MenuState* getNextState() = 0;
+
 	//void fillMenuStates();
 
 protected:
@@ -67,9 +72,6 @@ protected:
 
 	// кол-во состо€ний у данного состо€ни€
 	int numberOfStates;
-
-	// ѕолучить следующее состо€ние
-	virtual MenuState* getNextState() = 0;
 
 	// «адать список состо€ний
 	virtual void setListOfStates() = 0;
@@ -97,6 +99,9 @@ protected:
 
 	// ќчистить пам€ть
 	virtual void clear();
+
+	// был ли нажат esc дл€ выхода
+	virtual bool wasExit(int number);
 
 private:
 

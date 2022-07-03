@@ -8,6 +8,8 @@
 //#include "EffectsTableBuilder.h"
 #include "IngredientsTable.h"
 #include "EffectsTable.h"
+#include "IngredientBuilder.h"
+#include "ServiceFunctions.h"
 
 //using namespace std;
 //
@@ -42,9 +44,6 @@ public:
 
 #pragma endregion СЕТТЕРЫ
 
-
-
-
 #pragma region ГЕТТЕРЫ
 
 	// Геттер для алхимика
@@ -57,8 +56,10 @@ public:
 
 #pragma endregion ГЕТТЕРЫ
 
-	//// Запуск главного цикла программы
-	//void launchMainLoop();
+	// Попробовать добавить опр. кол-во ингредиента из списка
+	bool tryAddIngredientFromList(int id, int number);
+
+	bool tryAddNewIngredientToTable(string ingredientName);
 
 #pragma region МЕТОДЫ ПЕЧАТИ
 
@@ -78,6 +79,9 @@ private:
 
 	// Таблица ингредиентов
 	IngredientsTable* ingredientsTable;
+
+	// Проверяет есть ли подобные названия ингредиентов уже в таблице
+	bool hasSuchIngredientName(string ingredientName);
 
 };
 

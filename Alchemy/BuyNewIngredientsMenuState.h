@@ -1,5 +1,7 @@
 #pragma once
 #include "MenuState.h"
+#include "ServiceFunctions.h"
+#include "IngredientBuilder.h"
 
 class BuyNewIngredientsMenuState : public MenuState
 {

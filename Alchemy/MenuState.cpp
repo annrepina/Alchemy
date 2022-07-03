@@ -256,3 +256,15 @@ void MenuState::clear()
 	}
 }
 
+bool MenuState::wasExit(int number)
+{
+	if (number == EXIT_INT)
+	{
+		this->alchemicalUserInterface->setState(this->getNextState());
+
+		return true;
+	}
+
+	return false;
+}
+

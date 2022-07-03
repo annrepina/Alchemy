@@ -38,6 +38,109 @@ IngredientsTable* AlchemyLogic::getIngredientsTable()
 	return this->ingredientsTable;
 }
 
+bool AlchemyLogic::tryAddIngredientFromList(int id, int number)
+{
+	// результат
+	bool res = false;
+
+	// Этот ингредиент, полученный по id 
+	Ingredient* ingredient = ingredientsTable->getIngredientById(id);
+
+	// деньги алхимика
+	int capital = alchemist->getCapital();
+
+	// расходы
+	int cost = ingredient->getPrice() * number;
+
+	// если денег у алхимика больше или равно цене ингредиента
+	if (capital >= cost)
+	{
+		ingredient->increaseNumber(number);
+
+		// уведомляем подписчиков об изменениях
+		ingredientsTable->notify(id);
+
+		alchemist->decreaseCapital(cost);
+
+		res = true;
+	}
+	// если денег недостаточно
+	else
+	{
+		res = false;
+	}
+
+	return res;
+}
+
+bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
+{
+	// если ингредиента с подобным названием в таблице нет
+	if (!hasSuchIngredientName(ingredientName))
+	{
+		// Создаем строителя ингредиентов
+		IngredientBuilder builder;
+
+		// Задаем таблицу эффектов
+		builder.setEffectsTable(this->effectsTable);
+
+		builder.setName(ingredientName);
+
+		int price = randInRange(MIN_PRICE, MAX_PRICE);
+
+		builder.setPrice(price);
+
+		// Создаем временный вектор id эффектов
+		vector<int> tempEffectsId;
+
+		// Максимальное id эффекта 
+		int maxEffectId = builder.getEffectsTableSize();
+
+		// Добавление эффектов
+		for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
+		{
+			int idIndex = randInRange(1, maxEffectId);
+
+			// если это уже не первый эффект и предыдущий совпадает с вновь выбранным
+			if (0 < i && tempEffectsId[0] == idIndex)
+			{
+				--i;
+				continue;
+			}
+
+			// Добавляем во временный вектор id
+			tempEffectsId.push_back(idIndex);
+
+			builder.addEffect(idIndex);
+		}
+
+		// добавляем ингредиент в таблицу
+		this->ingredientsTable->add(builder.getResult());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool AlchemyLogic::hasSuchIngredientName(string ingredientName)
+{
+	map<int, Ingredient*>::iterator startIter = ingredientsTable->getStartIterator();
+
+	map<int, Ingredient*>::iterator endIter = ++ingredientsTable->getEndIterator();
+
+	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
+	{
+		// если имена совпадают, то возвращаем false
+		if (i->second->getName() == ingredientName)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 //void AlchemyProgram::printIngredientsTable()
 //{
 //	this->ingredientsTable->print();

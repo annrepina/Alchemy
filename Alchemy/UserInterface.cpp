@@ -45,6 +45,15 @@ int UserInterface::checkInput(string& value, int min, int max, string textOfRang
 
 	do
 	{
+		if (isEscKeyPressed())
+		{
+			// выход
+			intValue = EXIT_INT;
+			break;
+		}
+
+		cin >> value;
+
 		succes = tryParseToInt(value);
 
 		if (!succes)
@@ -182,6 +191,24 @@ void UserInterface::checkMenuChoice() const
 
 	}	// ≈сли нажата€ клавиша не соответсвует кнопкам меню
 	while (this->func(key));
+}
+
+bool UserInterface::isEscKeyPressed()
+{
+	// нажата€ клавиша
+	int key;
+
+	this->keyBoard->waitForKey();
+
+	key = this->keyBoard->getPressedKey();
+
+	// если нажали esc
+	if (key == VK_ESCAPE)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 //void UserInterface::checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu)

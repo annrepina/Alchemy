@@ -127,7 +127,7 @@ void IngredientsTable::unsubscribe(IObserver* observer)
 	}
 }
 
-void IngredientsTable::Notify(int id)
+void IngredientsTable::notify(int id)
 {
 	for (auto observer : this->observerList)
 	{

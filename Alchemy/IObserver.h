@@ -9,7 +9,7 @@ public:
 
 	virtual ~IObserver();
 
-	//virtual void update(int id, Table* table) = 0;
+	virtual void update(int id) = 0;
 
 	//virtual void update(float course) = 0;
 

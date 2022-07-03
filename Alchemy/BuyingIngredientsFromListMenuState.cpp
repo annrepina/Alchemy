@@ -4,6 +4,7 @@
 
 BuyingIngredientsFromListMenuState::BuyingIngredientsFromListMenuState()
 {
+	//index = 0;
 }
 
 BuyingIngredientsFromListMenuState::BuyingIngredientsFromListMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
@@ -11,6 +12,7 @@ BuyingIngredientsFromListMenuState::BuyingIngredientsFromListMenuState(Alchemica
 	this->title = "Покупка ингредиентов из \"Котелка Аркадии\"";
 	this->goToTitle = "Купить ингредиенты из \"Котелка Аркадии\"";
 	this->numberOfStates = 1;
+	//this->index = 0;
 }
 
 //BuyingIngredientsFromListMenuState::~BuyingIngredientsFromListMenuState()
@@ -22,49 +24,67 @@ void BuyingIngredientsFromListMenuState::printMenu()
 	// Сбрасываем координату каждый раз заходя в метод печати
 	currentYCursorCoordState = MAIN_MENU_Y_COORD;
 
+	// Успешность покупки 
+	bool success = false;
+
+	// Текст ошибки в случае неудачной покупки
+	string error = "";
+
 	setListOfCreatingFunctions();
 
 	fillMap<function<MenuState* (BuyingIngredientsFromListMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
 
-	// начальная страница таблицы
-	int page = FIRST_PAGE;
+	while (false == success)
+	{
+		// начальная страница таблицы
+		int page = FIRST_PAGE;
 
-	string choiceIngredient = "Введите № ингредиента: ";
+		string choiceIngredient = "Введите № ингредиента: ";
 
-	string choiceNumber = "Введите кол-во ингредиентов: ";
+		string choiceNumber = "Введите кол-во ингредиентов: ";
 
-	// Флаг ддля выхода из цикла
-	bool exit = false;
+		// Флаг ддля выхода из цикла
+		bool exit = false;
 
-	printColoredTextByCoords(choiceIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
+		printMenuTitle();
 
-	//cout << goToXY(Y_COORD_AFTER_MENU_TITLE, STANDARD_CURSOR_X_COORD);
+		printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
 
-	//cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+		printColoredTextByCoords(choiceIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
 
-	//printColoredText(choiceIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+		printColoredTextByCoords(choiceNumber, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD);
 
-	printColoredTextByCoords(choiceNumber, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
+		this->alchemicalUserInterface->printTablePagesInLoop(AlchemicalUserInterface::TableCode::IngredientTable, page);
 
-	//cout << goToXY(Y_COORD_AFTER_MENU_TITLE + 1, STANDARD_CURSOR_X_COORD);
+		// если был нажат esc
+		if (true == this->alchemicalUserInterface->getExitFlag())
+		{
+			// сбрасываем флаг
+			this->alchemicalUserInterface->setExitFlag(false);
 
-	//cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+			this->alchemicalUserInterface->setState(this->getNextState());
 
-	//printColoredText(choiceNumber, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+			return;
+		}
 
-	this->alchemicalUserInterface->printTablePagesInLoop(AlchemicalUserInterface::TableCode::IngredientTable, page);
+		int id = this->alchemicalUserInterface->chooseId(choiceIngredient, AlchemicalUserInterface::TableCode::IngredientTable);
 
-	//printTablePagesInLoop(TableCode::IngredientTable, page);
+		if (wasExit(id))
+			return;
 
-	// если был нажат esc
-	if (true == this->alchemicalUserInterface->getExitFlag())
-		return;
+		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable);
 
-	int id = this->alchemicalUserInterface->chooseId(choiceIngredient, AlchemicalUserInterface::TableCode::IngredientTable);
+		if (wasExit(number))
+			return;
 
-	int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable);
+		success = this->alchemicalUserInterface->getAlchemyLogic()->tryAddIngredientFromList(id, number);
 
-	this->alchemicalUserInterface->tryAddIngredientFromList(id, number);
+		// Если покупка не состоялась
+		if (!success)
+		{
+			error = "Недостаточно монет, попробуйте снова:";
+		}
+	}
 }
 
 MenuState* BuyingIngredientsFromListMenuState::getNextState()
@@ -82,11 +102,11 @@ void BuyingIngredientsFromListMenuState::setListOfStates()
 
 void BuyingIngredientsFromListMenuState::setListOfCreatingFunctions()
 {
-
-
-
-
-	this->listOfCreatingFunctions.push_back(&BuyingIngredientsFromListMenuState::createReturnMenuState);
+	// если вектор пустой
+	if (this->listOfCreatingFunctions.empty())
+	{
+		this->listOfCreatingFunctions.push_back(&BuyingIngredientsFromListMenuState::createReturnMenuState);
+	}
 }
 
 ReturnMenuState* BuyingIngredientsFromListMenuState::createReturnMenuState()

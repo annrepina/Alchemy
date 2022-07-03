@@ -78,11 +78,11 @@ int findDelimetrIndexes(const char delimetr, const size_t length, const string s
 }
 
 
-bool tryParseToInt(string& value)
+bool tryParseToInt(string value)
 {
 	bool res = true;
 
-	cin >> value;
+	//cin >> value;
 
 	// содержит в себе индекс первого символа не являющегося цифрой
 	size_t nonDigitIndex;

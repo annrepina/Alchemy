@@ -217,6 +217,37 @@ void MenuState::chooseMenuItem()
 	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
 }
 
+void MenuState::chooseContinueOrGoBack()
+{
+	this->alchemicalUserInterface->setFunc(std::bind(&AlchemicalUserInterface::isEnterEscKeyFalse, this->alchemicalUserInterface, _1));
+
+	// Флаг для выхода из цикла, но не выход из программы
+	bool innerExitFlag = false;
+
+	do
+	{
+		// Проверяем нажатую кнопку
+		this->alchemicalUserInterface->checkMenuChoice();
+
+		//switch (this->keyBoard->getPressedKey())
+		switch (this->alchemicalUserInterface->getKeyBoard()->getPressedKey())
+		{
+			case VK_RETURN:
+			{
+				// выход из цикла
+				innerExitFlag = true;
+			}
+			break;
+
+			case VK_ESCAPE:
+			{
+				this->alchemicalUserInterface->setExitFlag(true);
+			}
+			break;
+		}
+	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
+}
+
 void MenuState::checkVerticalArrowsChoice(int borderYCoord, int keyCode)
 {
 	// если граничная координата не равна текущей

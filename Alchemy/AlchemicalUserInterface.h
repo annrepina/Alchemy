@@ -12,6 +12,7 @@
 #define EXIT_Y_COORD					2		// Координата Y кнопки выхода
 #define Y_COORD_AFTER_ALCHEMIST			8		// Координата Y после печати алхимика
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
+#define PAGE_Y_COORD					37		// Координата Y меню страниц таблицы
 //#define Y_COORD_AFTER_MENU_TITLE_1		9		// Координата Y первая после печати заголовка меню
 //#define Y_COORD_AFTER_MENU_TITLE_2		10		// Координата Y вторая после печати заголовка меню
 //#define Y_COORD_AFTER_MENU_TITLE_3		11		// Координата Y третья после печати заголовка меню
@@ -74,7 +75,7 @@ public:
 	int chooseId(string strChoice, TableCode code);
 
 	// Вбрать кол-во ингредиента или зелья
-	int chooseNumber(string strChoice, TableCode code);
+	int chooseNumber(string strChoice, TableCode code, int yCoord);
 
 	//// Попробовать добавить опр. кол-во ингредиента из списка
 	//bool tryAddIngredientFromList(int id, int number);

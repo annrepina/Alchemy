@@ -46,6 +46,30 @@ public:
 
 		setPage(page);
 
+		//calculateData();
+
+		//this->columnWidthValues = calculateColumnWidth();
+
+		//this->tableWidth = calculateWidth();
+
+		//this->xCoordForFramePrinting = calculateXCoordForPrinting();
+
+		//this->numberOfColumns = this->columnWidthValues.size();
+
+		//this->numberOfLines = calculateNumberOfLines(); 
+
+		//this->xCoordsForContentPrinting = calculateXCoordsForContentPrinting();
+
+		printTitle();
+		
+		printInnerFrame();
+
+
+	}
+
+	// Расчитать данные по таблице
+	virtual void calculateData()
+	{
 		this->columnWidthValues = calculateColumnWidth();
 
 		this->tableWidth = calculateWidth();
@@ -54,15 +78,9 @@ public:
 
 		this->numberOfColumns = this->columnWidthValues.size();
 
-		this->numberOfLines = calculateNumberOfLines(); 
+		this->numberOfLines = calculateNumberOfLines();
 
 		this->xCoordsForContentPrinting = calculateXCoordsForContentPrinting();
-
-		printTitle();
-		
-		printInnerFrame();
-
-
 	}
 
 	// Получить кол-во колонок
@@ -295,4 +313,3 @@ private:
 		}
 	}
 };
-

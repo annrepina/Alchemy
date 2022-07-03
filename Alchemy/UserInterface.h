@@ -81,11 +81,16 @@ public:
 	// Не были ли нажаты кнопки стрелок?
 	bool isArrowKeyFalse(int key);
 
+	// Была ли нажата клавиша выхода?
+	bool isEscKeyPressed();
+
+	// Не были нажаты Enter и Esc
+	bool isEnterEscKeyFalse(int key);
+
 	// Проверка выбора в меню
 	void checkMenuChoice() const;
 
-	// Была ли нажата клавиша выхода?
-	bool isEscKeyPressed();
+
 
 	//// Проверка выбора стрелочек вверх/вниз
 	//void checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu);
@@ -151,8 +156,8 @@ protected:
 
 #pragma region ПРЕДИКАТЫ
 
-	// Предикат для выбора пользователя в главном меню
-	bool isMenuChoiceFalse(int key);
+	//// Предикат для выбора пользователя в главном меню
+	//bool isMenuChoiceFalse(int key);
 
 
 

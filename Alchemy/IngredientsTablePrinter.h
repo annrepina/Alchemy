@@ -27,6 +27,9 @@ public:
 
 	void print(int page) override;
 
+	// заполнить вектор с содержимым таблицы
+	void fillInTableContent() override;
+
 private:
 
 	void update(int id) override;
@@ -69,11 +72,11 @@ private:
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 
-	// заполнить вектор с содержимым таблицы
-	void fillInTableContent() override;
-
 	// заполнить один элемент вектора содержимым таблицы
-	void fillInTableContentForOneElement(int id);
+	void changeTableContentForOneElement(int id);
+
+	// Обновить содержимое таблицы - добавить новый ингредиент
+	void addIngredientToTableContent(int id);
 
 	//// Печать шапки таблицы
 	//void printHeader(IngredientsTable* table) override;

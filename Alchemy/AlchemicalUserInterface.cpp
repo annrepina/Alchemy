@@ -69,30 +69,17 @@ void AlchemicalUserInterface::launchMainLoop()
 	// Передаем в принтер таблицу
 	this->ingredientsTableprinter->setTable(this->alchemyLogic->getIngredientsTable());
 
+	this->ingredientsTableprinter->calculateData();
+
+	// Заполняем таблицу контентом
+	this->ingredientsTableprinter->fillInTableContent();
+
 	// Добавляем подписчиков
 	this->alchemyLogic->getIngredientsTable()->subscribe(this->ingredientsTableprinter);
-
-	//subscribe(IObserver * observer)
 
 	printTitle();
 
 	printExitButton();
-
-	//do
-	//{
-	//	printAlchemist();
-
-	//	menuCode = MenuCode::MainMenu;
-
-	//	// Сбрасываем по умолчанию координату
-	//	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-
-	//	// Вытащила из принтМенюТайтл
-	//	eraseScreenAfterAlchemist();
-
-	//	printMenuInLoop(mainMenu, mainMenuTitle);
-
-	//} while (exitFlag == false);	
 
 	do
 	{
@@ -207,11 +194,11 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 {
 	this->func = std::bind(&AlchemicalUserInterface::isPageChoiceFalse, this, _1);
 
-	//// Флаг ддля выхода из цикла
-	//bool exit = false;
+	// Флаг ддля выхода из цикла
+	bool exit = false;
 
-	//do
-	//{
+	do
+	{
 		// Проверяем нажатую кнопку
 		checkMenuChoice();
 
@@ -226,7 +213,7 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 				if (checkHorizontalArrowChoice(page, code, VK_LEFT))
 				{
 					printTablePagesInLoop(code, page);
-					//exit = true;
+					exit = true;
 				}		
 			}
 			break;
@@ -238,16 +225,16 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 				if (checkHorizontalArrowChoice(page, code, VK_RIGHT))
 				{
 					printTablePagesInLoop(code, page);
-					//exit = true;
+					exit = true;
 				}
 			}
 			break;
 
-			//case VK_RETURN:
-			//{
-			//	//exit = true;
-			//}
-			//break;
+			case VK_RETURN:
+			{
+				exit = true;
+			}
+			break;
 
 			case VK_ESCAPE:
 			{
@@ -257,7 +244,7 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 			}
 			break;
 		}
-	//} while (false == exitFlag && false == exit);
+	} while (false == exitFlag && false == exit);
 }
 
 int AlchemicalUserInterface::chooseId(string strChoice, TableCode code)
@@ -289,7 +276,7 @@ int AlchemicalUserInterface::chooseId(string strChoice, TableCode code)
 	return id;
 }
 
-int AlchemicalUserInterface::chooseNumber(string strChoice, TableCode code)
+int AlchemicalUserInterface::chooseNumber(string strChoice, TableCode code, int yCoord)
 {
 	int number = 0;
 
@@ -298,13 +285,13 @@ int AlchemicalUserInterface::chooseNumber(string strChoice, TableCode code)
 	if (code == TableCode::IngredientTable)
 	{
 		// перейти по координате для выбора
-		cout << goToXY(Y_COORD_AFTER_MENU_TITLE_3, strChoice.size() + 1);
+		cout << goToXY(yCoord, strChoice.size() + 1);
 
-		map<int, Ingredient*>::iterator iter = this->alchemyLogic->getIngredientsTable()->getEndIterator();
+		//map<int, Ingredient*>::iterator iter = this->alchemyLogic->getIngredientsTable()->getEndIterator();
 
 		string errorText = "Данное значение не подходит, попробуйте снова: ";
 
-		number = checkInput(value, 1, MAX_INT, errorText, Y_COORD_AFTER_MENU_TITLE_3);
+		number = checkInput(value, 1, MAX_INT, errorText, yCoord);
 	}
 	else
 	{
@@ -726,6 +713,8 @@ void AlchemicalUserInterface::printPageMenu(int page)
 	string strPage = "Страница " + to_string(page + 1);
 
 	int numberOfSymbols = strPage.size();
+
+	cout << goToXY(PAGE_Y_COORD, 0);
 
 	cout << eraseSymbolsOnScreen(to_string(numberOfSymbols));
 

@@ -45,12 +45,12 @@ int UserInterface::checkInput(string& value, int min, int max, string textOfRang
 
 	do
 	{
-		if (isEscKeyPressed())
-		{
-			// выход
-			intValue = EXIT_INT;
-			break;
-		}
+		//if (isEscKeyPressed())
+		//{
+		//	// выход
+		//	intValue = EXIT_INT;
+		//	break;
+		//}
 
 		cin >> value;
 
@@ -112,10 +112,10 @@ void UserInterface::printError(int yCoord, int xCoord, string textOfError)
 	printColoredText(textOfError, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 }
 
-bool UserInterface::isMenuChoiceFalse(int key)
-{
-	return key != VK_1 && key != VK_2 && key != VK_NUMPAD1 && key != VK_NUMPAD2 && key != VK_ESCAPE;
-}
+//bool UserInterface::isMenuChoiceFalse(int key)
+//{
+//	return key != VK_1 && key != VK_2 && key != VK_NUMPAD1 && key != VK_NUMPAD2 && key != VK_ESCAPE;
+//}
 
 bool UserInterface::isArrowKeyFalse(int key)
 {
@@ -211,31 +211,10 @@ bool UserInterface::isEscKeyPressed()
 	return false;
 }
 
-//void UserInterface::checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu)
-//{
-//	// если граничная координата не равна текущей
-//	if (borderYCoord != this->currentYCursorCoord)
-//	{
-//		// Если кнопка вниз
-//		if (VK_DOWN == keyCode)
-//		{
-//			// Печатаем пункт меню без выделения
-//			cout << menu[currentYCursorCoord];
-//
-//			// увеличиваем координаты
-//			++this->currentYCursorCoord;
-//		}
-//		// если кнопка вверх
-//		else
-//			// уменьшаем координаты
-//			--this->currentYCursorCoord;
-//
-//		// Переходим по координатам
-//		cout << goToXY(this->currentYCursorCoord, 0);
-//
-//		printMenu(menu);
-//
-//		// Возвращаемся в координаты
-//		cout << goToXY(currentYCursorCoord, 0);
-//	}
-//}
+bool UserInterface::isEnterEscKeyFalse(int key)
+{
+	bool res = VK_ESCAPE != key && VK_RETURN != key;
+
+	return res;
+}
+

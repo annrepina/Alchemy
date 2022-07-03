@@ -38,7 +38,7 @@ IngredientsTable* AlchemyLogic::getIngredientsTable()
 	return this->ingredientsTable;
 }
 
-bool AlchemyLogic::tryAddIngredientFromList(int id, int number)
+bool AlchemyLogic::tryBuyIngredientFromList(int id, int number)
 {
 	// результат
 	bool res = false;

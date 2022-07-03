@@ -69,15 +69,15 @@ void BuyingIngredientsFromListMenuState::printMenu()
 
 		int id = this->alchemicalUserInterface->chooseId(choiceIngredient, AlchemicalUserInterface::TableCode::IngredientTable);
 
-		if (wasExit(id))
-			return;
+		//if (wasExit(id))
+		//	return;
 
-		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable);
+		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
 
-		if (wasExit(number))
-			return;
+		//if (wasExit(number))
+		//	return;
 
-		success = this->alchemicalUserInterface->getAlchemyLogic()->tryAddIngredientFromList(id, number);
+		success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(id, number);
 
 		// Если покупка не состоялась
 		if (!success)
@@ -94,9 +94,6 @@ MenuState* BuyingIngredientsFromListMenuState::getNextState()
 
 void BuyingIngredientsFromListMenuState::setListOfStates()
 {
-
-
-
 	this->listOfStates.push_back(new ReturnMenuState(new BuyingIngredientsMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface));
 }
 

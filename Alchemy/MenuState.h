@@ -86,7 +86,10 @@ protected:
 	virtual void printMenuItems();
 
 	// Принять решение
-	virtual void chooseMenuItem(/*map <int, string> menu*/);
+	virtual void chooseMenuItem();
+
+	// Выбор продолжить или назад
+	virtual void chooseContinueOrGoBack();
 
 	// Ассоциативный массив состояний
 	std::map<int, MenuState*> menuStates;

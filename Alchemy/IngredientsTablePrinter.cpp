@@ -10,10 +10,21 @@ IngredientsTablePrinter::~IngredientsTablePrinter()
 
 void IngredientsTablePrinter::update(int id)
 {
-	this->tableContent[id - 1].clear();
+	// если элементов меньше, чем id, значит был добавлен новый элемент
+	if (this->tableContent.size() < id)
+	{
+		addIngredientToTableContent(id);
+	}
+	else
+	{
+		this->tableContent[id - 1].clear();
 
-	fillInTableContentForOneElement(id);
+		changeTableContentForOneElement(id);
+	}
+
 }
+
+#pragma region Методы расчета
 
 int IngredientsTablePrinter::calculateNumberOfLines()
 {
@@ -189,13 +200,19 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth()
 	return columnWidth;
 }
 
+#pragma endregion Методы расчета
+
 void IngredientsTablePrinter::print(int page)
 {
 	TablePrinter::print(page);
 
 	this->printHeader();
 
-	this->fillInTableContent();
+	//// если совсем пустая, то заполняем
+	//if (this->tableContent.size() == 0)
+	//{
+	//	this->fillInTableContent();
+	//}
 
 	this->printContent(page);
 }
@@ -329,7 +346,7 @@ void IngredientsTablePrinter::fillInTableContent()
 	}
 }
 
-void IngredientsTablePrinter::fillInTableContentForOneElement(int id)
+void IngredientsTablePrinter::changeTableContentForOneElement(int id)
 {
 	// Id для контента таблицы
 	int tableContentId = id - 1;
@@ -394,4 +411,90 @@ void IngredientsTablePrinter::fillInTableContentForOneElement(int id)
 	intValue = ingredient->getNumber();
 
 	this->tableContent[tableContentId].push_back(to_string(intValue));
+
+	// пересчитываем данные
+	this->calculateData();
+}
+
+void IngredientsTablePrinter::addIngredientToTableContent(int id)
+{
+	// Итератор на конец map в таблице
+	map<int, Ingredient*>::iterator endIter = table->getEndIterator();
+
+	// последний индекс в содержимом таблицы равен последнему id в таблице
+	int lastId = endIter->first - 1;
+
+	// Целое значение
+	int intValue;
+
+	// Строковое значение
+	string strValue;
+
+	// id эффекта ингредиента
+	int effectId;
+
+	// Известен ли игроку эффект данного ингредиента
+	bool isEffectKnown;
+
+	// Создаем внутренний вектор
+	vector <string> line;
+
+	// Добавляем этот вектор во внешний
+	this->tableContent.push_back(line);
+
+	// добываем id
+	intValue = endIter->first;
+
+	// Добавляем в первый вектор id
+	tableContent[lastId].push_back(to_string(intValue));
+
+	// добываем имя
+	strValue = endIter->second->getName();
+
+	// Добавляем в вектор имя
+	this->tableContent[lastId].push_back(strValue);
+
+	// добываем цену
+	intValue = endIter->second->getPrice();
+
+	// Добавляем цену 
+	this->tableContent[lastId].push_back(to_string(intValue));
+
+	// для каждого ингредиента
+	for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
+	{
+		// Итератор на map с эффектами у ингредиента
+		map<int, bool>::iterator effectIter = endIter->second->getIteratorOfEffectsId();
+
+		// Добываем булеву
+		isEffectKnown = effectIter->second;
+
+		// имя эффекта
+		string effectName;
+
+		// если имя игроку известно
+		if (isEffectKnown)
+		{
+			// Присваиваем id
+			effectId = effectIter->first;
+
+			// Присваиваем имя
+			effectName = table->getEffectsTable()->getEffectByKey(effectId)->getName();
+		}
+		else
+			effectName = UNKNOWN_EFFECT;
+
+		// Добавляем имя эффекта 
+		this->tableContent[lastId].push_back(effectName);
+
+		++effectIter;
+	}
+
+	intValue = endIter->second->getNumber();
+
+	// Добавляем кол-во ингредиента
+	this->tableContent[lastId].push_back(to_string(intValue));
+
+	// пересчитываем данные
+	this->calculateData();
 }

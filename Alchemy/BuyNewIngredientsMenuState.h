@@ -2,6 +2,7 @@
 #include "MenuState.h"
 #include "ServiceFunctions.h"
 #include "IngredientBuilder.h"
+#include "ReturnMenuState.h"
 
 class BuyNewIngredientsMenuState : public MenuState
 {
@@ -30,6 +31,9 @@ private:
 
 	// Вектор функций, которые создают стейты
 	vector< function<MenuState* (BuyNewIngredientsMenuState&)> > listOfCreatingFunctions;
+
+	// Создать состояние - меню назад
+	ReturnMenuState* createReturnMenuState();
 
 };
 

@@ -57,7 +57,7 @@ public:
 #pragma endregion ГЕТТЕРЫ
 
 	// Попробовать добавить опр. кол-во ингредиента из списка
-	bool tryAddIngredientFromList(int id, int number);
+	bool tryBuyIngredientFromList(int id, int number);
 
 	bool tryAddNewIngredientToTable(string ingredientName);
 

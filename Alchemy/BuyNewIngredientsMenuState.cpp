@@ -20,8 +20,11 @@ void BuyNewIngredientsMenuState::printMenu()
 	// Текст ошибки в случае неудачной покупки
 	string error = "";
 
-	// Удачно ли купили ингредиент
+	// Удачно ли купили ингредиент (хватило ли денег)
 	bool success = false;
+
+	// такого ингредиента еще нет?
+	bool tryAddNewIngredient = false;
 
 	//// Задаем таблицу эффектов
 	//builder.setEffectsTable(this->alchemicalUserInterface->getAlchemyLogic()->getEffectsTable());
@@ -33,6 +36,11 @@ void BuyNewIngredientsMenuState::printMenu()
 	while (false == success)
 	{
 		string ingredientName;
+
+		// id ингредиента
+		int ingredientId;
+
+		Ingredient* ingredient;
 
 		printMenuTitle();
 
@@ -48,7 +56,7 @@ void BuyNewIngredientsMenuState::printMenu()
 
 		//std::string name;
 		//std::cout << "Input name: ";
-		std::cin.ignore();
+		std::cin.ignore(1, '\n');
 		getline(std::cin, ingredientName);
 
 		//ingredientName = std::getline(std::cin, ingredientName);
@@ -59,15 +67,32 @@ void BuyNewIngredientsMenuState::printMenu()
 
 		//cin >> ingredientName;
 
-		success = this->alchemicalUserInterface->getAlchemyLogic()->tryAddNewIngredientToTable(ingredientName);
+		// Удачно ли добавили новый ингредиент
+		tryAddNewIngredient = this->alchemicalUserInterface->getAlchemyLogic()->tryAddNewIngredientToTable(ingredientName);
 
-		if (!success)
+		// если неудачно, значит такой ингредиент в базе уже есть
+		if (!tryAddNewIngredient)
 		{
-			error = "Ингредиент с именем \"" + ingredientName + "\" уже существует, попробуйте снова:";
-			continue;
+			cout << "У Аркадии есть " << ingredientName << ". ";
+
+			// ищем по имени этот ингредиент
+			ingredient = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getIngredientByName(ingredientName);
+
+			// выводим скок стоит
+			//cout << ingredientName << " стоит " << ingredient->getPrice() << " септ." << endl;
+
+			// узнаем id ингредиента
+			ingredientId = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getIdByIngredient(ingredient);
+		}
+		else
+		{
+			ingredient = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getEndIterator()->second;
+
+			ingredientId = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getEndIterator()->first;
 		}
 
-		cout << ingredientName << " стоит " << this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getEndIterator()->second->getPrice() << " монет" << endl;
+		// выводим скок стоит
+		cout << "Цена - " << ingredient->getPrice() << " септ." << endl;
 
 		string choiceNumber = "Введите кол-во: ";
 
@@ -75,10 +100,7 @@ void BuyNewIngredientsMenuState::printMenu()
 
 		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_4);
 
-		//if (wasExit(number))
-		//	return;
-
-		success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getEndIterator()->first, number);
+		success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(ingredientId, number);
 
 		// Если покупка не состоялась
 		if (!success)

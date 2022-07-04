@@ -104,6 +104,42 @@ Ingredient* IngredientsTable::getIngredientById(int id)
 	return this->ingredientsWithId[id];
 }
 
+Ingredient* IngredientsTable::getIngredientByName(string name)
+{
+	map<int, Ingredient*>::iterator startIter = this->getStartIterator();
+
+	map<int, Ingredient*>::iterator endIter = ++this->getEndIterator();
+
+	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
+	{
+		// если имена совпадают, то возвращаем false
+		if (i->second->getName() == name)
+		{
+			return i->second;
+		}
+	}
+
+	return nullptr;
+}
+
+int IngredientsTable::getIdByIngredient(Ingredient* ingredient)
+{
+	map<int, Ingredient*>::iterator startIter = this->getStartIterator();
+
+	map<int, Ingredient*>::iterator endIter = ++this->getEndIterator();
+
+	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
+	{
+		// если имена совпадают, то возвращаем false
+		if (i->second == ingredient)
+		{
+			return i->first;
+		}
+	}
+
+	return 0;
+}
+
 void IngredientsTable::subscribe(IObserver* observer)
 {
 	this->observerList.push_back(observer);

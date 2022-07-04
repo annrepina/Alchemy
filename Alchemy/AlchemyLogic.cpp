@@ -131,7 +131,7 @@ bool AlchemyLogic::hasSuchIngredientName(string ingredientName)
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{
-		// если имена совпадают, то возвращаем false
+		// если имена совпадают, то возвращаем true
 		if (i->second->getName() == ingredientName)
 		{
 			return true;

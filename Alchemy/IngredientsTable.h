@@ -43,6 +43,12 @@ public:
 	// Получить ингредиент по id 
 	Ingredient* getIngredientById(int id);
 
+	// Получить ингредиент по id 
+	Ingredient* getIngredientByName(string name);
+
+	// получить ключ по значению
+	int getIdByIngredient(Ingredient* ingredient);
+
 #pragma endregion ГЕТТЕРЫ
 
 	void subscribe(IObserver* observer) override;

@@ -70,23 +70,5 @@ private:
 
 	// Чистит память
 	void clear();
-
-
-
-	//// Вернуть наибольший id
-	//int calculateMaxIdStrSize();
-
-	//// Вернуть самое длинное название ингредиента
-	//int calculateMaxNameSize();
-
-	//// Вернуть наибольшее кол-во ингредиентов
-	//int calculateMaxNumberStrSize();
-
-	//// Посчитать размеры максимальных имен эффектов
-	//int calculateMaxEffectNameSize();
-
-	//// Хранит максимальные размеры имен эффектов
-	//int effectsNameSizes[NUMBER_OF_EFFECTS];
-
 };
 

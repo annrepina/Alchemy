@@ -171,6 +171,10 @@
     <ClCompile Include="IngredientDirector.cpp" />
     <ClCompile Include="Alchemist.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Potion.cpp" />
+    <ClCompile Include="PotionBuilder.cpp" />
+    <ClCompile Include="PotionTable.cpp" />
+    <ClCompile Include="PotionTablePrinter.cpp" />
     <ClCompile Include="ReturnMenuState.cpp" />
     <ClCompile Include="SellingIngredientsMenuState.cpp" />
     <ClCompile Include="SellingPotionsMenuState.cpp" />
@@ -213,6 +217,10 @@
     <ClInclude Include="IngredientsTablePrinter.h" />
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Potion.h" />
+    <ClInclude Include="PotionBuilder.h" />
+    <ClInclude Include="PotionTable.h" />
+    <ClInclude Include="PotionTablePrinter.h" />
     <ClInclude Include="ReturnMenuState.h" />
     <ClInclude Include="SellingIngredientsMenuState.h" />
     <ClInclude Include="SellingPotionsMenuState.h" />

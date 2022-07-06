@@ -10,6 +10,7 @@
 #define MAX_PRICE					135		// Максимальная цена ингредиента
 
 #define UNKNOWN						false	// Неизвестный пользователю эффект	
+#define KNOWN						true	// Известный пользователю эффект
 
 // Класс ингредиент
 class Ingredient
@@ -29,11 +30,14 @@ public:
 
 #pragma region ГЕТТЕРЫ
 
-	// Узнать известен ли пользователю эффект у данного ингредиента по id
+	// Узнать известен ли пользователю эффект у данного ингредиента по номеру эффекта
 	bool getEffectIsKnown(int number);
 
 	// Получить итератор на начало ассоциативного массива
-	map<int, bool>::iterator getIteratorOfEffectsId();
+	map<int, bool>::iterator getBeginIteratorOfEffectsId();
+
+	// Получить итератор на конец ассоциативного массива
+	map<int, bool>::iterator getEndIteratorOfEffectsId();
 	
 	// Получить имя
 	string getName();
@@ -61,6 +65,9 @@ public:
 
 	// Геттер для кол-ва
 	void setNumber(int number);
+
+	// Открыть эффект по id
+	void openEffect(int id);
 
 	//// Сеттер для id
 	//void setId(int id);

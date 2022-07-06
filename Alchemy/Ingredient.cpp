@@ -35,10 +35,18 @@ bool Ingredient::getEffectIsKnown(int number)
 	return 0;
 }
 
-map<int, bool>::iterator Ingredient::getIteratorOfEffectsId()
+map<int, bool>::iterator Ingredient::getBeginIteratorOfEffectsId()
 {
 	// Итератор на первый элемент
 	map<int, bool>::iterator iter = this->effectsId.begin();
+
+	return iter;
+}
+
+map<int, bool>::iterator Ingredient::getEndIteratorOfEffectsId()
+{
+	// итератор на элемент после конца
+	map<int, bool>::iterator iter = this->effectsId.end();
 
 	return iter;
 }
@@ -71,6 +79,11 @@ void Ingredient::setPrice(float price)
 void Ingredient::setNumber(int number)
 {
 	this->number = number;
+}
+
+void Ingredient::openEffect(int id)
+{
+	this->effectsId[id] = KNOWN;
 }
 
 void Ingredient::addEffect(int effectId)

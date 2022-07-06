@@ -11,11 +11,6 @@ IngredientsTableBuilder::~IngredientsTableBuilder()
 	clear();
 }
 
-//IngredientsTable* IngredientsTableBuilder::getResult()
-//{
-//	return this->ingredientsTable;
-//}
-
 void IngredientsTableBuilder::setIngredientBuilder(IngredientBuilder* ingredientBuilder)
 {
 	this->ingredientBuilder = ingredientBuilder;
@@ -36,19 +31,8 @@ void IngredientsTableBuilder::buildTable(AlchemyProgramParser* alchemyProgramPar
 	this->element->setEffectsTable(this->ingredientBuilder->getEffectsTable());
 }
 
-//void IngredientsTableBuilder::reset()
-//{
-//	this->ingredientsTable = new IngredientsTable();
-//}
-
 void IngredientsTableBuilder::clear()
 {
-	//if (nullptr != this->ingredientsTable)
-	//{
-	//	delete this->ingredientsTable;
-	//	this->ingredientsTable = nullptr;
-	//}
-
 	AlchemyTableBuilder::clear();
 
 	if (nullptr != this->ingredientBuilder)
@@ -81,24 +65,3 @@ void IngredientsTableBuilder::addIngredients(int numberOfIngredients)
 		--lastIngredientNameIndex;
 	}
 }
-
-//void IngredientsTableBuilder::calculateLength()
-//{
-//
-//	int length;
-//
-//	// Длина наибольшего id
-//	length = calculateMaxIdStrSize();
-//
-//	// Длина наибольшего имени ингредиента
-//	length += calculateMaxNameSize();
-//
-//	// Длина наибольшей цены
-//	length += to_string(MAX_PRICE).size();
-//
-//	// Длина наибольшего кол-ва
-//	length += calculateMaxNumberStrSize();
-//
-//	//length +=
-//
-//}

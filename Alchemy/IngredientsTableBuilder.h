@@ -38,8 +38,5 @@ private:
 
 	// Добавить ингредиенты в таблицу
 	void addIngredients(int numberOfIngredients);
-
-	//// Расчитать длину таблицы
-	//void calculateLength() override;
 };
 

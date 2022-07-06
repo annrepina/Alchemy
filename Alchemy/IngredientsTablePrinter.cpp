@@ -129,7 +129,7 @@ int IngredientsTablePrinter::calculateMaxNumberStrSize()
 int IngredientsTablePrinter::calculateMaxEffectNameSize()
 {
 	// Итератор на map 
-	map<int, bool>::iterator firstIter = table->getStartIterator()->second->getIteratorOfEffectsId();
+	map<int, bool>::iterator firstIter = table->getStartIterator()->second->getBeginIteratorOfEffectsId();
 
 	// Id-ключ первого элемента map
 	int firstEffectId = firstIter->first;
@@ -143,7 +143,7 @@ int IngredientsTablePrinter::calculateMaxEffectNameSize()
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{
 		// Для каждого ингредиента получаю свой итератор на map из эффектов, указывающий на 1ый элемент
-		map<int, bool>::iterator effectIter = i->second->getIteratorOfEffectsId();
+		map<int, bool>::iterator effectIter = i->second->getBeginIteratorOfEffectsId();
 
 		for (int i = 0; i < NUMBER_OF_EFFECTS; ++i, ++effectIter)
 		{
@@ -310,7 +310,7 @@ void IngredientsTablePrinter::fillInTableContent()
 		for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
 		{
 			// Итератор на map с эффектами у ингредиента
-			map<int, bool>::iterator effectIter = iter->second->getIteratorOfEffectsId();
+			map<int, bool>::iterator effectIter = iter->second->getBeginIteratorOfEffectsId();
 
 			// Добываем булеву
 			isEffectKnown = effectIter->second;
@@ -382,7 +382,7 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id)
 	for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
 	{
 		// Итератор на map с эффектами у ингредиента
-		map<int, bool>::iterator effectIter = ingredient->getIteratorOfEffectsId();
+		map<int, bool>::iterator effectIter = ingredient->getBeginIteratorOfEffectsId();
 
 		// Добываем булеву
 		isEffectKnown = effectIter->second;
@@ -464,7 +464,7 @@ void IngredientsTablePrinter::addIngredientToTableContent(int id)
 	for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
 	{
 		// Итератор на map с эффектами у ингредиента
-		map<int, bool>::iterator effectIter = endIter->second->getIteratorOfEffectsId();
+		map<int, bool>::iterator effectIter = endIter->second->getBeginIteratorOfEffectsId();
 
 		// Добываем булеву
 		isEffectKnown = effectIter->second;

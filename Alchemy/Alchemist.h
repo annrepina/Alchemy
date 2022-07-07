@@ -10,6 +10,7 @@ using namespace std;
 
 // Макисмальные показатели алхимика
 #define MAX_LEVEL			100
+#define LEVEL_DIVISOR		10		// Делитель для вычисления уровня алхимика
 
 // Класс Алхимик
 class Alchemist
@@ -39,6 +40,10 @@ public:
 
 	// Геттер для капитала
 	int getCapital();
+
+	int getAlchemistLevel();
+
+	int getSalesmanLevel();
 
 #pragma endregion Геттеры 
 
@@ -70,5 +75,9 @@ private:
 
 	// Капитал пользователя
 	int сapital;
+
+	//int alchemistLevelIndicator;
+
+	//int salesmanLevelIndicator;
 };
 

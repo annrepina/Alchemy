@@ -29,7 +29,7 @@ void IngredientsTablePrinter::update(int id)
 int IngredientsTablePrinter::calculateNumberOfLines()
 {
 	// Кол-во строк равно кол-ву ингредиентов
-	int numberOfLines = table->getEndIterator()->first;
+	int numberOfLines = (--table->getEndIterator())->first;
 
 	return numberOfLines;
 }
@@ -51,28 +51,30 @@ int IngredientsTablePrinter::calculateWidth()
 int IngredientsTablePrinter::calculateMaxId()
 {
 	// Последний id
-	int maxId = (table->getEndIterator())->first;
+	int maxId = (--table->getEndIterator())->first;
+
+	maxId = to_string(maxId).size();
 
 	return maxId;
 }
 
-int IngredientsTablePrinter::calculateMaxIdStrSize()
-{
-	// Последний id
-	int maxId = calculateMaxId();
-
-	// Последний id в виде строки
-	string strMaxId;
-
-	// Размер строки последнего id 
-	int maxStrIdSize;
-
-	strMaxId = to_string(maxId);
-
-	maxStrIdSize = strMaxId.size();
-
-	return maxStrIdSize;
-}
+//int IngredientsTablePrinter::calculateMaxIdStrSize()
+//{
+//	// Последний id
+//	int maxId = calculateMaxId();
+//
+//	// Последний id в виде строки
+//	string strMaxId;
+//
+//	// Размер строки последнего id 
+//	int maxStrIdSize;
+//
+//	strMaxId = to_string(maxId);
+//
+//	maxStrIdSize = strMaxId.size();
+//
+//	return maxStrIdSize;
+//}
 
 int IngredientsTablePrinter::calculateMaxNameSize()
 {
@@ -81,7 +83,7 @@ int IngredientsTablePrinter::calculateMaxNameSize()
 
 	map<int, Ingredient*>::iterator startIter = table->getStartIterator();
 
-	map<int, Ingredient*>::iterator endIter = ++table->getEndIterator();
+	map<int, Ingredient*>::iterator endIter = table->getEndIterator();
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{
@@ -108,7 +110,7 @@ int IngredientsTablePrinter::calculateMaxNumberStrSize()
 
 	map<int, Ingredient*>::iterator startIter = table->getStartIterator();
 
-	map<int, Ingredient*>::iterator endIter = ++table->getEndIterator();
+	map<int, Ingredient*>::iterator endIter = table->getEndIterator();
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{
@@ -123,7 +125,11 @@ int IngredientsTablePrinter::calculateMaxNumberStrSize()
 
 	strMaxNumberSize = strMaxNumber.size();
 
-	return strMaxNumberSize;
+	if (strMaxNumberSize > NUMBER_LENGTH)
+		return strMaxNumberSize;
+
+	else
+		return NUMBER_LENGTH;
 }
 
 int IngredientsTablePrinter::calculateMaxEffectNameSize()
@@ -138,7 +144,7 @@ int IngredientsTablePrinter::calculateMaxEffectNameSize()
 
 	map<int, Ingredient*>::iterator startIter = table->getStartIterator();
 
-	map<int, Ingredient*>::iterator endIter = ++table->getEndIterator();
+	map<int, Ingredient*>::iterator endIter = table->getEndIterator();
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{
@@ -167,7 +173,7 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth()
 	vector <int> columnWidth;
 
 	// Считаем ширину столбца с id
-	int idColumnWidth = calculateMaxIdStrSize() + GAPS;
+	int idColumnWidth = calculateMaxId() + GAPS;
 
 	// Добавляем ширину колонки с id
 	columnWidth.push_back(idColumnWidth);
@@ -193,7 +199,7 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth()
 
 	//int numberColumnWidth = calculateMaxNumberStrSize(table) + GAPS;
 
-	int numberColumnWidth = NUMBER_LENGTH + GAPS;
+	int numberColumnWidth = calculateMaxNumberStrSize() + GAPS;
 
 	columnWidth.push_back(numberColumnWidth);
 
@@ -201,6 +207,8 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth()
 }
 
 #pragma endregion Методы расчета
+
+#pragma region Методы печати
 
 void IngredientsTablePrinter::print(int page)
 {
@@ -262,6 +270,8 @@ void IngredientsTablePrinter::printContent(int page)
 
 	cout << endl << endl;
 }
+
+#pragma endregion Методы печати
 
 void IngredientsTablePrinter::fillInTableContent()
 {
@@ -419,7 +429,7 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id)
 void IngredientsTablePrinter::addIngredientToTableContent(int id)
 {
 	// Итератор на конец map в таблице
-	map<int, Ingredient*>::iterator endIter = table->getEndIterator();
+	map<int, Ingredient*>::iterator endIter = --table->getEndIterator();
 
 	// последний индекс в содержимом таблицы равен последнему id в таблице
 	int lastId = endIter->first - 1;

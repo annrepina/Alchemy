@@ -8,7 +8,7 @@
 //#define NUMBER_OF_COLUMNS		6		// Кол-во колонок
 #define OUTER_BORDERS			2		// Внешние границы таблицы (левая и правая)
 #define GAPS					2		// Кол-во пробелов в столбце (1 слева и 1 справа)
-
+#define NUMBER_OF_COLUMNS			6		// Кол-во колонок
 
 #define PRICE_LENGTH				4		// Длина слова "Цена"
 #define NUMBER_LENGTH				6		// Длина слова "Кол-во"
@@ -45,8 +45,8 @@ private:
 	// посчитать максимальное id
 	int calculateMaxId() override;
 
-	// Вернуть наибольший id
-	int calculateMaxIdStrSize() override;
+	//// Вернуть наибольший id
+	//int calculateMaxIdStrSize() override;
 
 	// Вернуть самое длинное название ингредиента
 	int calculateMaxNameSize() override;
@@ -77,11 +77,5 @@ private:
 
 	// Обновить содержимое таблицы - добавить новый ингредиент
 	void addIngredientToTableContent(int id);
-
-	//// Печать шапки таблицы
-	//void printHeader(IngredientsTable* table) override;
-
-	// Печать внутренней рамки таблицы
-	//void printInnerFrame(IngredientsTable* table) override;
 };
 

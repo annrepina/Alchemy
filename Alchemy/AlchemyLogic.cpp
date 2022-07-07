@@ -127,7 +127,7 @@ bool AlchemyLogic::hasSuchIngredientName(string ingredientName)
 {
 	map<int, Ingredient*>::iterator startIter = ingredientsTable->getStartIterator();
 
-	map<int, Ingredient*>::iterator endIter = ++ingredientsTable->getEndIterator();
+	map<int, Ingredient*>::iterator endIter = ingredientsTable->getEndIterator();
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{

@@ -11,7 +11,6 @@
 
 #define NUMBER_OF_LINES_ON_PAGE		11		// Кол-во строк на одной странице
 #define NUMBER_OF_CONTENT_LINES		10		// Кол-во строк с содержимым
-#define NUMBER_OF_COLUMNS			6		// Кол-во колонок
 
 #define GAPS						2		// Кол-во пробелов в столбце (1 слева и 1 справа)
 
@@ -42,34 +41,18 @@ public:
 
 	virtual void print(int page)
 	{
-		//cout << "\x1b[3;9000r";
-
 		setPage(page);
-
-		//calculateData();
-
-		//this->columnWidthValues = calculateColumnWidth();
-
-		//this->tableWidth = calculateWidth();
-
-		//this->xCoordForFramePrinting = calculateXCoordForPrinting();
-
-		//this->numberOfColumns = this->columnWidthValues.size();
-
-		//this->numberOfLines = calculateNumberOfLines(); 
-
-		//this->xCoordsForContentPrinting = calculateXCoordsForContentPrinting();
 
 		printTitle();
 		
 		printInnerFrame();
-
-
 	}
 
 	// Расчитать данные по таблице
 	virtual void calculateData()
 	{
+		this->numberOfLines = calculateNumberOfLines();
+
 		this->columnWidthValues = calculateColumnWidth();
 
 		this->tableWidth = calculateWidth();
@@ -77,8 +60,6 @@ public:
 		this->xCoordForFramePrinting = calculateXCoordForPrinting();
 
 		this->numberOfColumns = this->columnWidthValues.size();
-
-		this->numberOfLines = calculateNumberOfLines();
 
 		this->xCoordsForContentPrinting = calculateXCoordsForContentPrinting();
 	}
@@ -148,7 +129,7 @@ protected:
 
 	virtual int calculateMaxId() = 0;
 
-	virtual int calculateMaxIdStrSize() = 0;
+	//virtual int calculateMaxIdStrSize() = 0;
 
 	virtual int calculateMaxNameSize() = 0;
 

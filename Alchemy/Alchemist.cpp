@@ -33,6 +33,16 @@ int Alchemist::getCapital()
 	return this->сapital;
 }
 
+int Alchemist::getAlchemistLevel()
+{
+	return this->alchemistLevel;
+}
+
+int Alchemist::getSalesmanLevel()
+{
+	return this->salesmanLevel;
+}
+
 void Alchemist::increaseAlchemistLevel()
 {
 	// увеличиваем на 1
@@ -58,7 +68,7 @@ void Alchemist::decreaseCapital(int value)
 void Alchemist::print()
 {
 	cout << "Алхимик: " << this->name << endl
-		<< "Уровень алхимика: " << this->alchemistLevel << endl
-		<< "Уровень продавца: " << this->salesmanLevel << endl
+		<< "Уровень алхимика: " << this->alchemistLevel / LEVEL_DIVISOR << endl
+		<< "Уровень продавца: " << this->salesmanLevel / LEVEL_DIVISOR << endl
 		<< "Золото: " << this->сapital << endl;
 }

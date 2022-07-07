@@ -13,11 +13,29 @@ public:
 	//// Конструктор с параметрами
 	//Potion(Ingredient* ingredient1, Ingredient* ingredient2);
 
+#pragma region Сеттеры
+
 	void setEffectId(int id);
 
 	void setPrice(int price);
 
 	void setNumber(int number);
+
+	void setPower(int power);
+
+#pragma endregion Сеттеры
+
+#pragma region Геттеры
+
+	int getNumber();
+
+	int getEffectId();
+
+	int getPower();
+
+	int getPrice();
+
+#pragma endregion Геттеры
 
 private:
 
@@ -30,7 +48,7 @@ private:
 	// Кол-во
 	int number;
 
-	//// Ищет есть ли у ингредиентов совпадения по эффектам
-	//bool hasEffectsMatching(Ingredient* ingredient1, Ingredient* ingredient2);
+	// Мощность зелья, которая зависит от уровня алхимика
+	int power;
 
 };

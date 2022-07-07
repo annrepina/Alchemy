@@ -256,13 +256,13 @@ int AlchemicalUserInterface::chooseId(string strChoice, TableCode code)
 	// перейти по координате дл€ выбора
 	cout << goToXY(Y_COORD_AFTER_MENU_TITLE_2, strChoice.size() + 1);
 
-	map<int, Ingredient*>::iterator iter = this->alchemyLogic->getIngredientsTable()->getEndIterator();
+	//map<int, Ingredient*>::iterator iter = --this->alchemyLogic->getIngredientsTable()->getEndIterator();
 
 	//checkInput(id, 1, iter->first, strChoice);
 
 	if (code == TableCode::IngredientTable)
 	{
-		map<int, Ingredient*>::iterator iter = this->alchemyLogic->getIngredientsTable()->getEndIterator();
+		map<int, Ingredient*>::iterator iter = --this->alchemyLogic->getIngredientsTable()->getEndIterator();
 
 		string errorText = "ƒанного значени€ не существует в таблице, попробуйте снова: ";
 

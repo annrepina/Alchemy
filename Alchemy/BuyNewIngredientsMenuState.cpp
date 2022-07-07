@@ -86,9 +86,9 @@ void BuyNewIngredientsMenuState::printMenu()
 		}
 		else
 		{
-			ingredient = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getEndIterator()->second;
+			ingredient = (--this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getEndIterator())->second;
 
-			ingredientId = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getEndIterator()->first;
+			ingredientId = (--this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getEndIterator())->first;
 		}
 
 		// выводим скок стоит

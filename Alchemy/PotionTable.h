@@ -15,6 +15,18 @@ public:
 	// Добавить зелье в таблицу
 	void add(Potion* potion) override;
 
+#pragma region Геттеры
+
+	// Получить итератор на последний элемент в map
+	map<int, Potion*>::iterator getEndIterator();
+
+	// Получить итератор на последний элемент в map
+	map<int, Potion*>::iterator getStartIterator();
+
+	EffectsTable* getEffectsTable();
+
+#pragma endregion Геттеры
+
 private:
 
 	// Id зелья

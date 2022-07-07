@@ -43,6 +43,16 @@ Effect* EffectsTable::getEffectByKey(int key)
 	return this->effectsWithId[key];
 }
 
+map<int, Effect*>::iterator EffectsTable::getStartIterator()
+{
+	return this->effectsWithId.begin();
+}
+
+map<int, Effect*>::iterator EffectsTable::getEndIterator()
+{
+	return this->effectsWithId.end();
+}
+
 void EffectsTable::clear()
 {
 	// Очищаем память в каждом элементе

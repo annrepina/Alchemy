@@ -25,6 +25,12 @@ public:
 	// Получить эффект по ключу
 	Effect* getEffectByKey(int key);
 
+	// Получить итератор на начало map
+	map<int, Effect*>::iterator getStartIterator();
+	
+	// Получить итератор на начало map
+	map<int, Effect*>::iterator getEndIterator();
+
 private:
 
 	// Id эффекта

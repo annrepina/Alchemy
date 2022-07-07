@@ -23,6 +23,31 @@ void Potion::setNumber(int number)
 	this->number = number;
 }
 
+void Potion::setPower(int power)
+{
+	this->power = power;
+}
+
+int Potion::getNumber()
+{
+	return this->number;
+}
+
+int Potion::getEffectId()
+{
+	return this->effectId;
+}
+
+int Potion::getPower()
+{
+	return this->power;
+}
+
+int Potion::getPrice()
+{
+	return this->price;
+}
+
 //Potion::Potion(Ingredient* ingredient1, Ingredient* ingredient2)
 //{
 //	// результат смешения ингредиентов

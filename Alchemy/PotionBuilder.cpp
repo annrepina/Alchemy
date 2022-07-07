@@ -1,10 +1,14 @@
 #include "PotionBuilder.h"
 
+int PotionBuilder::coefficientOfPower = COEFFICIENT_OF_POWER;
+
+int PotionBuilder::coefficientOfPrice = COEFFICIENT_OF_PRICE;
+
 PotionBuilder::PotionBuilder() : Builder()
 {
 }
 
-void PotionBuilder::buildPotion(Ingredient* ingredient1, Ingredient* ingredient2)
+void PotionBuilder::buildPotion(Ingredient* ingredient1, Ingredient* ingredient2, Alchemist* alchemist)
 {
 	// результат смешения ингредиентов
 	bool res = false;
@@ -35,11 +39,27 @@ void PotionBuilder::buildPotion(Ingredient* ingredient1, Ingredient* ingredient2
 				// задаем параметры для зелья
 				this->element->setEffectId(i->first);
 				this->element->setNumber(1);
-				this->element->setPrice(ingredient1->getPrice() + ingredient2->getPrice());
+
+				// уровень алхимика
+				int alchemistLevel = alchemist->getAlchemistLevel();
+				int salesmanLevel = alchemist->getSalesmanLevel();
+
+				// если уровни самые маленькие, то увеличиваем до 1, чтобы не умножать на 0
+				if (alchemistLevel == 0)
+					alchemistLevel = 1;
+
+				if (salesmanLevel == 0)
+					salesmanLevel = 1;
+
+				// расчитываем цену зелья
+				this->element->setPrice((ingredient1->getPrice() + ingredient2->getPrice()) + (coefficientOfPrice * alchemistLevel * salesmanLevel));
 
 				// делаем узнаваемым эффект у обоих ингредиентов
 				ingredient1->openEffect(i->first);
 				ingredient2->openEffect(i->first);
+
+				// увеличиваем уровень алхимика
+				alchemist->increaseAlchemistLevel();
 
 				break;
 			}

@@ -32,6 +32,8 @@
 
 #define TWO_LINES						2		// Две строчки
 
+
+
 class AlchemicalUserInterface : public UserInterface
 {
 public:

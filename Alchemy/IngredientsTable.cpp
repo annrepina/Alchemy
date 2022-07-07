@@ -27,7 +27,7 @@ void IngredientsTable::setEffectsTable(EffectsTable* effectsTable)
 
 map<int, Ingredient*>::iterator IngredientsTable::getEndIterator()
 {
-	return --this->ingredientsWithId.end();
+	return this->ingredientsWithId.end();
 }
 
 map<int, Ingredient*>::iterator IngredientsTable::getStartIterator()
@@ -49,7 +49,7 @@ Ingredient* IngredientsTable::getIngredientByName(string name)
 {
 	map<int, Ingredient*>::iterator startIter = this->getStartIterator();
 
-	map<int, Ingredient*>::iterator endIter = ++this->getEndIterator();
+	map<int, Ingredient*>::iterator endIter = this->getEndIterator();
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{
@@ -67,7 +67,7 @@ int IngredientsTable::getIdByIngredient(Ingredient* ingredient)
 {
 	map<int, Ingredient*>::iterator startIter = this->getStartIterator();
 
-	map<int, Ingredient*>::iterator endIter = ++this->getEndIterator();
+	map<int, Ingredient*>::iterator endIter = this->getEndIterator();
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
 	{

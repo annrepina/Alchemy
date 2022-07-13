@@ -6,6 +6,7 @@
 #include "IngredientsTablePrinter.h"
 #include "MainMenuState.h"
 #include "IObserver.h"
+#include "PotionTablePrinter.h"
 
 // Координаты
 #define TITLE_Y_COORD					1		// Координаты Y курсора для печати названия программы
@@ -84,62 +85,6 @@ public:
 
 private:
 
-#pragma region КОДЫ
-
-	//// Коды меню
-	//enum MenuCode
-	//{
-	//	MainMenu1, 
-	//	AlchemicalMenu,
-	//	InstructionsMenu,
-	//	BuyingIngredientsMenu,
-	//	BuyingFaultMenu
-	//};
-
-	//// Коды пунктов в главном меню
-	//enum MainMenuCode
-	//{
-	//	DoAlchemy = MAIN_MENU_Y_COORD,
-	//	ReadInstructions
-	//};
-
-	//// Коды алхимического меню
-	//enum AlchemicalMenuCode
-	//{
-	//	MakingPotions = MAIN_MENU_Y_COORD,
-	//	BuyingIngredients,
-	//	SellingIngredients,
-	//	EatingIngredients,
-	//	SellingPotions,
-	//	WorkingWithTables, 
-	//	AlcReturn
-	//};
-
-	//// Коды меню инструкций
-	//enum InstructionsMenuCode
-	//{
-	//	InstrReturn = MAIN_MENU_Y_COORD,
-	//	Exit
-	//};
-
-	//// Коды меню покупки ингредиентов
-	//enum BuyingIngredientsMenuCode 
-	//{
-	//	ChooseFromList = MAIN_MENU_Y_COORD,
-	//	CreateNewIngredient
-	//};
-
-	//// Коды меню ошибки во время покупки ингредиентов
-	//enum BuyingFaultMenuCode
-	//{
-	//	СhooseAnotherIngredient = MAIN_MENU_Y_COORD, 
-	//	ChangeNumberOfIngredient
-	//};
-
-
-
-#pragma endregion 
-
 	// Программа - алхимия
 	AlchemyLogic* alchemyLogic;
 
@@ -151,6 +96,8 @@ private:
 
 	// Принтер для печати таблицы ингредиентов
 	IngredientsTablePrinter* ingredientsTableprinter;
+
+	PotionTablePrinter* potionTablePrinter;
 
 	// Состояние меню
 	MenuState* state;

@@ -1,14 +1,16 @@
 #include "AlchemyLogic.h"
 
-
-
 AlchemyLogic::AlchemyLogic()
 {
-	this->alchemist = new Alchemist();
+	//this->alchemist = new Alchemist();
+
+	this->alchemist = nullptr;
 
 	this->effectsTable = nullptr;
 
 	this->ingredientsTable = nullptr;
+
+	this->potionTable = nullptr;
 
 	
 }
@@ -21,6 +23,16 @@ void AlchemyLogic::setEffectsTable(EffectsTable* effectsTable)
 void AlchemyLogic::setIngredientsTable(IngredientsTable* ingredientsTable)
 {
 	this->ingredientsTable = ingredientsTable;
+}
+
+void AlchemyLogic::setPotionTable(PotionTable* potionTable)
+{
+	this->potionTable = potionTable;
+}
+
+void AlchemyLogic::setAlchemist(Alchemist* alchemist)
+{
+	this->alchemist = alchemist;
 }
 
 Alchemist* AlchemyLogic::getAlchemist()
@@ -36,6 +48,11 @@ EffectsTable* AlchemyLogic::getEffectsTable()
 IngredientsTable* AlchemyLogic::getIngredientsTable()
 {
 	return this->ingredientsTable;
+}
+
+PotionTable* AlchemyLogic::getPotionTable()
+{
+	return this->potionTable;
 }
 
 bool AlchemyLogic::tryBuyIngredientFromList(int id, int number)

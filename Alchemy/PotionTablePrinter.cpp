@@ -10,6 +10,11 @@ PotionTablePrinter::~PotionTablePrinter()
 
 void PotionTablePrinter::print(int page)
 {
+	TablePrinter::print(page);
+
+	this->printHeader();
+
+	this->printContent(page);
 }
 
 void PotionTablePrinter::fillInTableContent()
@@ -26,17 +31,10 @@ void PotionTablePrinter::fillInTableContent()
 	// Строковое значение
 	string strValue;
 
-	//// id эффекта ингредиента
-	//int effectId;
+	// Счетчик
+	int counter = 0;
 
-	//// Известен ли игроку эффект данного ингредиента
-	//bool isEffectKnown;
-
-
-
-	
-
-	for (auto i = startIter; i < this->numberOfLines; ++i)
+	for (auto i = startIter; i != endIter; ++i, ++counter)
 	{
 		// Создаем внутренний вектор
 		vector <string> line;
@@ -48,57 +46,28 @@ void PotionTablePrinter::fillInTableContent()
 		intValue = startIter->first;
 
 		// Добавляем в первый вектор id
-		this->tableContent[i].push_back(to_string(intValue));
+		this->tableContent[counter].push_back(to_string(intValue));
 
-		// добываем имя
-		strValue = startIter->second->getName();
+		// id эффекта
+		int effectId = startIter->second->getEffectId();
+
+		// добываем имя зелья 
+		strValue = this->table->getEffectsTable()->getEffectByKey(effectId)->getName();
 
 		// Добавляем в первый вектор имя
-		this->tableContent[i].push_back(strValue);
+		this->tableContent[counter].push_back(strValue);
 
 		// добываем цену
 		intValue = startIter->second->getPrice();
 
 		// Добавляем цену 
-		this->tableContent[i].push_back(to_string(intValue));
+		this->tableContent[counter].push_back(to_string(intValue));
 
-		//// для каждого ингредиента
-		//for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
-		//{
-		//	// Итератор на map с эффектами у ингредиента
-		//	map<int, bool>::iterator effectIter = iter->second->getBeginIteratorOfEffectsId();
-
-		//	// Добываем булеву
-		//	isEffectKnown = effectIter->second;
-
-		//	// имя эффекта
-		//	string effectName;
-
-		//	// если имя игроку известно
-		//	if (isEffectKnown)
-		//	{
-		//		// Присваиваем id
-		//		effectId = effectIter->first;
-
-		//		// Присваиваем имя
-		//		effectName = table->getEffectsTable()->getEffectByKey(effectId)->getName();
-		//	}
-		//	else
-		//		effectName = UNKNOWN_EFFECT;
-
-		//	// Добавляем имя эффекта 
-		//	this->tableContent[i].push_back(effectName);
-
-		//	++effectIter;
-		//}
-
+		// добываем кол-во
 		intValue = startIter->second->getNumber();
 
 		// Добавляем кол-во ингредиента
-		this->tableContent[i].push_back(to_string(intValue));
-
-		// увеличиваем итератор
-		++startIter;
+		this->tableContent[counter].push_back(to_string(intValue));
 	}
 }
 
@@ -280,8 +249,6 @@ int PotionTablePrinter::calculateMaxPriceStrSize()
 }
 
 #pragma endregion Методы расчета
-
-
 
 void PotionTablePrinter::printHeader()
 {

@@ -5,8 +5,8 @@
 //#include "Formatting.h"
 //#include "KeyBoard.h"
 #include "Alchemist.h"
-//#include "EffectsTableBuilder.h"
 #include "IngredientsTable.h"
+#include "PotionTable.h"
 #include "EffectsTable.h"
 #include "IngredientBuilder.h"
 #include "ServiceFunctions.h"
@@ -42,6 +42,10 @@ public:
 	// Сеттер для таблицы ингредиентов
 	void setIngredientsTable(IngredientsTable* ingredientsTable);
 
+	void setPotionTable(PotionTable* potionTable);
+
+	void setAlchemist(Alchemist* alchemist);
+
 #pragma endregion СЕТТЕРЫ
 
 #pragma region ГЕТТЕРЫ
@@ -54,20 +58,14 @@ public:
 
 	IngredientsTable* getIngredientsTable();
 
+	PotionTable* getPotionTable();
+
 #pragma endregion ГЕТТЕРЫ
 
 	// Попробовать добавить опр. кол-во ингредиента из списка
 	bool tryBuyIngredientFromList(int id, int number);
 
 	bool tryAddNewIngredientToTable(string ingredientName);
-
-#pragma region МЕТОДЫ ПЕЧАТИ
-
-
-	//void printIngredientsTable();
-
-#pragma endregion МЕТОДЫ ПЕЧАТИ
-
 
 private:
 
@@ -79,6 +77,9 @@ private:
 
 	// Таблица ингредиентов
 	IngredientsTable* ingredientsTable;
+
+	// Таблица зелий
+	PotionTable* potionTable;
 
 	// Проверяет есть ли подобные названия ингредиентов уже в таблице
 	bool hasSuchIngredientName(string ingredientName);

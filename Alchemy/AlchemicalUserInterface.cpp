@@ -1,45 +1,10 @@
 #include "AlchemicalUserInterface.h"
 
-//string AlchemicalUserInterface::listOfMainMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] = {
-//	"Алхимичить",
-//	"Читать инструкцию к программе"
-//};
-
-//string AlchemicalUserInterface::listOfALchemicalMenuItems[NUMBER_OF_ALCHEMICAL_MENU_ITEMS] = {
-//	"Создание зелий",
-//	"Покупка ингредиентов",
-//	"Продажа ингредиентов",
-//	"Поедание ингредиентов",
-//	"Продажа зелий",
-//	"Работа с таблицами",
-//	"Назад"
-//};
-//
-//string AlchemicalUserInterface::listOfInstructionsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] = {
-//	"Назад",
-//	"Выйти из программы"
-//};
-//
-//string AlchemicalUserInterface::listOfBuyingIngredientsMenuItems[NUMBER_OF_BUYING_MENU_ITEMS] = {
-//	"Покупка ингредиентов из имеющегося списка",
-//	"Покупка новых ингредиентов, которых нет в списке",
-//	"Назад"
-//};
-//
-//string AlchemicalUserInterface::listOfBuyingFaultMenuItems[NUMBER_OF_MAIN_MENU_ITEMS] =
-//{
-//	"Выбрать другой ингредиент.",
-//	"Выбрать другое кол-во ингредиента"
-//};
-
 AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 {
-	//this->alchemist = new Alchemist();
-	//this->ingredientBuilder = new IngredientBuilder();
 	this->exitFlag = false;
 	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 	this->boundaryYCoord = MAIN_MENU_Y_COORD;
-	//this->instructionsXCoord = 0;
 	this->instructionsMenuTitle = "Инструкции к программе \"Зельеварение\"";
 	this->mainMenuTitle = "Главное меню";
 	this->alchemicalMenuTitle = "Меню алхимии";
@@ -68,11 +33,15 @@ void AlchemicalUserInterface::launchMainLoop()
 
 	// Передаем в принтер таблицу
 	this->ingredientsTableprinter->setTable(this->alchemyLogic->getIngredientsTable());
+	this->potionTablePrinter->setTable(this->alchemyLogic->getPotionTable());
 
+	// Считаем данные по таблице 
 	this->ingredientsTableprinter->calculateData();
+	this->potionTablePrinter->calculateData();
 
 	// Заполняем таблицу контентом
 	this->ingredientsTableprinter->fillInTableContent();
+	this->potionTablePrinter->fillInTableContent();
 
 	// Добавляем подписчиков
 	this->alchemyLogic->getIngredientsTable()->subscribe(this->ingredientsTableprinter);

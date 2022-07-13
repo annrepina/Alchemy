@@ -31,6 +31,9 @@ void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgr
 
 	// Если док пустой
 
+	// Создаем пустого алхимика
+	this->element->setAlchemist(new Alchemist);
+
 	// Строим таблицу эффектов
 	this->effectsTableBuilder->buildTable(alchemyProgramParse);
 
@@ -51,6 +54,9 @@ void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgr
 
 	// Присваиваем таблицу ингредиентов
 	this->element->setIngredientsTable(ingredientsTableBuilder->getResult());
+
+	// Добавляем новую пустую таблицу зелий
+	this->element->setPotionTable(new PotionTable);
 
 	
 

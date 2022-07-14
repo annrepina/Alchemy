@@ -21,6 +21,7 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	this->alchemyProgramParser = new AlchemyProgramParser();
 
 	this->ingredientsTableprinter = new IngredientsTablePrinter();
+	this->potionTablePrinter = new PotionTablePrinter();
 
 	this->state = new MainMenuState(this);
 }
@@ -37,7 +38,9 @@ void AlchemicalUserInterface::launchMainLoop()
 
 	// Считаем данные по таблице 
 	this->ingredientsTableprinter->calculateData();
-	this->potionTablePrinter->calculateData();
+
+	/*if(this->alchemyLogic->getPotionTable()->getStartIterator() != this->alchemyLogic->getPotionTable()->getEndIterator())*/
+		this->potionTablePrinter->calculateData();
 
 	// Заполняем таблицу контентом
 	this->ingredientsTableprinter->fillInTableContent();

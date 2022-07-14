@@ -58,6 +58,9 @@ void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgr
 	// Добавляем новую пустую таблицу зелий
 	this->element->setPotionTable(new PotionTable);
 
+	// Задаем таблицу эффектов таблице зелий
+	this->element->getPotionTable()->setEffectsTable(this->element->getEffectsTable());
+
 	
 
 }

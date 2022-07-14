@@ -18,6 +18,11 @@ void PotionTable::add(Potion* potion)
 	this->potiontsWithId.emplace(++id, potion);
 }
 
+void PotionTable::setEffectsTable(EffectsTable* effectsTable)
+{
+	this->effectsTable = effectsTable;
+}
+
 map<int, Potion*>::iterator PotionTable::getEndIterator()
 {
 	// возвращаем итератор на последний элемент

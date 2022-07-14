@@ -101,7 +101,7 @@ vector<int> PotionTablePrinter::calculateColumnWidth()
 	// Значения ширин колонки
 	vector <int> columnWidth;
 
-	// Считаем ширину столбца с номером ингредиента
+	// Считаем ширину столбца с номером зелья
 	int idColumnWidth = calculateMaxId() + GAPS;
 
 	// Добавляем ширину колонки с id
@@ -175,29 +175,34 @@ int PotionTablePrinter::calculateMaxNameSize()
 
 int PotionTablePrinter::calculateMaxNumberStrSize()
 {
-	// мах кол-во зелья
-	int maxNumber = table->getStartIterator()->second->getNumber();
-
 	auto startIter = table->getStartIterator();
 
 	auto endIter = table->getEndIterator();
 
-	for (auto i = startIter; i != endIter; ++i)
+	if (startIter != endIter)
 	{
-		// Присваиваем кол-во текущего элемента
-		int number = i->second->getNumber();
+		// мах кол-во зелья
+		int maxNumber = startIter->second->getNumber();
 
-		if (maxNumber < number)
-			maxNumber = number;
+		for (auto i = startIter; i != endIter; ++i)
+		{
+			// Присваиваем кол-во текущего элемента
+			int number = i->second->getNumber();
+
+			if (maxNumber < number)
+				maxNumber = number;
+		}
+
+		maxNumber = to_string(maxNumber).size();
+
+		if (maxNumber > NUMBER_LENGTH)
+			return maxNumber;
+
+		else
+			return NUMBER_LENGTH;
 	}
 
-	maxNumber = to_string(maxNumber).size();
-
-	if (maxNumber > NUMBER_LENGTH)
-		return maxNumber;
-
-	else
-		return NUMBER_LENGTH;
+	return 0;
 }
 
 int PotionTablePrinter::calculateMaxPowerStrSize()
@@ -205,23 +210,28 @@ int PotionTablePrinter::calculateMaxPowerStrSize()
 	auto startIter = this->table->getStartIterator();
 	auto endIter = this->table->getEndIterator();
 
-	int maxPower = startIter->second->getPower();
-
-	for (auto i = startIter; i != endIter; ++i)
+	if (startIter != endIter)
 	{
-		int power = i->second->getPower();
+		int maxPower = startIter->second->getPower();
 
-		if (maxPower < power)
-			maxPower = power;
+		for (auto i = startIter; i != endIter; ++i)
+		{
+			int power = i->second->getPower();
+
+			if (maxPower < power)
+				maxPower = power;
+		}
+
+		maxPower = to_string(maxPower).size();
+
+		if (maxPower > POWER_LENGTH)
+			return maxPower;
+
+		else
+			return POWER_LENGTH;
 	}
 
-	maxPower = to_string(maxPower).size();
-
-	if (maxPower > POWER_LENGTH)
-		return maxPower;
-
-	else
-		return POWER_LENGTH;
+	return 0;
 }
 
 int PotionTablePrinter::calculateMaxPriceStrSize()
@@ -229,23 +239,28 @@ int PotionTablePrinter::calculateMaxPriceStrSize()
 	auto startIter = this->table->getStartIterator();
 	auto endIter = this->table->getEndIterator();
 
-	int maxPrice = startIter->second->getPrice();
-
-	for (auto i = startIter; i != endIter; ++i)
+	if (startIter != endIter)
 	{
-		int price = i->second->getPrice();
+		int maxPrice = startIter->second->getPrice();
 
-		if (maxPrice < price)
-			maxPrice = price;
+		for (auto i = startIter; i != endIter; ++i)
+		{
+			int price = i->second->getPrice();
+
+			if (maxPrice < price)
+				maxPrice = price;
+		}
+
+		maxPrice = to_string(maxPrice).size();
+
+		if (maxPrice > PRICE_LENGTH)
+			return maxPrice;
+
+		else
+			return PRICE_LENGTH;
 	}
 
-	maxPrice = to_string(maxPrice).size();
-
-	if (maxPrice > PRICE_LENGTH)
-		return maxPrice;
-
-	else
-		return PRICE_LENGTH;
+	return 0;
 }
 
 #pragma endregion Методы расчета

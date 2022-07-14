@@ -1,5 +1,7 @@
 #pragma once
 #include "MenuState.h"
+#include "ReturnMenuState.h"
+#include "ServiceFunctions.h"
 
 class CreatingPotionsMenuState : public MenuState
 {
@@ -31,10 +33,8 @@ private:
 	// Вектор функций, которые создают стейты
 	vector< function<MenuState* (CreatingPotionsMenuState&)> > listOfCreatingFunctions;
 
-	//// Создать состояние - алхимическое меню
-	//AlchemicalMenuState* createAlchemicalMenuState();
+	// Создать состояние - меню назад
+	ReturnMenuState* createReturnMenuState();
 
-	//// Создать состояние - меню инструкций
-	//InstructionsMenuState* createInstructionsMenuState();
 };
 

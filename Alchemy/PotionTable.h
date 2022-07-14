@@ -15,6 +15,9 @@ public:
 	// Добавить зелье в таблицу
 	void add(Potion* potion) override;
 
+	// Сеттер для таблицы эффектов
+	void setEffectsTable(EffectsTable* effectsTable);
+
 #pragma region Геттеры
 
 	// Получить итератор на последний элемент в map

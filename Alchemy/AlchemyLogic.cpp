@@ -77,6 +77,8 @@ bool AlchemyLogic::tryBuyIngredientFromList(int id, int number)
 		// уведомляем подписчиков об изменениях
 		ingredientsTable->notify(id);
 
+		ingredientsTable->addAvailableElement(id);
+
 		alchemist->decreaseCapital(cost);
 
 		res = true;
@@ -133,6 +135,12 @@ bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
 
 		// добавляем ингредиент в таблицу
 		this->ingredientsTable->add(builder.getResult());
+
+		// id Этого ингредиента
+		int id = (--this->ingredientsTable->getEndIterator())->first;
+
+		// добавляем элемент в вектор имеющихся элементов
+		this->ingredientsTable->addAvailableElement(id);
 
 		return true;
 	}

@@ -248,6 +248,11 @@ int AlchemicalUserInterface::chooseId(string strChoice, TableCode code)
 	return id;
 }
 
+int AlchemicalUserInterface::chooseIdFromAvailableElements(string strChoice, TableCode code)
+{
+	return 0;
+}
+
 int AlchemicalUserInterface::chooseNumber(string strChoice, TableCode code, int yCoord)
 {
 	int number = 0;
@@ -696,6 +701,22 @@ void AlchemicalUserInterface::printPageMenu(int page)
 }
 
 void AlchemicalUserInterface::printTablePagesInLoop(TableCode code, int& page)
+{
+	if (code == TableCode::IngredientTable)
+	{
+		this->ingredientsTableprinter->print(page);
+
+		printPageMenu(page);
+
+		choosePage(page, TableCode::IngredientTable);
+	}
+	else
+	{
+
+	}
+}
+
+void AlchemicalUserInterface::printTableWithAvailableToUserElements(TableCode code, int& page)
 {
 	if (code == TableCode::IngredientTable)
 	{

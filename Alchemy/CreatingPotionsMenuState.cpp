@@ -1,5 +1,6 @@
 #include "CreatingPotionsMenuState.h"
 #include "AlchemicalMenuState.h"
+#include "AlchemicalUserInterface.h"
 
 CreatingPotionsMenuState::CreatingPotionsMenuState()
 {
@@ -32,18 +33,14 @@ void CreatingPotionsMenuState::printMenu()
     // Текст ошибки в случае неудачной покупки
     string error = "";
 
-
-
-
-
 	while (false == success)
 	{
 		// начальная страница таблицы
 		int page = FIRST_PAGE;
 
-		string choiceIngredient = "Введите № первого ингредиента: ";
+		string choiceFirstIngredient = "Введите № первого ингредиента: ";
 
-		string choiceNumber = "Введите № второго ингредиента: ";
+		string choiceSecondIngredient = "Введите № второго ингредиента: ";
 
 		// Флаг ддля выхода из цикла
 		bool exit = false;
@@ -52,10 +49,11 @@ void CreatingPotionsMenuState::printMenu()
 
 		printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
 
-		printColoredTextByCoords(choiceIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
+		printColoredTextByCoords(choiceFirstIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
 
-		printColoredTextByCoords(choiceNumber, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD);
+		printColoredTextByCoords(choiceSecondIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD);
 
+		// печатаем таблицу зелий
 		this->alchemicalUserInterface->printTablePagesInLoop(AlchemicalUserInterface::TableCode::IngredientTable, page);
 
 		// если был нажат esc
@@ -69,17 +67,17 @@ void CreatingPotionsMenuState::printMenu()
 			return;
 		}
 
-		int id = this->alchemicalUserInterface->chooseId(choiceIngredient, AlchemicalUserInterface::TableCode::IngredientTable);
+		Ingredient* firstIngredient = this->alchemicalUserInterface->chooseId(choiceFirstIngredient, AlchemicalUserInterface::TableCode::IngredientTable);
 
 		//if (wasExit(id))
 		//	return;
 
-		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
+		int number = this->alchemicalUserInterface->chooseNumber(choiceSecondIngredient, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
 
 		//if (wasExit(number))
 		//	return;
 
-		success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(id, number);
+		success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(firstIngredient, number);
 
 		// Если покупка не состоялась
 		if (!success)

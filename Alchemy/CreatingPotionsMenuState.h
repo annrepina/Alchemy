@@ -2,6 +2,7 @@
 #include "MenuState.h"
 #include "ReturnMenuState.h"
 #include "ServiceFunctions.h"
+#include "PotionBuilder.h"
 
 class CreatingPotionsMenuState : public MenuState
 {
@@ -17,6 +18,9 @@ public:
 	void printMenu() override;
 
 private:
+
+	// строитель зель€
+	PotionBuilder* potionBuilder;
 
 	// ѕолучить следующее состо€ние
 	MenuState* getNextState() override;

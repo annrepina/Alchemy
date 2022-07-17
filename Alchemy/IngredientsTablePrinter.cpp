@@ -225,6 +225,15 @@ void IngredientsTablePrinter::print(int page)
 	this->printContent(page);
 }
 
+void IngredientsTablePrinter::printAvailableElemnts(int page)
+{
+	TablePrinter::printAvailableElements(page);
+
+	this->printHeader();
+
+	this->printAvailableContent(page);
+}
+
 void IngredientsTablePrinter::printHeader()
 {
 	string namesOfColumns[NUMBER_OF_COLUMNS] = { "є", "»м€", "÷ена", "Ёффект 1", "Ёффект 2", " ол-во" };
@@ -266,6 +275,44 @@ void IngredientsTablePrinter::printContent(int page)
 		}
 
 		this->yCoordForContentPrinting += GAPS;
+	}
+
+	cout << endl << endl;
+}
+
+void IngredientsTablePrinter::printAvailableContent(int page)
+{
+	int border = page * NUMBER_OF_CONTENT_LINES;
+
+	// сбрасываем координату
+	this->yCoordForContentPrinting = Y_COORD_FOR_CONTENT_PRINTING;
+
+	//// »тератор на начало 
+	//map<int, Ingredient*>::iterator iter = table->getStartIterator();
+
+	int i = 0;
+
+	if (page > 1)
+	{
+		i = (page - 1) * NUMBER_OF_CONTENT_LINES;
+	}
+
+	for (; i < this->numberOfLines && i < border; ++i)
+	{
+		// если кол-во ингредиента больше нул€
+		if (this->table->getIngredientById(i)->getNumber() > 0)
+		{
+			for (int j = 0; j < this->numberOfColumns; ++j)
+			{
+				cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[j]);
+
+				cout << this->tableContent[i][j];
+			}
+
+			this->yCoordForContentPrinting += GAPS;
+		}
+		else
+			++border;
 	}
 
 	cout << endl << endl;

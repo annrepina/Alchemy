@@ -30,12 +30,38 @@ public:
 		return this->title;
 	}
 
+	// Добавить доступный элемент
+	void addAvailableElement(int id)
+	{
+		// Имеет ли таблица такой элемент уже
+		bool hasSuchElement = false;
+
+		// проверяем в цикле
+		for (auto element : availableElements)
+		{
+			// если есть совпадение
+			if (element == id)
+			{
+				hasSuchElement = true;
+				break;
+			}
+		}
+
+		// если такого элемента не было
+		if(!hasSuchElement)
+			this->availableElements.push_back(id);
+	}
+
 protected:
 
 	// Название таблицы
 	string title;
 
+	// Доступные пользователю элементы, те, у которых кол-во больше нуля
+	vector<int> availableElements;
+
 private:
 
 };
+
 

@@ -47,6 +47,12 @@ public:
 		
 		printInnerFrame();
 	}
+	
+	virtual void printAvailableElements(int page)
+	{
+		print(page);
+
+	}
 
 	// Расчитать данные по таблице
 	virtual void calculateData()
@@ -274,6 +280,8 @@ protected:
 
 	// Печать содержимого таблицы по страницам
 	virtual void printContent(int page) = 0;
+
+	virtual void printAvailableContent(int page) = 0;
 
 	// Печать шапки таблицы
 	virtual void printHeader() = 0;

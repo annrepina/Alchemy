@@ -74,8 +74,14 @@ public:
 	// Печать страниц таблиц в цикле
 	void printTablePagesInLoop(TableCode code, int& page);
 
+	// Печать таблицы только с теми элементами, которые существуют у юзера
+	void printTableWithAvailableToUserElements(TableCode code, int& page);
+
 	// Выбрать Id из таблицы
 	int chooseId(string strChoice, TableCode code);
+
+	// Выбрать Id из имеющихся элементов
+	int chooseIdFromAvailableElements(string strChoice, TableCode code);
 
 	// Вбрать кол-во ингредиента или зелья
 	int chooseNumber(string strChoice, TableCode code, int yCoord);

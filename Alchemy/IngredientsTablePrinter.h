@@ -27,7 +27,7 @@ public:
 
 	void print(int page) override;
 
-	void printAvailableElemnts(int page) override;
+	void printAvailableElements(int page) override;
 
 	// заполнить вектор с содержимым таблицы
 	void fillInTableContent() override;

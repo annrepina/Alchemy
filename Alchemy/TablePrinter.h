@@ -171,8 +171,6 @@ protected:
 		return xCoordForPrinting;
 	}
 
-
-
 #pragma endregion МЕТОДЫ РАСЧЕТА
 
 	// заполнить вектор с содержимым таблицы

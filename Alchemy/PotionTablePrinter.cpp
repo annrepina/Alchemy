@@ -71,6 +71,10 @@ void PotionTablePrinter::fillInTableContent()
 	}
 }
 
+void PotionTablePrinter::printAvailableElements(int page)
+{
+}
+
 #pragma region Методы расчета
 
 int PotionTablePrinter::calculateNumberOfLines()

@@ -21,6 +21,8 @@ public:
 	// заполнить вектор с содержимым таблицы
 	void fillInTableContent() override;
 
+	void printAvailableElements(int page) override;
+
 
 private:
 
@@ -66,6 +68,9 @@ private:
 
 	// Печать содержимого таблицы
 	void printContent(int page) override;
+
+	// Печать доступного содержимого таблицы
+	void printAvailableContent(int page) override;
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 

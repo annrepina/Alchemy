@@ -225,7 +225,7 @@ void IngredientsTablePrinter::print(int page)
 	this->printContent(page);
 }
 
-void IngredientsTablePrinter::printAvailableElemnts(int page)
+void IngredientsTablePrinter::printAvailableElements(int page)
 {
 	TablePrinter::printAvailableElements(page);
 

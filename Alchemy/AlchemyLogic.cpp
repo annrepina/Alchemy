@@ -97,44 +97,12 @@ bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
 	// если ингредиента с подобным названием в таблице нет
 	if (!hasSuchIngredientName(ingredientName))
 	{
-		// Создаем строителя ингредиентов
-		IngredientBuilder builder;
+		IngredientBuilder ingredientBuilder;
 
-		// Задаем таблицу эффектов
-		builder.setEffectsTable(this->effectsTable);
-
-		builder.setName(ingredientName);
-
-		int price = randInRange(MIN_PRICE, MAX_PRICE);
-
-		builder.setPrice(price);
-
-		// Создаем временный вектор id эффектов
-		vector<int> tempEffectsId;
-
-		// Максимальное id эффекта 
-		int maxEffectId = builder.getEffectsTableSize();
-
-		// Добавление эффектов
-		for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
-		{
-			int idIndex = randInRange(1, maxEffectId);
-
-			// если это уже не первый эффект и предыдущий совпадает с вновь выбранным
-			if (0 < i && tempEffectsId[0] == idIndex)
-			{
-				--i;
-				continue;
-			}
-
-			// Добавляем во временный вектор id
-			tempEffectsId.push_back(idIndex);
-
-			builder.addEffect(idIndex);
-		}
+		ingredientBuilder.buildIngredient(ingredientName, this->effectsTable);
 
 		// добавляем ингредиент в таблицу
-		this->ingredientsTable->add(builder.getResult());
+		this->ingredientsTable->add(ingredientBuilder.getResult());
 
 		// id Этого ингредиента
 		int id = (--this->ingredientsTable->getEndIterator())->first;
@@ -142,11 +110,97 @@ bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
 		// добавляем элемент в вектор имеющихся элементов
 		this->ingredientsTable->addAvailableElement(id);
 
+		this->ingredientsTable->notify(id);
+
 		return true;
 	}
 
 	return false;
 }
+
+bool AlchemyLogic::tryCreatePotion(int firstIngredientId, int secondIngredientId)
+{	
+	// первый ингредиент
+	Ingredient* firstIngredient = this->ingredientsTable->getIngredientById(firstIngredientId);
+
+	// второй ингредиент
+	Ingredient* secondIngredient = this->ingredientsTable->getIngredientById(secondIngredientId);
+
+	// Создаем строителя зелий
+	PotionBuilder potionBuilder;
+
+	potionBuilder.buildPotion(firstIngredient, secondIngredient, this->alchemist);
+
+	Potion* potion = potionBuilder.getResult();
+
+	// если зелье не пустое
+	if (potion->getEffectId() != 0)
+	{
+		// 0 - если таких зелий нет
+		int id = hasSuchPotion(potion);
+
+		// если точно такое же зелье уже есть
+		if (id > 0)
+		{
+			this->potionTable->getPotionById(id)->increaseNumber();
+
+			this->potionTable->notify(id);
+
+			// удаляем созданное зелье
+			delete potion;
+			potion = nullptr;
+		}
+	}
+
+	return false;
+}
+
+//vector<int> AlchemyLogic::findEqualEffects(int firstIngredientId, int secondIngredientId)
+//{
+//	// Вектор id эффектов, которые совпали
+//	vector<int> equalEffectsId;
+//
+//	// первый ингредиент
+//	Ingredient* firstIngredient = this->ingredientsTable->getIngredientById(firstIngredientId);
+//
+//	// второй ингредиент
+//	Ingredient* secondIngredient = this->ingredientsTable->getIngredientById(secondIngredientId);
+//
+//	// Итератор на начало мэпа с эффектами первого ингредиента
+//	auto firstIngredientBeginIter = firstIngredient->getBeginIteratorOfEffectsId();
+//
+//	// итератор на конец мэпа с эффектами первого ингредиента 
+//	auto firstIngredientEndInter = firstIngredient->getEndIteratorOfEffectsId();
+//
+//	auto secondIngredientBeginIter = secondIngredient->getBeginIteratorOfEffectsId();
+//
+//	auto secondIngredientEndInter = secondIngredient->getEndIteratorOfEffectsId();
+//
+//	for (auto i = firstIngredientBeginIter; i != firstIngredientEndInter; ++i)
+//	{
+//		for (auto j = secondIngredientBeginIter; j != secondIngredientEndInter; ++j)
+//		{
+//			// если id эффектов совпали
+//			if (i->first == j->first)
+//			{
+//				// Добавляем в вектор эффектов
+//				equalEffectsId.push_back(i->first);
+//
+//				break;
+//			}
+//		}
+//	}
+//
+//	return equalEffectsId;
+//}
+
+//void AlchemyLogic::addPotion(int effectId)
+//{
+//	//// Создаем строителя зелий
+//	//PotionBuilder potionBuilder;
+//
+//	//potionBuilder.buildPotion()
+//}
 
 bool AlchemyLogic::hasSuchIngredientName(string ingredientName)
 {
@@ -164,6 +218,42 @@ bool AlchemyLogic::hasSuchIngredientName(string ingredientName)
 	}
 
 	return false;
+}
+
+int AlchemyLogic::hasSuchPotion(Potion* potion)
+{
+	int id = 0;
+
+	map<int, Potion*>::iterator startIter = potionTable->getStartIterator();
+
+	map<int, Potion*>::iterator endIter = potionTable->getEndIterator();
+
+	// Id эффекта зелья
+	int effectId = potion->getEffectId();
+
+	// цена зелья
+	int price = potion->getPrice();
+
+	// Мощность зелья
+	int power = potion->getPower();
+
+	for (map<int, Potion*>::iterator i = startIter; i != endIter; ++i)
+	{
+		// если совпадают главные поля, то возвращаем true
+		if (i->second->getEffectId() == effectId && i->second->getPrice() == price && i->second->getPower() == power)
+		{
+			id = i->first;
+
+			break;
+		}
+	}
+
+	return id;
+}
+
+Ingredient* AlchemyLogic::createNewIngredient(string ingredientName)
+{
+	return nullptr;
 }
 
 //void AlchemyProgram::printIngredientsTable()

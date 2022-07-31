@@ -48,6 +48,11 @@ int Potion::getPrice()
 	return this->price;
 }
 
+void Potion::increaseNumber()
+{
+	++this->number;
+}
+
 //Potion::Potion(Ingredient* ingredient1, Ingredient* ingredient2)
 //{
 //	// результат смешения ингредиентов

@@ -30,6 +30,9 @@ public:
 	// Создать ингредиент
 	void buildIngredient(int lastIngredientNameIndex, int& lastEffectIndex);
 
+	// Создать ингредиент по имени
+	void buildIngredient(string ingredientName, EffectsTable* effectsTable);
+
 	// Добавить эффект
 	void addEffect(int effectId);
 
@@ -41,8 +44,20 @@ public:
 	// Задать имя
 	void setName(string name);
 
+	// Задать имя
+	void setNameFromListRandomly(int lastIngredientNameIndex);
+
 	// Задать цену
 	void setPrice(int price);
+
+	// Задать цену рандомно
+	void setPriceRandomly();
+
+	// Задает ингредиенту эффекты
+	void setEffects(int& lastEffectIndex);
+
+	// Задает ингредиенты рандомно без привязки к конкретному индексу
+	void setEffectsRandomly();
 
 #pragma endregion СЕТТЕРЫ
 
@@ -53,12 +68,6 @@ private:
 
 	// Выбрать имя эффекту
 	string chooseIngredientName(int lastIndex);
-
-	//// Сбросить до начальных установок
-	//void reset();
-
-	//// Очизает память
-	//void clear();
 
 	// Список имен ингредиентов
 	static string listOfIngredientsNames[NUMBER_OF_INGREDIENTS];

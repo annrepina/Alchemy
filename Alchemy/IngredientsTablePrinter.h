@@ -17,7 +17,7 @@
 
 // Очередность столбцов id name price effect1 effect2 number
 
-class IngredientsTablePrinter : public TablePrinter<IngredientsTable>, public IObserver
+class IngredientsTablePrinter : public TablePrinter<IngredientsTable>
 {
 public:
 
@@ -34,7 +34,7 @@ public:
 
 private:
 
-	void update(int id) override;
+	/*void update(int id) override;*/
 
 #pragma region МЕТОДЫ РАСЧЕТА
 	
@@ -78,9 +78,9 @@ private:
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 
 	// заполнить один элемент вектора содержимым таблицы
-	void changeTableContentForOneElement(int id);
+	void changeTableContentForOneElement(int id) override;
 
 	// Обновить содержимое таблицы - добавить новый ингредиент
-	void addIngredientToTableContent(int id);
+	void addElementToTableContent(int id) override;
 };
 

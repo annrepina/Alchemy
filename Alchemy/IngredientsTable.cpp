@@ -81,36 +81,36 @@ int IngredientsTable::getIdByIngredient(Ingredient* ingredient)
 	return 0;
 }
 
-void IngredientsTable::subscribe(IObserver* observer)
-{
-	this->observerList.push_back(observer);
-}
+//void IngredientsTable::subscribe(IObserver* observer)
+//{
+//	this->observerList.push_back(observer);
+//}
 
-void IngredientsTable::unsubscribe(IObserver* observer)
-{
-	// размер вектор
-	int size = this->observerList.size();
+//void IngredientsTable::unsubscribe(IObserver* observer)
+//{
+//	// размер вектор
+//	int size = this->observerList.size();
+//
+//	// итератор на первый элемент в векторе
+//	auto begin = this->observerList.cbegin();	
+//
+//	for (int i = 0; i < size; ++i)
+//	{
+//		if (this->observerList[i] == observer)
+//		{
+//			this->observerList.erase(begin + i);
+//			break;
+//		}
+//	}
+//}
 
-	// итератор на первый элемент в векторе
-	auto begin = this->observerList.cbegin();	
-
-	for (int i = 0; i < size; ++i)
-	{
-		if (this->observerList[i] == observer)
-		{
-			this->observerList.erase(begin + i);
-			break;
-		}
-	}
-}
-
-void IngredientsTable::notify(int id)
-{
-	for (auto observer : this->observerList)
-	{
-		observer->update(id);
-	}
-}
+//void IngredientsTable::notify(int id)
+//{
+//	for (auto observer : this->observerList)
+//	{
+//		observer->update(id);
+//	}
+//}
 
 void IngredientsTable::clear()
 {

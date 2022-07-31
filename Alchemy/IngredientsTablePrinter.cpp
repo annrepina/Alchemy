@@ -8,21 +8,21 @@ IngredientsTablePrinter::~IngredientsTablePrinter()
 {
 }
 
-void IngredientsTablePrinter::update(int id)
-{
-	// если элементов меньше, чем id, значит был добавлен новый элемент
-	if (this->tableContent.size() < id)
-	{
-		addIngredientToTableContent(id);
-	}
-	else
-	{
-		this->tableContent[id - 1].clear();
-
-		changeTableContentForOneElement(id);
-	}
-
-}
+//void IngredientsTablePrinter::update(int id)
+//{
+//	// если элементов меньше, чем id, значит был добавлен новый элемент
+//	if (this->tableContent.size() < id)
+//	{
+//		addElementToTableContent(id);
+//	}
+//	else
+//	{
+//		this->tableContent[id - 1].clear();
+//
+//		changeTableContentForOneElement(id);
+//	}
+//
+//}
 
 #pragma region Методы расчета
 
@@ -216,18 +216,14 @@ void IngredientsTablePrinter::print(int page)
 
 	this->printHeader();
 
-	//// если совсем пустая, то заполняем
-	//if (this->tableContent.size() == 0)
-	//{
-	//	this->fillInTableContent();
-	//}
-
 	this->printContent(page);
 }
 
 void IngredientsTablePrinter::printAvailableElements(int page)
 {
-	TablePrinter::printAvailableElements(page);
+	//TablePrinter::printAvailableElements(page);
+
+	TablePrinter::print(page);
 
 	this->printHeader();
 
@@ -473,7 +469,7 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id)
 	this->calculateData();
 }
 
-void IngredientsTablePrinter::addIngredientToTableContent(int id)
+void IngredientsTablePrinter::addElementToTableContent(int id)
 {
 	// Итератор на конец map в таблице
 	map<int, Ingredient*>::iterator endIter = --table->getEndIterator();

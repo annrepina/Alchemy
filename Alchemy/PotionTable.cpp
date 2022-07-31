@@ -40,6 +40,11 @@ EffectsTable* PotionTable::getEffectsTable()
 	return this->effectsTable;
 }
 
+Potion* PotionTable::getPotionById(int id)
+{
+	return this->potiontsWithId[id];
+}
+
 void PotionTable::clear()
 {
 	for (auto potion : potiontsWithId)

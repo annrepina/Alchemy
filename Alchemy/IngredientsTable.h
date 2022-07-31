@@ -51,11 +51,11 @@ public:
 
 #pragma endregion церрепш
 
-	void subscribe(IObserver* observer) override;
+	//void subscribe(IObserver* observer) override;
 
-	void unsubscribe(IObserver* observer) override;
+	//void unsubscribe(IObserver* observer) override;
 
-	void notify(int id) override;
+	//void notify(int id) override;
 
 private:
 

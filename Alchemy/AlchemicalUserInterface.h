@@ -78,7 +78,7 @@ public:
 	void printTableWithAvailableToUserElements(TableCode code, int& page);
 
 	// Выбрать Id из таблицы
-	int chooseId(string strChoice, TableCode code);
+	int chooseId(/*string strChoice, */TableCode code);
 
 	// Выбрать Id из имеющихся элементов
 	int chooseIdFromAvailableElements(string strChoice, TableCode code);

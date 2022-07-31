@@ -98,7 +98,6 @@ void Ingredient::addEffect(int effectId)
 
 void Ingredient::increaseNumber(int number)
 {
-	this->number += number;
-
+	++this->number;
 }
 

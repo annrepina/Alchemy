@@ -133,14 +133,50 @@ EffectsTable* IngredientBuilder::getEffectsTable()
 
 void IngredientBuilder::buildIngredient(int lastIngredientNameIndex, int& lastEffectIndex)
 {
+	setNameFromListRandomly(lastIngredientNameIndex);
+
+	setPriceRandomly();
+
+	setEffects(lastEffectIndex);
+}
+
+void IngredientBuilder::buildIngredient(string ingredientName, EffectsTable* effectsTable)
+{
+	this->effectsTable = effectsTable;
+
+	setName(ingredientName);
+
+	setPriceRandomly();
+
+	setEffectsRandomly();
+}
+
+void IngredientBuilder::setName(string name)
+{
+	this->element->setName(name);
+}
+
+void IngredientBuilder::setNameFromListRandomly(int lastIngredientNameIndex)
+{
 	string name = chooseIngredientName(lastIngredientNameIndex);
 
 	setName(name);
+}
 
+void IngredientBuilder::setPrice(int price)
+{
+	this->element->setPrice(price);
+}
+
+void IngredientBuilder::setPriceRandomly()
+{
 	int price = randInRange(MIN_PRICE, MAX_PRICE);
 
 	setPrice(price);
+}
 
+void IngredientBuilder::setEffects(int& lastEffectIndex)
+{
 	// Создаем вектор id эффектов
 	vector<int> tempEffectsId;
 
@@ -156,7 +192,7 @@ void IngredientBuilder::buildIngredient(int lastIngredientNameIndex, int& lastEf
 		// если это уже не первый эффект
 		if (0 < i)
 		{
-			// Проверяем не добавлялся ли такой же до этого
+			// Проверяем не добавлялся ли такой же до этого, и если добавлялся
 			if (find(tempEffectsId.begin(), tempEffectsId.end(), this->effectsId[idIndex]) != tempEffectsId.end())
 			{
 				--i;
@@ -176,14 +212,31 @@ void IngredientBuilder::buildIngredient(int lastIngredientNameIndex, int& lastEf
 	}
 }
 
-void IngredientBuilder::setName(string name)
+void IngredientBuilder::setEffectsRandomly()
 {
-	this->element->setName(name);
-}
+	// Создаем временный вектор id эффектов
+	vector<int> tempEffectsId;
 
-void IngredientBuilder::setPrice(int price)
-{
-	this->element->setPrice(price);
+	// Максимальное id эффекта 
+	int maxEffectId = this->effectsTable->getSize();
+
+	// Добавление эффектов
+	for (int i = 0; i < NUMBER_OF_EFFECTS; ++i)
+	{
+		int idIndex = randInRange(1, maxEffectId);
+
+		// если это уже не первый эффект и предыдущий совпадает с вновь выбранным
+		if (0 < i && tempEffectsId[0] == idIndex)
+		{
+			--i;
+			continue;
+		}
+
+		// Добавляем во временный вектор id
+		tempEffectsId.push_back(idIndex);
+
+		addEffect(idIndex);
+	}
 }
 
 void IngredientBuilder::addEffect(int effectId)

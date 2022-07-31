@@ -2,9 +2,10 @@
 #include "Potion.h"
 #include "Table.h"
 #include "EffectsTable.h"
+#include "IObservable.h"
 
 // Класс таблица зелий
-class PotionTable : public Table<Potion>
+class PotionTable : public Table<Potion>, public IObservable
 {
 public:
 
@@ -27,6 +28,9 @@ public:
 	map<int, Potion*>::iterator getStartIterator();
 
 	EffectsTable* getEffectsTable();
+
+	// Получить зелье по id
+	Potion* getPotionById(int id);
 
 #pragma endregion Геттеры
 

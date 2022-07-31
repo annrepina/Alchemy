@@ -8,7 +8,7 @@
 
 #define NUMBER_OF_COLUMNS			5		// 4 êîëîíêè
 
-class PotionTablePrinter : public TablePrinter<PotionTable>
+class PotionTablePrinter : public TablePrinter<PotionTable>/*, public IObserver*/
 {
 public:
 
@@ -25,6 +25,8 @@ public:
 
 
 private:
+
+	//void update(int id) override;
 
 #pragma region ÌÅÒÎÄÛ ĞÀÑ×ÅÒÀ
 

@@ -219,18 +219,14 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 	} while (false == exitFlag && false == exit);
 }
 
-int AlchemicalUserInterface::chooseId(string strChoice, TableCode code)
+int AlchemicalUserInterface::chooseId(/*string strChoice, */TableCode code)
 {
 	int id = 0;
 
 	string value = "";
 
-	// перейти по координате для выбора
-	cout << goToXY(Y_COORD_AFTER_MENU_TITLE_2, strChoice.size() + 1);
-
-	//map<int, Ingredient*>::iterator iter = --this->alchemyLogic->getIngredientsTable()->getEndIterator();
-
-	//checkInput(id, 1, iter->first, strChoice);
+	//// перейти по координате для выбора
+	//cout << goToXY(Y_COORD_AFTER_MENU_TITLE_2, strChoice.size() + 1);
 
 	if (code == TableCode::IngredientTable)
 	{
@@ -716,11 +712,13 @@ void AlchemicalUserInterface::printTablePagesInLoop(TableCode code, int& page)
 	}
 }
 
+
+
 void AlchemicalUserInterface::printTableWithAvailableToUserElements(TableCode code, int& page)
 {
 	if (code == TableCode::IngredientTable)
 	{
-		this->ingredientsTableprinter->print(page);
+		this->ingredientsTableprinter->printAvailableElements(page);
 
 		printPageMenu(page);
 

@@ -17,7 +17,7 @@
 
 // Класс-шаблон печатающий что-либо
 template <typename PrintableTable>
-class TablePrinter
+class TablePrinter : public IObserver
 {
 public:
 
@@ -39,6 +39,21 @@ public:
 
 	}
 
+	void update(int id) override
+	{
+		// если элементов меньше, чем id, значит был добавлен новый элемент
+		if (this->tableContent.size() < id)
+		{
+			addElementToTableContent(id);
+		}
+		else
+		{
+			this->tableContent[id - 1].clear();
+
+			changeTableContentForOneElement(id);
+		}
+	}
+
 	virtual void print(int page)
 	{
 		setPage(page);
@@ -48,11 +63,10 @@ public:
 		printInnerFrame();
 	}
 	
-	virtual void printAvailableElements(int page)
-	{
-		print(page);
-
-	}
+	//virtual void printAvailableElements(int page)
+	//{
+	//	print(page);
+	//}
 
 	// Расчитать данные по таблице
 	virtual void calculateData()
@@ -283,6 +297,12 @@ protected:
 
 	// Печать шапки таблицы
 	virtual void printHeader() = 0;
+
+	// Добавить элемент в контент
+	virtual void addElementToTableContent(int id) = 0;
+
+	// Изменить контент одного элемента
+	virtual void changeTableContentForOneElement(int id) = 0;
 
 private:
 

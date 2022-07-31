@@ -37,6 +37,9 @@ public:
 
 #pragma endregion Геттеры
 
+	// Увеличить кол-во ингредиента
+	void increaseNumber();
+
 private:
 
 	// id эффекта

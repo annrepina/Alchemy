@@ -75,6 +75,21 @@ void PotionTablePrinter::printAvailableElements(int page)
 {
 }
 
+//void PotionTablePrinter::update(int id)
+//{
+//	// если элементов меньше, чем id, значит был добавлен новый элемент
+//	if (this->tableContent.size() < id)
+//	{
+//		addPotionToTableContent(id);
+//	}
+//	else
+//	{
+//		this->tableContent[id - 1].clear();
+//
+//		changeTableContentForOneElement(id);
+//	}
+//}
+
 #pragma region Методы расчета
 
 int PotionTablePrinter::calculateNumberOfLines()
@@ -310,4 +325,8 @@ void PotionTablePrinter::printContent(int page)
 	}
 
 	cout << endl << endl;
+}
+
+void PotionTablePrinter::printAvailableContent(int page)
+{
 }

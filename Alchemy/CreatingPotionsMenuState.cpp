@@ -53,8 +53,8 @@ void CreatingPotionsMenuState::printMenu()
 
 		printColoredTextByCoords(choiceSecondIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD);
 
-		// печатаем таблицу зелий
-		this->alchemicalUserInterface->printTablePagesInLoop(AlchemicalUserInterface::TableCode::IngredientTable, page);
+		// печатаем таблицу имеющихся ингредиентов
+		this->alchemicalUserInterface->printTableWithAvailableToUserElements(AlchemicalUserInterface::TableCode::IngredientTable, page);
 
 		// если был нажат esc
 		if (true == this->alchemicalUserInterface->getExitFlag())
@@ -67,17 +67,27 @@ void CreatingPotionsMenuState::printMenu()
 			return;
 		}
 
-		Ingredient* firstIngredient = this->alchemicalUserInterface->chooseId(choiceFirstIngredient, AlchemicalUserInterface::TableCode::IngredientTable);
+		// Переходим по координате для ввода первого id
+		cout << goToXY(Y_COORD_AFTER_MENU_TITLE_2, choiceFirstIngredient.size() + 1);
 
-		//if (wasExit(id))
-		//	return;
+		int firstIngredientId = this->alchemicalUserInterface->chooseId(AlchemicalUserInterface::TableCode::IngredientTable);
 
-		int number = this->alchemicalUserInterface->chooseNumber(choiceSecondIngredient, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
+		// Переходим по координате для ввода второго id
+		cout << goToXY(Y_COORD_AFTER_MENU_TITLE_3, choiceFirstIngredient.size() + 1);
 
-		//if (wasExit(number))
-		//	return;
+		int secondIngredientId = this->alchemicalUserInterface->chooseId(AlchemicalUserInterface::TableCode::IngredientTable);
 
-		success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(firstIngredient, number);
+		// если ввели одинаковые ингредиенты
+		if (firstIngredientId == secondIngredientId)
+		{
+			string textOfError = "Вы уже выбрали ингредиент с номером " + to_string(secondIngredientId) + "выберите другой номер снова: ";
+
+			this->alchemicalUserInterface->printError(Y_COORD_AFTER_MENU_TITLE_3, 1, textOfError);
+		}
+
+
+
+		//success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(firstIngredient, number);
 
 		// Если покупка не состоялась
 		if (!success)

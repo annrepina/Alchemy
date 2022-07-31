@@ -90,6 +90,9 @@ public:
 	// Проверка выбора в меню
 	void checkMenuChoice() const;
 
+	// Печать ошибки из-за некорректного ввода
+	virtual void printError(int yCoord, int xCoord, string textOfError);
+
 
 
 	//// Проверка выбора стрелочек вверх/вниз
@@ -127,8 +130,6 @@ protected:
 	//// Расчитывает координату Х для заголовков
 	//void setXCoordInMiddle();
 
-
-
 #pragma region МЕТОДЫ ПЕЧАТИ
 
 	// Печатает заголовок программы
@@ -148,9 +149,6 @@ protected:
 
 	// Печать прощания
 	virtual void printBye() = 0;
-
-	// Печать ошибки из-за некорректного вводпа
-	virtual void printError(int yCoord, int xCoord, string textOfError);
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 

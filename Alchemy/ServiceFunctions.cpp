@@ -77,7 +77,6 @@ int findDelimetrIndexes(const char delimetr, const size_t length, const string s
 	return delimetrIndex;
 }
 
-
 bool tryParseToInt(string value)
 {
 	bool res = true;

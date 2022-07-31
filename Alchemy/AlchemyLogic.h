@@ -9,6 +9,7 @@
 #include "PotionTable.h"
 #include "EffectsTable.h"
 #include "IngredientBuilder.h"
+#include "PotionBuilder.h"
 #include "ServiceFunctions.h"
 
 //using namespace std;
@@ -67,6 +68,13 @@ public:
 
 	bool tryAddNewIngredientToTable(string ingredientName);
 
+	bool tryCreatePotion(int firstIngredientId, int secondIngredientId);
+
+	//vector<int> findEqualEffects(int firstIngredientId, int secondIngredientId);
+
+	//// Создать зелье и поместить его в таблицу
+	//void addPotion(int effectId);
+
 private:
 
 	// Алхимик (пользователь)
@@ -84,5 +92,10 @@ private:
 	// Проверяет есть ли подобные названия ингредиентов уже в таблице
 	bool hasSuchIngredientName(string ingredientName);
 
+	// Имееет ли таблица такое зелье, если да то возвращает Id этого зелья
+	int hasSuchPotion(Potion* potion);
+
+	// Создать новый ингредиент
+	Ingredient* createNewIngredient(string ingredientName);
 };
 

@@ -12,17 +12,15 @@ public:
 
 	virtual ~IObservable() {};
 
-	virtual void subscribe(IObserver* observer) = 0;
+	virtual void subscribe(IObserver* observer);
 
-	virtual void unsubscribe(IObserver* observer) = 0;
+	virtual void unsubscribe(IObserver* observer);
 
-	virtual void notify(int id) = 0;
-
-	vector<IObserver*> observerList;
+	virtual void notify(int id);
 
 protected:
 
-
+	vector<IObserver*> observerList;
 
 };
 

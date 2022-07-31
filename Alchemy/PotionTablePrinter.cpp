@@ -330,3 +330,11 @@ void PotionTablePrinter::printContent(int page)
 void PotionTablePrinter::printAvailableContent(int page)
 {
 }
+
+void PotionTablePrinter::changeTableContentForOneElement(int id)
+{
+}
+
+void PotionTablePrinter::addElementToTableContent(int id)
+{
+}

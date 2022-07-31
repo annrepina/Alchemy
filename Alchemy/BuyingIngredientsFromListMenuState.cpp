@@ -34,14 +34,14 @@ void BuyingIngredientsFromListMenuState::printMenu()
 
 	fillMap<function<MenuState* (BuyingIngredientsFromListMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
 
+	string choiceIngredient = "Введите № ингредиента: ";
+	string choiceNumber = "Введите кол-во ингредиентов: ";
+	string successfullBuying = "";
+
 	while (false == success)
 	{
 		// начальная страница таблицы
 		int page = FIRST_PAGE;
-
-		string choiceIngredient = "Введите № ингредиента: ";
-
-		string choiceNumber = "Введите кол-во ингредиентов: ";
 
 		// Флаг ддля выхода из цикла
 		bool exit = false;
@@ -72,9 +72,6 @@ void BuyingIngredientsFromListMenuState::printMenu()
 
 		int id = this->alchemicalUserInterface->chooseId(/*choiceIngredient, */AlchemicalUserInterface::TableCode::IngredientTable);
 
-		//if (wasExit(id))
-		//	return;
-
 		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
 
 		//if (wasExit(number))
@@ -86,6 +83,17 @@ void BuyingIngredientsFromListMenuState::printMenu()
 		if (!success)
 		{
 			error = "Недостаточно монет, попробуйте снова:";
+		}
+		else
+		{
+			successfullBuying = "Ингредиент №" + to_string(id) + " куплен!";
+
+			cout << goToXY(Y_COORD_AFTER_MENU_TITLE_4, 1);
+
+			printColoredText(successfullBuying, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+
+			// ждем нажатия любой клавиши
+			char a = _getch();
 		}
 	}
 }

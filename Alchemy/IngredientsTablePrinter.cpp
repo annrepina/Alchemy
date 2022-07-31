@@ -2,6 +2,7 @@
 
 IngredientsTablePrinter::IngredientsTablePrinter() : TablePrinter()
 {
+	numberOfAvailableContent = 0;
 }
 
 IngredientsTablePrinter::~IngredientsTablePrinter()
@@ -223,6 +224,10 @@ void IngredientsTablePrinter::printAvailableElements(int page)
 {
 	//TablePrinter::printAvailableElements(page);
 
+	// если на остальные страницы контента нет, то не печатаем
+	if (numberOfAvailableContent <= (page - 1) * NUMBER_OF_CONTENT_LINES)
+		return;
+
 	TablePrinter::print(page);
 
 	this->printHeader();
@@ -296,7 +301,7 @@ void IngredientsTablePrinter::printAvailableContent(int page)
 	for (; i < this->numberOfLines && i < border; ++i)
 	{
 		// если кол-во ингредиента больше нуля
-		if (this->table->getIngredientById(i)->getNumber() > 0)
+		if (this->table->getIngredientById(i + 1)->getNumber() > 0)
 		{
 			for (int j = 0; j < this->numberOfColumns; ++j)
 			{
@@ -464,6 +469,14 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id)
 	intValue = ingredient->getNumber();
 
 	this->tableContent[tableContentId].push_back(to_string(intValue));
+
+	// если число ингрдеиентов стало 1, то увеличиваем кол-во доступных элементов
+	if (intValue == 1)
+		++numberOfAvailableContent;
+
+	// если стало 0, то уменьшаем
+	else if (intValue == 0)
+		--numberOfAvailableContent;
 
 	// пересчитываем данные
 	this->calculateData();

@@ -98,6 +98,11 @@ void Ingredient::addEffect(int effectId)
 
 void Ingredient::increaseNumber(int number)
 {
-	++this->number;
+	this->number += number;
+}
+
+void Ingredient::decreaseNumber()
+{
+	--this->number;
 }
 

@@ -45,13 +45,6 @@ int UserInterface::checkInput(string& value, int min, int max, string textOfRang
 
 	do
 	{
-		//if (isEscKeyPressed())
-		//{
-		//	// выход
-		//	intValue = EXIT_INT;
-		//	break;
-		//}
-
 		cin >> value;
 
 		succes = tryParseToInt(value);

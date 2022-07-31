@@ -80,6 +80,9 @@ public:
 	// ”величить кол-во ингредиента на опред число
 	void increaseNumber(int number);
 
+	// уменьшить кол-во ингредиентов на 1
+	void decreaseNumber();
+
 private:
 
 	//// —четчик ингредиентов

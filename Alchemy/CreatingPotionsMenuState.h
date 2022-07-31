@@ -4,6 +4,7 @@
 #include "ServiceFunctions.h"
 #include "PotionBuilder.h"
 
+
 class CreatingPotionsMenuState : public MenuState
 {
 public:
@@ -39,6 +40,17 @@ private:
 
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
+
+	void printMenu(string error, string choiceFirstIngredient, string choiceSecondIngredient);
+
+	// Печать выбора id
+	int printChoiceId(int yCoord, int xCoord);
+
+	// уменьшить кол-во ингредиентов
+	void decreaseNumberOfIngredients(int firstIngredientId, int secondIngredientId);
+
+	// Проверка введенных id на совпадение
+	void checkIngredientsId(int firstIngredientId, int &secondIngredientId);
 
 };
 

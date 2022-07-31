@@ -178,10 +178,6 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 		{
 			case VK_LEFT:
 			{
-				// Проверяем стрелочки
-				//checkVerticalArrowsChoice(boundaryYCoord, VK_UP, menu);
-				//checkHorizontalArrowChoice(page, code, VK_LEFT);
-
 				if (checkHorizontalArrowChoice(page, code, VK_LEFT))
 				{
 					printTablePagesInLoop(code, page);
@@ -193,7 +189,6 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 			case VK_RIGHT:
 			{
 				// Проверяем стрелочки
-				//checkVerticalArrowsChoice(boundaryYCoord + menu.size() - 1, VK_DOWN, menu);
 				if (checkHorizontalArrowChoice(page, code, VK_RIGHT))
 				{
 					printTablePagesInLoop(code, page);
@@ -215,6 +210,58 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 				//this->setState(this->state->getNextState());
 			}
 			break;
+		}
+	} while (false == exitFlag && false == exit);
+}
+
+void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode code)
+{
+	this->func = std::bind(&AlchemicalUserInterface::isPageChoiceFalse, this, _1);
+
+	// Флаг ддля выхода из цикла
+	bool exit = false;
+
+	do
+	{
+		// Проверяем нажатую кнопку
+		checkMenuChoice();
+
+		switch (this->keyBoard->getPressedKey())
+		{
+		case VK_LEFT:
+		{
+			if (checkHorizontalArrowChoice(page, code, VK_LEFT))
+			{
+				printTableWithAvailableToUserElements(code, page);
+				exit = true;
+			}
+		}
+		break;
+
+		case VK_RIGHT:
+		{
+			// Проверяем стрелочки
+			if (checkHorizontalArrowChoice(page, code, VK_RIGHT))
+			{
+				printTableWithAvailableToUserElements(code, page);
+				exit = true;
+			}
+		}
+		break;
+
+		case VK_RETURN:
+		{
+			exit = true;
+		}
+		break;
+
+		case VK_ESCAPE:
+		{
+			exitFlag = true;
+
+			//this->setState(this->state->getNextState());
+		}
+		break;
 		}
 	} while (false == exitFlag && false == exit);
 }
@@ -722,7 +769,7 @@ void AlchemicalUserInterface::printTableWithAvailableToUserElements(TableCode co
 
 		printPageMenu(page);
 
-		choosePage(page, TableCode::IngredientTable);
+		choosePageFromAvailableContent(page, TableCode::IngredientTable);
 	}
 	else
 	{

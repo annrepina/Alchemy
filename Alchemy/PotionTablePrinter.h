@@ -76,7 +76,10 @@ private:
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 
+	// заполнить один элемент вектора содержимым таблицы
+	void changeTableContentForOneElement(int id) override;
 
-
+	// Обновить содержимое таблицы - добавить новый ингредиент
+	void addElementToTableContent(int id) override;
 };
 

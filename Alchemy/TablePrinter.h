@@ -1,10 +1,11 @@
 #pragma once
 #include "Formatting.h"
+#include "IObserver.h"
 //#include "Table.h"
 
-#define Y_COORD_FOR_FRAME_PRINTING			12		// Координата Y для печати рамки таблицы 
-#define Y_COORD_FOR_HEADER_PRINTING			15		// Координата Y для печати шапки таблицы
-#define Y_COORD_FOR_CONTENT_PRINTING		17		// Координата Y для печати содержимого таблицы
+#define Y_COORD_FOR_FRAME_PRINTING			13		// Координата Y для печати рамки таблицы 
+#define Y_COORD_FOR_HEADER_PRINTING			16		// Координата Y для печати шапки таблицы
+#define Y_COORD_FOR_CONTENT_PRINTING		18		// Координата Y для печати содержимого таблицы
 
 
 #define OUTER_BORDERS				2		// Внешние границы таблицы (левая и правая)
@@ -63,7 +64,7 @@ public:
 		printInnerFrame();
 	}
 	
-	//virtual void printAvailableElements(int page)
+	virtual void printAvailableElements(int page) = 0;
 	//{
 	//	print(page);
 	//}

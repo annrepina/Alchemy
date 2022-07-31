@@ -81,6 +81,15 @@ int IngredientsTable::getIdByIngredient(Ingredient* ingredient)
 	return 0;
 }
 
+void IngredientsTable::decreaseNumberOfIngredient(int ingredientId)
+{
+	// Получаем ингредиент и уменьшаем его кол-во
+	getIngredientById(ingredientId)->decreaseNumber();
+
+	// уведомляем всех
+	notify(ingredientId);
+}
+
 //void IngredientsTable::subscribe(IObserver* observer)
 //{
 //	this->observerList.push_back(observer);

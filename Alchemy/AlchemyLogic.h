@@ -68,7 +68,10 @@ public:
 
 	bool tryAddNewIngredientToTable(string ingredientName);
 
-	bool tryCreatePotion(int firstIngredientId, int secondIngredientId);
+	bool checkPotion(Potion* potion);
+
+	// Создть зелье
+	Potion* createPotion(Ingredient* firstIngredient, Ingredient* secondIngredient);
 
 	//vector<int> findEqualEffects(int firstIngredientId, int secondIngredientId);
 

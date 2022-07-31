@@ -118,21 +118,8 @@ bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
 	return false;
 }
 
-bool AlchemyLogic::tryCreatePotion(int firstIngredientId, int secondIngredientId)
+bool AlchemyLogic::checkPotion(Potion* potion)
 {	
-	// первый ингредиент
-	Ingredient* firstIngredient = this->ingredientsTable->getIngredientById(firstIngredientId);
-
-	// второй ингредиент
-	Ingredient* secondIngredient = this->ingredientsTable->getIngredientById(secondIngredientId);
-
-	// Создаем строителя зелий
-	PotionBuilder potionBuilder;
-
-	potionBuilder.buildPotion(firstIngredient, secondIngredient, this->alchemist);
-
-	Potion* potion = potionBuilder.getResult();
-
 	// если зелье не пустое
 	if (potion->getEffectId() != 0)
 	{
@@ -150,6 +137,12 @@ bool AlchemyLogic::tryCreatePotion(int firstIngredientId, int secondIngredientId
 			delete potion;
 			potion = nullptr;
 		}
+		else
+		{
+			this->potionTable->add(potion);
+		}
+
+		return true;
 	}
 
 	return false;
@@ -254,6 +247,18 @@ int AlchemyLogic::hasSuchPotion(Potion* potion)
 Ingredient* AlchemyLogic::createNewIngredient(string ingredientName)
 {
 	return nullptr;
+}
+
+Potion* AlchemyLogic::createPotion(Ingredient* firstIngredient, Ingredient* secondIngredient)
+{
+	// Создаем строителя зелий
+	PotionBuilder potionBuilder;
+
+	potionBuilder.buildPotion(firstIngredient, secondIngredient, this->alchemist);
+
+	Potion* potion = potionBuilder.getResult();
+
+	return potion;
 }
 
 //void AlchemyProgram::printIngredientsTable()

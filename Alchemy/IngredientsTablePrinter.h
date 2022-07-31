@@ -34,7 +34,8 @@ public:
 
 private:
 
-	/*void update(int id) override;*/
+	// Кол-во доступных пользователю элементов
+	int numberOfAvailableContent;
 
 #pragma region МЕТОДЫ РАСЧЕТА
 	

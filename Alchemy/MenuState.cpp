@@ -299,3 +299,11 @@ bool MenuState::wasExit(int number)
 	return false;
 }
 
+void MenuState::exitMenu()
+{
+	// סבנאסûגאול פכאד
+	this->alchemicalUserInterface->setExitFlag(false);
+
+	this->alchemicalUserInterface->setState(this->getNextState());
+}
+

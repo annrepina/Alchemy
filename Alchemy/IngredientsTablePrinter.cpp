@@ -59,24 +59,6 @@ int IngredientsTablePrinter::calculateMaxId()
 	return maxId;
 }
 
-//int IngredientsTablePrinter::calculateMaxIdStrSize()
-//{
-//	// ѕоследний id
-//	int maxId = calculateMaxId();
-//
-//	// ѕоследний id в виде строки
-//	string strMaxId;
-//
-//	// –азмер строки последнего id 
-//	int maxStrIdSize;
-//
-//	strMaxId = to_string(maxId);
-//
-//	maxStrIdSize = strMaxId.size();
-//
-//	return maxStrIdSize;
-//}
-
 int IngredientsTablePrinter::calculateMaxNameSize()
 {
 	// ѕрисваеваем самому длинному размеру размер имени первого ингредиента в map
@@ -207,6 +189,34 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth()
 	return columnWidth;
 }
 
+int IngredientsTablePrinter::calculateNumberOfAvailableElements()
+{
+	int numberOfAvailableElements = 0;
+
+	for (int i = 0; i < this->numberOfLines ; ++i)
+	{
+		// если кол-во ингредиента больше нул€
+		if (this->table->getIngredientById(i + 1)->getNumber() > 0)
+		{
+			++numberOfAvailableElements;
+		}
+	}
+
+	return numberOfAvailableElements;
+}
+
+void IngredientsTablePrinter::calculateData()
+{
+	TablePrinter::calculateData();
+
+	calculateNumberOfAvailableElements();
+}
+
+int IngredientsTablePrinter::getNumberOfAvailableContent()
+{
+	return this->numberOfAvailableContent;
+}
+
 #pragma endregion ћетоды расчета
 
 #pragma region ћетоды печати
@@ -224,9 +234,12 @@ void IngredientsTablePrinter::printAvailableElements(int page)
 {
 	//TablePrinter::printAvailableElements(page);
 
-	// если на остальные страницы контента нет, то не печатаем
-	if (numberOfAvailableContent <= (page - 1) * NUMBER_OF_CONTENT_LINES)
-		return;
+	//// если на остальные страницы контента нет, то не печатаем
+	//if (numberOfAvailableContent <= (page - 1) * NUMBER_OF_CONTENT_LINES)
+	//	return;
+
+	//if (this->numberOfAvailableContent <= (page - 1) * NUMBER_OF_CONTENT_LINES)
+	//	return;
 
 	TablePrinter::print(page);
 
@@ -436,11 +449,12 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id)
 
 	this->tableContent[tableContentId].push_back(to_string(intValue));
 
+	// »тератор на map с эффектами у ингредиента
+	map<int, bool>::iterator effectIter = ingredient->getBeginIteratorOfEffectsId();
+
 	// дл€ каждого ингредиента
 	for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
 	{
-		// »тератор на map с эффектами у ингредиента
-		map<int, bool>::iterator effectIter = ingredient->getBeginIteratorOfEffectsId();
 
 		// ƒобываем булеву
 		isEffectKnown = effectIter->second;
@@ -470,16 +484,48 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id)
 
 	this->tableContent[tableContentId].push_back(to_string(intValue));
 
-	// если число ингрдеиентов стало 1, то увеличиваем кол-во доступных элементов
-	if (intValue == 1)
-		++numberOfAvailableContent;
+	//// если число ингрдеиентов стало 1, то увеличиваем кол-во доступных элементов
+	//if (intValue == 1)
+	//	++numberOfAvailableContent;
 
-	// если стало 0, то уменьшаем
-	else if (intValue == 0)
-		--numberOfAvailableContent;
+	//// если стало 0, то уменьшаем
+	//else if (intValue == 0)
+	//	--numberOfAvailableContent;
 
 	// пересчитываем данные
 	this->calculateData();
+}
+
+void IngredientsTablePrinter::changeTableContentForOneElement(int id, int previousNumber)
+{
+	Ingredient* ingredient = table->getIngredientById(id);
+
+	// если предыдущее кол-во равно ноль и текущее кол-во больше нул€
+	if (previousNumber == 0 && ingredient->getNumber() > 0)
+	{
+		++numberOfAvailableContent;
+
+		availableElementsId.push_back(id);
+
+		quickSort(&availableElementsId[0], availableElementsId.size());
+	}
+	// если предыдущее было больше нул€, а сейчас ноль
+	else if (previousNumber > 0 && ingredient->getNumber() == 0)
+	{
+		--numberOfAvailableContent;
+
+		int index = binarySearch(availableElementsId, id);
+
+		auto beginIter = availableElementsId.begin();
+
+		availableElementsId.erase(beginIter + index);
+
+		//auto beginIter = 
+
+		//availableElementsId.erase(id);
+	}
+
+	changeTableContentForOneElement(id);
 }
 
 void IngredientsTablePrinter::addElementToTableContent(int id)

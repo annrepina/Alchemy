@@ -34,3 +34,11 @@ void IObservable::notify(int id)
 		observer->update(id);
 	}
 }
+
+void IObservable::notify(int id, int previousNumber)
+{
+	for (auto observer : this->observerList)
+	{
+		observer->update(id, previousNumber);
+	}
+}

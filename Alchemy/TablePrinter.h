@@ -55,6 +55,21 @@ public:
 		}
 	}
 
+	void update(int id, int previousNumber) override
+	{
+		// если элементов меньше, чем id, значит был добавлен новый элемент
+		if (this->tableContent.size() < id)
+		{
+			addElementToTableContent(id);
+		}
+		else
+		{
+			this->tableContent[id - 1].clear();
+
+			changeTableContentForOneElement(id, previousNumber);
+		}
+	}
+
 	virtual void print(int page)
 	{
 		setPage(page);
@@ -65,9 +80,6 @@ public:
 	}
 	
 	virtual void printAvailableElements(int page) = 0;
-	//{
-	//	print(page);
-	//}
 
 	// Расчитать данные по таблице
 	virtual void calculateData()
@@ -101,6 +113,13 @@ public:
 	virtual void setTable(PrintableTable* table)
 	{
 		this->table = table;
+	}
+
+	int findElementInAvailableElementsId(int key)
+	{
+		int res = binarySearch(this->availableElementsId, key);
+
+		return res;
 	}
 
 protected:
@@ -140,6 +159,9 @@ protected:
 
 	// Вектор стрингов с содержимым таблицы
 	vector< vector <string> > tableContent;
+
+	// вектор с id доступных элементов
+	vector<int> availableElementsId;
 
 #pragma region МЕТОДЫ РАСЧЕТА
 
@@ -305,6 +327,9 @@ protected:
 	// Изменить контент одного элемента
 	virtual void changeTableContentForOneElement(int id) = 0;
 
+	// Изменить контент одного элемента
+	virtual void changeTableContentForOneElement(int id, int previousNumber) = 0;
+
 private:
 
 	void setPage(int page)
@@ -321,3 +346,4 @@ private:
 		}
 	}
 };
+

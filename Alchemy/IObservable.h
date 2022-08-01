@@ -18,6 +18,9 @@ public:
 
 	virtual void notify(int id);
 
+	// уведомить об изменениях с id элемента и предыдущим кол-вом 
+	virtual void notify(int id, int previousNumber);
+
 protected:
 
 	vector<IObserver*> observerList;

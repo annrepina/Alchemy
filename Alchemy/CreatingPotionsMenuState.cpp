@@ -10,7 +10,7 @@ CreatingPotionsMenuState::CreatingPotionsMenuState(AlchemicalUserInterface* alch
 {
     this->title = "Создание зелий";
     this->goToTitle = "Создать зелье";
-    this->numberOfStates = 0;
+    this->numberOfStates = 1;
 }
 
 //CreatingPotionsMenuState::~CreatingPotionsMenuState()
@@ -33,6 +33,22 @@ void CreatingPotionsMenuState::printMenu()
     // Текст ошибки в случае неудачной покупки
     string error = "";
 
+	// если кол-во доступных ингредиентов меньше двух, то алхимичить не выйдет
+	if (this->alchemicalUserInterface->getIngredientsTablePrinter()->getNumberOfAvailableContent() < MINIMUM_NUMBER_OF_INGREDIENTS_FOR_CREATING)
+	{
+		error = "Для создания зелий у вас недостаточно ингредиентов.\nПрикупите чего-нибудь у Аркадии.\nESC - назад";
+
+		printMenuTitle();
+
+		printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
+
+		this->alchemicalUserInterface->chooseExit();
+
+		exitMenu();
+
+		return;
+	}
+
 	string choiceFirstIngredient = "Введите № первого ингредиента: ";
 
 	string choiceSecondIngredient = "Введите № второго ингредиента: ";
@@ -45,7 +61,7 @@ void CreatingPotionsMenuState::printMenu()
 
 	while (false == success)
 	{
-		printMenu(error, choiceFirstIngredient, choiceSecondIngredient);
+		printMenu(choiceFirstIngredient, choiceSecondIngredient);
 
 		// начальная страница таблицы
 		int page = FIRST_PAGE;
@@ -56,10 +72,7 @@ void CreatingPotionsMenuState::printMenu()
 		// если был нажат esc
 		if (true == this->alchemicalUserInterface->getExitFlag())
 		{
-			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
-
-			this->alchemicalUserInterface->setState(this->getNextState());
+			exitMenu();
 
 			return;
 		}
@@ -80,14 +93,27 @@ void CreatingPotionsMenuState::printMenu()
 		// второй ингредиент
 		Ingredient* secondIngredient = alchemyLogic->getIngredientsTable()->getIngredientById(secondIngredientId);
 
+
 		Potion* potion = alchemyLogic->createPotion(firstIngredient, secondIngredient);
 
-		// Имя зелья
-		string name = alchemyLogic->getEffectsTable()->getEffectByKey(potion->getEffectId())->getName();
+		string name = "";
+		int price = 0;
+		int power = 0;
 
-		int price = potion->getPrice();
+		// ЕСЛИ ЗЕЛЬЕ НЕ ИСПОРЧЕНО
+		if (potion->getEffectId() > 0)
+		{
+			// Имя зелья
+			name = alchemyLogic->getEffectsTable()->getEffectByKey(potion->getEffectId())->getName();
 
-		int power = potion->getPower();
+			price = potion->getPrice();
+
+			power = potion->getPower();
+
+			// уведомляем подписчиков об изменение видимости открытых эффектов
+			firstIngredient->notify(firstIngredientId);
+			secondIngredient->notify(secondIngredientId);
+		}
 
 		success = this->alchemicalUserInterface->getAlchemyLogic()->checkPotion(potion);
 
@@ -95,10 +121,21 @@ void CreatingPotionsMenuState::printMenu()
 		if (!success)
 		{
 			error = "К сожалению, зелье не получилось!";
+
+			printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
+
+			error = "";
 		}
 		else
 		{
-			cout << "Вы создали зелье - " << name << ". Цена - " << price << " септ." << " Мощность - " << power << ".";
+			string congratulations = "Вы создали зелье - " + name + ". Цена - " + to_string(price) + " септ. Мощность - " + to_string(power) + ".";
+
+			//cout << "" << name << ". Цена - " << price << " септ." << " Мощность - " << power << ".";
+
+			printColoredText(congratulations, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+
+			// ждем нажатия любой клавиши
+			char a = _getch();
 
 			break;
 		}
@@ -129,11 +166,9 @@ ReturnMenuState* CreatingPotionsMenuState::createReturnMenuState()
     return new ReturnMenuState(new AlchemicalMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface);
 }
 
-void CreatingPotionsMenuState::printMenu(string error, string choiceFirstIngredient, string choiceSecondIngredient)
+void CreatingPotionsMenuState::printMenu(string choiceFirstIngredient, string choiceSecondIngredient)
 {
 	printMenuTitle();
-
-	printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
 
 	printColoredTextByCoords(choiceFirstIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
 
@@ -161,15 +196,61 @@ void CreatingPotionsMenuState::decreaseNumberOfIngredients(int firstIgredientId,
 	ingredientTable->decreaseNumberOfIngredient(secondIngredientId);
 }
 
-void CreatingPotionsMenuState::checkIngredientsId(int firstIngredientId, int& secondIngredientId)
+void CreatingPotionsMenuState::checkIngredientsId(int& firstIngredientId, int& secondIngredientId)
+{
+	int firstIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(firstIngredientId);
+	int secondIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(secondIngredientId);
+
+	int wrongId = 0;
+
+	while (firstIndex == NO_POSITION)
+	{
+		printErrorAndMakeChoiceAgain(firstIngredientId, Y_COORD_AFTER_MENU_TITLE_2);
+
+		checkIdForEquality(firstIngredientId, secondIngredientId, Y_COORD_AFTER_MENU_TITLE_2);
+
+		firstIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(firstIngredientId);
+	}
+
+	while (secondIndex == NO_POSITION)
+	{
+		printErrorAndMakeChoiceAgain(secondIngredientId, Y_COORD_AFTER_MENU_TITLE_3);
+
+		checkIdForEquality(secondIngredientId, firstIngredientId, Y_COORD_AFTER_MENU_TITLE_3);
+
+		secondIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(secondIngredientId);
+	}
+}
+
+void CreatingPotionsMenuState::printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& ingredientId)
+{
+	this->alchemicalUserInterface->printError(yCoord, STANDARD_CURSOR_X_COORD, textOfError);
+
+	ingredientId = printChoiceId(yCoord, textOfError.size() + 1);
+}
+
+void CreatingPotionsMenuState::printErrorAndMakeChoiceAgain(int& ingredientId, int yCoord)
+{
+	string textOfError = "У вас нет ингредиента с номером " + to_string(ingredientId) + ", выберите другой номер: ";
+
+	printErrorAndMakeChoiceAgain(yCoord, textOfError, ingredientId);
+}
+
+void CreatingPotionsMenuState::checkIdForEquality(int& firstIngredientId, int secondIngredientId, int YCoord)
 {
 	// если ввели одинаковые ингредиенты
 	while (firstIngredientId == secondIngredientId)
 	{
-		string textOfError = "Вы уже выбрали ингредиент с номером " + to_string(secondIngredientId) + "выберите другой номер снова: ";
+		string textOfError = "Вы уже выбрали ингредиент с номером " + to_string(firstIngredientId) + ", выберите другой номер: ";
 
-		this->alchemicalUserInterface->printError(Y_COORD_AFTER_MENU_TITLE_3, 1, textOfError);
-
-		secondIngredientId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_3, textOfError.size() + 1);
+		printErrorAndMakeChoiceAgain(YCoord, textOfError, firstIngredientId);
 	}
 }
+
+//void CreatingPotionsMenuState::exitMenu()
+//{
+//	// сбрасываем флаг
+//	this->alchemicalUserInterface->setExitFlag(false);
+//
+//	this->alchemicalUserInterface->setState(this->getNextState());
+//}

@@ -106,6 +106,9 @@ protected:
 	// был ли нажат esc для выхода
 	virtual bool wasExit(int number);
 
+	// Действия для выхода из меню
+	virtual void exitMenu();
+
 private:
 
 };

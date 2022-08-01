@@ -1,7 +1,6 @@
 #pragma once
-
 #include "Effect.h"
-//#include <vector>
+#include "IObservable.h"
 #include <map>
 
 #define NUMBER_OF_EFFECTS			2		// Кол-во эффектов
@@ -13,7 +12,7 @@
 #define KNOWN						true	// Известный пользователю эффект
 
 // Класс ингредиент
-class Ingredient
+class Ingredient : public IObservable
 {
 public:
 

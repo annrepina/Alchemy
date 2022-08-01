@@ -2,6 +2,7 @@
 #include "TablePrinter.h"
 #include "IngredientsTable.h"
 #include "IObserver.h"
+#include "ServiceFunctions.h"
 
 #define MULTIPLIER				3		// Множитель для расчета длины таблицы
 
@@ -32,10 +33,16 @@ public:
 	// заполнить вектор с содержимым таблицы
 	void fillInTableContent() override;
 
+	void calculateData() override;
+
+	int getNumberOfAvailableContent();
+
 private:
 
 	// Кол-во доступных пользователю элементов
 	int numberOfAvailableContent;
+
+	//int numberOfelement
 
 #pragma region МЕТОДЫ РАСЧЕТА
 	
@@ -63,6 +70,9 @@ private:
 	// Расчитывает ширину каждого столбца и возвращает вектор
 	vector<int> calculateColumnWidth() override;
 
+	// Посчитать кол-во доступных пользователю ингредиентов
+	int calculateNumberOfAvailableElements();
+
 #pragma endregion МЕТОДЫ РАСЧЕТА
 
 #pragma region МЕТОДЫ ПЕЧАТИ
@@ -80,6 +90,8 @@ private:
 
 	// заполнить один элемент вектора содержимым таблицы
 	void changeTableContentForOneElement(int id) override;
+
+	void changeTableContentForOneElement(int id, int previousNumber) override;
 
 	// Обновить содержимое таблицы - добавить новый ингредиент
 	void addElementToTableContent(int id) override;

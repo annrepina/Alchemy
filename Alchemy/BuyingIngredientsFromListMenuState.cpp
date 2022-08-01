@@ -59,10 +59,7 @@ void BuyingIngredientsFromListMenuState::printMenu()
 		// если был нажат esc
 		if (true == this->alchemicalUserInterface->getExitFlag())
 		{
-			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
-
-			this->alchemicalUserInterface->setState(this->getNextState());
+			exitMenu();
 
 			return;
 		}
@@ -73,9 +70,6 @@ void BuyingIngredientsFromListMenuState::printMenu()
 		int id = this->alchemicalUserInterface->chooseId(/*choiceIngredient, */AlchemicalUserInterface::TableCode::IngredientTable);
 
 		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
-
-		//if (wasExit(number))
-		//	return;
 
 		success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(id, number);
 

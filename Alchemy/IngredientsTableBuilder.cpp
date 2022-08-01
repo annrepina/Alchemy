@@ -58,8 +58,12 @@ void IngredientsTableBuilder::addIngredients(int numberOfIngredients)
 		// Создаем ингредиент 
 		this->ingredientBuilder->buildIngredient(lastIngredientNameIndex, lastEffectsIndex);
 
+		Ingredient* res = this->ingredientBuilder->getResult();
+
 		// Добавляем ингредиент в таблицу
-		this->element->add(this->ingredientBuilder->getResult());
+		this->element->add(res);
+
+		res->subscribe(this->element);
 
 		// Уменьшаем последний индекс
 		--lastIngredientNameIndex;

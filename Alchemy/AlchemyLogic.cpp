@@ -72,10 +72,13 @@ bool AlchemyLogic::tryBuyIngredientFromList(int id, int number)
 	// если денег у алхимика больше или равно цене ингредиента
 	if (capital >= cost)
 	{
+		// закрепляем предыдущее кол-во ингредиента
+		int previousNumber = ingredient->getNumber();
+
 		ingredient->increaseNumber(number);
 
 		// уведомляем подписчиков об изменениях
-		ingredientsTable->notify(id);
+		ingredientsTable->notify(id, previousNumber);
 
 		ingredientsTable->addAvailableElement(id);
 
@@ -101,8 +104,12 @@ bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
 
 		ingredientBuilder.buildIngredient(ingredientName, this->effectsTable);
 
+		Ingredient* res = ingredientBuilder.getResult();
+
 		// добавляем ингредиент в таблицу
-		this->ingredientsTable->add(ingredientBuilder.getResult());
+		this->ingredientsTable->add(res);
+
+		res->subscribe(this->ingredientsTable);
 
 		// id Этого ингредиента
 		int id = (--this->ingredientsTable->getEndIterator())->first;

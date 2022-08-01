@@ -4,6 +4,8 @@
 #include "ServiceFunctions.h"
 #include "PotionBuilder.h"
 
+#define MINIMUM_NUMBER_OF_INGREDIENTS_FOR_CREATING		2	// минимально требуемое кол-во ингредиентов для смешивания 
+
 
 class CreatingPotionsMenuState : public MenuState
 {
@@ -41,7 +43,7 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 
-	void printMenu(string error, string choiceFirstIngredient, string choiceSecondIngredient);
+	void printMenu(string choiceFirstIngredient, string choiceSecondIngredient);
 
 	// Печать выбора id
 	int printChoiceId(int yCoord, int xCoord);
@@ -50,7 +52,16 @@ private:
 	void decreaseNumberOfIngredients(int firstIngredientId, int secondIngredientId);
 
 	// Проверка введенных id на совпадение
-	void checkIngredientsId(int firstIngredientId, int &secondIngredientId);
+	void checkIngredientsId(int &firstIngredientId, int &secondIngredientId);
+
+	void printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& ingredientId);
+
+	void printErrorAndMakeChoiceAgain(int& ingredientId, int yCoord);
+
+	void checkIdForEquality(int& firstIngredientId, int secondIngredientId, int YCoord);
+
+	//// Действия для выхода из меню
+	//void exitMenu();
 
 };
 

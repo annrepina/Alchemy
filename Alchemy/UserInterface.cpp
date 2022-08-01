@@ -204,6 +204,13 @@ bool UserInterface::isEscKeyPressed()
 	return false;
 }
 
+bool UserInterface::isEscKeyFalse(int key)
+{
+	bool res = VK_ESCAPE != key ;
+
+	return res;
+}
+
 bool UserInterface::isEnterEscKeyFalse(int key)
 {
 	bool res = VK_ESCAPE != key && VK_RETURN != key;

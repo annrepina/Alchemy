@@ -25,6 +25,15 @@ void IngredientsTable::setEffectsTable(EffectsTable* effectsTable)
 	this->effectsTable = effectsTable;
 }
 
+void IngredientsTable::update(int id)
+{
+	notify(id);
+}
+
+void IngredientsTable::update(int id, int previousNumber)
+{
+}
+
 map<int, Ingredient*>::iterator IngredientsTable::getEndIterator()
 {
 	return this->ingredientsWithId.end();
@@ -87,7 +96,7 @@ void IngredientsTable::decreaseNumberOfIngredient(int ingredientId)
 	getIngredientById(ingredientId)->decreaseNumber();
 
 	// уведомляем всех
-	notify(ingredientId);
+	notify(ingredientId, getIngredientById(ingredientId)->getNumber() + 1);
 }
 
 //void IngredientsTable::subscribe(IObserver* observer)

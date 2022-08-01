@@ -21,19 +21,11 @@
 //#define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
 //#define STANDARD_CURSOR_X_COORD			0		// Стандартная координата X курсора 
 
-
-// Кол-ва
-//#define NUMBER_OF_MAIN_MENU_ITEMS		2		// Кол-во пунктов в главном меню
-//#define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	7		// Кол-во пунктов в алхимическом меню
-//#define NUMBER_OF_BUYING_MENU_ITEMS		3		// Кол-во пунктов в меню покупки ингредиентов
-
 #define FIRST_PAGE						1		// Первая страница таблицы
 
 #define MAX_INT							2147483647	// Самое большое число int 
 
 #define TWO_LINES						2		// Две строчки
-
-
 
 class AlchemicalUserInterface : public UserInterface
 {
@@ -53,6 +45,8 @@ public:
 	bool getExitFlag();
 
 	AlchemyLogic* getAlchemyLogic();
+
+	IngredientsTablePrinter* getIngredientsTablePrinter();
 
 #pragma endregion ГЕТТЕРЫ
 
@@ -86,8 +80,7 @@ public:
 	// Вбрать кол-во ингредиента или зелья
 	int chooseNumber(string strChoice, TableCode code, int yCoord);
 
-	//// Попробовать добавить опр. кол-во ингредиента из списка
-	//bool tryAddIngredientFromList(int id, int number);
+	void chooseExit();
 
 private:
 
@@ -166,56 +159,23 @@ private:
 
 #pragma endregion НАЗВАНИЕ ЗАГОЛОВКОВ
 
-	//// Принять решение
-	//void chooseMenuItem(map <int, string> menu);
-
 	// Выбрать страницу таблицы
 	void choosePage(int page, TableCode code);
 
 	// Выбрать страницу таблицы среди доступных элементов
 	void choosePageFromAvailableContent(int page, TableCode code);
 
-	//// Сделать выбор пункта меню
-	//void makeChoice(bool& innerExitFlag);
 
-	//void makeChoice();
 
 #pragma region ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
-
-	//// Проверка выбора в главном меню
-	//void checkMainMenu(bool& innerExitFlag);
-
-	//// Проверка выбора в меню инструкций
-	//void checkInstructionsMenu(bool& innerExitFlag);
-
-	//// Проверка выбоа меню в меню алхимии
-	//void checkAlchemicalMenu(bool& innerExitFlag);
-
-	//// Проверка выбора пункта в меню покупки ингредиентов
-	//void checkBuyingIngredientsMenu(bool& innerExitFlag);
-
-	//// Проверка выбора пункта в меню ошибки при покупки ингредиентов из списка 
-	//void checkBuyingFaultMenu();
 
 	// Проверить горизонтальные стрелки
 	bool checkHorizontalArrowChoice(int& page, TableCode code, int keyCode);
 
 #pragma endregion ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 
-	//// Заниматься алхимией
-	//void doAlchemy();
-
-	//// Покупка ингредиентов
-	//void buyIngredients();
-
-	//// Покупка ингредиентов из имеющегося списка
-	//void buyIngredientsFromList();
-
 	// Стирает с консоли все после печати алхимика
 	void eraseScreenAfterAlchemist();
-
-	//// Заполнить все меню
-	//void fillAllMenu();
 
 #pragma region МЕТОДЫ ПЕЧАТИ
 

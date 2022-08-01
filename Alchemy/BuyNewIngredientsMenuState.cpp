@@ -59,6 +59,9 @@ void BuyNewIngredientsMenuState::printMenu()
 		std::cin.ignore(1, '\n');
 		getline(std::cin, ingredientName);
 
+		if (ingredientName == "")
+			continue;
+
 		//ingredientName = std::getline(std::cin, ingredientName);
 
 		//cin.getline(ingredientName, 25, '\n');

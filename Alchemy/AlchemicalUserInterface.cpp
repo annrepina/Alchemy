@@ -91,6 +91,11 @@ AlchemyLogic* AlchemicalUserInterface::getAlchemyLogic()
 	return this->alchemyLogic;
 }
 
+IngredientsTablePrinter* AlchemicalUserInterface::getIngredientsTablePrinter()
+{
+	return this->ingredientsTableprinter;
+}
+
 void AlchemicalUserInterface::setState(MenuState* state)
 {
 	if (state != nullptr)
@@ -264,6 +269,23 @@ void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode
 		break;
 		}
 	} while (false == exitFlag && false == exit);
+}
+
+void AlchemicalUserInterface::chooseExit()
+{
+	this->func = std::bind(&AlchemicalUserInterface::isEscKeyFalse, this, _1);
+
+	do
+	{
+		// Проверяем нажатую кнопку
+		checkMenuChoice();
+
+		if (this->keyBoard->getPressedKey() == VK_ESCAPE)
+		{
+			exitFlag = true;
+		}
+
+	} while (false == exitFlag);
 }
 
 int AlchemicalUserInterface::chooseId(/*string strChoice, */TableCode code)
@@ -765,6 +787,9 @@ void AlchemicalUserInterface::printTableWithAvailableToUserElements(TableCode co
 {
 	if (code == TableCode::IngredientTable)
 	{
+		if (this->ingredientsTableprinter->getNumberOfAvailableContent() <= (page - 1) * NUMBER_OF_CONTENT_LINES)
+			return;
+
 		this->ingredientsTableprinter->printAvailableElements(page);
 
 		printPageMenu(page);
@@ -783,3 +808,5 @@ bool AlchemicalUserInterface::isPageChoiceFalse(int key)
 
 	return res;
 }
+
+

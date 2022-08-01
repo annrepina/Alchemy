@@ -79,6 +79,9 @@ private:
 	// заполнить один элемент вектора содержимым таблицы
 	void changeTableContentForOneElement(int id) override;
 
+	// заполнить один элемент вектора содержимым таблицы
+	void changeTableContentForOneElement(int id, int previousNumber) override;
+
 	// Обновить содержимое таблицы - добавить новый ингредиент
 	void addElementToTableContent(int id) override;
 };

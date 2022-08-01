@@ -11,7 +11,7 @@
 //#define MULTIPLIER				3		// Множитель для расчета длины таблицы
 
 // Таблица ингредиентов
-class IngredientsTable : public Table<Ingredient>, public IObservable
+class IngredientsTable : public Table<Ingredient>, public IObservable, public IObserver
 {
 public:
 
@@ -25,6 +25,10 @@ public:
 
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
+
+	void update(int id) override;
+
+	void update(int id, int previousNumber) override;
 
 #pragma region ГЕТТЕРЫ
 
@@ -70,6 +74,8 @@ private:
 
 	// Таблица эффектов
 	EffectsTable* effectsTable;
+
+
 
 	// Чистит память
 	void clear();

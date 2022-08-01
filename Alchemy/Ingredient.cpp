@@ -84,6 +84,8 @@ void Ingredient::setNumber(int number)
 void Ingredient::openEffect(int id)
 {
 	this->effectsId[id] = KNOWN;
+
+	//this->notify(id);
 }
 
 void Ingredient::addEffect(int effectId)

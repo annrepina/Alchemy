@@ -82,7 +82,10 @@ public:
 	bool isArrowKeyFalse(int key);
 
 	// Была ли нажата клавиша выхода?
-	bool isEscKeyPressed();
+	virtual bool isEscKeyPressed();
+
+	// Была ли нажата клавиша выхода?
+	virtual bool isEscKeyFalse(int key);
 
 	// Не были нажаты Enter и Esc
 	bool isEnterEscKeyFalse(int key);

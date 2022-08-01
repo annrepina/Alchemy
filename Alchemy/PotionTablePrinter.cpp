@@ -335,6 +335,10 @@ void PotionTablePrinter::changeTableContentForOneElement(int id)
 {
 }
 
+void PotionTablePrinter::changeTableContentForOneElement(int id, int previousNumber)
+{
+}
+
 void PotionTablePrinter::addElementToTableContent(int id)
 {
 }

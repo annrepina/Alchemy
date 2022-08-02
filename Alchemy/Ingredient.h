@@ -80,7 +80,7 @@ public:
 	void increaseNumber(int number);
 
 	// уменьшить кол-во ингредиентов на 1
-	void decreaseNumber();
+	void decreaseNumber(int number);
 
 private:
 

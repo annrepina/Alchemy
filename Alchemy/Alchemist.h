@@ -53,6 +53,9 @@ public:
 	// Увеличить уровень продажника на 1 
 	void increaseSalesmanLevel();
 
+	// Увеличить уровень продажника на определенное число 
+	void increaseSalesmanLevel(int number);
+
 	// Увеличить капитал пользователя на указанную сумму
 	void increaseCapital(int value);
 

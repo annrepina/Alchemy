@@ -62,7 +62,7 @@ public:
 	//void notify(int id) override;
 
 	// уменьшить кол-во ингредиента
-	void decreaseNumberOfIngredient(int ingredientId);
+	void decreaseNumberOfIngredient(int ingredientId, int number);
 
 private:
 

@@ -251,10 +251,10 @@ int AlchemyLogic::hasSuchPotion(Potion* potion)
 	return id;
 }
 
-Ingredient* AlchemyLogic::createNewIngredient(string ingredientName)
-{
-	return nullptr;
-}
+//Ingredient* AlchemyLogic::createNewIngredient(string ingredientName)
+//{
+//	return nullptr;
+//}
 
 Potion* AlchemyLogic::createPotion(Ingredient* firstIngredient, Ingredient* secondIngredient)
 {
@@ -266,6 +266,24 @@ Potion* AlchemyLogic::createPotion(Ingredient* firstIngredient, Ingredient* seco
 	Potion* potion = potionBuilder.getResult();
 
 	return potion;
+}
+
+void AlchemyLogic::sellIngredient(int ingredientId, int numberOfIngredient)
+{
+	Ingredient* ingredient = this->ingredientsTable->getIngredientById(ingredientId);
+
+	decreaseNumberOfIngredient(ingredientId, numberOfIngredient);
+
+	int profit = ingredient->getPrice();
+
+	this->alchemist->increaseCapital(profit);
+
+	this->alchemist->increaseSalesmanLevel(numberOfIngredient);
+}
+
+void AlchemyLogic::decreaseNumberOfIngredient(int ingredientId, int numberOfIngredient)
+{
+	this->ingredientsTable->decreaseNumberOfIngredient(ingredientId, numberOfIngredient);
 }
 
 //void AlchemyProgram::printIngredientsTable()

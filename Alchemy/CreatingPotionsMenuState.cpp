@@ -93,7 +93,6 @@ void CreatingPotionsMenuState::printMenu()
 		// второй ингредиент
 		Ingredient* secondIngredient = alchemyLogic->getIngredientsTable()->getIngredientById(secondIngredientId);
 
-
 		Potion* potion = alchemyLogic->createPotion(firstIngredient, secondIngredient);
 
 		string name = "";
@@ -187,21 +186,19 @@ int CreatingPotionsMenuState::printChoiceId(int yCoord, int xCoord)
 
 void CreatingPotionsMenuState::decreaseNumberOfIngredients(int firstIgredientId, int secondIngredientId)
 {
-	// ѕолучаем нашу таблицу
-	IngredientsTable* ingredientTable = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable();
+	// ѕолучаем нашу логику
+	AlchemyLogic* alchemyLogic = this->alchemicalUserInterface->getAlchemyLogic();
 
 	// уменьшаем кол-во ингредиентов
-	ingredientTable->decreaseNumberOfIngredient(firstIgredientId);
+	alchemyLogic->decreaseNumberOfIngredient(firstIgredientId, 1);
 
-	ingredientTable->decreaseNumberOfIngredient(secondIngredientId);
+	alchemyLogic->decreaseNumberOfIngredient(secondIngredientId, 1);
 }
 
 void CreatingPotionsMenuState::checkIngredientsId(int& firstIngredientId, int& secondIngredientId)
 {
 	int firstIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(firstIngredientId);
 	int secondIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(secondIngredientId);
-
-	int wrongId = 0;
 
 	while (firstIndex == NO_POSITION)
 	{

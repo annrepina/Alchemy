@@ -42,6 +42,17 @@ private:
 	// Печать выбора id и возвращене резульата
 	int printChoiceId(int yCoord, int xCoord);
 
-	int printChoiceNumber(int yCoord, int xCoord);
+	void printErrorAndMakeChoiceAgain(int& ingredientId, int yCoord);
+
+	void printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& ingredientId);
+
+
+	// Проверка введенного id на наличие этого id
+	void checkIngredientsId(int& ingredientId);
+
+	void checkNumberOfIngredient(int& numberOfIngredient, int ingrdientId);
+
+	//void decreaseNumberOfIngredients(int igredientId);
+
 };
 

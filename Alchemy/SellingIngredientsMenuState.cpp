@@ -9,7 +9,7 @@ SellingIngredientsMenuState::SellingIngredientsMenuState(AlchemicalUserInterface
 {
 	this->title = "Продажа ингредиентов";
 	this->goToTitle = "Продать ингредиенты";
-	this->numberOfStates = 0;
+	this->numberOfStates = 1;
 }
 
 //SellingIngredientsMenuState::~SellingIngredientsMenuState()
@@ -26,27 +26,11 @@ void SellingIngredientsMenuState::printMenu()
 
 	fillMap<function<MenuState* (SellingIngredientsMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
 
-	// Успешность продажи 
-	bool success = false;
+	//// Успешность продажи 
+	//bool success = false;
 
 	// Текст ошибки в случае неудачной продажи
 	string error = "";
-
-	// если кол-во доступных ингредиентов меньше ОДНОГО, то продать ничего не выйдет
-	if (this->alchemicalUserInterface->getIngredientsTablePrinter()->getNumberOfAvailableContent() < MINIMUM_NUMBER_OF_INGREDIENTS_FOR_SELLING)
-	{
-		error = "Для продажи ингредиентов у вас недостаточно ингредиентов.\nПрикупите чего-нибудь у Аркадии.\nESC - назад";
-
-		printMenuTitle();
-
-		printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
-
-		this->alchemicalUserInterface->chooseExit();
-
-		exitMenu();
-
-		return;
-	}
 
 	string choiceIngredient = "Введите № ингредиента: ";
 
@@ -58,8 +42,24 @@ void SellingIngredientsMenuState::printMenu()
 	// Получаем таблицу ингредиентов 
 	IngredientsTable* ingredientsTable = alchemyLogic->getIngredientsTable();
 
-	while (false == success)
+	while (/*false == success*/true)
 	{
+		// если кол-во доступных ингредиентов меньше ОДНОГО, то продать ничего не выйдет
+		if (this->alchemicalUserInterface->getIngredientsTablePrinter()->getNumberOfAvailableContent() < MINIMUM_NUMBER_OF_INGREDIENTS_FOR_SELLING)
+		{
+			error = "Для продажи ингредиентов у вас недостаточно ингредиентов.\nПрикупите чего-нибудь у Аркадии.\nESC - назад";
+
+			printMenuTitle();
+
+			printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
+
+			this->alchemicalUserInterface->chooseExit();
+
+			exitMenu();
+
+			return;
+		}
+
 		printMenu(choiceIngredient, choiceNumberOfIngredient);
 
 		// начальная страница таблицы
@@ -80,11 +80,15 @@ void SellingIngredientsMenuState::printMenu()
 
 		int numberOfIngredient = this->alchemicalUserInterface->chooseNumber(choiceNumberOfIngredient, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
 
-		//// если ввели одинаковые ингредиенты
-		//checkIngredientsId(ingredientId, secondIngredientId);
+		// если ввели отсутствующие id
+		checkIngredientsId(ingredientId);
+
+		checkNumberOfIngredient(numberOfIngredient, ingredientId);
 
 		//// уменьшаем кол-во выбранных ингредиентов
-		//decreaseNumberOfIngredients(ingredientId, secondIngredientId);
+		//decreaseNumberOfIngredients(ingredientId);
+
+		alchemyLogic->sellIngredient(ingredientId, numberOfIngredient);
 
 		//// первый ингредиент
 		//Ingredient* firstIngredient = alchemyLogic->getIngredientsTable()->getIngredientById(ingredientId);
@@ -127,16 +131,17 @@ void SellingIngredientsMenuState::printMenu()
 		//}
 		//else
 		//{
-		//	string congratulations = "Вы создали зелье - " + name + ". Цена - " + to_string(price) + " септ. Мощность - " + to_string(power) + ".";
+			string congratulations = "Вы отличный торговец!";
 
 		//	//cout << "" << name << ". Цена - " << price << " септ." << " Мощность - " << power << ".";
+			cout << goToXY(Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
 
-		//	printColoredText(congratulations, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+			printColoredText(congratulations, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
 
-		//	// ждем нажатия любой клавиши
-		//	char a = _getch();
+			// ждем нажатия любой клавиши
+			char a = _getch();
 
-		//	break;
+			break;
 		//}
 	}
 
@@ -150,7 +155,7 @@ MenuState* SellingIngredientsMenuState::getNextState()
 
 void SellingIngredientsMenuState::setListOfStates()
 {
-	this->listOfStates.push_back(new ReturnMenuState(new SellingIngredientsMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface));
+	this->listOfStates.push_back(new ReturnMenuState(new AlchemicalMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface));
 }
 
 void SellingIngredientsMenuState::setListOfCreatingFunctions()
@@ -164,7 +169,7 @@ void SellingIngredientsMenuState::setListOfCreatingFunctions()
 
 ReturnMenuState* SellingIngredientsMenuState::createReturnMenuState()
 {
-	return new ReturnMenuState(new SellingIngredientsMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface);
+	return new ReturnMenuState(new AlchemicalMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface);
 }
 
 void SellingIngredientsMenuState::printMenu(string choiceIngredient, string choiceNumberOfIngredient)
@@ -185,6 +190,57 @@ int SellingIngredientsMenuState::printChoiceId(int yCoord, int xCoord)
 
 	return ingredientId;
 }
+
+void SellingIngredientsMenuState::printErrorAndMakeChoiceAgain(int& ingredientId, int yCoord)
+{
+	string textOfError = "У вас нет ингредиента с номером " + to_string(ingredientId) + ", выберите другой номер: ";
+
+	printErrorAndMakeChoiceAgain(yCoord, textOfError, ingredientId);
+}
+
+void SellingIngredientsMenuState::printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& ingredientId)
+{
+	this->alchemicalUserInterface->printError(yCoord, STANDARD_CURSOR_X_COORD, textOfError);
+
+	ingredientId = printChoiceId(yCoord, textOfError.size() + 1);
+}
+
+void SellingIngredientsMenuState::checkIngredientsId(int& ingredientId)
+{
+	int index = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(ingredientId);
+
+	while (index == NO_POSITION)
+	{
+		printErrorAndMakeChoiceAgain(ingredientId, Y_COORD_AFTER_MENU_TITLE_2);
+
+		index = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(ingredientId);
+	}
+}
+
+void SellingIngredientsMenuState::checkNumberOfIngredient(int& numberOfIngredient, int ingrdientId)
+{
+	int currentNumber = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getIngredientById(ingrdientId)->getNumber();
+
+	while (numberOfIngredient > currentNumber)
+	{
+		string textOfError = "У вас нет такого количества ингредиента с номером " + to_string(ingrdientId) + ", введите меньшее количество: ";
+
+		this->alchemicalUserInterface->printError(Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD, textOfError);
+
+		numberOfIngredient = this->alchemicalUserInterface->chooseNumber(textOfError, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
+	}
+}
+
+//void SellingIngredientsMenuState::decreaseNumberOfIngredients(int igredientId)
+//{
+//	// Получаем нашу таблицу
+//	IngredientsTable* ingredientTable = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable();
+//
+//	// уменьшаем кол-во ингредиентов
+//	ingredientTable->decreaseNumberOfIngredient(igredientId);
+//}
+
+
 
 
 

@@ -73,6 +73,10 @@ public:
 	// Создть зелье
 	Potion* createPotion(Ingredient* firstIngredient, Ingredient* secondIngredient);
 
+	void sellIngredient(int ingredientId, int numberOfIngredient);
+
+	void decreaseNumberOfIngredient(int ingredientId, int numberOfIngredient);
+
 	//vector<int> findEqualEffects(int firstIngredientId, int secondIngredientId);
 
 	//// Создать зелье и поместить его в таблицу
@@ -98,7 +102,7 @@ private:
 	// Имееет ли таблица такое зелье, если да то возвращает Id этого зелья
 	int hasSuchPotion(Potion* potion);
 
-	// Создать новый ингредиент
-	Ingredient* createNewIngredient(string ingredientName);
+	//// Создать новый ингредиент
+	//Ingredient* createNewIngredient(string ingredientName);
 };
 

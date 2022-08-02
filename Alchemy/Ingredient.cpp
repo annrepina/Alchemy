@@ -103,8 +103,8 @@ void Ingredient::increaseNumber(int number)
 	this->number += number;
 }
 
-void Ingredient::decreaseNumber()
+void Ingredient::decreaseNumber(int number)
 {
-	--this->number;
+	this->number -= number;
 }
 

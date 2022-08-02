@@ -55,6 +55,11 @@ void Alchemist::increaseSalesmanLevel()
 	++this->salesmanLevel;
 }
 
+void Alchemist::increaseSalesmanLevel(int number)
+{
+	this->salesmanLevel += number;
+}
+
 void Alchemist::increaseCapital(int value)
 {
 	this->ñapital += value;

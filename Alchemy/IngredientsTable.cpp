@@ -18,6 +18,8 @@ IngredientsTable::~IngredientsTable()
 void IngredientsTable::add(Ingredient* ingredient)
 {
 	this->ingredientsWithId.emplace(++id, ingredient);
+
+	ingredient->subscribe(this);
 }
 
 void IngredientsTable::setEffectsTable(EffectsTable* effectsTable)

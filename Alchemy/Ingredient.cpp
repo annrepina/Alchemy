@@ -88,6 +88,24 @@ void Ingredient::openEffect(int id)
 	//this->notify(id);
 }
 
+void Ingredient::openEffectRandomly()
+{
+	// Итератор на начало
+	auto beginIter = this->effectsId.begin();
+
+	// Итератор на конец
+	auto endIter = this->effectsId.end();
+
+	for (auto i = beginIter; i != endIter; ++i)
+	{
+		if (beginIter->second == UNKNOWN)
+		{
+			beginIter->second = KNOWN;
+			break;
+		}
+	}
+}
+
 void Ingredient::addEffect(int effectId)
 {
 	// Если размер вектора меньше двух, то добавляем элемент

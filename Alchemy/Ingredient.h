@@ -68,6 +68,8 @@ public:
 	// Открыть эффект по id
 	void openEffect(int id);
 
+	void openEffectRandomly();
+
 	//// Сеттер для id
 	//void setId(int id);
 

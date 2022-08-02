@@ -91,6 +91,8 @@ protected:
 	// Выбор продолжить или назад
 	virtual void chooseContinueOrGoBack();
 
+	int printChoiceIngredientId(int yCoord, int xCoord);
+
 	// Ассоциативный массив состояний
 	std::map<int, MenuState*> menuStates;
 

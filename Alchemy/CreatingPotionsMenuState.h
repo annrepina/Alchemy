@@ -45,8 +45,8 @@ private:
 
 	void printMenu(string choiceFirstIngredient, string choiceSecondIngredient);
 
-	// Печать выбора id
-	int printChoiceId(int yCoord, int xCoord);
+	//// Печать выбора id
+	//int printChoiceId(int yCoord, int xCoord);
 
 	// уменьшить кол-во ингредиентов
 	void decreaseNumberOfIngredients(int firstIngredientId, int secondIngredientId);

@@ -77,6 +77,8 @@ public:
 
 	void decreaseNumberOfIngredient(int ingredientId, int numberOfIngredient);
 
+	void eatIngredient(int ingredientId);
+
 	//vector<int> findEqualEffects(int firstIngredientId, int secondIngredientId);
 
 	//// Создать зелье и поместить его в таблицу

@@ -39,7 +39,6 @@ MenuState& MenuState::operator=(MenuState const& right)
 		this->numberOfStates = right.numberOfStates;
 		this->title = right.title;
 	}
-	// TODO: вставьте здесь оператор return
 
 	return *this;
 }
@@ -70,59 +69,17 @@ void MenuState::printMenu()
 
 	printMenuItems();
 
-	cout << goToXY(/*this->alchemicalUserInterface->getCurrentYCursorCoord()*/this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
+	cout << goToXY(this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
 
 	chooseMenuItem();
 
 	this->alchemicalUserInterface->setState(this->getNextState());
 }
 
-//void MenuState::setListOfStates()
-//{
-//}
-
-//void MenuState::setListOfCreatingFunctions()
-//{
-//}
-
-//void MenuState::fillMenuStates()
-//{
-//	// Стартовый ключ в ассоциативном массиве
-//	int startKey = this->currentYCursorCoordState;
-//
-//	//// Создаем ассоциативный массив
-//	//map<int, string> menu;
-//
-//	// Заполняем ассоциативный массив
-//	for (int i = 0; i < this->numberOfStates; ++i, ++startKey)
-//	{
-//		menuStates.emplace(startKey, this->listOfStates[i]);
-//	}
-//
-//	//return map<int, MenuState*>();
-//}
-
-//MenuState* MenuState::getNextState()
-//{
-//	return nullptr;
-//}
-
-
-
 void MenuState::printMenuTitle()
 {
-	//eraseScreenAfterAlchemist();
-
-	//this->alchemicalUserInterface->setCurrentYCursorCoord(calculateXCoordInMiddle(title));
-
 	this->currentXCursorCoordState = calculateXCoordInMiddle(title);
-
-	//this->alchemicalUserInterface->currentXCursorCoord = calculateXCoordInMiddle(title);
-
-	//this->currentXCursorCoord = calculateXCoordInMiddle(title);
-
-	/*cout << goToXY(this->alchemicalUserInterface->getCurrentYCursorCoord() - TWO_LINES, this->alchemicalUserInterface->getCurrentXCursorCoord());*/
-
+	
 	cout << goToXY(this->currentYCursorCoordState - TWO_LINES, this->currentXCursorCoordState);
 
 	printColoredText(title, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
@@ -153,6 +110,16 @@ void MenuState::printMenuItems()
 			// Печатаем пункт меню
 			cout << menuStates[i]->goToTitle << endl;
 	}
+}
+
+int MenuState::printChoiceIngredientId(int yCoord, int xCoord)
+{
+	// Переходим по координате для ввода первого id
+	cout << goToXY(yCoord, xCoord);
+
+	int ingredientId = alchemicalUserInterface->chooseId(AlchemicalUserInterface::TableCode::IngredientTable);
+
+	return ingredientId;
 }
 
 void MenuState::chooseMenuItem()

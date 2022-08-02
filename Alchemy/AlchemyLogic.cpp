@@ -286,6 +286,17 @@ void AlchemyLogic::decreaseNumberOfIngredient(int ingredientId, int numberOfIngr
 	this->ingredientsTable->decreaseNumberOfIngredient(ingredientId, numberOfIngredient);
 }
 
+void AlchemyLogic::eatIngredient(int ingredientId)
+{
+	Ingredient* ingredient = this->ingredientsTable->getIngredientById(ingredientId);
+
+	decreaseNumberOfIngredient(ingredientId, 1);
+
+	ingredient->openEffectRandomly();
+
+	ingredient->notify(ingredientId);
+}
+
 //void AlchemyProgram::printIngredientsTable()
 //{
 //	this->ingredientsTable->print();

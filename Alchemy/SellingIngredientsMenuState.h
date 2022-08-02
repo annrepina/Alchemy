@@ -39,8 +39,8 @@ private:
 
 	void printMenu(string choiceIngredient, string choiceNumberOfIngredient);
 
-	// Печать выбора id и возвращене резульата
-	int printChoiceId(int yCoord, int xCoord);
+	//// Печать выбора id и возвращене резульата
+	//int printChoiceId(int yCoord, int xCoord);
 
 	void printErrorAndMakeChoiceAgain(int& ingredientId, int yCoord);
 

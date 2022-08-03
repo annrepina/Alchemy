@@ -56,8 +56,8 @@ void CreatingPotionsMenuState::printMenu()
 	// Получаем нашу логику
 	AlchemyLogic* alchemyLogic = this->alchemicalUserInterface->getAlchemyLogic();
 
-	// Получаем таблицу ингредиентов 
-	IngredientsTable* ingredientsTable = alchemyLogic->getIngredientsTable();
+	// Получаем таблицу зелий 
+	PotionTable* potionsTable = alchemyLogic->getPotionTable();
 
 	while (false == success)
 	{
@@ -109,9 +109,29 @@ void CreatingPotionsMenuState::printMenu()
 
 			power = potion->getPower();
 
+			int key = potionsTable->hasSuchPotion(potion);
+
+			if (key != NO_POSITION)
+				potionsTable->add(potion);
+
+			else
+			{
+				potionsTable->getPotionById(key)->increaseNumber();
+
+				potionsTable->notify(key);
+			}
+
+
+
+			
+
+
 			// уведомляем подписчиков об изменение видимости открытых эффектов
 			firstIngredient->notify(firstIngredientId);
 			secondIngredient->notify(secondIngredientId);
+
+
+
 		}
 
 		success = this->alchemicalUserInterface->getAlchemyLogic()->checkPotion(potion);

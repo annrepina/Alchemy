@@ -6,6 +6,7 @@ Potion::Potion()
 	//this->name = "";
 	this->number = 0;
 	this->price = 0;
+	this->power = 0;
 }
 
 void Potion::setEffectId(int id)

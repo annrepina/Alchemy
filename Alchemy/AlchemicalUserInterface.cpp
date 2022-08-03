@@ -40,7 +40,7 @@ void AlchemicalUserInterface::launchMainLoop()
 	this->ingredientsTableprinter->calculateData();
 
 	/*if(this->alchemyLogic->getPotionTable()->getStartIterator() != this->alchemyLogic->getPotionTable()->getEndIterator())*/
-		this->potionTablePrinter->calculateData();
+	this->potionTablePrinter->calculateData();
 
 	// Заполняем таблицу контентом
 	this->ingredientsTableprinter->fillInTableContent();
@@ -48,6 +48,7 @@ void AlchemicalUserInterface::launchMainLoop()
 
 	// Добавляем подписчиков
 	this->alchemyLogic->getIngredientsTable()->subscribe(this->ingredientsTableprinter);
+	this->alchemyLogic->getPotionTable()->subscribe(this->potionTablePrinter);
 
 	printTitle();
 
@@ -94,6 +95,11 @@ AlchemyLogic* AlchemicalUserInterface::getAlchemyLogic()
 IngredientsTablePrinter* AlchemicalUserInterface::getIngredientsTablePrinter()
 {
 	return this->ingredientsTableprinter;
+}
+
+PotionTablePrinter* AlchemicalUserInterface::getPotionTablePrinter()
+{
+	return this->potionTablePrinter;
 }
 
 void AlchemicalUserInterface::setState(MenuState* state)
@@ -768,17 +774,14 @@ void AlchemicalUserInterface::printPageMenu(int page)
 void AlchemicalUserInterface::printTablePagesInLoop(TableCode code, int& page)
 {
 	if (code == TableCode::IngredientTable)
-	{
 		this->ingredientsTableprinter->print(page);
 
-		printPageMenu(page);
-
-		choosePage(page, TableCode::IngredientTable);
-	}
 	else
-	{
+		this->potionTablePrinter->print(page);
 
-	}
+	printPageMenu(page);
+
+	choosePage(page, code);
 }
 
 

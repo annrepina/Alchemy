@@ -1,5 +1,8 @@
 #pragma once
 #include "MenuState.h"
+#include "ReturnMenuState.h"
+
+#define MINIMUM_NUMBER_OF_POTIONTS_FOR_SELLING		1	// минимально требуемое кол-во зелья для ПРОДАЖИ 
 
 class SellingPotionsMenuState : public MenuState
 {
@@ -31,10 +34,9 @@ private:
 	// Вектор функций, которые создают стейты
 	vector< function<MenuState* (SellingPotionsMenuState&)> > listOfCreatingFunctions;
 
-	//// Создать состояние - алхимическое меню
-	//AlchemicalMenuState* createAlchemicalMenuState();
+	// Создать состояние - меню назад
+	ReturnMenuState* createReturnMenuState();
 
-	//// Создать состояние - меню инструкций
-	//InstructionsMenuState* createInstructionsMenuState();
+	void printMenu(string choiceIngredient, string choiceNumberOfIngredient);
 };
 

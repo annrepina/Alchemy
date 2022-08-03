@@ -48,6 +48,8 @@ public:
 
 	IngredientsTablePrinter* getIngredientsTablePrinter();
 
+	PotionTablePrinter* getPotionTablePrinter();
+
 #pragma endregion √≈““≈–€
 
 #pragma region C≈““≈–€

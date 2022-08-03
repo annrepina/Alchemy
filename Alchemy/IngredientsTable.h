@@ -75,8 +75,6 @@ private:
 	// Таблица эффектов
 	EffectsTable* effectsTable;
 
-
-
 	// Чистит память
 	void clear();
 };

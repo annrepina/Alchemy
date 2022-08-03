@@ -5,7 +5,7 @@
 #include "IObservable.h"
 
 // Класс таблица зелий
-class PotionTable : public Table<Potion>, public IObservable
+class PotionTable : public Table<Potion>, public IObservable, public IObserver
 {
 public:
 
@@ -19,6 +19,13 @@ public:
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
 
+	// Возвращает ключ Зелья, если такое было, иначе -1
+	int hasSuchPotion(Potion* potion);
+
+	void update(int id) override;
+
+	void update(int id, int previousNumber) override;
+
 #pragma region Геттеры
 
 	// Получить итератор на последний элемент в map
@@ -31,6 +38,9 @@ public:
 
 	// Получить зелье по id
 	Potion* getPotionById(int id);
+
+	// Получить такое же зелье
+	Potion* getSuchPotion(Potion* potion);
 
 #pragma endregion Геттеры
 

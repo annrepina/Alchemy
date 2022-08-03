@@ -75,21 +75,6 @@ void PotionTablePrinter::printAvailableElements(int page)
 {
 }
 
-//void PotionTablePrinter::update(int id)
-//{
-//	// если элементов меньше, чем id, значит был добавлен новый элемент
-//	if (this->tableContent.size() < id)
-//	{
-//		addPotionToTableContent(id);
-//	}
-//	else
-//	{
-//		this->tableContent[id - 1].clear();
-//
-//		changeTableContentForOneElement(id);
-//	}
-//}
-
 #pragma region Методы расчета
 
 int PotionTablePrinter::calculateNumberOfLines()
@@ -105,12 +90,13 @@ int PotionTablePrinter::calculateNumberOfLines()
 
 	for (auto i = startIter; i != endIter; ++i)
 	{
-		// если кол-во зелья больше 0
-		if (i->second->getNumber() > 0)
-		{
+		//// если кол-во зелья больше 0
+		//if (i->second->getNumber() > 0)
+		//{
 			++numberOfLines;
-		}
+		//}
 	}
+
 
 	return numberOfLines;
 }
@@ -333,12 +319,167 @@ void PotionTablePrinter::printAvailableContent(int page)
 
 void PotionTablePrinter::changeTableContentForOneElement(int id)
 {
+
+	// Итератор на начало map в таблице
+	auto startIter = table->getStartIterator();
+
+	// итератор на конец map
+	auto endIter = table->getEndIterator();
+
+	// Целое значение
+	int intValue;
+
+	// Строковое значение
+	string strValue;
+
+	// Счетчик
+	int counter = 0;
+
+	for (auto i = startIter; i != endIter; ++i, ++counter)
+	{
+		// Создаем внутренний вектор
+		vector <string> line;
+
+		// Добавляем этот вектор во внешний
+		this->tableContent.push_back(line);
+
+		// добываем id
+		intValue = startIter->first;
+
+		// Добавляем в первый вектор id
+		this->tableContent[counter].push_back(to_string(intValue));
+
+		// id эффекта
+		int effectId = startIter->second->getEffectId();
+
+		// добываем имя зелья 
+		strValue = this->table->getEffectsTable()->getEffectByKey(effectId)->getName();
+
+		// Добавляем в первый вектор имя
+		this->tableContent[counter].push_back(strValue);
+
+		// добываем цену
+		intValue = startIter->second->getPrice();
+
+		// Добавляем цену 
+		this->tableContent[counter].push_back(to_string(intValue));
+
+		// добываем кол-во
+		intValue = startIter->second->getNumber();
+
+		// Добавляем кол-во ингредиента
+		this->tableContent[counter].push_back(to_string(intValue));
+	}
+
+
+
+
+
+	//// !!!нужно осуществить поиск по контенту 
+
+	int index = -1;
+
+	string strIndex = to_string(id);
+
+	int tableContentSize = this->tableContent.size();
+
+	for (int i = 0; i < tableContentSize; ++i)
+	{
+		// если ключи совпадают
+		if (strIndex == tableContent[i][0])
+		{
+			index = i;
+
+			break;
+		}
+	}
+
+
+
+
+	// Id для контента таблицы
+	int tableContentId = id - 1;
+
+	Ingredient* ingredient = table->getIngredientById(id);
+
+	// Известен ли игроку эффект данного ингредиента
+	bool isEffectKnown;
+
+	// Целое значение
+	int intValue;
+
+	// id эффекта ингредиента
+	int effectId;
+
+	// Строковое значение
+	string strValue;
+
+	// Добавляем в вектор id
+	this->tableContent[tableContentId].push_back(to_string(id));
+
+	// Строковое значение
+	strValue = ingredient->getName();
+
+	// добавляем имя
+	this->tableContent[tableContentId].push_back(strValue);
+
+	intValue = ingredient->getPrice();
+
+	this->tableContent[tableContentId].push_back(to_string(intValue));
+
+	// Итератор на map с эффектами у ингредиента
+	map<int, bool>::iterator effectIter = ingredient->getBeginIteratorOfEffectsId();
+
+	// для каждого ингредиента
+	for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
+	{
+
+		// Добываем булеву
+		isEffectKnown = effectIter->second;
+
+		// имя эффекта
+		string effectName;
+
+		// если имя игроку известно
+		if (isEffectKnown)
+		{
+			// Присваиваем id
+			effectId = effectIter->first;
+
+			// Присваиваем имя
+			effectName = table->getEffectsTable()->getEffectByKey(effectId)->getName();
+		}
+		else
+			effectName = UNKNOWN_EFFECT;
+
+		// Добавляем имя эффекта 
+		this->tableContent[tableContentId].push_back(effectName);
+
+		++effectIter;
+	}
+
+	intValue = ingredient->getNumber();
+
+	this->tableContent[tableContentId].push_back(to_string(intValue));
+
+	//// если число ингрдеиентов стало 1, то увеличиваем кол-во доступных элементов
+	//if (intValue == 1)
+	//	++numberOfAvailableContent;
+
+	//// если стало 0, то уменьшаем
+	//else if (intValue == 0)
+	//	--numberOfAvailableContent;
+
+	// пересчитываем данные
+	this->calculateData();
 }
 
 void PotionTablePrinter::changeTableContentForOneElement(int id, int previousNumber)
 {
+
 }
 
 void PotionTablePrinter::addElementToTableContent(int id)
 {
+
 }

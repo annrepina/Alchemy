@@ -98,9 +98,9 @@ void Ingredient::openEffectRandomly()
 
 	for (auto i = beginIter; i != endIter; ++i)
 	{
-		if (beginIter->second == UNKNOWN)
+		if (i->second == UNKNOWN)
 		{
-			beginIter->second = KNOWN;
+			i->second = KNOWN;
 			break;
 		}
 	}

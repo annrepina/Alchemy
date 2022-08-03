@@ -75,23 +75,10 @@ void EatingIngredientsMenuState::printMenu()
 			return;
 		}
 
-		//
-
 		int ingredientId = printChoiceIngredientId(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1);
-
-		IngredientsTable* table = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable();
-
-		//int numberOfIngredient = this->alchemicalUserInterface->chooseNumber(choiceNumberOfIngredient, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
 
 		// если ввели отсутствующие id
 		checkIngredientsId(ingredientId);
-
-		table = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable();
-
-
-		Ingredient* ingredient = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getIngredientById(ingredientId);
-
-		//checkNumberOfIngredient(numberOfIngredient, ingredientId);
 
 		alchemyLogic->eatIngredient(ingredientId);
 

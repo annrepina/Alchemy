@@ -43,13 +43,13 @@ void PotionTablePrinter::fillInTableContent()
 		this->tableContent.push_back(line);
 
 		// добываем id
-		intValue = startIter->first;
+		intValue = i->first;
 
 		// Добавляем в первый вектор id
 		this->tableContent[counter].push_back(to_string(intValue));
 
 		// id эффекта
-		int effectId = startIter->second->getEffectId();
+		int effectId = i->second->getEffectId();
 
 		// добываем имя зелья 
 		strValue = this->table->getEffectsTable()->getEffectByKey(effectId)->getName();
@@ -57,14 +57,18 @@ void PotionTablePrinter::fillInTableContent()
 		// Добавляем в первый вектор имя
 		this->tableContent[counter].push_back(strValue);
 
+		intValue = i->second->getPower();
+
+		this->tableContent[counter].push_back(to_string(intValue));
+
 		// добываем цену
-		intValue = startIter->second->getPrice();
+		intValue = i->second->getPrice();
 
 		// Добавляем цену 
 		this->tableContent[counter].push_back(to_string(intValue));
 
 		// добываем кол-во
-		intValue = startIter->second->getNumber();
+		intValue = i->second->getNumber();
 
 		// Добавляем кол-во ингредиента
 		this->tableContent[counter].push_back(to_string(intValue));
@@ -319,156 +323,52 @@ void PotionTablePrinter::printAvailableContent(int page)
 
 void PotionTablePrinter::changeTableContentForOneElement(int id)
 {
-
-	// Итератор на начало map в таблице
-	auto startIter = table->getStartIterator();
-
-	// итератор на конец map
-	auto endIter = table->getEndIterator();
-
-	// Целое значение
-	int intValue;
-
-	// Строковое значение
-	string strValue;
-
-	// Счетчик
-	int counter = 0;
-
-	for (auto i = startIter; i != endIter; ++i, ++counter)
-	{
-		// Создаем внутренний вектор
-		vector <string> line;
-
-		// Добавляем этот вектор во внешний
-		this->tableContent.push_back(line);
-
-		// добываем id
-		intValue = startIter->first;
-
-		// Добавляем в первый вектор id
-		this->tableContent[counter].push_back(to_string(intValue));
-
-		// id эффекта
-		int effectId = startIter->second->getEffectId();
-
-		// добываем имя зелья 
-		strValue = this->table->getEffectsTable()->getEffectByKey(effectId)->getName();
-
-		// Добавляем в первый вектор имя
-		this->tableContent[counter].push_back(strValue);
-
-		// добываем цену
-		intValue = startIter->second->getPrice();
-
-		// Добавляем цену 
-		this->tableContent[counter].push_back(to_string(intValue));
-
-		// добываем кол-во
-		intValue = startIter->second->getNumber();
-
-		// Добавляем кол-во ингредиента
-		this->tableContent[counter].push_back(to_string(intValue));
-	}
-
-
-
-
-
-	//// !!!нужно осуществить поиск по контенту 
-
 	int index = -1;
 
 	string strIndex = to_string(id);
 
 	int tableContentSize = this->tableContent.size();
 
-	for (int i = 0; i < tableContentSize; ++i)
-	{
-		// если ключи совпадают
-		if (strIndex == tableContent[i][0])
-		{
-			index = i;
+	index = findIndexInTableContentByKey(id);
 
-			break;
-		}
-	}
+	// очищаем данный элемент
+	this->tableContent[index].clear();
 
-
-
-
-	// Id для контента таблицы
-	int tableContentId = id - 1;
-
-	Ingredient* ingredient = table->getIngredientById(id);
-
-	// Известен ли игроку эффект данного ингредиента
-	bool isEffectKnown;
+	Potion* potion = table->getPotionById(id);
 
 	// Целое значение
 	int intValue;
 
-	// id эффекта ингредиента
-	int effectId;
-
 	// Строковое значение
 	string strValue;
 
-	// Добавляем в вектор id
-	this->tableContent[tableContentId].push_back(to_string(id));
+	// Добавляем в первый вектор id
+	this->tableContent[index].push_back(to_string(id));
 
-	// Строковое значение
-	strValue = ingredient->getName();
+	// id эффекта
+	int effectId = potion->getEffectId();
 
-	// добавляем имя
-	this->tableContent[tableContentId].push_back(strValue);
+	// добываем имя зелья 
+	strValue = this->table->getEffectsTable()->getEffectByKey(effectId)->getName();
 
-	intValue = ingredient->getPrice();
+	// Добавляем в первый вектор имя
+	this->tableContent[index].push_back(strValue);
 
-	this->tableContent[tableContentId].push_back(to_string(intValue));
+	intValue = potion->getPower();
 
-	// Итератор на map с эффектами у ингредиента
-	map<int, bool>::iterator effectIter = ingredient->getBeginIteratorOfEffectsId();
+	this->tableContent[index].push_back(to_string(intValue));
 
-	// для каждого ингредиента
-	for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
-	{
+	// добываем цену
+	intValue = potion->getPrice();
 
-		// Добываем булеву
-		isEffectKnown = effectIter->second;
+	// Добавляем цену 
+	this->tableContent[index].push_back(to_string(intValue));
 
-		// имя эффекта
-		string effectName;
+	// добываем кол-во
+	intValue = potion->getNumber();
 
-		// если имя игроку известно
-		if (isEffectKnown)
-		{
-			// Присваиваем id
-			effectId = effectIter->first;
-
-			// Присваиваем имя
-			effectName = table->getEffectsTable()->getEffectByKey(effectId)->getName();
-		}
-		else
-			effectName = UNKNOWN_EFFECT;
-
-		// Добавляем имя эффекта 
-		this->tableContent[tableContentId].push_back(effectName);
-
-		++effectIter;
-	}
-
-	intValue = ingredient->getNumber();
-
-	this->tableContent[tableContentId].push_back(to_string(intValue));
-
-	//// если число ингрдеиентов стало 1, то увеличиваем кол-во доступных элементов
-	//if (intValue == 1)
-	//	++numberOfAvailableContent;
-
-	//// если стало 0, то уменьшаем
-	//else if (intValue == 0)
-	//	--numberOfAvailableContent;
+	// Добавляем кол-во ингредиента
+	this->tableContent[index].push_back(to_string(intValue));
 
 	// пересчитываем данные
 	this->calculateData();
@@ -481,5 +381,78 @@ void PotionTablePrinter::changeTableContentForOneElement(int id, int previousNum
 
 void PotionTablePrinter::addElementToTableContent(int id)
 {
+	Potion* potion = table->getPotionById(id);
 
+	//// последний индекс в содержимом таблицы 
+	//int lastIndex = findIndexInTableContentByKey(id);
+
+	int lastIndex = tableContent.size();
+
+	// Целое значение
+	int intValue;
+
+	// Строковое значение
+	string strValue;
+
+	// id эффекта ингредиента
+	int effectId;
+
+	// Создаем внутренний вектор
+	vector <string> line;
+
+	// Добавляем этот вектор во внешний
+	this->tableContent.push_back(line);
+
+	//// добываем id
+	//intValue = endIter->first;
+
+	// Добавляем в первый вектор id
+	tableContent[lastIndex].push_back(to_string(id));
+
+	// id эффекта
+	effectId = potion->getEffectId();
+
+	// добываем имя зелья 
+	strValue = this->table->getEffectsTable()->getEffectByKey(effectId)->getName();
+
+	// Добавляем в первый вектор имя
+	this->tableContent[lastIndex].push_back(strValue);
+
+	intValue = potion->getPower();
+	this->tableContent[lastIndex].push_back(to_string(intValue));
+
+	// добываем цену
+	intValue = potion->getPrice();
+	// Добавляем цену 
+	this->tableContent[lastIndex].push_back(to_string(intValue));
+
+	// добываем кол-во
+	intValue = potion->getNumber();
+	// Добавляем кол-во ингредиента
+	this->tableContent[lastIndex].push_back(to_string(intValue));
+
+	// пересчитываем данные
+	this->calculateData();
+}
+
+int PotionTablePrinter::findIndexInTableContentByKey(int key)
+{
+	int index = -1;
+
+	int size = tableContent.size();
+
+	string strKey = to_string(key);
+
+	for (int i = 0; i < size; ++i)
+	{
+		// если ключи совпадают
+		if (strKey == tableContent[i][0])
+		{
+			index = i;
+
+			break;
+		}
+	}
+
+	return index;
 }

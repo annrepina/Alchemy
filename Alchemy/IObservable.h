@@ -4,6 +4,9 @@
 
 using namespace std;
 
+#define NEW_ELEMENT		true
+#define NOT_NEW_ELMENT	false
+
 class IObservable
 {
 public:
@@ -16,7 +19,7 @@ public:
 
 	virtual void unsubscribe(IObserver* observer);
 
-	virtual void notify(int id);
+	virtual void notify(int id, bool isNewElement);
 
 	// уведомить об изменениях с id элемента и предыдущим кол-вом 
 	virtual void notify(int id, int previousNumber);

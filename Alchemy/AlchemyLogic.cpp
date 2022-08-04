@@ -117,7 +117,7 @@ bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
 		// добавляем элемент в вектор имеющихся элементов
 		this->ingredientsTable->addAvailableElement(id);
 
-		this->ingredientsTable->notify(id);
+		this->ingredientsTable->notify(id, NEW_ELEMENT);
 
 		return true;
 	}
@@ -138,7 +138,7 @@ bool AlchemyLogic::checkPotion(Potion* potion)
 		{
 			this->potionTable->getPotionById(id)->increaseNumber();
 
-			this->potionTable->notify(id);
+			this->potionTable->notify(id, NOT_NEW_ELMENT);
 
 			// удаляем созданное зелье
 			delete potion;
@@ -294,7 +294,7 @@ void AlchemyLogic::eatIngredient(int ingredientId)
 
 	ingredient->openEffectRandomly();
 
-	ingredient->notify(ingredientId);
+	ingredient->notify(ingredientId, NOT_NEW_ELMENT);
 }
 
 //void AlchemyProgram::printIngredientsTable()

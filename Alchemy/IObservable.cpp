@@ -27,11 +27,11 @@ void IObservable::unsubscribe(IObserver* observer)
 	}
 }
 
-void IObservable::notify(int id)
+void IObservable::notify(int id, bool isNewElement)
 {
 	for (auto observer : this->observerList)
 	{
-		observer->update(id);
+		observer->update(id, isNewElement);
 	}
 }
 

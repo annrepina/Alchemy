@@ -40,16 +40,16 @@ public:
 
 	}
 
-	void update(int id) override
+	void update(int id, bool isNewElement) override
 	{
-		// если элементов меньше, чем id, значит был добавлен новый элемент
-		if (this->tableContent.size() < id)
+		// если новый элемент
+		if (isNewElement)
 		{
 			addElementToTableContent(id);
 		}
 		else
 		{
-			this->tableContent[id - 1].clear();
+			//this->tableContent[id - 1].clear();
 
 			changeTableContentForOneElement(id);
 		}

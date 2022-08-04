@@ -27,9 +27,9 @@ void IngredientsTable::setEffectsTable(EffectsTable* effectsTable)
 	this->effectsTable = effectsTable;
 }
 
-void IngredientsTable::update(int id)
+void IngredientsTable::update(int id, bool isNewElement)
 {
-	notify(id);
+	notify(id, isNewElement);
 }
 
 void IngredientsTable::update(int id, int previousNumber)

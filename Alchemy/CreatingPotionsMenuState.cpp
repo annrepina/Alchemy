@@ -109,29 +109,27 @@ void CreatingPotionsMenuState::printMenu()
 
 			power = potion->getPower();
 
+			PotionTable* tabl = this->alchemicalUserInterface->getAlchemyLogic()->getPotionTable();
+
 			int key = potionsTable->hasSuchPotion(potion);
 
-			if (key != NO_POSITION)
+			if (key == NO_POSITION)
+			{
 				potionsTable->add(potion);
+			}
 
 			else
 			{
 				potionsTable->getPotionById(key)->increaseNumber();
 
-				potionsTable->notify(key);
+				potionsTable->notify(key, NOT_NEW_ELMENT);
 			}
 
-
-
-			
-
-
 			// уведомляем подписчиков об изменение видимости открытых эффектов
-			firstIngredient->notify(firstIngredientId);
-			secondIngredient->notify(secondIngredientId);
+			firstIngredient->notify(firstIngredientId, NOT_NEW_ELMENT);
+			secondIngredient->notify(secondIngredientId, NOT_NEW_ELMENT);
 
-
-
+			tabl = this->alchemicalUserInterface->getAlchemyLogic()->getPotionTable();
 		}
 
 		success = this->alchemicalUserInterface->getAlchemyLogic()->checkPotion(potion);

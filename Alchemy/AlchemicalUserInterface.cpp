@@ -516,25 +516,24 @@ bool AlchemicalUserInterface::checkHorizontalArrowChoice(int& page, TableCode co
 
 	else
 	{
+		int numberOfLines;
+
 		// Если рассматриваем таблицу ингредиентов
 		if (code == TableCode::IngredientTable)
-		{
-			int numberOfLines = ingredientsTableprinter->getNumberOfLines();
-
-			if (numberOfLines > page * NUMBER_OF_CONTENT_LINES)
-			{
-				++page;
-				return true;
-			}
-			else
-				return false;
-		}
+			numberOfLines = ingredientsTableprinter->getNumberOfLines();
 
 		// если рассматриваем таблицу зелий
 		else 
-		{
+			numberOfLines = potionTablePrinter->getNumberOfLines();
 
+
+		if (numberOfLines > page * NUMBER_OF_CONTENT_LINES)
+		{
+			++page;
+			return true;
 		}
+		else
+			return false;
 	}
 }
 

@@ -22,7 +22,7 @@ public:
 	// Возвращает ключ Зелья, если такое было, иначе -1
 	int hasSuchPotion(Potion* potion);
 
-	void update(int id) override;
+	void update(int id, bool isNewElement) override;
 
 	void update(int id, int previousNumber) override;
 
@@ -39,8 +39,8 @@ public:
 	// Получить зелье по id
 	Potion* getPotionById(int id);
 
-	// Получить такое же зелье
-	Potion* getSuchPotion(Potion* potion);
+	//// Получить такое же зелье
+	//Potion* getSuchPotion(Potion* potion);
 
 #pragma endregion Геттеры
 

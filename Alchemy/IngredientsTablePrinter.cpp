@@ -419,6 +419,9 @@ void IngredientsTablePrinter::fillInTableContent()
 
 void IngredientsTablePrinter::changeTableContentForOneElement(int id)
 {
+	// очищаем данный элемент
+	this->tableContent[id - 1].clear();
+
 	// Id для контента таблицы
 	int tableContentId = id - 1;
 

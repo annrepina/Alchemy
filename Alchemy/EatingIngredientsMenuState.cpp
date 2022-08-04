@@ -137,7 +137,7 @@ void EatingIngredientsMenuState::checkIngredientsId(int& ingredientId)
 			error = "У ингредиента с номером " + to_string(ingredientId) + " все эффекты открыты, выберите другой номер: ";
 
 		// сбрасываем
-		wasClosedEff == false;
+		wasClosedEff = false;
 
 		printErrorAndMakeChoiceAgain(Y_COORD_AFTER_MENU_TITLE_2, error, ingredientId);
 

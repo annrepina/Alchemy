@@ -26,7 +26,7 @@ public:
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
 
-	void update(int id) override;
+	void update(int id, bool isNewElement) override;
 
 	void update(int id, int previousNumber) override;
 

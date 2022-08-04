@@ -6,7 +6,7 @@
 #define NUMBER_LENGTH				6		// Длина слова "Кол-во"
 #define POWER_LENGTH				8		// Длина слова "Мощность"
 
-#define NUMBER_OF_COLUMNS			5		// 4 колонки
+#define NUMBER_OF_COLUMNS			5		// 5 колонок
 
 class PotionTablePrinter : public TablePrinter<PotionTable>/*, public IObserver*/
 {
@@ -84,5 +84,8 @@ private:
 
 	// Обновить содержимое таблицы - добавить новый ингредиент
 	void addElementToTableContent(int id) override;
+
+	// Найти индекс искомого элемента в таблице контента по ключу
+	int findIndexInTableContentByKey(int key);
 };
 

@@ -17,7 +17,7 @@ void PotionTable::add(Potion* potion)
 {
 	this->potiontsWithId.emplace(++id, potion);
 
-	notify(id);
+	notify(id, NEW_ELEMENT);
 }
 
 void PotionTable::setEffectsTable(EffectsTable* effectsTable)
@@ -28,10 +28,16 @@ void PotionTable::setEffectsTable(EffectsTable* effectsTable)
 int PotionTable::hasSuchPotion(Potion* potion)
 {
 	// начальный индекс
-	bool key = -1;
+	int key = -1;
+
+	auto mapp = this->potiontsWithId;
 
 	auto beginIter = getStartIterator();
 	auto endIter = getEndIterator();
+
+
+
+	//Potion* potion1 = beginIter->second;
 
 	int effectId = potion->getEffectId();
 	int price = potion->getPrice();
@@ -51,7 +57,7 @@ int PotionTable::hasSuchPotion(Potion* potion)
 	return key;
 }
 
-void PotionTable::update(int id)
+void PotionTable::update(int id, bool isNewElement)
 {
 }
 
@@ -81,28 +87,30 @@ Potion* PotionTable::getPotionById(int id)
 	return this->potiontsWithId[id];
 }
 
-Potion* PotionTable::getSuchPotion(Potion* potion)
-{
-	auto beginIter = getStartIterator();
-	auto endIter = getEndIterator();
-
-	int effectId = potion->getEffectId();
-	int price = potion->getPrice();
-	int power = potion->getPower();
-
-	for (auto i = beginIter; i != endIter; ++i)
-	{
-		// если совпадают основные показатели
-		if (effectId == i->second->getEffectId() && price == i->second->getPrice() && power == i->second->getPower())
-		{
-			hasPotion = true;
-
-			break;
-		}
-	}
-
-	return nullptr;
-}
+//Potion* PotionTable::getSuchPotion(Potion* potion)
+//{
+//	Potion* potion = nullptr;
+//
+//	auto beginIter = getStartIterator();
+//	auto endIter = getEndIterator();
+//
+//	int effectId = potion->getEffectId();
+//	int price = potion->getPrice();
+//	int power = potion->getPower();
+//
+//	for (auto i = beginIter; i != endIter; ++i)
+//	{
+//		// если совпадают основные показатели
+//		if (effectId == i->second->getEffectId() && price == i->second->getPrice() && power == i->second->getPower())
+//		{
+//			potion = i->second;
+//
+//			break;
+//		}
+//	}
+//
+//	return potion;
+//}
 
 void PotionTable::clear()
 {

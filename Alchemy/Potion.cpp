@@ -9,6 +9,10 @@ Potion::Potion()
 	this->power = 0;
 }
 
+Potion::~Potion()
+{
+}
+
 void Potion::setEffectId(int id)
 {
 	this->effectId = id;

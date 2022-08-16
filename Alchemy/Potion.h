@@ -10,6 +10,8 @@ public:
 	// Конструктор по умолчанию
 	Potion();
 
+	~Potion();
+
 	//// Конструктор с параметрами
 	//Potion(Ingredient* ingredient1, Ingredient* ingredient2);
 

@@ -111,19 +111,21 @@ void CreatingPotionsMenuState::printMenu()
 
 			PotionTable* tabl = this->alchemicalUserInterface->getAlchemyLogic()->getPotionTable();
 
-			int key = potionsTable->hasSuchPotion(potion);
+			success = this->alchemicalUserInterface->getAlchemyLogic()->checkPotion(potion);
 
-			if (key == NO_POSITION)
-			{
-				potionsTable->add(potion);
-			}
+			//int key = potionsTable->hasSuchPotion(potion);
 
-			else
-			{
-				potionsTable->getPotionById(key)->increaseNumber();
+			//if (key == NO_POSITION)
+			//{
+			//	potionsTable->add(potion);
+			//}
 
-				potionsTable->notify(key, NOT_NEW_ELMENT);
-			}
+			//else
+			//{
+			//	potionsTable->getPotionById(key)->increaseNumber();
+
+			//	potionsTable->notify(key, NOT_NEW_ELMENT);
+			//}
 
 			// уведомляем подписчиков об изменение видимости открытых эффектов
 			firstIngredient->notify(firstIngredientId, NOT_NEW_ELMENT);
@@ -132,7 +134,7 @@ void CreatingPotionsMenuState::printMenu()
 			tabl = this->alchemicalUserInterface->getAlchemyLogic()->getPotionTable();
 		}
 
-		success = this->alchemicalUserInterface->getAlchemyLogic()->checkPotion(potion);
+		//success = this->alchemicalUserInterface->getAlchemyLogic()->checkPotion(potion);
 
 		// Если зелье не получилось
 		if (!success)

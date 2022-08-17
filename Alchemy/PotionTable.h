@@ -39,6 +39,8 @@ public:
 	// Получить зелье по id
 	Potion* getPotionById(int id);
 
+	int getSize();
+
 	//// Получить такое же зелье
 	//Potion* getSuchPotion(Potion* potion);
 

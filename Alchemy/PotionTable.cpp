@@ -87,6 +87,11 @@ Potion* PotionTable::getPotionById(int id)
 	return this->potiontsWithId[id];
 }
 
+int PotionTable::getSize()
+{
+	return this->potiontsWithId.size();
+}
+
 //Potion* PotionTable::getSuchPotion(Potion* potion)
 //{
 //	Potion* potion = nullptr;

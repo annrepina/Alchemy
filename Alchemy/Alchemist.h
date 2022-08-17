@@ -5,11 +5,11 @@
 using namespace std;
 
 // Стартовые показатели алхимика
-#define START_LEVEL			0
+#define START_LEVEL			10
 #define START_UP_CAPITAL	5000
 
 // Макисмальные показатели алхимика
-#define MAX_LEVEL			100
+#define MAX_LEVEL			1000
 #define LEVEL_DIVISOR		10		// Делитель для вычисления уровня алхимика
 
 // Класс Алхимик

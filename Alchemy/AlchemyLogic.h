@@ -68,7 +68,7 @@ public:
 
 	bool tryAddNewIngredientToTable(string ingredientName);
 
-	bool checkPotion(Potion* potion);
+	void checkPotion(Potion* potion);
 
 	// Создть зелье
 	Potion* createPotion(Ingredient* firstIngredient, Ingredient* secondIngredient);

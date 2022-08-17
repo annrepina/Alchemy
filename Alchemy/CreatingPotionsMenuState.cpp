@@ -2,6 +2,8 @@
 #include "AlchemicalMenuState.h"
 #include "AlchemicalUserInterface.h"
 
+#define DEBUG
+
 CreatingPotionsMenuState::CreatingPotionsMenuState()
 {
 }
@@ -109,47 +111,14 @@ void CreatingPotionsMenuState::printMenu()
 
 			power = potion->getPower();
 
-			PotionTable* tabl = this->alchemicalUserInterface->getAlchemyLogic()->getPotionTable();
-
-			success = this->alchemicalUserInterface->getAlchemyLogic()->checkPotion(potion);
-
-			//int key = potionsTable->hasSuchPotion(potion);
-
-			//if (key == NO_POSITION)
-			//{
-			//	potionsTable->add(potion);
-			//}
-
-			//else
-			//{
-			//	potionsTable->getPotionById(key)->increaseNumber();
-
-			//	potionsTable->notify(key, NOT_NEW_ELMENT);
-			//}
+			// проверка зелья, есть ли такое уже
+			this->alchemicalUserInterface->getAlchemyLogic()->checkPotion(potion);
 
 			// уведомляем подписчиков об изменение видимости открытых эффектов
 			firstIngredient->notify(firstIngredientId, NOT_NEW_ELMENT);
 			secondIngredient->notify(secondIngredientId, NOT_NEW_ELMENT);
 
-			tabl = this->alchemicalUserInterface->getAlchemyLogic()->getPotionTable();
-		}
-
-		//success = this->alchemicalUserInterface->getAlchemyLogic()->checkPotion(potion);
-
-		// Если зелье не получилось
-		if (!success)
-		{
-			error = "К сожалению, зелье не получилось!";
-
-			printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
-
-			error = "";
-		}
-		else
-		{
 			string congratulations = "Вы создали зелье - " + name + ". Цена - " + to_string(price) + " септ. Мощность - " + to_string(power) + ".";
-
-			//cout << "" << name << ". Цена - " << price << " септ." << " Мощность - " << power << ".";
 
 			printColoredText(congratulations, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
 
@@ -157,6 +126,16 @@ void CreatingPotionsMenuState::printMenu()
 			char a = _getch();
 
 			break;
+		}
+
+		// Если зелье не получилось
+		else
+		{
+			error = "К сожалению, зелье не получилось!";
+
+			printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
+
+			error = "";
 		}
 	}
 }

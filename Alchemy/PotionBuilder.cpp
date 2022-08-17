@@ -69,8 +69,8 @@ void PotionBuilder::setPotion(int effectId, Ingredient* ingredient1, Ingredient*
 	this->element->setNumber(1);
 
 	// уровень алхимика
-	int alchemistLevel = alchemist->getAlchemistLevel();
-	int salesmanLevel = alchemist->getSalesmanLevel();
+	int alchemistLevel = alchemist->getAlchemistLevel() / LEVEL_DIVISOR;
+	int salesmanLevel = alchemist->getSalesmanLevel() / LEVEL_DIVISOR;
 
 	// если уровни самые маленькие, то увеличиваем до 1, чтобы не умножать на 0
 	if (alchemistLevel == 0)

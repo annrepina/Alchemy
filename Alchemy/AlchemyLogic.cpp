@@ -125,34 +125,26 @@ bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
 	return false;
 }
 
-bool AlchemyLogic::checkPotion(Potion* potion)
+void AlchemyLogic::checkPotion(Potion* potion)
 {	
-	// если зелье не пустое
-	if (potion->getEffectId() != 0)
+	// 0 - если таких зелий нет
+	int id = hasSuchPotion(potion);
+
+	// если точно такое же зелье уже есть
+	if (id > 0)
 	{
-		// 0 - если таких зелий нет
-		int id = hasSuchPotion(potion);
+		this->potionTable->getPotionById(id)->increaseNumber();
 
-		// если точно такое же зелье уже есть
-		if (id > 0)
-		{
-			this->potionTable->getPotionById(id)->increaseNumber();
+		this->potionTable->notify(id, NOT_NEW_ELMENT);
 
-			this->potionTable->notify(id, NOT_NEW_ELMENT);
-
-			// удаляем созданное зелье
-			delete potion;
-			potion = nullptr;
-		}
-		else
-		{
-			this->potionTable->add(potion);
-		}
-
-		return true;
+		// удаляем созданное зелье
+		delete potion;
+		potion = nullptr;
 	}
-
-	return false;
+	else
+	{
+		this->potionTable->add(potion);
+	}
 }
 
 //vector<int> AlchemyLogic::findEqualEffects(int firstIngredientId, int secondIngredientId)

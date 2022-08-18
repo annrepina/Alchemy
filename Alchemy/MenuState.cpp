@@ -112,12 +112,12 @@ void MenuState::printMenuItems()
 	}
 }
 
-int MenuState::printChoiceIngredientId(int yCoord, int xCoord)
+int MenuState::printChoiceId(int yCoord, int xCoord, AlchemicalUserInterface::TableCode tableCode)
 {
 	// Переходим по координате для ввода первого id
 	cout << goToXY(yCoord, xCoord);
 
-	int ingredientId = alchemicalUserInterface->chooseId(AlchemicalUserInterface::TableCode::IngredientTable);
+	int ingredientId = alchemicalUserInterface->chooseId(tableCode);
 
 	return ingredientId;
 }
@@ -125,12 +125,6 @@ int MenuState::printChoiceIngredientId(int yCoord, int xCoord)
 void MenuState::chooseMenuItem()
 {
 	this->alchemicalUserInterface->setFunc(std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this->alchemicalUserInterface, _1));
-
-	//this->alchemicalUserInterface->setFunc(AlchemicalUserInterface::isArrowKeyFalse(1));
-	//this->func = std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this, _1);
-
-	//// Флаг для возвращения в предыдущее меню, но не выход из программы
-	//bool innerExitFlag = false;
 
 	// Флаг для выхода из цикла, но не выход из программы
 	bool innerExitFlag = false;
@@ -140,18 +134,12 @@ void MenuState::chooseMenuItem()
 		// Проверяем нажатую кнопку
 		this->alchemicalUserInterface->checkMenuChoice();
 
-		//checkMenuChoice();
-
-		//switch (this->keyBoard->getPressedKey())
 		switch (this->alchemicalUserInterface->getKeyBoard()->getPressedKey())
 		{
 		case VK_UP:
 		{
-			// Проверяем стрелочки
-			/*this->alchemicalUserInterface->checkVerticalArrowsChoice(this->alchemicalUserInterface->getBoundaryYCoord(), VK_UP, menu);*/
 			this->checkVerticalArrowsChoice(this->boundaryYCoord, VK_UP);
 
-			//checkVerticalArrowsChoice(boundaryYCoord, VK_UP, menu);
 		}
 		break;
 
@@ -159,16 +147,11 @@ void MenuState::chooseMenuItem()
 		{
 			// Проверяем стрелочки
 			this->checkVerticalArrowsChoice(this->boundaryYCoord + menuStates.size() - 1, VK_DOWN);
-
-			//checkVerticalArrowsChoice(boundaryYCoord + menu.size() - 1, VK_DOWN, menu);
 		}
 		break;
 
 		case VK_RETURN:
 		{
-			// Сделать выбор пункта меню
-			//makeChoice(innerExitFlag);// !! Осуществление действий
-
 			// выход из цикла
 			innerExitFlag = true;
 		}

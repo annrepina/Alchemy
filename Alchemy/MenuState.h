@@ -91,7 +91,7 @@ protected:
 	// Выбор продолжить или назад
 	virtual void chooseContinueOrGoBack();
 
-	int printChoiceIngredientId(int yCoord, int xCoord);
+	int printChoiceId(int yCoord, int xCoord, AlchemicalUserInterface::TableCode tableCode);
 
 	// Ассоциативный массив состояний
 	std::map<int, MenuState*> menuStates;

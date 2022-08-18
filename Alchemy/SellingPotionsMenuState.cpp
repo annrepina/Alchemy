@@ -75,7 +75,9 @@ void SellingPotionsMenuState::printMenu()
 			return;
 		}
 
-		//int ingredientId = printChoiceIngredientId(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1);
+		int potionId = printChoice
+
+		int ingredientId = printChoiceIngredientId(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1);
 
 		//int numberOfIngredient = this->alchemicalUserInterface->chooseNumber(choiceNumberOfIngredient, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
 

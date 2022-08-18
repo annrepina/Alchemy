@@ -75,7 +75,7 @@ void EatingIngredientsMenuState::printMenu()
 			return;
 		}
 
-		int ingredientId = printChoiceIngredientId(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1);
+		int ingredientId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1);
 
 		// если ввели отсутствующие id
 		checkIngredientsId(ingredientId);
@@ -158,7 +158,7 @@ void EatingIngredientsMenuState::printErrorAndMakeChoiceAgain(int yCoord, string
 {
 	this->alchemicalUserInterface->printError(yCoord, STANDARD_CURSOR_X_COORD, textOfError);
 
-	ingredientId = printChoiceIngredientId(yCoord, textOfError.size() + 1);
+	ingredientId = printChoiceId(yCoord, textOfError.size() + 1);
 }
 
 bool EatingIngredientsMenuState::wasClosedEffect(int ingredientId)

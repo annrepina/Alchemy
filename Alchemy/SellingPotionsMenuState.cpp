@@ -29,9 +29,9 @@ void SellingPotionsMenuState::printMenu()
 	// Текст ошибки в случае неудачной продажи
 	string error = "";
 
-	string choiceIngredient = "Введите № зелья: ";
+	string choicePotion = "Введите № зелья: ";
 
-	string choiceNumberOfIngredient = "Введите кол-во зелья: ";
+	string choiceNumberOfPotion = "Введите кол-во зелья: ";
 
 	// Получаем нашу логику
 	AlchemyLogic* alchemyLogic = this->alchemicalUserInterface->getAlchemyLogic();
@@ -57,7 +57,7 @@ void SellingPotionsMenuState::printMenu()
 			return;
 		}
 
-		printMenu(choiceIngredient, choiceNumberOfIngredient);
+		printMenu(choicePotion, choiceNumberOfPotion);
 
 		// начальная страница таблицы
 		int page = FIRST_PAGE;
@@ -75,11 +75,9 @@ void SellingPotionsMenuState::printMenu()
 			return;
 		}
 
-		int potionId = printChoice
+		int potionId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_2, choicePotion.size() + 1, (int)AlchemicalUserInterface::TableCode::PotionTable);
 
-		int ingredientId = printChoiceIngredientId(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1);
-
-		//int numberOfIngredient = this->alchemicalUserInterface->chooseNumber(choiceNumberOfIngredient, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
+		int numberOfPotion = this->alchemicalUserInterface->chooseNumber(choiceNumberOfPotion, Y_COORD_AFTER_MENU_TITLE_3);
 
 		//// если ввели отсутствующие id
 		//checkIngredientsId(ingredientId);

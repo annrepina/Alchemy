@@ -61,7 +61,7 @@ public:
 
 #pragma endregion CЕТТЕРЫ
 
-	enum TableCode
+	enum class TableCode
 	{
 		IngredientTable,
 		PotionTable
@@ -80,7 +80,7 @@ public:
 	int chooseIdFromAvailableElements(string strChoice, TableCode code);
 
 	// Вбрать кол-во ингредиента или зелья
-	int chooseNumber(string strChoice, TableCode code, int yCoord);
+	int chooseNumber(string strChoice, int yCoord);
 
 	void chooseExit();
 

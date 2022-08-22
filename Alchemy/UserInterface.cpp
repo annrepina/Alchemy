@@ -36,7 +36,7 @@ void UserInterface::eraseScreenAfterTitle() const
 	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
 }
 
-int UserInterface::checkInput(string& value, int min, int max, string textOfRangeError, int yCoord)
+int UserInterface::checkInput(string value, int min, int max, string textOfRangeError, int yCoord)
 {
 	// не ввели всякие символы вместо числа
 	bool succes; 

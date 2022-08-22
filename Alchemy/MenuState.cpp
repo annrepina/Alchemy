@@ -112,14 +112,14 @@ void MenuState::printMenuItems()
 	}
 }
 
-int MenuState::printChoiceId(int yCoord, int xCoord, AlchemicalUserInterface::TableCode tableCode)
+int MenuState::printChoiceId(int yCoord, int xCoord, int tableCode)
 {
 	// Переходим по координате для ввода первого id
 	cout << goToXY(yCoord, xCoord);
 
-	int ingredientId = alchemicalUserInterface->chooseId(tableCode);
+	int id = alchemicalUserInterface->chooseId((AlchemicalUserInterface::TableCode)tableCode);
 
-	return ingredientId;
+	return id;
 }
 
 void MenuState::chooseMenuItem()

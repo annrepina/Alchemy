@@ -73,9 +73,9 @@ void SellingIngredientsMenuState::printMenu()
 			return;
 		}
 
-		int ingredientId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1);
+		int ingredientId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1, (int)AlchemicalUserInterface::TableCode::IngredientTable);
 
-		int numberOfIngredient = this->alchemicalUserInterface->chooseNumber(choiceNumberOfIngredient, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
+		int numberOfIngredient = this->alchemicalUserInterface->chooseNumber(choiceNumberOfIngredient, Y_COORD_AFTER_MENU_TITLE_3);
 
 		// если ввели отсутствующие id
 		checkIngredientsId(ingredientId);
@@ -141,7 +141,7 @@ void SellingIngredientsMenuState::printErrorAndMakeChoiceAgain(int yCoord, strin
 {
 	this->alchemicalUserInterface->printError(yCoord, STANDARD_CURSOR_X_COORD, textOfError);
 
-	ingredientId = printChoiceId(yCoord, textOfError.size() + 1);
+	ingredientId = printChoiceId(yCoord, textOfError.size() + 1, (int)AlchemicalUserInterface::TableCode::IngredientTable);
 }
 
 void SellingIngredientsMenuState::checkIngredientsId(int& ingredientId)
@@ -166,6 +166,6 @@ void SellingIngredientsMenuState::checkNumberOfIngredient(int& numberOfIngredien
 
 		this->alchemicalUserInterface->printError(Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD, textOfError);
 
-		numberOfIngredient = this->alchemicalUserInterface->chooseNumber(textOfError, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
+		numberOfIngredient = this->alchemicalUserInterface->chooseNumber(textOfError, Y_COORD_AFTER_MENU_TITLE_3);
 	}
 }

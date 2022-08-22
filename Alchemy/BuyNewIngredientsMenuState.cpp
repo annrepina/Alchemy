@@ -101,7 +101,7 @@ void BuyNewIngredientsMenuState::printMenu()
 
 		cout << choiceNumber;
 
-		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_4);
+		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, Y_COORD_AFTER_MENU_TITLE_4);
 
 		success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(ingredientId, number);
 

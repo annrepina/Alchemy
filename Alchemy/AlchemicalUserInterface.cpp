@@ -294,18 +294,15 @@ void AlchemicalUserInterface::chooseExit()
 	} while (false == exitFlag);
 }
 
-int AlchemicalUserInterface::chooseId(/*string strChoice, */TableCode code)
+int AlchemicalUserInterface::chooseId(TableCode code)
 {
 	int id = 0;
 
 	string value = "";
 
-	//// перейти по координате для выбора
-	//cout << goToXY(Y_COORD_AFTER_MENU_TITLE_2, strChoice.size() + 1);
-
 	if (code == TableCode::IngredientTable)
 	{
-		map<int, Ingredient*>::iterator iter = --this->alchemyLogic->getIngredientsTable()->getEndIterator();
+		auto iter = --this->alchemyLogic->getIngredientsTable()->getEndIterator();
 
 		string errorText = "Данного значения не существует в таблице, попробуйте снова: ";
 
@@ -313,7 +310,11 @@ int AlchemicalUserInterface::chooseId(/*string strChoice, */TableCode code)
 	}
 	else
 	{
+		auto iter = --this->alchemyLogic->getPotionTable()->getEndIterator();
 
+		string errorText = "Данного значения не существует в таблице, попробуйте снова: ";
+
+		id = checkInput(value, 1, iter->first, errorText, Y_COORD_AFTER_MENU_TITLE_2);
 	}
 
 	return id;
@@ -324,28 +325,18 @@ int AlchemicalUserInterface::chooseIdFromAvailableElements(string strChoice, Tab
 	return 0;
 }
 
-int AlchemicalUserInterface::chooseNumber(string strChoice, TableCode code, int yCoord)
+int AlchemicalUserInterface::chooseNumber(string strChoice, int yCoord)
 {
 	int number = 0;
 
 	string value = "";
 
-	if (code == TableCode::IngredientTable)
-	{
-		// перейти по координате для выбора
-		cout << goToXY(yCoord, strChoice.size() + 1);
+	// перейти по координате для выбора
+	cout << goToXY(yCoord, strChoice.size() + 1);
 
-		//map<int, Ingredient*>::iterator iter = this->alchemyLogic->getIngredientsTable()->getEndIterator();
+	string errorText = "Данное значение не подходит, попробуйте снова: ";
 
-		string errorText = "Данное значение не подходит, попробуйте снова: ";
-
-		number = checkInput(value, 1, MAX_INT, errorText, yCoord);
-	}
-	else
-	{
-
-	
-	}
+	number = checkInput(value, 1, MAX_INT, errorText, yCoord);
 
 	return number;
 }

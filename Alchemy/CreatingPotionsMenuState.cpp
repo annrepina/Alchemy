@@ -79,9 +79,9 @@ void CreatingPotionsMenuState::printMenu()
 			return;
 		}
 
-		int firstIngredientId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_2, choiceFirstIngredient.size() + 1);
+		int firstIngredientId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_2, choiceFirstIngredient.size() + 1, (int)AlchemicalUserInterface::TableCode::IngredientTable);
 
-		int secondIngredientId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_3, choiceSecondIngredient.size() + 1);
+		int secondIngredientId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_3, choiceSecondIngredient.size() + 1, (int)AlchemicalUserInterface::TableCode::IngredientTable);
 
 		// если ввели одинаковые ингредиенты
 		checkIngredientsId(firstIngredientId, secondIngredientId);
@@ -222,7 +222,7 @@ void CreatingPotionsMenuState::printErrorAndMakeChoiceAgain(int yCoord, string t
 {
 	this->alchemicalUserInterface->printError(yCoord, STANDARD_CURSOR_X_COORD, textOfError);
 
-	ingredientId = printChoiceId(yCoord, textOfError.size() + 1);
+	ingredientId = printChoiceId(yCoord, textOfError.size() + 1, (int)AlchemicalUserInterface::TableCode::IngredientTable);
 }
 
 void CreatingPotionsMenuState::printErrorAndMakeChoiceAgain(int& ingredientId, int yCoord)

@@ -69,7 +69,7 @@ void BuyingIngredientsFromListMenuState::printMenu()
 
 		int id = this->alchemicalUserInterface->chooseId(/*choiceIngredient, */AlchemicalUserInterface::TableCode::IngredientTable);
 
-		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, AlchemicalUserInterface::TableCode::IngredientTable, Y_COORD_AFTER_MENU_TITLE_3);
+		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, Y_COORD_AFTER_MENU_TITLE_3);
 
 		success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(id, number);
 

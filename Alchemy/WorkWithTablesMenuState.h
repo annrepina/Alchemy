@@ -1,6 +1,8 @@
 #pragma once
 #include "MenuState.h"
 
+#define WORK_WITH_TABLES_MENU_ITEMS		3	//  ол-во пунктов меню работы с таблицами
+
 class WorkWithTablesMenuState : public MenuState
 {
 public:

@@ -8,7 +8,7 @@ WorkWithTablesMenuState::WorkWithTablesMenuState(AlchemicalUserInterface* alchem
 {
 	this->title = "Работа с инвентарем";
 	this->goToTitle = "Работать с инвентарем";
-	this->numberOfStates = 0;
+	this->numberOfStates = WORK_WITH_TABLES_MENU_ITEMS;
 }
 
 //WorkWithTablesMenuState::~WorkWithTablesMenuState()

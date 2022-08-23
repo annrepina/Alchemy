@@ -37,6 +37,19 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 
+	// Проверка введенного id на наличие этого id
+	void checkPotionId(int& potionId);
+
+	void checkNumberOfPotion(int& numberOfPotion, int potionId);
+
+#pragma region Методы печати
+
 	void printMenu(string choiceIngredient, string choiceNumberOfIngredient);
+
+	void printErrorAndMakeChoiceAgain(int& potionId, int yCoord);
+
+	void printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& potionId);
+
+#pragma region Методы печати
 };
 

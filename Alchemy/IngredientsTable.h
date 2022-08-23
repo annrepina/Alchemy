@@ -30,6 +30,8 @@ public:
 
 	void update(int id, int previousNumber) override;
 
+	void update() override;
+
 #pragma region ГЕТТЕРЫ
 
 	// Получить итератор на последний элемент в map

@@ -79,23 +79,28 @@ void SellingPotionsMenuState::printMenu()
 
 		int numberOfPotion = this->alchemicalUserInterface->chooseNumber(choiceNumberOfPotion, Y_COORD_AFTER_MENU_TITLE_3);
 
-		//// если ввели отсутствующие id
-		//checkIngredientsId(ingredientId);
+		// если ввели отсутствующие id
+		checkPotionId(potionId);
 
-		//checkNumberOfIngredient(numberOfIngredient, ingredientId);
+		checkNumberOfPotion(numberOfPotion, potionId);
 
 		//alchemyLogic->sellIngredient(ingredientId, numberOfIngredient);
 
-		//string congratulations = "¬ы отличный торговец!";
+		alchemyLogic->sellPotion(potionId, numberOfPotion);
 
-		//cout << goToXY(Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
+		// принтер пересчитывает
+		this->alchemicalUserInterface->getPotionTablePrinter()->calculateData();
 
-		//printColoredText(congratulations, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+		string congratulations = "¬ы отличный торговец!";
 
-		//// ждем нажати€ любой клавиши
-		//char a = _getch();
+		cout << goToXY(Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
 
-		//break;
+		printColoredText(congratulations, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+
+		// ждем нажати€ любой клавиши
+		char a = _getch();
+
+		break;
 	}
 }
 
@@ -130,6 +135,46 @@ void SellingPotionsMenuState::printMenu(string choicePotion, string choiceNumber
 	printColoredTextByCoords(choicePotion, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
 
 	printColoredTextByCoords(choiceNumberOfPotions, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD);
+}
+
+void SellingPotionsMenuState::printErrorAndMakeChoiceAgain(int& potionId, int yCoord)
+{
+	string textOfError = "” вас нет зель€ с номером " + to_string(potionId) + ", выберите другой номер: ";
+
+	printErrorAndMakeChoiceAgain(yCoord, textOfError, potionId);
+}
+
+void SellingPotionsMenuState::printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& potionId)
+{
+	this->alchemicalUserInterface->printError(yCoord, STANDARD_CURSOR_X_COORD, textOfError);
+
+	potionId = printChoiceId(yCoord, textOfError.size() + 1, (int)AlchemicalUserInterface::TableCode::PotionTable);
+}
+
+void SellingPotionsMenuState::checkPotionId(int& potionId)
+{
+	int index = this->alchemicalUserInterface->getPotionTablePrinter()->findElementInAvailableElementsId(potionId);
+
+	while (index == NO_POSITION)
+	{
+		printErrorAndMakeChoiceAgain(potionId, Y_COORD_AFTER_MENU_TITLE_2);
+
+		index = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(potionId);
+	}
+}
+
+void SellingPotionsMenuState::checkNumberOfPotion(int& numberOfPotion, int potionId)
+{
+	int currentNumber = this->alchemicalUserInterface->getAlchemyLogic()->getPotionTable()->getPotionById(potionId)->getNumber();
+
+	while (numberOfPotion > currentNumber)
+	{
+		string textOfError = "” вас нет такого количества зель€ с номером " + to_string(potionId) + ", введите меньшее количество: ";
+
+		this->alchemicalUserInterface->printError(Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD, textOfError);
+
+		numberOfPotion = this->alchemicalUserInterface->chooseNumber(textOfError, Y_COORD_AFTER_MENU_TITLE_3);
+	}
 }
 
 

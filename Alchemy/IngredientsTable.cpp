@@ -36,6 +36,10 @@ void IngredientsTable::update(int id, int previousNumber)
 {
 }
 
+void IngredientsTable::update()
+{
+}
+
 map<int, Ingredient*>::iterator IngredientsTable::getEndIterator()
 {
 	return this->ingredientsWithId.end();

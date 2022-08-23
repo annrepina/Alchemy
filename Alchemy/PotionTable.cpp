@@ -65,6 +65,35 @@ void PotionTable::update(int id, int previousNumber)
 {
 }
 
+void PotionTable::update()
+{
+}
+
+void PotionTable::decreaseNumberOfPotion(int potionId, int number)
+{
+	Potion* potion = getPotionById(potionId);
+
+	// Получаем зелье и уменьшаем его кол-во
+	potion->decreaseNumber(number);
+
+	// если кол-во зелья равно 0, то удаляем его из таблицы
+	if (potion->getNumber() == 0)
+	{
+		// сначала уведомляем принтер об этом
+		notify(potionId, NOT_NEW_ELEMENT);
+
+		// удаляем из map данный элемент
+		this->potiontsWithId.erase(potionId);
+
+		// удаляем само зелье
+		delete potion;
+		potion = nullptr;
+
+		// еще раз уведомляем принтер после окончательного удаления элемента
+		notify();
+	}
+}
+
 map<int, Potion*>::iterator PotionTable::getEndIterator()
 {
 	// возвращаем итератор на последний элемент

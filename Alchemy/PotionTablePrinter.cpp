@@ -79,6 +79,11 @@ void PotionTablePrinter::printAvailableElements(int page)
 {
 }
 
+void PotionTablePrinter::update()
+{
+	calculateData();
+}
+
 #pragma region Методы расчета
 
 int PotionTablePrinter::calculateNumberOfLines()
@@ -336,6 +341,39 @@ void PotionTablePrinter::changeTableContentForOneElement(int id)
 
 	Potion* potion = table->getPotionById(id);
 
+	if (potion->getNumber() == 0)
+	{
+		// итератор на начало и конец вектора с контентом
+		auto beginIter = this->tableContent.begin();
+		auto endIter = this->tableContent.begin();
+
+		// итератор на начало вектора с доступными пользователю id
+		auto beginIterOfAvailableContent = this->availableElementsId.begin();
+
+		int startIndex = 0;
+
+		// перебираем в цикле вектор
+		for (auto i = beginIter; i != endIter; ++i, ++startIndex, ++beginIterOfAvailableContent)
+		{
+			// если сравнялись индексы
+			if (startIndex == index)
+			{
+				// то присваиваем текущий итератор
+				beginIter = i;
+				break;
+			}
+		}
+
+		// удаляем данный элемент из вектора контента и доступных id
+		this->tableContent.erase(beginIter);
+		this->availableElementsId.erase(beginIterOfAvailableContent);
+
+		// пересчитываем данные
+		this->calculateData();
+
+		return;
+	}
+
 	// Целое значение
 	int intValue;
 
@@ -376,11 +414,12 @@ void PotionTablePrinter::changeTableContentForOneElement(int id)
 
 void PotionTablePrinter::changeTableContentForOneElement(int id, int previousNumber)
 {
-
 }
 
 void PotionTablePrinter::addElementToTableContent(int id)
 {
+	this->availableElementsId.push_back(id);
+
 	Potion* potion = table->getPotionById(id);
 
 	//// последний индекс в содержимом таблицы 

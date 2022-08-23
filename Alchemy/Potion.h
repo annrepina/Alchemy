@@ -39,8 +39,11 @@ public:
 
 #pragma endregion Геттеры
 
-	// Увеличить кол-во ингредиента
+	// Увеличить кол-во зелья
 	void increaseNumber();
+
+	// уменьшить кол-во зелья на 1
+	void decreaseNumber(int number);
 
 private:
 

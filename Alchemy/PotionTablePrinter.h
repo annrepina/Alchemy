@@ -23,6 +23,7 @@ public:
 
 	void printAvailableElements(int page) override;
 
+	void update() override;
 
 private:
 

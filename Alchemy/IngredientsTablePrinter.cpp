@@ -9,6 +9,8 @@ IngredientsTablePrinter::~IngredientsTablePrinter()
 {
 }
 
+
+
 //void IngredientsTablePrinter::update(int id)
 //{
 //	// если элементов меньше, чем id, значит был добавлен новый элемент

@@ -115,8 +115,8 @@ void CreatingPotionsMenuState::printMenu()
 			this->alchemicalUserInterface->getAlchemyLogic()->checkPotion(potion);
 
 			// уведомляем подписчиков об изменение видимости открытых эффектов
-			firstIngredient->notify(firstIngredientId, NOT_NEW_ELMENT);
-			secondIngredient->notify(secondIngredientId, NOT_NEW_ELMENT);
+			firstIngredient->notify(firstIngredientId, NOT_NEW_ELEMENT);
+			secondIngredient->notify(secondIngredientId, NOT_NEW_ELEMENT);
 
 			string congratulations = "Вы создали зелье - " + name + ". Цена - " + to_string(price) + " септ. Мощность - " + to_string(power) + ".";
 

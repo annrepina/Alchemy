@@ -41,8 +41,12 @@ void MainMenuState::setListOfStates()
 
 void MainMenuState::setListOfCreatingFunctions()
 {
-	this->listOfCreatingFunctions.push_back(&MainMenuState::createAlchemicalMenuState);
-	this->listOfCreatingFunctions.push_back(&MainMenuState::createInstructionsMenuState);	
+	// если вектор пустой
+	if (this->listOfCreatingFunctions.empty())
+	{
+		this->listOfCreatingFunctions.push_back(&MainMenuState::createAlchemicalMenuState);
+		this->listOfCreatingFunctions.push_back(&MainMenuState::createInstructionsMenuState);
+	}
 }
 
 AlchemicalMenuState* MainMenuState::createAlchemicalMenuState()

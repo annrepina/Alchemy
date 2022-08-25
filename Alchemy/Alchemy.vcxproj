@@ -183,6 +183,8 @@
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="AlchemyTableBuilder.cpp" />
     <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="WorkWithIngredientTableMenuState.cpp" />
+    <ClCompile Include="WorkWithPotionTableMenuState.cpp" />
     <ClCompile Include="WorkWithTablesMenuState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +231,8 @@
     <ClInclude Include="Table.h" />
     <ClInclude Include="AlchemyTableBuilder.h" />
     <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="WorkWithIngredientTableMenuState.h" />
+    <ClInclude Include="WorkWithPotionTableMenuState.h" />
     <ClInclude Include="WorkWithTablesMenuState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

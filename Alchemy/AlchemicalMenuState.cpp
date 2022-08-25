@@ -42,13 +42,17 @@ void AlchemicalMenuState::setListOfStates()
 
 void AlchemicalMenuState::setListOfCreatingFunctions()
 {
-	this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createCreatingPotionsMenuState);
-	this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createBuyingIngredientsMenuState);
-	this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createSellingIngredientsMenuState);
-	this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createEatingIngredientsMenuState);
-	this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createSellingPotionsMenuState);
-	this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createWorkWithTablesMenuState);
-	this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createReturnMenuState);
+	// если вектор пустой
+	if (this->listOfCreatingFunctions.empty())
+	{
+		this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createCreatingPotionsMenuState);
+		this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createBuyingIngredientsMenuState);
+		this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createSellingIngredientsMenuState);
+		this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createEatingIngredientsMenuState);
+		this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createSellingPotionsMenuState);
+		this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createWorkWithTablesMenuState);
+		this->listOfCreatingFunctions.push_back(&AlchemicalMenuState::createReturnMenuState);
+	}
 }
 
 MenuState* AlchemicalMenuState::getNextState()

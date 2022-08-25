@@ -150,6 +150,12 @@
     <ClCompile Include="PotionTablePrinter.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="WorkWithIngredientTableMenuState.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkWithPotionTableMenuState.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Effect.h">
@@ -282,6 +288,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="PotionTablePrinter.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkWithIngredientTableMenuState.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkWithPotionTableMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

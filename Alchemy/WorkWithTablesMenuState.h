@@ -1,5 +1,8 @@
 #pragma once
 #include "MenuState.h"
+#include "WorkWithIngredientTableMenuState.h"
+#include "WorkWithPotionTableMenuState.h"
+#include "ServiceFunctions.h"
 
 #define WORK_WITH_TABLES_MENU_ITEMS		3	// Кол-во пунктов меню работы с таблицами
 
@@ -33,11 +36,11 @@ private:
 	// Вектор функций, которые создают стейты
 	vector< function<MenuState* (WorkWithTablesMenuState&)> > listOfCreatingFunctions;
 
-	//// Создать состояние - алхимическое меню
-	//AlchemicalMenuState* createAlchemicalMenuState();
+		// Создать состояние - меню назад
+	ReturnMenuState* createReturnMenuState();
 
-	//// Создать состояние - меню инструкций
-	//InstructionsMenuState* createInstructionsMenuState();
+	WorkWithIngredientTableMenuState* createWorkWithIngredientTableMenuState();
 
+	WorkWithPotionTableMenuState* createWorkWithPotionTableMenuState();
 };
 

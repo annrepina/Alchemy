@@ -38,9 +38,13 @@ void BuyingIngredientsMenuState::setListOfStates()
 
 void BuyingIngredientsMenuState::setListOfCreatingFunctions()
 {
-    this->listOfCreatingFunctions.push_back(&BuyingIngredientsMenuState::createBuyingIngredientsFromListMenuState);
-    this->listOfCreatingFunctions.push_back(&BuyingIngredientsMenuState::createBuyNewIngredientsMenuState);
-    this->listOfCreatingFunctions.push_back(&BuyingIngredientsMenuState::createReturnMenuState);
+    // если вектор пустой
+    if (this->listOfCreatingFunctions.empty())
+    {
+        this->listOfCreatingFunctions.push_back(&BuyingIngredientsMenuState::createBuyingIngredientsFromListMenuState);
+        this->listOfCreatingFunctions.push_back(&BuyingIngredientsMenuState::createBuyNewIngredientsMenuState);
+        this->listOfCreatingFunctions.push_back(&BuyingIngredientsMenuState::createReturnMenuState);
+    }
 }
 
 BuyingIngredientsFromListMenuState* BuyingIngredientsMenuState::createBuyingIngredientsFromListMenuState()

@@ -100,7 +100,7 @@ protected:
 	vector<MenuState*> listOfStates;
 
 	// Проверка выбора стрелочек вверх/вниз
-	void checkVerticalArrowsChoice(int borderYCoord, int keyCode);
+	virtual void checkVerticalArrowsChoice(int borderYCoord, int keyCode);
 
 	// Очистить память
 	virtual void clear();

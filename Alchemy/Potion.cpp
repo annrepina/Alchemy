@@ -58,6 +58,11 @@ void Potion::increaseNumber()
 	++this->number;
 }
 
+void Potion::decreaseNumber(int number)
+{
+	this->number -= number;
+}
+
 //Potion::Potion(Ingredient* ingredient1, Ingredient* ingredient2)
 //{
 //	// результат смешения ингредиентов

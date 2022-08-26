@@ -75,7 +75,11 @@ public:
 
 	void sellIngredient(int ingredientId, int numberOfIngredient);
 
+	void sellPotion(int potionId, int numberOfPotion);
+
 	void decreaseNumberOfIngredient(int ingredientId, int numberOfIngredient);
+
+	void decreaseNumberOfPotion(int potionId, int numberOfPotion);
 
 	void eatIngredient(int ingredientId);
 

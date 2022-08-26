@@ -135,7 +135,7 @@ void AlchemyLogic::checkPotion(Potion* potion)
 	{
 		this->potionTable->getPotionById(id)->increaseNumber();
 
-		this->potionTable->notify(id, NOT_NEW_ELMENT);
+		this->potionTable->notify(id, NOT_NEW_ELEMENT);
 
 		// удаляем созданное зелье
 		delete potion;
@@ -264,18 +264,36 @@ void AlchemyLogic::sellIngredient(int ingredientId, int numberOfIngredient)
 {
 	Ingredient* ingredient = this->ingredientsTable->getIngredientById(ingredientId);
 
-	decreaseNumberOfIngredient(ingredientId, numberOfIngredient);
+	int profit = ingredient->getPrice() * numberOfIngredient;
 
-	int profit = ingredient->getPrice();
+	decreaseNumberOfIngredient(ingredientId, numberOfIngredient);
 
 	this->alchemist->increaseCapital(profit);
 
 	this->alchemist->increaseSalesmanLevel(numberOfIngredient);
 }
 
+void AlchemyLogic::sellPotion(int potionId, int numberOfPotion)
+{
+	Potion* potion = this->potionTable->getPotionById(potionId);
+
+	int profit = potion->getPrice() * numberOfPotion;
+
+	decreaseNumberOfPotion(potionId, numberOfPotion);
+
+	this->alchemist->increaseCapital(profit);
+
+	this->alchemist->increaseSalesmanLevel(numberOfPotion);
+}
+
 void AlchemyLogic::decreaseNumberOfIngredient(int ingredientId, int numberOfIngredient)
 {
 	this->ingredientsTable->decreaseNumberOfIngredient(ingredientId, numberOfIngredient);
+}
+
+void AlchemyLogic::decreaseNumberOfPotion(int potionId, int numberOfPotion)
+{
+	this->potionTable->decreaseNumberOfPotion(potionId, numberOfPotion);
 }
 
 void AlchemyLogic::eatIngredient(int ingredientId)
@@ -286,7 +304,7 @@ void AlchemyLogic::eatIngredient(int ingredientId)
 
 	ingredient->openEffectRandomly();
 
-	ingredient->notify(ingredientId, NOT_NEW_ELMENT);
+	ingredient->notify(ingredientId, NOT_NEW_ELEMENT);
 }
 
 //void AlchemyProgram::printIngredientsTable()

@@ -70,6 +70,11 @@ public:
 		}
 	}
 
+	virtual void update()
+	{
+
+	}
+
 	virtual void print(int page)
 	{
 		setPage(page);

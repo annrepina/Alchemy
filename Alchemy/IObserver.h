@@ -13,6 +13,9 @@ public:
 
 	virtual void update(int id, int previousNumber) = 0;
 
+	// уведомление без параметров
+	virtual void update() = 0;
+
 	//virtual void update(float course) = 0;
 
 

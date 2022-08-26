@@ -45,7 +45,11 @@ void InstructionsMenuState::setListOfStates()
 
 void InstructionsMenuState::setListOfCreatingFunctions()
 {
-	this->listOfCreatingFunctions.push_back(&InstructionsMenuState::createReturnMenuState);
+	// если вектор пустой
+	if (this->listOfCreatingFunctions.empty())
+	{
+		this->listOfCreatingFunctions.push_back(&InstructionsMenuState::createReturnMenuState);
+	}
 }
 
 //void InstructionsMenuState::fillStateCreatingFunctions()

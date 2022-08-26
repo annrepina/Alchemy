@@ -5,7 +5,7 @@
 using namespace std;
 
 #define NEW_ELEMENT		true
-#define NOT_NEW_ELMENT	false
+#define NOT_NEW_ELEMENT	false
 
 class IObservable
 {
@@ -23,6 +23,9 @@ public:
 
 	// уведомить об изменениях с id элемента и предыдущим кол-вом 
 	virtual void notify(int id, int previousNumber);
+
+	// уведомление без параметрв
+	virtual void notify();
 
 protected:
 

@@ -11,8 +11,6 @@ AlchemyLogic::AlchemyLogic()
 	this->ingredientsTable = nullptr;
 
 	this->potionTable = nullptr;
-
-	
 }
 
 void AlchemyLogic::setEffectsTable(EffectsTable* effectsTable)
@@ -305,6 +303,29 @@ void AlchemyLogic::eatIngredient(int ingredientId)
 	ingredient->openEffectRandomly();
 
 	ingredient->notify(ingredientId, NOT_NEW_ELEMENT);
+}
+
+void AlchemyLogic::workWithTable(OperationCode code, vector<vector<string>> tableData, int numberOfColumn, bool order)
+{
+	switch (code)
+	{
+		case OperationCode::Search:
+		{
+
+		}
+		break;
+
+		case OperationCode::Sorting:
+		{
+
+		}
+		break;
+	}
+}
+
+void AlchemyLogic::sortData(vector<vector<string>> tableData, int numberOfColumn, bool order)
+{
+
 }
 
 //void AlchemyProgram::printIngredientsTable()

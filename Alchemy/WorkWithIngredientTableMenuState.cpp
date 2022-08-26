@@ -1,5 +1,6 @@
 #include "WorkWithIngredientTableMenuState.h"
 #include "AlchemicalMenuState.h"
+#include "AlchemicalUserInterface.h"
 
 //string WorkWithIngredientTableMenuState::listOfInnerMenuItems[INNER_MENU_ITEMS] = { "Сортировка", "Поиск" };
 
@@ -25,18 +26,25 @@ void WorkWithIngredientTableMenuState::printMenu()
 
 	setListOfInnerMenuItems();
 
-	fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, numberOfStates);
+	fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, INNER_MENU_ITEMS);
 
 	printMenuTitle();
 
 	printColoredText("Выберите действие:", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 	cout << endl;
 
-	printInnerMenuItems();
+	printMenuItems();
 
 	cout << goToXY(this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
 
 	chooseMenuItem();
+
+	int operationCode = defineOperation();
+
+	// получаем принтер
+	IngredientsTablePrinter* ingredientTablePrinter = this->alchemicalUserInterface->getIngredientsTablePrinter();
+
+	this->alchemicalUserInterface->getAlchemyLogic()->workWithTable((AlchemyLogic::OperationCode)operationCode, ingredientTablePrinter->getTableContent()
 }
 
 MenuState* WorkWithIngredientTableMenuState::getNextState()
@@ -63,7 +71,7 @@ ReturnMenuState* WorkWithIngredientTableMenuState::createReturnMenuState()
 	return new ReturnMenuState(new AlchemicalMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface);
 }
 
-void WorkWithIngredientTableMenuState::printInnerMenuItems()
+void WorkWithIngredientTableMenuState::printMenuItems()
 {
 	int border = this->boundaryYCoord + innerMenuItems.size();
 
@@ -111,6 +119,51 @@ void WorkWithIngredientTableMenuState::checkVerticalArrowsChoice(int borderYCoor
 	}
 }
 
+void WorkWithIngredientTableMenuState::chooseMenuItem()
+{
+	this->alchemicalUserInterface->setFunc(std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this->alchemicalUserInterface, _1));
+
+	// Флаг для выхода из цикла, но не выход из программы
+	bool innerExitFlag = false;
+
+	do
+	{
+		// Проверяем нажатую кнопку
+		this->alchemicalUserInterface->checkMenuChoice();
+
+		switch (this->alchemicalUserInterface->getKeyBoard()->getPressedKey())
+		{
+		case VK_UP:
+		{
+			this->checkVerticalArrowsChoice(this->boundaryYCoord, VK_UP);
+
+		}
+		break;
+
+		case VK_DOWN:
+		{
+			// Проверяем стрелочки
+			this->checkVerticalArrowsChoice(this->boundaryYCoord + innerMenuItems.size() - 1, VK_DOWN);
+		}
+		break;
+
+		case VK_RETURN:
+		{
+			// выход из цикла
+			innerExitFlag = true;
+		}
+		break;
+
+		case VK_ESCAPE:
+		{
+			this->alchemicalUserInterface->setExitFlag(true);
+			//exitFlag = true;
+		}
+		break;
+		}
+	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
+}
+
 void WorkWithIngredientTableMenuState::setListOfInnerMenuItems()
 {
 	// если вектор пустой
@@ -119,4 +172,11 @@ void WorkWithIngredientTableMenuState::setListOfInnerMenuItems()
 		this->listOfInnerMenuItems.push_back("Сортировка");
 		this->listOfInnerMenuItems.push_back("Поиск");
 	}
+}
+
+int WorkWithIngredientTableMenuState::defineOperation()
+{
+	int operationCode = currentYCursorCoordState - MAIN_MENU_Y_COORD;
+
+	return operationCode;
 }

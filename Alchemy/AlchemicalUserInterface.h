@@ -167,8 +167,6 @@ private:
 	// Выбрать страницу таблицы среди доступных элементов
 	void choosePageFromAvailableContent(int page, TableCode code);
 
-
-
 #pragma region ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 
 	// Проверить горизонтальные стрелки

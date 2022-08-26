@@ -35,6 +35,12 @@ public:
 	// Конструктор по умолчанию
 	AlchemyLogic();
 
+	enum class OperationCode
+	{
+		Sorting,
+		Search
+	};
+
 #pragma region СЕТТЕРЫ
 
 	// Сеттер для таблицы эффектов
@@ -82,6 +88,10 @@ public:
 	void decreaseNumberOfPotion(int potionId, int numberOfPotion);
 
 	void eatIngredient(int ingredientId);
+
+	void workWithTable(OperationCode code, vector<vector<string>> tableData, int numberOfColumn, bool order);
+
+	void sortData(vector<vector<string>> tableData, int numberOfColumn, bool order);
 
 	//vector<int> findEqualEffects(int firstIngredientId, int secondIngredientId);
 

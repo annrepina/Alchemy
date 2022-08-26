@@ -4,7 +4,7 @@
 
 #define INNER_MENU_ITEMS	2	// 2 внутренних пункта меню
 
-class AlchemicalMenuState;
+class AlchemicalUserInterface;
 
 class WorkWithIngredientTableMenuState : public MenuState
 {
@@ -18,6 +18,10 @@ public:
 
 	// Печать меню
 	void printMenu() override;
+
+protected:
+
+
 
 private:
 
@@ -39,7 +43,7 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 
-	void printInnerMenuItems();
+	void printMenuItems() override;
 
 	map<int, string> innerMenuItems;
 
@@ -47,6 +51,11 @@ private:
 
 	void checkVerticalArrowsChoice(int borderYCoord, int keyCode) override;
 
+	void chooseMenuItem() override;
+
 	void setListOfInnerMenuItems();
+
+	// Определить операцию сортировка или посиск
+	int defineOperation();
 };
 

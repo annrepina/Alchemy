@@ -114,6 +114,11 @@ public:
 		return this->numberOfLines;
 	}
 
+	vector<vector<string>> getTableContent()
+	{
+		return this->tableContent;
+	}
+
 	// Задать таблицу
 	virtual void setTable(PrintableTable* table)
 	{

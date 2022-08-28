@@ -1,8 +1,11 @@
 #pragma once
 #include "MenuState.h"
 #include "ReturnMenuState.h"
+#include "IngredientsTablePrinter.h"
 
-#define INNER_MENU_ITEMS	2	// 2 внутренних пункта меню
+#define INNER_MENU_ITEMS				2		// 2 внутренних пункта меню
+
+#define DEFAULT_NUMBER_OF_COLUMN		1		// Номер колонки по умолчанию при работе с таблицей
 
 class AlchemicalUserInterface;
 
@@ -25,7 +28,28 @@ protected:
 
 private:
 
+	enum class OperationCode
+	{
+		Sorting,
+		Search
+	};
+
+	// Номер столбца, по которому сортируем
+	int numberOfColumn;
+
+	// Порядок сортировки
+	bool orderOfSorting;
+
+	// Исходный контент таблицы - Весь
+	vector<vector<string>> initialContent;
+
+	// Контекент после печати и поиска
+	vector<vector<string>> contentAfterSortingAndSearch;
+
+	IngredientsTablePrinter* ingredientTablePrinter;
+
 	// Получить следующее состояние
+
 	MenuState* getNextState() override;
 
 	// Задать список состояний
@@ -33,6 +57,9 @@ private:
 
 	// Задать список создающих стейты функций
 	void setListOfCreatingFunctions() override;
+
+	// Задать контент для печати
+	void setContent();
 
 	// Map функций, которые создают стейты и их ключи - координаты пунктов меню
 	map<int, function<MenuState* (WorkWithIngredientTableMenuState&)> > stateCreatingFunctions;
@@ -57,5 +84,7 @@ private:
 
 	// Определить операцию сортировка или посиск
 	int defineOperation();
+
+	void workWithTable(OperationCode operationCode);
 };
 

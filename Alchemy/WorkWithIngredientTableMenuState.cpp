@@ -2,10 +2,13 @@
 #include "AlchemicalMenuState.h"
 #include "AlchemicalUserInterface.h"
 
+
 //string WorkWithIngredientTableMenuState::listOfInnerMenuItems[INNER_MENU_ITEMS] = { "Сортировка", "Поиск" };
 
 WorkWithIngredientTableMenuState::WorkWithIngredientTableMenuState()
 {
+	this->numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
+	this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
 }
 
 WorkWithIngredientTableMenuState::WorkWithIngredientTableMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
@@ -13,6 +16,9 @@ WorkWithIngredientTableMenuState::WorkWithIngredientTableMenuState(AlchemicalUse
 	this->title = "Работа с ингредиентами";
 	this->goToTitle = "Работать с ингредиентами";
 	this->numberOfStates = 1;
+	this->numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
+	this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
+	this->ingredientTablePrinter = alchemicalUserInterface->getIngredientsTablePrinter();
 }
 
 void WorkWithIngredientTableMenuState::printMenu()
@@ -28,6 +34,15 @@ void WorkWithIngredientTableMenuState::printMenu()
 
 	fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, INNER_MENU_ITEMS);
 
+	// начальная страница таблицы
+	int page = FIRST_PAGE;
+
+	//// Начальный столбец при сортировке
+	//int numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
+
+	//// Порядок сортировки
+	//int orderOfSorting = ASCENDING_ORDER_OF_SORTING;
+
 	printMenuTitle();
 
 	printColoredText("Выберите действие:", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
@@ -37,14 +52,42 @@ void WorkWithIngredientTableMenuState::printMenu()
 
 	cout << goToXY(this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
 
-	chooseMenuItem();
+	while (this->alchemicalUserInterface->getExitFlag() == false)
+	{
+		chooseMenuItem();
 
-	int operationCode = defineOperation();
+		// сбрасываем флаг после выбора поиск/сортировка
+		this->alchemicalUserInterface->setExitFlag(false);
+
+		int operationCode = defineOperation();
+
+		auto tableContent = this->alchemicalUserInterface->getIngredientsTablePrinter()->getTableContent();
+
+		workWithTable((OperationCode)operationCode);
+
+		//this->alchemicalUserInterface->workWithTable((AlchemicalUserInterface::OperationCode)operationCode, AlchemicalUserInterface::TableCode::IngredientTable, tableContent, numberOfColumn, );
+
+	}
+
+
+
+
+
+
+
+
+
+
+	this->alchemicalUserInterface->printTablePagesInLoop(AlchemicalUserInterface::TableCode::IngredientTable, page);
+
+	this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(DEFAULT_NUMBER_OF_COLUMN, , AlchemicalUserInterface::TableCode::IngredientTable);
+
+
 
 	// получаем принтер
 	IngredientsTablePrinter* ingredientTablePrinter = this->alchemicalUserInterface->getIngredientsTablePrinter();
 
-	this->alchemicalUserInterface->getAlchemyLogic()->workWithTable((AlchemyLogic::OperationCode)operationCode, ingredientTablePrinter->getTableContent()
+	this->alchemicalUserInterface->getAlchemyLogic()->workWithTable((AlchemyLogic::OperationCode)operationCode, ingredientTablePrinter->getTableContent(), DEFAULT_NUMBER_OF_COLUMN, ASCENDING_ORDER_OF_SORTING);
 }
 
 MenuState* WorkWithIngredientTableMenuState::getNextState()
@@ -64,6 +107,15 @@ void WorkWithIngredientTableMenuState::setListOfCreatingFunctions()
 	{
 		this->listOfCreatingFunctions.push_back(&WorkWithIngredientTableMenuState::createReturnMenuState);
 	}
+}
+
+void WorkWithIngredientTableMenuState::setContent()
+{
+	int totalSize = 
+
+	this->initialContent = this->ingredientTablePrinter->getTableContent();
+
+	this->contentAfterSortingAndSearch = this->initialContent;
 }
 
 ReturnMenuState* WorkWithIngredientTableMenuState::createReturnMenuState()
@@ -179,4 +231,34 @@ int WorkWithIngredientTableMenuState::defineOperation()
 	int operationCode = currentYCursorCoordState - MAIN_MENU_Y_COORD;
 
 	return operationCode;
+}
+
+void WorkWithIngredientTableMenuState::workWithTable(OperationCode operationCode)
+{
+	switch (operationCode)
+	{
+		case OperationCode::Search:
+		{
+
+		}
+		break;
+
+		case OperationCode::Sorting:
+		{
+			while (this->alchemicalUserInterface->getExitFlag() != true)
+			{
+				// делаем выбор
+				this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);
+
+				// сортируем
+				this->alchemicalUserInterface->getAlchemyLogic()->sortData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
+
+
+			}
+
+
+
+		}
+		break;
+	}
 }

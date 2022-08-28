@@ -83,6 +83,9 @@ public:
 		
 		printInnerFrame();
 	}
+
+	// Печать определенного контента напрямую передаваемого принтеру
+	virtual void print(vector<vector<string>> content, int page) = 0;
 	
 	virtual void printAvailableElements(int page) = 0;
 
@@ -325,6 +328,8 @@ protected:
 
 	// Печать содержимого таблицы по страницам
 	virtual void printContent(int page) = 0;
+
+	virtual void printContent(vector<vector<string>> content, int page) = 0;
 
 	virtual void printAvailableContent(int page) = 0;
 

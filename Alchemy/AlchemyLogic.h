@@ -28,6 +28,9 @@
 //#define VK_ESCAPE				0x1B	// Клавиша ESC
 //#define VK_RETURN				0x0D	// Клавиша Enter
 
+#define ASCENDING_ORDER_OF_SORTING		true	// Порядок сортировки по возрастанию
+#define DESCENDING_ORDER_OF_SORTING		false	// Порядок сортировки по убыванию
+
 class AlchemyLogic
 {
 public:
@@ -35,11 +38,11 @@ public:
 	// Конструктор по умолчанию
 	AlchemyLogic();
 
-	enum class OperationCode
-	{
-		Sorting,
-		Search
-	};
+	//enum class OperationCode
+	//{
+	//	Sorting,
+	//	Search
+	//};
 
 #pragma region СЕТТЕРЫ
 
@@ -89,9 +92,9 @@ public:
 
 	void eatIngredient(int ingredientId);
 
-	void workWithTable(OperationCode code, vector<vector<string>> tableData, int numberOfColumn, bool order);
+	//void workWithTable(OperationCode code, vector<vector<string>> tableData, int numberOfColumn, bool order);
 
-	void sortData(vector<vector<string>> tableData, int numberOfColumn, bool order);
+	void sortData(vector<string>* tableData, int numberOfColumn, bool order, int size);
 
 	//vector<int> findEqualEffects(int firstIngredientId, int secondIngredientId);
 

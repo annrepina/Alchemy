@@ -305,245 +305,87 @@ void AlchemyLogic::eatIngredient(int ingredientId)
 	ingredient->notify(ingredientId, NOT_NEW_ELEMENT);
 }
 
-void AlchemyLogic::workWithTable(OperationCode code, vector<vector<string>> tableData, int numberOfColumn, bool order)
+//void AlchemyLogic::workWithTable(OperationCode code, vector<vector<string>> tableData, int numberOfColumn, bool order)
+//{
+//	switch (code)
+//	{
+//		case OperationCode::Search:
+//		{
+//
+//		}
+//		break;
+//
+//		case OperationCode::Sorting:
+//		{
+//			sortData(tableData, numberOfColumn, order);
+//		}
+//		break;
+//	}
+//}
+
+void AlchemyLogic::sortData(vector<string>* tableData, int numberOfColumn, bool order, int size)
 {
-	switch (code)
+	// Разделяющий элемент, с которым будет происходить сравнение других элементов - всегда начальный элемент массива
+	vector<string> pivot = tableData[PIVOT_INDEX];
+
+	// Отнимаем 1, т.к. нумерация элементов в екторе с 0
+	int analyzedIndex = numberOfColumn - 1;
+
+	// Индекс начального левого элемента - начальный индекс массива
+	auto left = 0;
+
+	// Индекс начального правого элемента - последний индекс массива
+	auto right = size - 1;
+
+	// цикл продолжается, пока не встретится break
+	while (true)
 	{
-		case OperationCode::Search:
+		// ищем справа элемент меньше пивота
+		// уменьшаем правый индекс до тех пор, пока элементы больше либо равны пивоту и пока правый индекс больше левого
+		while (right > left && tableData[right][analyzedIndex] >= pivot[analyzedIndex])
 		{
-
+			--right;
 		}
-		break;
 
-		case OperationCode::Sorting:
+		// ищем слева элемент больше пивота
+		// увеличиваем левый индекс до тех пор, пока элементы меньше либо равны пивоту и пока левый элемент меньше правого
+		while (left < right && tableData[left][analyzedIndex] <= pivot[analyzedIndex])
 		{
-
+			++left;
 		}
-		break;
+
+		// если индексы сравнялись во время поиска
+		if (right == left)
+		{
+			// меняем местами пивот и элемент, на котором индексы сравнялись, 
+			//после этого пивот занял свою позицию и разделил масив на 2 части
+			swap(tableData[PIVOT_INDEX], tableData[right]);
+
+			break;
+		}
+
+		// если left и right не пересеклись свопаем соответствующие элементы, 
+		// перекидывая элементы меньше пивота - влево, а больше - вправо
+		swap(tableData[left], tableData[right]);
 	}
+
+	// если правый индекс больше или равен минимального размера массива, который нужно отсортировать, 
+	// значит слева осталось неотсортировано 2 или больше элелементов
+	// вызываем функцию на их сортировку
+	if (right >= MIN_SIZE)
+	{
+		// передаем указатель на массив без изменений - начинаем с 0го элемента исходного массива
+		// размер массива равен индексу правого элемента
+		sortData(tableData, numberOfColumn, order, right);
+	}
+
+	// если правый индекс меньше размера массива минус 2, значит справа осталось неотсортировано 2 или больше элелементов
+	// вызываем функцию на их сортировку
+	if (right < size - 2)
+	{
+		// передаем указатель на массив + right + 1. Т.е. задаем адрес т.н. нулевого элемента передаваемой части массива
+		// размер массива равен исходному размеру за вычетом right и 1
+		sortData(tableData + right + 1, numberOfColumn, order, size - right - 1);
+	}
+	
 }
-
-void AlchemyLogic::sortData(vector<vector<string>> tableData, int numberOfColumn, bool order)
-{
-
-}
-
-//void AlchemyProgram::printIngredientsTable()
-//{
-//	this->ingredientsTable->print();
-//}
-
-//void AlchemyProgram::printTitle()
-//{
-//	this->setXCoord();
-//
-//	printFramedText(title, TITLE_Y_COORD, titleXCoord);
-//}
-//
-//void AlchemyProgram::printMenu()
-//{
-//	cout << "\nВыберите действие: " << endl
-//		<< "1 - Заняться алхимией" << endl
-//		<< "2 - Ознакомиться с инструкцией к программе" << endl
-//		<< "ESC - выход" << endl;
-//}
-//
-//void AlchemyProgram::printInstructions()
-//{
-//	eraseScreenAfterTitle();
-//
-//	cout << "Инструкции к программе \"Зельеварение\"" << endl
-//		<< "0 - назад"
-//		<< "ESC - выход";
-//}
-//
-//void AlchemyProgram::eraseScreenAfterTitle()
-//{
-//	cout << goToXY(Y_COORD_AFTER_TITLE, 0);
-//
-//	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
-//}
-//
-//bool AlchemyProgram::isMenuChoiceFalse(int key)
-//{
-//	return key != VK_1 && key != VK_2 && key != VK_NUMPAD1 && key != VK_NUMPAD2 && key != VK_ESCAPE;
-//}
-//
-//bool AlchemyProgram::isContinueGameFalse(int key)
-//{
-//	return VK_1 != key && VK_2 != key && VK_NUMPAD1 != key && VK_NUMPAD2 != key;
-//}
-//
-//bool AlchemyProgram::isContinue(int key)
-//{
-//	return VK_RETURN != key && VK_ESCAPE != key;
-//}
-//
-//void AlchemyProgram::launchMainLoop()
-//{
-//	/*setXCoord();*/
-//
-//	/*printTitle();*/
-//
-//	printMenu();
-//
-//	//using std::placeholders::_1;
-//
-//	//function<bool(int)> func = std::bind(&AlchemyProgram::isMenuChoiceFalse, this, _1);
-//
-//	this->func = std::bind(&AlchemyProgram::isMenuChoiceFalse, this, _1);
-//
-//	//checkMenuChoice(/*0, */func);
-//	checkMenuChoice();
-//
-//	eraseScreenAfterTitle();
-//
-//	switch (this->keyBoard->getPressedKey())
-//	{
-//		case VK_1: case VK_NUMPAD1:
-//		{
-//			doAlchemy();
-//
-//			//cout << "\nАлхимия" << endl;
-//			//
-//			//cout << "Хотите продолжить последнюю игру или создать новую?" << endl
-//			//	<< "1 - Продолжить игру" << endl
-//			//	<< "2 - Создать новую игру" << endl;
-//
-//			//func = std::bind(&AlchemyProgram::isContinuePlayFalse, this, _1);
-//
-//			////checkMenuChoice(/*0, */func);
-//
-//			//checkMenuChoice();
-//
-//
-//		}
-//		break;
-//
-//		case VK_2: case VK_NUMPAD2:
-//		{
-//			cout << "\nИнструкция" << endl;
-//		}
-//		break;
-//
-//		case VK_ESCAPE:
-//		{
-//			cout << "\nДо скорой встречи!" << endl;
-//		}
-//		break;
-//	}
-//	//
-//	//cout << "Вы нажали верную клавишу";
-//
-//	//system("pause");
-//
-//
-//
-//	//cout << "А теперь стерли все";
-//}
-//
-//void AlchemyProgram::setXCoord()
-//{
-//	titleXCoord = (defineConsoleWidth() / 2) - (title.length() / 2);
-//}
-//
-////void AlchemyProgram::getKey()
-////{
-////	// ждем нажатия клавиши
-////	while (!_kbhit());
-////
-////	// записываем нажатую клавишу
-////	auto key = getch();
-////
-////	// Присваиваем нажатую кнопку
-////	this->key = key;
-////}
-//
-////void AlchemyProgram::checkMenuChoice(/*int key,*/ function<bool(int)> condition/*bool (*condition) (int key)*/)
-////{
-////	// нажатая клавиша
-////	int key;
-////
-////	do {
-////
-////		this->keyBoard->waitForKey();
-////
-////		key = this->keyBoard->getPressedKey();
-////
-////	}	// Если нажатая клавиша не соответсвует кнопкам меню
-////	while (condition(key));
-////}
-//
-//void AlchemyProgram::checkMenuChoice()
-//{
-//	// нажатая клавиша
-//	int key;
-//
-//	do {
-//
-//		this->keyBoard->waitForKey();
-//
-//		key = this->keyBoard->getPressedKey();
-//
-//	}	// Если нажатая клавиша не соответсвует кнопкам меню
-//	while (this->func(key));
-//}
-//
-//void AlchemyProgram::doAlchemy()
-//{
-//	cout << "\nАлхимия" << endl;
-//
-//	cout << "Хотите продолжить последнюю игру или создать новую?" << endl
-//		 << "1 - Продолжить игру" << endl
-//		 << "2 - Создать новую игру" << endl;
-//
-//	func = std::bind(&AlchemyProgram::isContinueGameFalse, this, _1);
-//
-//	//checkMenuChoice(/*0, */func);
-//
-//	checkMenuChoice();
-//
-//
-//
-//	// Имя алхимика
-//	string name;
-//
-//	eraseScreenAfterTitle();
-//
-//	switch (this->keyBoard->getPressedKey())
-//	{
-//		case VK_1: case VK_NUMPAD1:
-//		{
-//			// продумать проверку была ли игра до этого или нет
-//		}
-//		break;
-//
-//		case VK_2: case VK_NUMPAD2:
-//		{
-//			cout << "Введите ваше имя: ";
-//
-//			cin >> name;
-//
-//			this->alchemist->setName(name);
-//
-//			cout << "\nEnter - продолжить" << endl
-//				<< "Esc - выход";
-//
-//			func = std::bind(&AlchemyProgram::isContinue, this, _1);
-//
-//			checkMenuChoice();
-//
-//			printUserInterface();
-//		}
-//		break;
-//
-//
-//		default:
-//			break;
-//	}
-//
-//
-//
-//
-//
-//}

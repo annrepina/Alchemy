@@ -232,6 +232,15 @@ void IngredientsTablePrinter::print(int page)
 	this->printContent(page);
 }
 
+void IngredientsTablePrinter::print(vector<vector<string>> content, int page)
+{
+	TablePrinter::print(page);
+
+	this->printHeader();
+
+	this->printContent(content, page);
+}
+
 void IngredientsTablePrinter::printAvailableElements(int page)
 {
 	//TablePrinter::printAvailableElements(page);
@@ -265,6 +274,38 @@ void IngredientsTablePrinter::printHeader()
 }
 
 void IngredientsTablePrinter::printContent(int page)
+{
+	int border = page * NUMBER_OF_CONTENT_LINES;
+
+	// сбрасываем координату
+	this->yCoordForContentPrinting = Y_COORD_FOR_CONTENT_PRINTING;
+
+	//// Итератор на начало 
+	//map<int, Ingredient*>::iterator iter = table->getStartIterator();
+
+	int i = 0;
+
+	if (page > 1)
+	{
+		i = (page - 1) * NUMBER_OF_CONTENT_LINES;
+	}
+
+	for (; i < this->numberOfLines && i < border; ++i)
+	{
+		for (int j = 0; j < this->numberOfColumns; ++j)
+		{
+			cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[j]);
+
+			cout << this->tableContent[i][j];
+		}
+
+		this->yCoordForContentPrinting += GAPS;
+	}
+
+	cout << endl << endl;
+}
+
+void IngredientsTablePrinter::printContent(vector<vector<string>> content, int page)
 {
 	int border = page * NUMBER_OF_CONTENT_LINES;
 

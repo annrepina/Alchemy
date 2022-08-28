@@ -17,6 +17,10 @@ void PotionTablePrinter::print(int page)
 	this->printContent(page);
 }
 
+void PotionTablePrinter::print(vector<vector<string>> content, int page)
+{
+}
+
 void PotionTablePrinter::fillInTableContent()
 {
 	// Итератор на начало map в таблице
@@ -320,6 +324,10 @@ void PotionTablePrinter::printContent(int page)
 	}
 
 	cout << endl << endl;
+}
+
+void PotionTablePrinter::printContent(vector<vector<string>> content, int page)
+{
 }
 
 void PotionTablePrinter::printAvailableContent(int page)

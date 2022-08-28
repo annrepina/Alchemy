@@ -78,6 +78,8 @@ public:
 
 #pragma endregion ГЕТТЕРЫ
 
+#pragma region ПРЕДИКАТЫ
+
 	// Не были ли нажаты кнопки стрелок?
 	bool isArrowKeyFalse(int key);
 
@@ -90,13 +92,13 @@ public:
 	// Не были нажаты Enter и Esc
 	bool isEnterEscKeyFalse(int key);
 
+#pragma endregion ПРЕДИКАТЫ
+
 	// Проверка выбора в меню
 	void checkMenuChoice() const;
 
 	// Печать ошибки из-за некорректного ввода
 	virtual void printError(int yCoord, int xCoord, string textOfError);
-
-
 
 	//// Проверка выбора стрелочек вверх/вниз
 	//void checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu);
@@ -154,15 +156,6 @@ protected:
 	virtual void printBye() = 0;
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
-
-#pragma region ПРЕДИКАТЫ
-
-	//// Предикат для выбора пользователя в главном меню
-	//bool isMenuChoiceFalse(int key);
-
-
-
-#pragma endregion ПРЕДИКАТЫ
 
 	// Координата Х - печати названия программы
 	int titleXCoord;

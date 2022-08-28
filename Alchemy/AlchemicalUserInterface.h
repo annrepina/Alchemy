@@ -21,7 +21,9 @@
 //#define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
 //#define STANDARD_CURSOR_X_COORD			0		// Стандартная координата X курсора 
 
+// Значения по умолчанию
 #define FIRST_PAGE						1		// Первая страница таблицы
+#define DEFAULT_NUMBER_OF_COLUMN		1		// Номер колонки по умолчанию при работе с таблицей
 
 #define MAX_INT							2147483647	// Самое большое число int 
 
@@ -67,11 +69,20 @@ public:
 		PotionTable
 	};
 
+	//enum class OperationCode
+	//{
+	//	Sorting,
+	//	Search
+	//};
+
 	// Печать страниц таблиц в цикле
 	void printTablePagesInLoop(TableCode code, int& page);
 
 	// Печать таблицы только с теми элементами, которые существуют у юзера
 	void printTableWithAvailableToUserElements(TableCode code, int& page);
+
+	// Печать таблицы первой страницы таблицы (только то, что есть у юзера)
+	void printFirstTablePage(TableCode code);
 
 	// Выбрать Id из таблицы
 	int chooseId(/*string strChoice, */TableCode code);
@@ -83,6 +94,10 @@ public:
 	int chooseNumber(string strChoice, int yCoord);
 
 	void chooseExit();
+
+	//void workWithTable(OperationCode operationCode, TableCode tableCode, vector<vector<string>> tableData, int& numberOfColumn, bool& order);
+
+	void chooseColumnAndOrderOfSorting(int& numberOfColum, bool& orderOfSorting, TableCode code);
 
 private:
 
@@ -169,8 +184,14 @@ private:
 
 #pragma region ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 
-	// Проверить горизонтальные стрелки
+	// Проверить горизонтальные стрелки в случае с выбором страницы в таблицы
 	bool checkHorizontalArrowChoice(int& page, TableCode code, int keyCode);
+
+	// Проверить горизонтальные стрелки в случае с выбором столбца во время сортировки
+	bool checkHorizontalArrowChoice(int& numberOfColums, int keyCode, TableCode code);
+
+	// Проверить вертикальные стрелочки в случае выбора порядка сортировки
+	bool checkVerticalArrowChoice(bool& orderOfSorting, int keyCode, TableCode code);
 
 #pragma endregion ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 
@@ -209,6 +230,9 @@ private:
 
 	// Неправилный выбор страницы
 	bool isPageChoiceFalse(int key);
+
+	// Неправильный выбор столбца или направления сортировки
+	bool isColumnAndOrderChoiceFalse(int key);
 
 #pragma endregion ПРЕДИКАТЫ
 

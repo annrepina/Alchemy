@@ -102,6 +102,8 @@ void quickSort(T* vec, int size)
 	}
 }
 
+
+
 template<typename T>
 int binarySearch(vector<T> vec,/* const int ARRAY_SIZE,*/ int key)
 {

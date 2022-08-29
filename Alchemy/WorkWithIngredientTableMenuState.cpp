@@ -58,15 +58,23 @@ void WorkWithIngredientTableMenuState::printMenu()
 	{
 		chooseMenuItem();
 
-		// сбрасываем флаг после выбора поиск/сортировка
-		this->alchemicalUserInterface->setExitFlag(false);
+		//// сбрасываем флаг после выбора поиск/сортировка
+		//this->alchemicalUserInterface->setExitFlag(false);
+
+		// если была нажата кнопка назад
+		if (currentYCursorCoordState == MAIN_MENU_Y_COORD + INNER_MENU_ITEMS - 1)
+		{
+			// сбрасываем координату
+			this->currentYCursorCoordState = MAIN_MENU_Y_COORD;
+
+			this->alchemicalUserInterface->setState(this->getNextState());
+
+			return;
+		}
 
 		int operationCode = defineOperation();
 
 		workWithTable((OperationCode)operationCode);
-
-		//this->alchemicalUserInterface->workWithTable((AlchemicalUserInterface::OperationCode)operationCode, AlchemicalUserInterface::TableCode::IngredientTable, tableContent, numberOfColumn, );
-
 	}
 }
 
@@ -128,6 +136,8 @@ void WorkWithIngredientTableMenuState::checkVerticalArrowsChoice(int borderYCoor
 		// Если кнопка вниз
 		if (VK_DOWN == keyCode)
 		{
+			cout << goToXY(currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
+
 			// Печатаем пункт меню без выделения
 			cout << innerMenuItems[currentYCursorCoordState];
 
@@ -201,6 +211,7 @@ void WorkWithIngredientTableMenuState::setListOfInnerMenuItems()
 	{
 		this->listOfInnerMenuItems.push_back("Сортировка");
 		this->listOfInnerMenuItems.push_back("Поиск");
+		this->listOfInnerMenuItems.push_back("Назад");
 	}
 }
 
@@ -227,9 +238,14 @@ void WorkWithIngredientTableMenuState::workWithTable(OperationCode operationCode
 			{
 				int page = FIRST_PAGE;
 
-				this->ingredientTablePrinter->printWithSortingMarkers(page, numberOfColumn, orderOfSorting);
+				//this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndSearch, AlchemicalUserInterface::TableCode::IngredientTable, page, numberOfColumn, orderOfSorting);
+				
+				this->ingredientTablePrinter->print(contentAfterSortingAndSearch, page, numberOfColumn, orderOfSorting);
+
+				//this->ingredientTablePrinter->printWithSortingMarkers(page, numberOfColumn, orderOfSorting);
 
 				// делаем выбор
+
 				this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);
 
 #ifdef DEBUG
@@ -255,7 +271,25 @@ void WorkWithIngredientTableMenuState::workWithTable(OperationCode operationCode
 
 				//this->ingredientTablePrinter->print(contentAfterSortingAndSearch, FIRST_PAGE, numberOfColumn, orderOfSorting);
 
+				// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
+				if (this->alchemicalUserInterface->getExitFlag() == true)
+				{
+					// сбрасываем флаг
+					this->alchemicalUserInterface->setExitFlag(false);
+
+					return;
+				}
+
 				this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndSearch, AlchemicalUserInterface::TableCode::IngredientTable, page, numberOfColumn, orderOfSorting);
+
+				// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
+				if (this->alchemicalUserInterface->getExitFlag() == true)
+				{
+					// сбрасываем флаг
+					this->alchemicalUserInterface->setExitFlag(false);
+
+					return;
+				}
 			}
 		}
 		break;

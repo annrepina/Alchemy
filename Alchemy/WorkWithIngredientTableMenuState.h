@@ -3,7 +3,7 @@
 #include "ReturnMenuState.h"
 #include "IngredientsTablePrinter.h"
 
-#define INNER_MENU_ITEMS				2		// 2 внутренних пункта меню
+#define INNER_MENU_ITEMS				3		// 3 внутренних пункта меню
 
 #define DEFAULT_NUMBER_OF_COLUMN		1		// Номер колонки по умолчанию при работе с таблицей
 

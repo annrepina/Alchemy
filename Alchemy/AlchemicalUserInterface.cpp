@@ -226,14 +226,14 @@ void AlchemicalUserInterface::choosePageWhileSorting(vector<vector<string>> cont
 		case VK_ESCAPE:
 		{
 
-			exit = true;
-			//exitFlag = true;
+			//exit = true;
+			exitFlag = true;
 
 			//this->setState(this->state->getNextState());
 		}
 		break;
 		}
-	} while (/*false == exitFlag && */false == exit);
+	} while (false == exitFlag && false == exit);
 }
 
 void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode code)
@@ -331,6 +331,12 @@ void AlchemicalUserInterface::chooseColumnAndOrderOfSorting(int& numberOfColumn,
 			{
 				if (checkVerticalArrowChoice(orderOfSorting, VK_UP, code))
 					exit = true;
+			}
+			break;
+
+			case VK_RETURN:
+			{
+				exit = true;
 			}
 			break;
 
@@ -701,7 +707,7 @@ bool AlchemicalUserInterface::isPageChoiceFalse(int key)
 
 bool AlchemicalUserInterface::isColumnAndOrderChoiceFalse(int key)
 {
-	bool res = VK_LEFT != key && VK_RIGHT != key && VK_ESCAPE != key /*&& VK_RETURN != key*/ && VK_UP != key && VK_DOWN != key;
+	bool res = VK_LEFT != key && VK_RIGHT != key && VK_ESCAPE != key && VK_RETURN != key && VK_UP != key && VK_DOWN != key;
 
 	return res;
 }

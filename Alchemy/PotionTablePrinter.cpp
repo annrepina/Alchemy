@@ -17,8 +17,17 @@ void PotionTablePrinter::print(int page)
 	this->printContent(page);
 }
 
-void PotionTablePrinter::print(vector<vector<string>> content, int page)
+void PotionTablePrinter::print(vector<vector<string>> content, int page, int numberOfColumn, bool orderOfSorting)
 {
+}
+
+void PotionTablePrinter::printWithSortingMarkers(int page, int numberOfColumn, bool orderOfSorting)
+{
+	TablePrinter::print(page);
+
+	this->printHeader(numberOfColumn, orderOfSorting);
+
+	this->printContent(page);
 }
 
 void PotionTablePrinter::fillInTableContent()
@@ -295,6 +304,37 @@ void PotionTablePrinter::printHeader()
 
 		cout << namesOfColumns[i];
 	}
+}
+
+void PotionTablePrinter::printHeader(int numberOfColumn, bool ordreOfSorting)
+{
+	//string namesOfColumns[NUMBER_OF_COLUMNS] = { "№", "Имя", "Мощность", "Цена", "Кол-во" };
+
+	//this->yCoordForContentPrinting = Y_COORD_FOR_HEADER_PRINTING;
+
+	//// уменьшаем на 1, т.к. нумерация с нуля
+	//numberOfColumn -= 1;
+
+	//for (int i = 0; i < this->numberOfColumns; ++i)
+	//{
+	//	//int xCoord = 0;
+
+	//	if (i == numberOfColumn)
+	//	{
+	//		if(ordreOfSorting == ASC)
+	//		printColoredTextByCoords()
+
+	//		cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[i] - 1);
+	//	}
+
+	//	cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[i] - 1);
+
+	//	
+
+	//	printColoredTextByCoords("^")
+
+	//	cout << namesOfColumns[i];
+	//}
 }
 
 void PotionTablePrinter::printContent(int page)

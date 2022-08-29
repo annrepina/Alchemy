@@ -78,6 +78,8 @@ public:
 	// Печать страниц таблиц в цикле
 	void printTablePagesInLoop(TableCode code, int& page);
 
+	void printTablePagesInLoopWhileSorting(vector<vector<string>> content, TableCode code, int& page, int numberOfColumn, bool orderOfSorting);
+
 	// Печать таблицы только с теми элементами, которые существуют у юзера
 	void printTableWithAvailableToUserElements(TableCode code, int& page);
 
@@ -178,6 +180,8 @@ private:
 
 	// Выбрать страницу таблицы
 	void choosePage(int page, TableCode code);
+
+	void choosePageWhileSorting(vector<vector<string>> content, int page, TableCode code, int numberOfColumn, bool orderOfSorting);
 
 	// Выбрать страницу таблицы среди доступных элементов
 	void choosePageFromAvailableContent(int page, TableCode code);

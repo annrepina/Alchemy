@@ -94,7 +94,11 @@ public:
 
 	//void workWithTable(OperationCode code, vector<vector<string>> tableData, int numberOfColumn, bool order);
 
-	void sortData(vector<string>* tableData, int numberOfColumn, bool order, int size);
+	// Когда данные строковые
+	void sortStringData(vector<string>* tableData, int numberOfColumn, bool order, int size);
+
+	// Когда данные цифровые
+	void sortDigitData(vector<string>* tableData, int numberOfColumn, bool order, int size);
 
 	//vector<int> findEqualEffects(int firstIngredientId, int secondIngredientId);
 

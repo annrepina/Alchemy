@@ -15,6 +15,9 @@
 
 #define GAPS						2		// Кол-во пробелов в столбце (1 слева и 1 справа)
 
+#define ASCENDING_ORDER_OF_SORTING		true	// Порядок сортировки по возрастанию
+#define DESCENDING_ORDER_OF_SORTING		false	// Порядок сортировки по убыванию
+
 
 // Класс-шаблон печатающий что-либо
 template <typename PrintableTable>
@@ -85,7 +88,9 @@ public:
 	}
 
 	// Печать определенного контента напрямую передаваемого принтеру
-	virtual void print(vector<vector<string>> content, int page) = 0;
+	virtual void print(vector<vector<string>> content, int page, int numberOfColumn, bool orderOfSorting) = 0;
+
+	virtual void printWithSortingMarkers(int page, int numberOfColumn, bool orderOfSorting) = 0;
 	
 	virtual void printAvailableElements(int page) = 0;
 
@@ -335,6 +340,9 @@ protected:
 
 	// Печать шапки таблицы
 	virtual void printHeader() = 0;
+
+	// Печать шапки с маркерами сортировки
+	virtual void printHeader(int numberOfColumn, bool ordreOfSorting) = 0;
 
 	// Добавить элемент в контент
 	virtual void addElementToTableContent(int id) = 0;

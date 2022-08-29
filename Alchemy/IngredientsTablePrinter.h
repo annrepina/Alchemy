@@ -16,6 +16,12 @@
 
 #define UNKNOWN_EFFECT				"НЕИЗВЕСТНО"	// если эффект у данного ингредиента неизветстен
 
+
+// Цифровые столбцы в таблице
+#define COLUMN_1			1	// Столбец 1
+#define COLUMN_3			3	// Столбец 3
+#define COLUMN_6			6	// Столбец 6
+
 // Очередность столбцов id name price effect1 effect2 number
 
 class IngredientsTablePrinter : public TablePrinter<IngredientsTable>
@@ -28,7 +34,9 @@ public:
 
 	void print(int page) override;
 
-	void print(vector<vector<string>> content, int page) override;
+	void print(vector<vector<string>> content, int page, int numberOfColumn, bool orderOfSorting) override;
+
+	void printWithSortingMarkers(int page, int numberOfColumn, bool orderOfSorting) override;
 
 	void printAvailableElements(int page) override;
 
@@ -81,6 +89,8 @@ private:
 
 	// Печать шапки таблицы
 	void printHeader() override;
+
+	void printHeader(int numberOfColumn, bool ordreOfSorting) override;
 
 	// Печать содержимого таблицы
 	void printContent(int page) override;

@@ -2,7 +2,7 @@
 #include "AlchemicalMenuState.h"
 #include "AlchemicalUserInterface.h"
 
-#define DEBUG
+//#define DEBUG
 
 CreatingPotionsMenuState::CreatingPotionsMenuState()
 {

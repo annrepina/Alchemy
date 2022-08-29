@@ -47,6 +47,11 @@ using namespace std;
 #define G_DECIMAL_RED		"0"
 #define B_DECIMAL_RED		"0"
 
+// Желтый цвет
+#define R_DECIMAL_YELLOW	"255"
+#define G_DECIMAL_YELLOW	"255"
+#define B_DECIMAL_YELLOW	"0"
+
 //// Цвета для стандартоного форматированя текста
 //// Красный цвет
 //#define RED_FOREGROUND		"31"		

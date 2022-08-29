@@ -18,7 +18,9 @@ public:
 
 	void print(int page) override;
 
-	void print(vector<vector<string>> content, int page) override;
+	void print(vector<vector<string>> content, int page, int numberOfColumn, bool orderOfSorting) override;
+
+	void printWithSortingMarkers(int page, int numberOfColumn, bool orderOfSorting) override;
 
 	// заполнить вектор с содержимым таблицы
 	void fillInTableContent() override;
@@ -70,6 +72,8 @@ private:
 
 	// Печать шапки таблицы
 	void printHeader() override;
+
+	void printHeader(int numberOfColumn, bool ordreOfSorting) override;
 
 	// Печать содержимого таблицы
 	void printContent(int page) override;

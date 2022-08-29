@@ -58,19 +58,10 @@ void AlchemicalUserInterface::launchMainLoop()
 	{
 		printAlchemist();
 
-		//menuCode = MenuCode::MainMenu;
-
-		//// Сбрасываем по умолчанию координату
-		//this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-
 		// Вытащила из принтМенюТайтл
 		eraseScreenAfterAlchemist();
 
-		//this->state->setListOfStates();
-
 		this->state->printMenu();
-
-		//printMenuInLoop(mainMenu, mainMenuTitle);
 
 	} while (exitFlag == false);
 
@@ -188,6 +179,61 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 			break;
 		}
 	} while (false == exitFlag && false == exit);
+}
+
+void AlchemicalUserInterface::choosePageWhileSorting(vector<vector<string>> content, int page, TableCode code, int numberOfColumn, bool orderOfSorting)
+{
+	this->func = std::bind(&AlchemicalUserInterface::isPageChoiceFalse, this, _1);
+
+	// Флаг ддля выхода из цикла
+	bool exit = false;
+
+	do
+	{
+		// Проверяем нажатую кнопку
+		checkMenuChoice();
+
+		switch (this->keyBoard->getPressedKey())
+		{
+		case VK_LEFT:
+		{
+			if (checkHorizontalArrowChoice(page, code, VK_LEFT))
+			{
+				printTablePagesInLoopWhileSorting(content, code, page, numberOfColumn, orderOfSorting);
+				//printTablePagesInLoop(code, page);
+				exit = true;
+			}
+		}
+		break;
+
+		case VK_RIGHT:
+		{
+			// Проверяем стрелочки
+			if (checkHorizontalArrowChoice(page, code, VK_RIGHT))
+			{
+				printTablePagesInLoopWhileSorting(content, code, page, numberOfColumn, orderOfSorting);
+				exit = true;
+			}
+		}
+		break;
+
+		case VK_RETURN:
+		{
+			exit = true;
+		}
+		break;
+
+		case VK_ESCAPE:
+		{
+
+			exit = true;
+			//exitFlag = true;
+
+			//this->setState(this->state->getNextState());
+		}
+		break;
+		}
+	} while (/*false == exitFlag && */false == exit);
 }
 
 void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode code)
@@ -591,6 +637,21 @@ void AlchemicalUserInterface::printTablePagesInLoop(TableCode code, int& page)
 	printPageMenu(page);
 
 	choosePage(page, code);
+}
+
+void AlchemicalUserInterface::printTablePagesInLoopWhileSorting(vector<vector<string>> content, TableCode code, int& page, int numberOfColumn, bool orderOfSorting)
+{
+	if (code == TableCode::IngredientTable)
+		this->ingredientsTableprinter->print(content, page, numberOfColumn, orderOfSorting);
+		//this->ingredientsTableprinter->printWithSortingMarkers(page, numberOfColumn, orderOfSorting);
+
+	else
+		this->ingredientsTableprinter->print(content, page, numberOfColumn, orderOfSorting);
+		//this->potionTablePrinter->printWithSortingMarkers(page, numberOfColumn, orderOfSorting);
+
+	printPageMenu(page);
+
+	choosePageWhileSorting(content, page, code, numberOfColumn, orderOfSorting);
 }
 
 void AlchemicalUserInterface::printTableWithAvailableToUserElements(TableCode code, int& page)

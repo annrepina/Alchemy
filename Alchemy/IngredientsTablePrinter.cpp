@@ -232,13 +232,22 @@ void IngredientsTablePrinter::print(int page)
 	this->printContent(page);
 }
 
-void IngredientsTablePrinter::print(vector<vector<string>> content, int page)
+void IngredientsTablePrinter::print(vector<vector<string>> content, int page, int numberOfColumn, bool orderOfSorting)
 {
 	TablePrinter::print(page);
 
-	this->printHeader();
+	this->printHeader(numberOfColumn, orderOfSorting);
 
 	this->printContent(content, page);
+}
+
+void IngredientsTablePrinter::printWithSortingMarkers(int page, int numberOfColumn, bool orderOfSorting)
+{
+	TablePrinter::print(page);
+
+	this->printHeader(numberOfColumn, orderOfSorting);
+
+	this->printContent(page);
 }
 
 void IngredientsTablePrinter::printAvailableElements(int page)
@@ -267,6 +276,38 @@ void IngredientsTablePrinter::printHeader()
 
 	for (int i = 0; i < this->numberOfColumns; ++i)
 	{
+		cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[i]);
+
+		cout << namesOfColumns[i];
+	}
+}
+
+void IngredientsTablePrinter::printHeader(int numberOfColumn, bool ordreOfSorting)
+{
+	string namesOfColumns[NUMBER_OF_COLUMNS] = { "№", "Имя", "Цена", "Эффект 1", "Эффект 2", "Кол-во" };
+
+	this->yCoordForContentPrinting = Y_COORD_FOR_HEADER_PRINTING;
+
+	// отнимаем 1 т.к. нумерация с нуля
+	numberOfColumn -= 1;
+
+	for (int i = 0; i < this->numberOfColumns; ++i)
+	{
+		if (numberOfColumn == i)
+		{
+			string sortingSymbol = " ";
+
+			if (ordreOfSorting == ASCENDING_ORDER_OF_SORTING)
+				sortingSymbol = "^";
+
+			else
+				sortingSymbol = "v";
+
+			cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[i] - 1);
+
+			printColoredText(sortingSymbol, R_DECIMAL_YELLOW, G_DECIMAL_YELLOW, B_DECIMAL_YELLOW);
+		}
+
 		cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[i]);
 
 		cout << namesOfColumns[i];
@@ -328,7 +369,7 @@ void IngredientsTablePrinter::printContent(vector<vector<string>> content, int p
 		{
 			cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[j]);
 
-			cout << this->tableContent[i][j];
+			cout << content[i][j];
 		}
 
 		this->yCoordForContentPrinting += GAPS;

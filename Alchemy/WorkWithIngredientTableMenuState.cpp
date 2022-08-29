@@ -3,12 +3,12 @@
 #include "AlchemicalUserInterface.h"
 
 //#define DEBUG
-//string WorkWithIngredientTableMenuState::listOfInnerMenuItems[INNER_MENU_ITEMS] = { "Сортировка", "Поиск" };
 
 WorkWithIngredientTableMenuState::WorkWithIngredientTableMenuState()
 {
 	this->numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
 	this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
+	this->ingredientTablePrinter = nullptr;
 }
 
 WorkWithIngredientTableMenuState::WorkWithIngredientTableMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
@@ -38,12 +38,6 @@ void WorkWithIngredientTableMenuState::printMenu()
 
 	// начальная страница таблицы
 	int page = FIRST_PAGE;
-
-	//// Начальный столбец при сортировке
-	//int numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
-
-	//// Порядок сортировки
-	//int orderOfSorting = ASCENDING_ORDER_OF_SORTING;
 
 	printMenuTitle();
 
@@ -237,29 +231,11 @@ void WorkWithIngredientTableMenuState::workWithTable(OperationCode operationCode
 			while (this->alchemicalUserInterface->getExitFlag() != true)
 			{
 				int page = FIRST_PAGE;
-
-				//this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndSearch, AlchemicalUserInterface::TableCode::IngredientTable, page, numberOfColumn, orderOfSorting);
 				
 				this->ingredientTablePrinter->print(contentAfterSortingAndSearch, page, numberOfColumn, orderOfSorting);
 
-				//this->ingredientTablePrinter->printWithSortingMarkers(page, numberOfColumn, orderOfSorting);
-
 				// делаем выбор
-
 				this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);
-
-#ifdef DEBUG
-
-				AlchemyLogic* logic = this->alchemicalUserInterface->getAlchemyLogic();
-
-
-
-				logic->sortData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
-
-#endif // DEBUG
-
-
-				//int size = contentAfterSortingAndSearch.size();
 
 				// если критерий цифровой
 				if (numberOfColumn == COLUMN_1 || numberOfColumn == COLUMN_3 || numberOfColumn == COLUMN_6)
@@ -269,7 +245,6 @@ void WorkWithIngredientTableMenuState::workWithTable(OperationCode operationCode
 					// сортируем
 					this->alchemicalUserInterface->getAlchemyLogic()->sortStringData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
 
-				//this->ingredientTablePrinter->print(contentAfterSortingAndSearch, FIRST_PAGE, numberOfColumn, orderOfSorting);
 
 				// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
 				if (this->alchemicalUserInterface->getExitFlag() == true)

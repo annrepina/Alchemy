@@ -343,9 +343,6 @@ void AlchemyLogic::sortStringData(vector<string>* tableData, int numberOfColumn,
 		// если сортировка по возрастанию
 		if (order == ASCENDING_ORDER_OF_SORTING)
 		{
-			//// Разделяющий элемент, с которым будет происходить сравнение других элементов - всегда начальный элемент массива
-			//vector<string> pivot = tableData[PIVOT_INDEX];
-
 			// ищем справа элемент меньше пивота
 			// уменьшаем правый индекс до тех пор, пока элементы больше либо равны пивоту и пока правый индекс больше левого
 			while (right > left && tableData[right][analyzedIndex] >= pivot[analyzedIndex])
@@ -378,58 +375,29 @@ void AlchemyLogic::sortStringData(vector<string>* tableData, int numberOfColumn,
 		// если по убыванию
 		else
 		{
-			//// Разделяющий элемент, с которым будет происходить сравнение других элементов - всегда начальный элемент массива
-			//vector<string> pivot = tableData[PIVOT_INDEX];
-
 			// ищем справа элемент больше пивота
 			// уменьшаем правый индекс до тех пор, пока элементы меньше либо равны пивоту и пока правый индекс больше левого
-
-
 			while (right > left && tableData[right][analyzedIndex] <= pivot[analyzedIndex])
 			{
-				auto vec1 = tableData[right];
-
-				auto vec2str = vec1[analyzedIndex];
-
-
-
 				--right;
 			}
-
-
 
 			// ищем слева элемент меньше пивота
 			// увеличиваем левый индекс до тех пор, пока элементы больше либо равны пивоту и пока левый элемент меньше правого
 			while (left < right && tableData[left][analyzedIndex] >= pivot[analyzedIndex])
 			{
-				auto vec4 = tableData[left];
-
-				auto vec5 = vec4[analyzedIndex];
-
-				auto vec3 = pivot[analyzedIndex];
-
 				++left;
 			}
-
-
 
 			// если индексы сравнялись во время поиска
 			if (right == left)
 			{
-				auto vec6 = tableData[PIVOT_INDEX];
-
-				auto vec7 = tableData[right];
-
 				// меняем местами пивот и элемент, на котором индексы сравнялись, 
 				//после этого пивот занял свою позицию и разделил масив на 2 части
 				swap(tableData[PIVOT_INDEX], tableData[right]);
 
 				break;
 			}
-
-			auto vect = tableData[left];
-
-			auto vec8 = tableData[right];
 
 			// если left и right не пересеклись свопаем соответствующие элементы, 
 			// перекидывая элементы больше пивота - влево, а меньше - вправо
@@ -478,9 +446,6 @@ void AlchemyLogic::sortDigitData(vector<string>* tableData, int numberOfColumn, 
 		// если сортировка по возрастанию
 		if (order == ASCENDING_ORDER_OF_SORTING)
 		{
-			//// Разделяющий элемент, с которым будет происходить сравнение других элементов - всегда начальный элемент массива
-			//vector<string> pivot = tableData[PIVOT_INDEX];
-
 			// ищем справа элемент меньше пивота
 			// уменьшаем правый индекс до тех пор, пока элементы больше либо равны пивоту и пока правый индекс больше левого
 
@@ -514,58 +479,29 @@ void AlchemyLogic::sortDigitData(vector<string>* tableData, int numberOfColumn, 
 		// если по убыванию
 		else
 		{
-			//// Разделяющий элемент, с которым будет происходить сравнение других элементов - всегда начальный элемент массива
-			//vector<string> pivot = tableData[PIVOT_INDEX];
-
 			// ищем справа элемент больше пивота
 			// уменьшаем правый индекс до тех пор, пока элементы меньше либо равны пивоту и пока правый индекс больше левого
-
-
 			while (right > left && stoi(tableData[right][analyzedIndex]) <= stoi(pivot[analyzedIndex]))
 			{
-				auto vec1 = tableData[right];
-
-				auto vec2str = vec1[analyzedIndex];
-
-
-
 				--right;
 			}
-
-
 
 			// ищем слева элемент меньше пивота
 			// увеличиваем левый индекс до тех пор, пока элементы больше либо равны пивоту и пока левый элемент меньше правого
 			while (left < right && stoi(tableData[left][analyzedIndex]) >= stoi(pivot[analyzedIndex]))
 			{
-				auto vec4 = tableData[left];
-
-				auto vec5 = vec4[analyzedIndex];
-
-				auto vec3 = pivot[analyzedIndex];
-
 				++left;
 			}
-
-
 
 			// если индексы сравнялись во время поиска
 			if (right == left)
 			{
-				auto vec6 = tableData[PIVOT_INDEX];
-
-				auto vec7 = tableData[right];
-
 				// меняем местами пивот и элемент, на котором индексы сравнялись, 
 				//после этого пивот занял свою позицию и разделил масив на 2 части
 				swap(tableData[PIVOT_INDEX], tableData[right]);
 
 				break;
 			}
-
-			auto vect = tableData[left];
-
-			auto vec8 = tableData[right];
 
 			// если left и right не пересеклись свопаем соответствующие элементы, 
 			// перекидывая элементы больше пивота - влево, а меньше - вправо

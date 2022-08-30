@@ -191,6 +191,9 @@ private:
 	// ѕроверить горизонтальные стрелки в случае с выбором страницы в таблицы
 	bool checkHorizontalArrowChoice(int& page, TableCode code, int keyCode);
 
+	// ѕроверить горизонтальные стрелки в случае с выбором страницы в таблицы
+	bool checkHorizontalArrowChoice(int contentSize, int& page, TableCode code, int keyCode);
+
 	// ѕроверить горизонтальные стрелки в случае с выбором столбца во врем€ сортировки
 	bool checkHorizontalArrowChoice(int& numberOfColums, int keyCode, TableCode code);
 

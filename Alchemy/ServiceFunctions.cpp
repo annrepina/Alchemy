@@ -97,3 +97,32 @@ bool tryParseToInt(string value)
 
 	return res;
 }
+
+bool firstStringIsBiggerOrEqualSecond(string str1, string str2)
+{
+	std::transform(str1.begin(), str1.end(), str1.begin(), ::tolower);
+	std::transform(str2.begin(), str2.end(), str2.begin(), ::tolower);
+
+	auto a = str1;
+	auto v = str2; 
+
+	if (str1 < str2)
+		return false;
+
+	else
+		return true;
+}
+
+bool firstStringIsSmallerOrEqualSecond(string str1, string str2)
+{
+	std::transform(str1.begin(), str1.end(), str1.begin(), ::tolower);
+	std::transform(str2.begin(), str2.end(), str2.begin(), ::tolower);
+
+	if (str1 > str2)
+		return false;
+
+	else
+		return true;
+}
+
+

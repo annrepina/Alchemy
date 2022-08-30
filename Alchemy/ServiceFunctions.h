@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -140,3 +141,9 @@ int binarySearch(vector<T> vec,/* const int ARRAY_SIZE,*/ int key)
 
 	return index;
 }
+
+// Первая строка больше либо равно второй без учета регистра
+bool firstStringIsBiggerOrEqualSecond(string str1, string str2);
+
+//  строка больше либо равно второй без учета регистра
+bool firstStringIsSmallerOrEqualSecond(string str1, string str2);

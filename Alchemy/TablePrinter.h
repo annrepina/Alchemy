@@ -127,6 +127,12 @@ public:
 		return this->tableContent;
 	}
 
+	// Получить вектор айдишников доступных элементов
+	vector<int> getAvailableElementsId()
+	{
+		return availableElementsId;
+	}
+
 	// Задать таблицу
 	virtual void setTable(PrintableTable* table)
 	{
@@ -369,4 +375,5 @@ private:
 		}
 	}
 };
+
 

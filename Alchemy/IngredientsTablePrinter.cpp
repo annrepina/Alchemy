@@ -358,12 +358,14 @@ void IngredientsTablePrinter::printContent(vector<vector<string>> content, int p
 
 	int i = 0;
 
+	int size = content.size();
+
 	if (page > 1)
 	{
 		i = (page - 1) * NUMBER_OF_CONTENT_LINES;
 	}
 
-	for (; i < this->numberOfLines && i < border; ++i)
+	for (; i < size && i < border; ++i)
 	{
 		for (int j = 0; j < this->numberOfColumns; ++j)
 		{

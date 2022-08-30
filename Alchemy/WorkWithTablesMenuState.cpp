@@ -37,6 +37,7 @@ MenuState* WorkWithTablesMenuState::getNextState()
 void WorkWithTablesMenuState::setListOfStates()
 {
 	this->listOfStates.push_back(new WorkWithIngredientTableMenuState(this->alchemicalUserInterface));
+	this->listOfStates.push_back(new WorkWithUsersInfredientTableMenuState(this->alchemicalUserInterface));
 	this->listOfStates.push_back(new WorkWithPotionTableMenuState(this->alchemicalUserInterface));
 	this->listOfStates.push_back(new ReturnMenuState(new AlchemicalMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface));
 }
@@ -47,8 +48,10 @@ void WorkWithTablesMenuState::setListOfCreatingFunctions()
 	if (this->listOfCreatingFunctions.empty())
 	{
 		this->listOfCreatingFunctions.push_back(&WorkWithTablesMenuState::createWorkWithIngredientTableMenuState);
+		this->listOfCreatingFunctions.push_back(&WorkWithTablesMenuState::createWorkWithUsersInfredientTableMenuState);
 		this->listOfCreatingFunctions.push_back(&WorkWithTablesMenuState::createWorkWithPotionTableMenuState);
 		this->listOfCreatingFunctions.push_back(&WorkWithTablesMenuState::createReturnMenuState);
+
 	}
 }
 
@@ -65,5 +68,10 @@ WorkWithIngredientTableMenuState* WorkWithTablesMenuState::createWorkWithIngredi
 WorkWithPotionTableMenuState* WorkWithTablesMenuState::createWorkWithPotionTableMenuState()
 {
 	return new WorkWithPotionTableMenuState(this->alchemicalUserInterface);
+}
+
+WorkWithUsersInfredientTableMenuState* WorkWithTablesMenuState::createWorkWithUsersInfredientTableMenuState()
+{
+	return new WorkWithUsersInfredientTableMenuState(this->alchemicalUserInterface);
 }
 

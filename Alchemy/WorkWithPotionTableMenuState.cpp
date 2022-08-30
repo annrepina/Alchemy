@@ -37,5 +37,5 @@ void WorkWithPotionTableMenuState::setListOfCreatingFunctions()
 
 ReturnMenuState* WorkWithPotionTableMenuState::createReturnMenuState()
 {
-    return new ReturnMenuState(new AlchemicalMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface);
+    return new ReturnMenuState(new WorkWithTablesMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface);
 }

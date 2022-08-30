@@ -4,15 +4,16 @@
 #include "IObserver.h"
 #include "ServiceFunctions.h"
 
-#define MULTIPLIER				3		// Множитель для расчета длины таблицы
+#define MULTIPLIER									3		// Множитель для расчета длины таблицы
 
-//#define NUMBER_OF_COLUMNS		6		// Кол-во колонок
-#define OUTER_BORDERS			2		// Внешние границы таблицы (левая и правая)
-#define GAPS					2		// Кол-во пробелов в столбце (1 слева и 1 справа)
-#define NUMBER_OF_COLUMNS			6		// Кол-во колонок
+//#define NUMBER_OF_COLUMNS							6		// Кол-во колонок
+#define OUTER_BORDERS								2		// Внешние границы таблицы (левая и правая)
+#define GAPS										2		// Кол-во пробелов в столбце (1 слева и 1 справа)
+#define NUMBER_OF_COLUMNS							6		// Кол-во колонок
+#define NUMBER_OF_COLUMN_WITH_NUMBER_OF_INGREDIENTS	6		// Номер колонки, в которой находится кол-во ингредиентов
 
-#define PRICE_LENGTH				4		// Длина слова "Цена"
-#define NUMBER_LENGTH				6		// Длина слова "Кол-во"
+#define PRICE_LENGTH								4		// Длина слова "Цена"
+#define NUMBER_LENGTH								6		// Длина слова "Кол-во"
 
 #define UNKNOWN_EFFECT				"НЕИЗВЕСТНО"	// если эффект у данного ингредиента неизветстен
 

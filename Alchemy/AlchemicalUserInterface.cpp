@@ -197,7 +197,7 @@ void AlchemicalUserInterface::choosePageWhileSorting(vector<vector<string>> cont
 		{
 		case VK_LEFT:
 		{
-			if (checkHorizontalArrowChoice(page, code, VK_LEFT))
+			if (checkHorizontalArrowChoice(content.size(), page, code, VK_LEFT))
 			{
 				printTablePagesInLoopWhileSorting(content, code, page, numberOfColumn, orderOfSorting);
 				//printTablePagesInLoop(code, page);
@@ -209,7 +209,7 @@ void AlchemicalUserInterface::choosePageWhileSorting(vector<vector<string>> cont
 		case VK_RIGHT:
 		{
 			// ѕровер€ем стрелочки
-			if (checkHorizontalArrowChoice(page, code, VK_RIGHT))
+			if (checkHorizontalArrowChoice(content.size(), page, code, VK_RIGHT))
 			{
 				printTablePagesInLoopWhileSorting(content, code, page, numberOfColumn, orderOfSorting);
 				exit = true;
@@ -462,6 +462,33 @@ bool AlchemicalUserInterface::checkHorizontalArrowChoice(int& page, TableCode co
 
 
 		if (numberOfLines > page * NUMBER_OF_CONTENT_LINES)
+		{
+			++page;
+			return true;
+		}
+		else
+			return false;
+	}
+}
+
+bool AlchemicalUserInterface::checkHorizontalArrowChoice(int contentSize, int& page, TableCode code, int keyCode)
+{
+	if (VK_LEFT == keyCode)
+	{
+		// если это не перва€ страница
+		if (FIRST_PAGE < page)
+		{
+			--page;
+			return true;
+		}
+
+		else
+			return false;
+	}
+
+	else
+	{
+		if (contentSize > page * NUMBER_OF_CONTENT_LINES)
 		{
 			++page;
 			return true;

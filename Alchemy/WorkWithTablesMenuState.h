@@ -2,9 +2,10 @@
 #include "MenuState.h"
 #include "WorkWithIngredientTableMenuState.h"
 #include "WorkWithPotionTableMenuState.h"
+#include "WorkWithUsersInfredientTableMenuState.h"
 #include "ServiceFunctions.h"
 
-#define WORK_WITH_TABLES_MENU_ITEMS		3	//  ол-во пунктов меню работы с таблицами
+#define WORK_WITH_TABLES_MENU_ITEMS		4	//  ол-во пунктов меню работы с таблицами
 
 class WorkWithTablesMenuState : public MenuState
 {
@@ -42,5 +43,7 @@ private:
 	WorkWithIngredientTableMenuState* createWorkWithIngredientTableMenuState();
 
 	WorkWithPotionTableMenuState* createWorkWithPotionTableMenuState();
+
+	WorkWithUsersInfredientTableMenuState* createWorkWithUsersInfredientTableMenuState();
 };
 

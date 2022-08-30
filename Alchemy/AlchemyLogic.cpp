@@ -345,14 +345,14 @@ void AlchemyLogic::sortStringData(vector<string>* tableData, int numberOfColumn,
 		{
 			// ищем справа элемент меньше пивота
 			// уменьшаем правый индекс до тех пор, пока элементы больше либо равны пивоту и пока правый индекс больше левого
-			while (right > left && tableData[right][analyzedIndex] >= pivot[analyzedIndex])
+			while (right > left && firstStringIsBiggerOrEqualSecond(tableData[right][analyzedIndex], pivot[analyzedIndex]))
 			{
 				--right;
 			}
 
 			// ищем слева элемент больше пивота
 			// увеличиваем левый индекс до тех пор, пока элементы меньше либо равны пивоту и пока левый элемент меньше правого
-			while (left < right && tableData[left][analyzedIndex] <= pivot[analyzedIndex])
+			while (left < right && firstStringIsSmallerOrEqualSecond(tableData[left][analyzedIndex], pivot[analyzedIndex]))
 			{
 				++left;
 			}
@@ -377,14 +377,14 @@ void AlchemyLogic::sortStringData(vector<string>* tableData, int numberOfColumn,
 		{
 			// ищем справа элемент больше пивота
 			// уменьшаем правый индекс до тех пор, пока элементы меньше либо равны пивоту и пока правый индекс больше левого
-			while (right > left && tableData[right][analyzedIndex] <= pivot[analyzedIndex])
+			while (right > left && firstStringIsSmallerOrEqualSecond(tableData[right][analyzedIndex], pivot[analyzedIndex]))
 			{
 				--right;
 			}
 
 			// ищем слева элемент меньше пивота
 			// увеличиваем левый индекс до тех пор, пока элементы больше либо равны пивоту и пока левый элемент меньше правого
-			while (left < right && tableData[left][analyzedIndex] >= pivot[analyzedIndex])
+			while (left < right && firstStringIsBiggerOrEqualSecond(tableData[left][analyzedIndex], pivot[analyzedIndex]))
 			{
 				++left;
 			}

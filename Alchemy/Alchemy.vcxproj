@@ -186,6 +186,7 @@
     <ClCompile Include="WorkWithIngredientTableMenuState.cpp" />
     <ClCompile Include="WorkWithPotionTableMenuState.cpp" />
     <ClCompile Include="WorkWithTablesMenuState.cpp" />
+    <ClCompile Include="WorkWithUsersInfredientTableMenuState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlchemicalMenuState.h" />
@@ -234,6 +235,7 @@
     <ClInclude Include="WorkWithIngredientTableMenuState.h" />
     <ClInclude Include="WorkWithPotionTableMenuState.h" />
     <ClInclude Include="WorkWithTablesMenuState.h" />
+    <ClInclude Include="WorkWithUsersInfredientTableMenuState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

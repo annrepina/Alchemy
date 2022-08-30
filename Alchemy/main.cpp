@@ -15,10 +15,10 @@ using namespace std;
 
 int main()
 {
-    //setlocale(LC_ALL, "rus");
-    //SetConsoleCP(1251);
-
+    setlocale(LC_ALL, "rus");
     SetConsoleCP(1251);
+
+    //SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
     //MainMenuState* state = new MainMenuState();

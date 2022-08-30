@@ -24,21 +24,16 @@ public:
 
 protected:
 
-
-
-private:
-
-	enum class OperationCode
-	{
-		Sorting,
-		Search
-	};
-
 	// Номер столбца, по которому сортируем
 	int numberOfColumn;
 
 	// Порядок сортировки
 	bool orderOfSorting;
+
+	IngredientsTablePrinter* ingredientTablePrinter;
+
+	// Задать контент для печати
+	virtual void setContent();
 
 	// Исходный контент таблицы - Весь
 	vector<vector<string>> initialContent;
@@ -46,20 +41,39 @@ private:
 	// Контекент после печати и поиска
 	vector<vector<string>> contentAfterSortingAndSearch;
 
-	IngredientsTablePrinter* ingredientTablePrinter;
-
-	// Получить следующее состояние
-
-	MenuState* getNextState() override;
-
-	// Задать список состояний
-	void setListOfStates() override;
-
 	// Задать список создающих стейты функций
 	void setListOfCreatingFunctions() override;
 
-	// Задать контент для печати
-	void setContent();
+	void setListOfInnerMenuItems();
+
+	map<int, string> innerMenuItems;
+
+	vector<string> listOfInnerMenuItems;
+
+	void printMenuItems() override;
+
+	void chooseMenuItem() override;
+
+	// Получить следующее состояние
+	MenuState* getNextState() override;
+
+	// Определить операцию сортировка или посиск
+	int defineOperation();
+
+	enum class OperationCode
+	{
+		Sorting,
+		Search
+	};
+
+	virtual void workWithTable(OperationCode operationCode);
+
+	virtual void sortData();
+
+private:
+
+	// Задать список состояний
+	void setListOfStates() override;
 
 	// Map функций, которые создают стейты и их ключи - координаты пунктов меню
 	map<int, function<MenuState* (WorkWithIngredientTableMenuState&)> > stateCreatingFunctions;
@@ -70,21 +84,6 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 
-	void printMenuItems() override;
-
-	map<int, string> innerMenuItems;
-
-	vector<string> listOfInnerMenuItems;
-
 	void checkVerticalArrowsChoice(int borderYCoord, int keyCode) override;
-
-	void chooseMenuItem() override;
-
-	void setListOfInnerMenuItems();
-
-	// Определить операцию сортировка или посиск
-	int defineOperation();
-
-	void workWithTable(OperationCode operationCode);
 };
 

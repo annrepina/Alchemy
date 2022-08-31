@@ -1,10 +1,13 @@
 #pragma once
-#include "MenuState.h"
+#include "WorkWithIngredientTableMenuState.h"
 #include "ReturnMenuState.h"
+#include "PotionTablePrinter.h"
+
+#define MINIMUM_NUMBER_OF_POTIONTS		1	// Минимальное кол-во зелий
 
 class AlchemicalMenuState;
 
-class WorkWithPotionTableMenuState : public MenuState
+class WorkWithPotionTableMenuState : public WorkWithIngredientTableMenuState
 {
 public:
 
@@ -16,6 +19,14 @@ public:
 
 	// Печать меню
 	void printMenu() override;
+
+protected:
+
+	void setContent() override;
+
+	PotionTablePrinter* potionTablePrinter;
+
+	virtual void sortData();
 
 private:
 

@@ -38,6 +38,22 @@ void WorkWithUsersInfredientTableMenuState::printMenu()
 
 	printMenuTitle();
 
+	string error;
+
+	// если кол-во доступных ингредиентов меньше ОДНОГО, то продать ничего не выйдет
+	if (this->contentAfterSortingAndSearch.size() < MINIMUM_NUMBER_OF_INGREDIENTS)
+	{
+		error = "У вас совсем нет ингредиентов.\nКупите что-нибудь у Аркадиии\.\nESC - назад";
+
+		printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
+
+		this->alchemicalUserInterface->chooseExit();
+
+		exitMenu();
+
+		return;
+	}
+
 	printColoredText("Выберите действие:", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 	cout << endl;
 

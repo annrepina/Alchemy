@@ -8,6 +8,13 @@
 
 #define NUMBER_OF_COLUMNS			5		// 5 колонок
 
+// Цифровые столбцы в таблице
+#define NON_DIGIT_COLUMN			2	// Столбец 2
+#define COLUMN_1					1	// Столбец 1
+#define COLUMN_3					3	// Столбец 3
+#define COLUMN_4					4	// Столбец 4
+#define COLUMN_5					5	// Столбец 5
+
 class PotionTablePrinter : public TablePrinter<PotionTable>/*, public IObserver*/
 {
 public:

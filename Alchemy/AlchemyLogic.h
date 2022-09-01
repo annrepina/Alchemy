@@ -100,6 +100,8 @@ public:
 	// Когда данные цифровые
 	void sortDigitData(vector<string>* tableData, int numberOfColumn, bool order, int size);
 
+	void filterData(vector<string> content, vector<>)
+
 	//vector<int> findEqualEffects(int firstIngredientId, int secondIngredientId);
 
 	//// Создать зелье и поместить его в таблицу

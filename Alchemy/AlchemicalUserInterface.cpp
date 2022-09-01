@@ -371,26 +371,6 @@ void AlchemicalUserInterface::chooseExit()
 	} while (false == exitFlag);
 }
 
-//void AlchemicalUserInterface::workWithTable(OperationCode operationCode, TableCode tableCode, vector<vector<string>> tableData, int& numberOfColumn, bool& orderOfSorting)
-//{
-//	switch (operationCode)
-//	{
-//		case OperationCode::Search:
-//		{
-//
-//		}
-//		break;
-//
-//		case OperationCode::Sorting:
-//		{
-//			//sortData(tableData, numberOfColumn, order);
-//			while()
-//			chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, tableCode);
-//		}
-//		break;
-//	}
-//}
-
 int AlchemicalUserInterface::chooseId(TableCode code)
 {
 	int id = 0;

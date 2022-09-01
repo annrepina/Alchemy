@@ -135,6 +135,26 @@ void WorkWithIngredientTableMenuState::printMenuItems(vector<string> listOfItems
 	}
 }
 
+void WorkWithIngredientTableMenuState::printFilterItems(vector<string> listOfItems)
+{
+	int border = this->boundaryYCoord + listOfItems.size();
+
+	// Печатаем ассоциативный массив
+	for (int i = this->currentYCursorCoordState; i < border; ++i)
+	{
+		if (i == this->currentYCursorCoordState)
+		{
+			cout << goToXY(i, X_COORD_FOR_FILTER_ITEMS);
+			printTextWithBackground(listOfItems[i], R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
+			//cout << endl;
+		}
+
+		else
+			// Печатаем пункт меню
+			cout << listOfItems[i] /*<< endl*/;
+	}
+}
+
 void WorkWithIngredientTableMenuState::checkVerticalArrowsChoice(int borderYCoord, int keyCode, vector<string> items)
 {
 		// если граничная координата не равна текущей
@@ -210,50 +230,50 @@ void WorkWithIngredientTableMenuState::chooseMenuItem(vector<string> listOfItems
 	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
 }
 
-void WorkWithIngredientTableMenuState::chooseFilterColumn()
-{
-	this->alchemicalUserInterface->setFunc(std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this->alchemicalUserInterface, _1));
-
-	// Флаг для выхода из цикла, но не выход из программы
-	bool innerExitFlag = false;
-
-	do
-	{
-		// Проверяем нажатую кнопку
-		this->alchemicalUserInterface->checkMenuChoice();
-
-		switch (this->alchemicalUserInterface->getKeyBoard()->getPressedKey())
-		{
-		case VK_UP:
-		{
-			this->checkVerticalArrowsChoice(this->boundaryYCoord, VK_UP);
-
-		}
-		break;
-
-		case VK_DOWN:
-		{
-			// Проверяем стрелочки
-			this->checkVerticalArrowsChoice(this->boundaryYCoord + innerMenuItems.size() - 1, VK_DOWN);
-		}
-		break;
-
-		case VK_RETURN:
-		{
-			// выход из цикла
-			innerExitFlag = true;
-		}
-		break;
-
-		case VK_ESCAPE:
-		{
-			this->alchemicalUserInterface->setExitFlag(true);
-			//exitFlag = true;
-		}
-		break;
-		}
-	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
-}
+//void WorkWithIngredientTableMenuState::chooseFilterColumn()
+//{
+//	this->alchemicalUserInterface->setFunc(std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this->alchemicalUserInterface, _1));
+//
+//	// Флаг для выхода из цикла, но не выход из программы
+//	bool innerExitFlag = false;
+//
+//	do
+//	{
+//		// Проверяем нажатую кнопку
+//		this->alchemicalUserInterface->checkMenuChoice();
+//
+//		switch (this->alchemicalUserInterface->getKeyBoard()->getPressedKey())
+//		{
+//		case VK_UP:
+//		{
+//			this->checkVerticalArrowsChoice(this->boundaryYCoord, VK_UP);
+//
+//		}
+//		break;
+//
+//		case VK_DOWN:
+//		{
+//			// Проверяем стрелочки
+//			this->checkVerticalArrowsChoice(this->boundaryYCoord + innerMenuItems.size() - 1, VK_DOWN);
+//		}
+//		break;
+//
+//		case VK_RETURN:
+//		{
+//			// выход из цикла
+//			innerExitFlag = true;
+//		}
+//		break;
+//
+//		case VK_ESCAPE:
+//		{
+//			this->alchemicalUserInterface->setExitFlag(true);
+//			//exitFlag = true;
+//		}
+//		break;
+//		}
+//	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
+//}
 
 void WorkWithIngredientTableMenuState::setListOfInnerMenuItems()
 {
@@ -354,6 +374,10 @@ void WorkWithIngredientTableMenuState::filterData()
 		int page = FIRST_PAGE;
 
 		this->ingredientTablePrinter->print(contentAfterSortingAndSearch, page, numberOfColumn, orderOfSorting);
+
+
+
+		chooseMenuItem(this->listOfColumnTitles);
 
 		// делаем выбор
 		this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);

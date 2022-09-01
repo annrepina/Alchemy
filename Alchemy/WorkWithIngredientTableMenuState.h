@@ -8,6 +8,8 @@
 #define DEFAULT_NUMBER_OF_COLUMN				1		// Номер колонки по умолчанию при работе с таблицей
 #define NUMBER_OF_INGREDIENT_TABLE_COLUMNS		6		// Кол-во колонк в таблице с ингредиентами
 
+#define X_COORD_FOR_FILTER_ITEMS				20		// Координата для печати пунктов меню во время фильтрации
+
 class AlchemicalUserInterface;
 
 class WorkWithIngredientTableMenuState : public MenuState
@@ -65,14 +67,16 @@ protected:
 
 	vector<string> listOfInnerMenuItems;
 
-	void printMenuItems(vector<string> listOfItems);
+	virtual void printMenuItems(vector<string> listOfItems);
+
+	virtual void printFilterItems(vector<string> listOfItems);
 
 	//void chooseMenuItem() override;
 
 	void chooseMenuItem(vector<string> listOfItems);
 
-	// Выбрать колонку для фильтрации
-	void chooseFilterColumn();
+	//// Выбрать колонку для фильтрации
+	//void chooseFilterColumn();
 
 	// Получить следующее состояние
 	MenuState* getNextState() override;

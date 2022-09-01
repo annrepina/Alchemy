@@ -681,11 +681,9 @@ void AlchemicalUserInterface::printTablePagesInLoopWhileSorting(vector<vector<st
 {
 	if (code == TableCode::IngredientTable)
 		this->ingredientsTableprinter->print(content, page, numberOfColumn, orderOfSorting);
-		//this->ingredientsTableprinter->printWithSortingMarkers(page, numberOfColumn, orderOfSorting);
 
 	else
-		this->ingredientsTableprinter->print(content, page, numberOfColumn, orderOfSorting);
-		//this->potionTablePrinter->printWithSortingMarkers(page, numberOfColumn, orderOfSorting);
+		this->potionTablePrinter->print(content, page, numberOfColumn, orderOfSorting);
 
 	printPageMenu(page);
 
@@ -716,10 +714,6 @@ void AlchemicalUserInterface::printFirstTablePage(TableCode code)
 	if (code == TableCode::IngredientTable)
 	{
 		this->ingredientsTableprinter->printAvailableElements(FIRST_PAGE);
-
-		//printPageMenu(page);
-
-		//choosePageFromAvailableContent(page, TableCode::IngredientTable);
 	}
 	else
 	{

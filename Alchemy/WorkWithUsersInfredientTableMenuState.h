@@ -5,6 +5,8 @@
 #include "IngredientsTablePrinter.h"
 //#include "MenuState.h"
 
+#define MINIMUM_NUMBER_OF_INGREDIENTS		1		// Минимальное кол-во ингредиентов
+
 class WorkWithUsersInfredientTableMenuState : public WorkWithIngredientTableMenuState/*, public MenuState*/
 {
 public:

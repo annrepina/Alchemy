@@ -101,6 +101,8 @@ public:
 
 	void chooseColumnAndOrderOfSorting(int& numberOfColum, bool& orderOfSorting, TableCode code);
 
+	void chooseColumnForFiltration(int& numberOfColumn, TableCode code);
+
 private:
 
 	// Программа - алхимия

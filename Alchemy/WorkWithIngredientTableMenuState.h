@@ -3,9 +3,10 @@
 #include "ReturnMenuState.h"
 #include "IngredientsTablePrinter.h"
 
-#define INNER_MENU_ITEMS				3		// 3 внутренних пункта меню
+#define INNER_MENU_ITEMS						3		// 3 внутренних пункта меню
 
-#define DEFAULT_NUMBER_OF_COLUMN		1		// Номер колонки по умолчанию при работе с таблицей
+#define DEFAULT_NUMBER_OF_COLUMN				1		// Номер колонки по умолчанию при работе с таблицей
+#define NUMBER_OF_INGREDIENT_TABLE_COLUMNS		6		// Кол-во колонк в таблице с ингредиентами
 
 class AlchemicalUserInterface;
 
@@ -32,6 +33,12 @@ protected:
 
 	IngredientsTablePrinter* ingredientTablePrinter;
 
+	// Поисковые запросы
+	vector<string> searchingQueries;
+
+	// Задать вектор поисковых запросов по умолчанию
+	void setSearchingQueriesDefault();
+
 	// Задать контент для печати
 	virtual void setContent();
 
@@ -46,13 +53,26 @@ protected:
 
 	void setListOfInnerMenuItems();
 
+	void setListOfColumnTitles();
+
+	// Пункты внутреннего меню
 	map<int, string> innerMenuItems;
+
+	// Колонки для фильтрации
+	map<int, string> columnForFiltration;
+
+	vector<string> listOfColumnTitles;
 
 	vector<string> listOfInnerMenuItems;
 
-	void printMenuItems() override;
+	void printMenuItems(vector<string> listOfItems);
 
-	void chooseMenuItem() override;
+	//void chooseMenuItem() override;
+
+	void chooseMenuItem(vector<string> listOfItems);
+
+	// Выбрать колонку для фильтрации
+	void chooseFilterColumn();
 
 	// Получить следующее состояние
 	MenuState* getNextState() override;
@@ -70,6 +90,8 @@ protected:
 
 	virtual void sortData();
 
+	virtual void filterData();
+
 private:
 
 	// Задать список состояний
@@ -84,6 +106,6 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 
-	void checkVerticalArrowsChoice(int borderYCoord, int keyCode) override;
+	void checkVerticalArrowsChoice(int borderYCoord, int keyCode, vector<string> items);
 };
 

@@ -62,10 +62,6 @@ private:
 	// Расчитать макс длину стрингового отображения цены
 	int calculateMaxPriceStrSize();
 
-
-
-
-
 #pragma endregion МЕТОДЫ РАСЧЕТА
 
 #pragma region МЕТОДЫ ПЕЧАТИ

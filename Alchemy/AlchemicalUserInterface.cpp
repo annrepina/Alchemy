@@ -349,6 +349,11 @@ void AlchemicalUserInterface::chooseColumnAndOrderOfSorting(int& numberOfColumn,
 	} while (false == exitFlag && false == exit);
 }
 
+void AlchemicalUserInterface::chooseColumnForFiltration(int& numberOfColumn, TableCode code)
+{
+
+}
+
 void AlchemicalUserInterface::chooseExit()
 {
 	this->func = std::bind(&AlchemicalUserInterface::isEscKeyFalse, this, _1);

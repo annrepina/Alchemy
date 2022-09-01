@@ -9,6 +9,7 @@
 #define NUMBER_OF_INGREDIENT_TABLE_COLUMNS		6		// Кол-во колонк в таблице с ингредиентами
 
 #define X_COORD_FOR_FILTER_ITEMS				20		// Координата для печати пунктов меню во время фильтрации
+#define	GAP_BETWEEN_FILTER_AND_VALUE			5		// Простраство между фильтром и запросом
 
 class AlchemicalUserInterface;
 
@@ -32,6 +33,9 @@ protected:
 
 	// Порядок сортировки
 	bool orderOfSorting;
+
+	// Координата х для печати выбора для фильтрации
+	int xCoordForFilterValue;
 
 	IngredientsTablePrinter* ingredientTablePrinter;
 
@@ -67,6 +71,8 @@ protected:
 
 	vector<string> listOfInnerMenuItems;
 
+	int longestColumnSize;
+
 	virtual void printMenuItems(vector<string> listOfItems);
 
 	virtual void printFilterItems(vector<string> listOfItems);
@@ -95,6 +101,14 @@ protected:
 	virtual void sortData();
 
 	virtual void filterData();
+
+	// Расчитать самый длинный пункт фильтрации (название столбца)
+	virtual int calculateLongestFIlteringItem();
+
+	// Искомая колонка является стринговой или интовой в тбалице?
+	virtual bool isStringColumn(int numberOfColumn);
+
+
 
 private:
 

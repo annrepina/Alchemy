@@ -19,9 +19,14 @@
 
 
 // Цифровые столбцы в таблице
-#define COLUMN_1			1	// Столбец 1
-#define COLUMN_3			3	// Столбец 3
-#define COLUMN_6			6	// Столбец 6
+//#define COLUMN_1			1	// Столбец 1
+//#define COLUMN_3			3	// Столбец 3
+//#define COLUMN_6			6	// Столбец 6
+
+// Цифровые столбцы в таблице
+#define INGREDIENT_TABLE_DIGIT_COLUMN_1			1	// Столбец 1
+#define INGREDIENT_TABLE_DIGIT_COLUMN_3			3	// Столбец 3
+#define INGREDIENT_TABLE_DIGIT_COLUMN_6			6	// Столбец 6
 
 // Очередность столбцов id name price effect1 effect2 number
 

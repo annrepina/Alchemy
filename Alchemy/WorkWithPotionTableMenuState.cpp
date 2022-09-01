@@ -60,13 +60,13 @@ void WorkWithPotionTableMenuState::printMenu()
 	printColoredText("Выберите действие:", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 	cout << endl;
 
-	printMenuItems();
+	printMenuItems(this->listOfInnerMenuItems);
 
 	cout << goToXY(this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
 
 	while (this->alchemicalUserInterface->getExitFlag() == false)
 	{
-		chooseMenuItem();
+		chooseMenuItem(listOfInnerMenuItems);
 
 		//// сбрасываем флаг после выбора поиск/сортировка
 		//this->alchemicalUserInterface->setExitFlag(false);

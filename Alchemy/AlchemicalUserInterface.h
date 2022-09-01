@@ -103,6 +103,9 @@ public:
 
 	void chooseColumnForFiltration(int& numberOfColumn, TableCode code);
 
+
+	int calculateNumberOfColumnForFiltration();
+
 private:
 
 	// Программа - алхимия
@@ -124,36 +127,6 @@ private:
 
 	// Настроить программу Алхимии
 	void setAlchemyLogic();
-
-	//// Список строк - пунктов главного меню
-	//static string listOfMainMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
-
-	//// Ассоциативный массив координат и "кнопок" главного меню
-	//map <int, string> mainMenu;
-
-	//// Список строк - пунктов меню алхимии
-	//static string listOfALchemicalMenuItems[NUMBER_OF_ALCHEMICAL_MENU_ITEMS];
-
-	//// Ассоциативный массив координат и "кнопок" меню алхимии
-	//map <int, string> alchemicalMenu;
-
-	//// Список строк - пунктов меню инструкций
-	//static string listOfInstructionsMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
-
-	//// Ассоциативный массив координат и "кнопок" меню инструкций
-	//map <int, string> instructionsMenu;
-
-	//// Список строк - пунктов меню покупки ингредиентов
-	//static string listOfBuyingIngredientsMenuItems[NUMBER_OF_BUYING_MENU_ITEMS];
-	//
-	//// Ассоциативный массив координат и "кнопок" меню покупки ингредиентов
-	//map<int, string> buyingIngredientsMenu;
-
-	//// Список строк - пунктов меню ошибки при покупке ингредиентов
-	//static string listOfBuyingFaultMenuItems[NUMBER_OF_MAIN_MENU_ITEMS];
-
-	//// Ассоциативный массив координат и пунктов меню ошибки во время покупки ингредиентов
-	//map <int, string> buyingFaultMenu;
 
 	// Флаг для выхода из главного цикла
 	bool exitFlag;

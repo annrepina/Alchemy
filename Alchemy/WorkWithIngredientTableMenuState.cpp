@@ -11,6 +11,8 @@ WorkWithIngredientTableMenuState::WorkWithIngredientTableMenuState()
 	this->numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
 	this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
 	this->ingredientTablePrinter = nullptr;
+	this->longestColumnSize = 0;
+	this->xCoordForFilterValue = 0;
 }
 
 WorkWithIngredientTableMenuState::WorkWithIngredientTableMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
@@ -21,6 +23,8 @@ WorkWithIngredientTableMenuState::WorkWithIngredientTableMenuState(AlchemicalUse
 	this->numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
 	this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
 	this->ingredientTablePrinter = alchemicalUserInterface->getIngredientsTablePrinter();
+	this->longestColumnSize = 0;
+	this->xCoordForFilterValue = 0;
 }
 
 void WorkWithIngredientTableMenuState::printMenu()
@@ -39,6 +43,10 @@ void WorkWithIngredientTableMenuState::printMenu()
 	fillMap<string>(columnForFiltration, listOfColumnTitles, currentYCursorCoordState, NUMBER_OF_INGREDIENT_TABLE_COLUMNS);
 
 	setContent();
+
+	longestColumnSize = calculateLongestFIlteringItem();
+
+	xCoordForFilterValue = X_COORD_FOR_FILTER_ITEMS + longestColumnSize + GAP_BETWEEN_FILTER_AND_VALUE;
 
 	// начальная страница таблицы
 	int page = FIRST_PAGE;
@@ -71,8 +79,10 @@ void WorkWithIngredientTableMenuState::printMenu()
 		}
 
 		int operationCode = defineOperation();
+		
+		this->workWithTable((OperationCode)operationCode);
 
-		workWithTable((OperationCode)operationCode);
+		//this->workWithTable((OperationCode)operationCode);
 	}
 }
 
@@ -118,12 +128,14 @@ ReturnMenuState* WorkWithIngredientTableMenuState::createReturnMenuState()
 
 void WorkWithIngredientTableMenuState::printMenuItems(vector<string> listOfItems)
 {
-	int border = this->boundaryYCoord + listOfItems.size();
+	int border = this->boundaryYCoord + listOfItems.size() - MAIN_MENU_Y_COORD;
+
+	int index = this->currentYCursorCoordState - MAIN_MENU_Y_COORD;
 
 	// Печатаем ассоциативный массив
-	for (int i = this->currentYCursorCoordState; i < border; ++i)
+	for (int i = index; i < border; ++i)
 	{
-		if (i == this->currentYCursorCoordState)
+		if (i == index)
 		{
 			printTextWithBackground(listOfItems[i], R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
 			cout << endl;
@@ -137,12 +149,14 @@ void WorkWithIngredientTableMenuState::printMenuItems(vector<string> listOfItems
 
 void WorkWithIngredientTableMenuState::printFilterItems(vector<string> listOfItems)
 {
-	int border = this->boundaryYCoord + listOfItems.size();
+	int border = this->boundaryYCoord + listOfItems.size()- MAIN_MENU_Y_COORD;
+
+	int index = this->currentYCursorCoordState - MAIN_MENU_Y_COORD;
 
 	// Печатаем ассоциативный массив
-	for (int i = this->currentYCursorCoordState; i < border; ++i)
+	for (int i = index; i < border; ++i)
 	{
-		if (i == this->currentYCursorCoordState)
+		if (i == index)
 		{
 			cout << goToXY(i, X_COORD_FOR_FILTER_ITEMS);
 			printTextWithBackground(listOfItems[i], R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
@@ -166,7 +180,7 @@ void WorkWithIngredientTableMenuState::checkVerticalArrowsChoice(int borderYCoor
 			cout << goToXY(currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
 
 			// Печатаем пункт меню без выделения
-			cout << items[currentYCursorCoordState];
+			cout << items[currentYCursorCoordState - MAIN_MENU_Y_COORD];
 
 			// увеличиваем координаты
 			++this->currentYCursorCoordState;
@@ -230,51 +244,6 @@ void WorkWithIngredientTableMenuState::chooseMenuItem(vector<string> listOfItems
 	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
 }
 
-//void WorkWithIngredientTableMenuState::chooseFilterColumn()
-//{
-//	this->alchemicalUserInterface->setFunc(std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this->alchemicalUserInterface, _1));
-//
-//	// Флаг для выхода из цикла, но не выход из программы
-//	bool innerExitFlag = false;
-//
-//	do
-//	{
-//		// Проверяем нажатую кнопку
-//		this->alchemicalUserInterface->checkMenuChoice();
-//
-//		switch (this->alchemicalUserInterface->getKeyBoard()->getPressedKey())
-//		{
-//		case VK_UP:
-//		{
-//			this->checkVerticalArrowsChoice(this->boundaryYCoord, VK_UP);
-//
-//		}
-//		break;
-//
-//		case VK_DOWN:
-//		{
-//			// Проверяем стрелочки
-//			this->checkVerticalArrowsChoice(this->boundaryYCoord + innerMenuItems.size() - 1, VK_DOWN);
-//		}
-//		break;
-//
-//		case VK_RETURN:
-//		{
-//			// выход из цикла
-//			innerExitFlag = true;
-//		}
-//		break;
-//
-//		case VK_ESCAPE:
-//		{
-//			this->alchemicalUserInterface->setExitFlag(true);
-//			//exitFlag = true;
-//		}
-//		break;
-//		}
-//	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
-//}
-
 void WorkWithIngredientTableMenuState::setListOfInnerMenuItems()
 {
 	// если вектор пустой
@@ -337,7 +306,7 @@ void WorkWithIngredientTableMenuState::sortData()
 		this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);
 
 		// если критерий цифровой
-		if (numberOfColumn == COLUMN_1 || numberOfColumn == COLUMN_3 || numberOfColumn == COLUMN_6)
+		if (numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_1 || numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_3 || numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_6)
 			this->alchemicalUserInterface->getAlchemyLogic()->sortDigitData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
 
 		else
@@ -373,42 +342,82 @@ void WorkWithIngredientTableMenuState::filterData()
 	{
 		int page = FIRST_PAGE;
 
+		int numberOfColumnForFiltration = 0;
+
+		// Запрос на фильтрацию
+		string requestForFiltration = "";
+
+		bool isString = true;
+
 		this->ingredientTablePrinter->print(contentAfterSortingAndSearch, page, numberOfColumn, orderOfSorting);
 
+		printFilterItems(this->listOfColumnTitles);
 
-
+		// выбираем пункт меню фильтрации
 		chooseMenuItem(this->listOfColumnTitles);
 
-		// делаем выбор
-		this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);
+		////// делаем выбор
+		//this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);
 
-		// если критерий цифровой
-		if (numberOfColumn == COLUMN_1 || numberOfColumn == COLUMN_3 || numberOfColumn == COLUMN_6)
-			this->alchemicalUserInterface->getAlchemyLogic()->sortDigitData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
+		numberOfColumnForFiltration = this->alchemicalUserInterface->calculateNumberOfColumnForFiltration();
 
-		else
-			// сортируем
-			this->alchemicalUserInterface->getAlchemyLogic()->sortStringData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
+		isString = isStringColumn(numberOfColumnForFiltration);
+
+		requestForFiltration = this->alchemicalUserInterface->checkInput(requestForFiltration, isString, 0, MAX_INT, currentYCursorCoordState, this->xCoordForFilterValue);
+
+		//// если критерий цифровой
+		//if (numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_1 || numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_3 || numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_6)
+		//	this->alchemicalUserInterface->getAlchemyLogic()->sortDigitData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
+
+		//else
+		//	// сортируем
+		//	this->alchemicalUserInterface->getAlchemyLogic()->sortStringData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
 
 
-		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		if (this->alchemicalUserInterface->getExitFlag() == true)
-		{
-			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
+		//// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
+		//if (this->alchemicalUserInterface->getExitFlag() == true)
+		//{
+		//	// сбрасываем флаг
+		//	this->alchemicalUserInterface->setExitFlag(false);
 
-			return;
-		}
+		//	return;
+		//}
 
-		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndSearch, AlchemicalUserInterface::TableCode::IngredientTable, page, numberOfColumn, orderOfSorting);
+		//this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndSearch, AlchemicalUserInterface::TableCode::IngredientTable, page, numberOfColumn, orderOfSorting);
 
-		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		if (this->alchemicalUserInterface->getExitFlag() == true)
-		{
-			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
+		//// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
+		//if (this->alchemicalUserInterface->getExitFlag() == true)
+		//{
+		//	// сбрасываем флаг
+		//	this->alchemicalUserInterface->setExitFlag(false);
 
-			return;
-		}
+		//	return;
+		//}
 	}
+}
+
+int WorkWithIngredientTableMenuState::calculateLongestFIlteringItem()
+{
+	string longest = "";
+
+	int size = 0;
+
+	for (auto line : this->listOfColumnTitles)
+	{
+		if (longest.size() < line.size())
+			longest = line;
+	}
+
+	size = longest.size();
+
+	return size;
+}
+
+bool WorkWithIngredientTableMenuState::isStringColumn(int numberOfColumn)
+{
+	if (numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_6 || numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_3 || numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_1)
+		return false;
+
+	else
+		return true;
 }

@@ -36,10 +36,10 @@ void UserInterface::eraseScreenAfterTitle() const
 	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
 }
 
-int UserInterface::checkInput(string value, int min, int max, string textOfRangeError, int yCoord)
+int UserInterface::checkInput(string value, int min, int max, string textOfRangeError, int yCoord, int xCoord)
 {
 	// не ввели всякие символы вместо числа
-	bool succes; 
+	bool success;
 
 	int intValue;
 
@@ -47,13 +47,13 @@ int UserInterface::checkInput(string value, int min, int max, string textOfRange
 	{
 		cin >> value;
 
-		succes = tryParseToInt(value);
+		success = tryParseToInt(value);
 
-		if (!succes)
+		if (!success)
 		{
 			string textOfError = "Вы ввели недопустимое значение, попробуйте снова: ";
 
-			printError(yCoord, 1, textOfError);
+			printError(yCoord, xCoord, textOfError);
 
 			continue;
 		}
@@ -64,7 +64,7 @@ int UserInterface::checkInput(string value, int min, int max, string textOfRange
 		// если не попадаем в диапазон
 		if (intValue < min || max < intValue)
 		{
-			printError(yCoord, 1, textOfRangeError);
+			printError(yCoord, xCoord, textOfRangeError);
 		}
 		else
 		{
@@ -184,6 +184,24 @@ void UserInterface::checkMenuChoice() const
 
 	}	// Если нажатая клавиша не соответсвует кнопкам меню
 	while (this->func(key));
+}
+
+string UserInterface::checkInput(string& value, bool isString, int max, int min, int yCoord, int xCoord)
+{
+	int intRequest = 0;
+
+	//string strRequest = "";
+
+	// если требуется число
+	if (!isString)
+	{
+		intRequest = checkInput(value, 0, MAX_INT, "Данное значение не подходит", yCoord, xCoord);
+		value = to_string(intRequest);
+	}
+	else
+		cin >> value;
+
+	return value;
 }
 
 bool UserInterface::isEscKeyPressed()

@@ -9,6 +9,8 @@
 #include "ReturnMenuState.h"
 #include "ServiceFunctions.h"
 
+#define EDITION
+
 #define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	7		// Кол-во пунктов в алхимическом меню
 
 class MainMenuState;

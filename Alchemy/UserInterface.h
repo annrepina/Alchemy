@@ -13,6 +13,8 @@ using namespace std;
 
 using std::placeholders::_1;
 
+#define MAX_INT							2147483647	// Самое большое число int 
+
 // Координаты
 #define Y_COORD_AFTER_TITLE				4		// Координата Y после названя программы
 #define Y_COORD_AFTER_MENU_TITLE_1		9		// Координата Y после печати заголовка меню
@@ -97,6 +99,10 @@ public:
 	// Проверка выбора в меню
 	void checkMenuChoice() const;
 
+	// Проверка ввода
+	virtual string checkInput(string& value, bool isString, int max, int min, int yCoord, int xCoord);
+
+
 	// Печать ошибки из-за некорректного ввода
 	virtual void printError(int yCoord, int xCoord, string textOfError);
 
@@ -130,7 +136,7 @@ protected:
 	void eraseScreenAfterTitle() const;
 
 	// Проверка ввода
-	int checkInput(string value, int min, int max, string textOfRangeError, int yCoord);
+	int checkInput(string value, int min, int max, string textOfRangeError, int yCoord, int xCoord);
 
 	//// Расчитывает координату Х для заголовков
 	//void setXCoordInMiddle();

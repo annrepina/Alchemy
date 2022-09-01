@@ -383,7 +383,7 @@ int AlchemicalUserInterface::chooseId(TableCode code)
 
 		string errorText = "Данного значения не существует в таблице, попробуйте снова: ";
 
-		id = checkInput(value, 1, iter->first, errorText, Y_COORD_AFTER_MENU_TITLE_2);
+		id = checkInput(value, 1, iter->first, errorText, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
 	}
 	else
 	{
@@ -391,7 +391,7 @@ int AlchemicalUserInterface::chooseId(TableCode code)
 
 		string errorText = "Данного значения не существует в таблице, попробуйте снова: ";
 
-		id = checkInput(value, 1, iter->first, errorText, Y_COORD_AFTER_MENU_TITLE_2);
+		id = checkInput(value, 1, iter->first, errorText, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
 	}
 
 	return id;
@@ -413,7 +413,7 @@ int AlchemicalUserInterface::chooseNumber(string strChoice, int yCoord)
 
 	string errorText = "Данное значение не подходит, попробуйте снова: ";
 
-	number = checkInput(value, 1, MAX_INT, errorText, yCoord);
+	number = checkInput(value, 1, MAX_INT, errorText, yCoord, STANDARD_CURSOR_X_COORD);
 
 	return number;
 }
@@ -716,6 +716,13 @@ bool AlchemicalUserInterface::isColumnAndOrderChoiceFalse(int key)
 	bool res = VK_LEFT != key && VK_RIGHT != key && VK_ESCAPE != key && VK_RETURN != key && VK_UP != key && VK_DOWN != key;
 
 	return res;
+}
+
+int AlchemicalUserInterface::calculateNumberOfColumnForFiltration()
+{
+	int numberOfColumn = currentYCursorCoord - MAIN_MENU_Y_COORD + 1;
+
+	return numberOfColumn;
 }
 
 

@@ -4,7 +4,7 @@
 
 WorkWithPotionTableMenuState::WorkWithPotionTableMenuState()
 {
-    this->numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
+    this->numberOfColumnforSorting = DEFAULT_NUMBER_OF_COLUMN;
     this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
     this->ingredientTablePrinter = nullptr;
 	this->potionTablePrinter = nullptr;
@@ -15,7 +15,7 @@ WorkWithPotionTableMenuState::WorkWithPotionTableMenuState(AlchemicalUserInterfa
     this->title = "Работа с зельями";
     this->goToTitle = "Работать с зельями";
     this->numberOfStates = 1;
-    this->numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
+    this->numberOfColumnforSorting = DEFAULT_NUMBER_OF_COLUMN;
     this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
     this->ingredientTablePrinter = alchemicalUserInterface->getIngredientsTablePrinter();
 	this->potionTablePrinter = alchemicalUserInterface->getPotionTablePrinter();
@@ -44,7 +44,7 @@ void WorkWithPotionTableMenuState::printMenu()
 	string error;
 
 	// если кол-во доступных зелий меньше ОДНОГО, то сортировать ничего не выйдет
-	if (this->contentAfterSortingAndSearch.size() < MINIMUM_NUMBER_OF_POTIONTS)
+	if (this->contentAfterSortingAndResearch.size() < MINIMUM_NUMBER_OF_POTIONTS)
 	{
 		error = "У вас совсем нет зелий.\nСоздайте что-нибудь.\.\nESC - назад";
 
@@ -92,7 +92,7 @@ void WorkWithPotionTableMenuState::setContent()
 {
 	this->initialContent = this->potionTablePrinter->getTableContent();
 
-	this->contentAfterSortingAndSearch = this->initialContent;
+	this->contentAfterSortingAndResearch = this->initialContent;
 }
 
 void WorkWithPotionTableMenuState::sortData()
@@ -101,20 +101,20 @@ void WorkWithPotionTableMenuState::sortData()
 	{
 		int page = FIRST_PAGE;
 
-		this->potionTablePrinter->print(contentAfterSortingAndSearch, page, numberOfColumn, orderOfSorting);
+		this->potionTablePrinter->print(contentAfterSortingAndResearch, page, numberOfColumnforSorting, orderOfSorting);
 
 		//this->ingredientTablePrinter->print(contentAfterSortingAndSearch, page, numberOfColumn, orderOfSorting);
 
 		// делаем выбор
-		this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, AlchemicalUserInterface::TableCode::PotionTable);
+		this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumnforSorting, orderOfSorting, AlchemicalUserInterface::TableCode::PotionTable);
 
 		// если критерий цифровой
-		if (numberOfColumn != NON_DIGIT_COLUMN)
-			this->alchemicalUserInterface->getAlchemyLogic()->sortDigitData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
+		if (numberOfColumnforSorting != NON_DIGIT_COLUMN)
+			this->alchemicalUserInterface->getAlchemyLogic()->sortDigitData(&contentAfterSortingAndResearch[0], numberOfColumnforSorting, orderOfSorting, contentAfterSortingAndResearch.size());
 
 		else
 			// сортируем
-			this->alchemicalUserInterface->getAlchemyLogic()->sortStringData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
+			this->alchemicalUserInterface->getAlchemyLogic()->sortStringData(&contentAfterSortingAndResearch[0], numberOfColumnforSorting, orderOfSorting, contentAfterSortingAndResearch.size());
 
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
@@ -126,7 +126,7 @@ void WorkWithPotionTableMenuState::sortData()
 			return;
 		}
 
-		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndSearch, AlchemicalUserInterface::TableCode::PotionTable, page, numberOfColumn, orderOfSorting);
+		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndResearch, AlchemicalUserInterface::TableCode::PotionTable, page, numberOfColumnforSorting, orderOfSorting);
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
 		if (this->alchemicalUserInterface->getExitFlag() == true)

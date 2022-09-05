@@ -3,7 +3,7 @@
 
 WorkWithUsersInfredientTableMenuState::WorkWithUsersInfredientTableMenuState()
 {
-	this->numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
+	this->numberOfColumnforSorting = DEFAULT_NUMBER_OF_COLUMN;
 	this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
 	this->ingredientTablePrinter = nullptr;
 }
@@ -13,7 +13,7 @@ WorkWithUsersInfredientTableMenuState::WorkWithUsersInfredientTableMenuState(Alc
 	this->title = "Работа с ингредиентами алхимика";
 	this->goToTitle = "Работать с ингредиентами алхимика";
 	this->numberOfStates = 1;
-	this->numberOfColumn = DEFAULT_NUMBER_OF_COLUMN;
+	this->numberOfColumnforSorting = DEFAULT_NUMBER_OF_COLUMN;
 	this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
 	this->ingredientTablePrinter = alchemicalUserInterface->getIngredientsTablePrinter();
 }
@@ -41,7 +41,7 @@ void WorkWithUsersInfredientTableMenuState::printMenu()
 	string error;
 
 	// если кол-во доступных ингредиентов меньше ОДНОГО, то продать ничего не выйдет
-	if (this->contentAfterSortingAndSearch.size() < MINIMUM_NUMBER_OF_INGREDIENTS)
+	if (this->contentAfterSortingAndResearch.size() < MINIMUM_NUMBER_OF_INGREDIENTS)
 	{
 		error = "У вас совсем нет ингредиентов.\nКупите что-нибудь у Аркадиии\.\nESC - назад";
 
@@ -99,7 +99,7 @@ void WorkWithUsersInfredientTableMenuState::setContent()
 			this->initialContent.push_back(line);
 	}
 
-	this->contentAfterSortingAndSearch = this->initialContent;
+	this->contentAfterSortingAndResearch = this->initialContent;
 }
 
 void WorkWithUsersInfredientTableMenuState::setListOfCreatingFunctions()

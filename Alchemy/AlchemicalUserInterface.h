@@ -13,7 +13,7 @@
 #define EXIT_Y_COORD					2		// Координата Y кнопки выхода
 #define Y_COORD_AFTER_ALCHEMIST			8		// Координата Y после печати алхимика
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
-#define PAGE_Y_COORD					41		// Координата Y меню страниц таблицы - УВЕЛИЧИЛА НА 3
+#define PAGE_Y_COORD					44		// Координата Y меню страниц таблицы - УВЕЛИЧИЛА НА 6
 
 
 // Значения по умолчанию

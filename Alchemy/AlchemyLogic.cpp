@@ -528,3 +528,8 @@ void AlchemyLogic::sortDigitData(vector<string>* tableData, int numberOfColumn, 
 		sortDigitData(tableData + right + 1, numberOfColumn, order, size - right - 1);
 	}
 }
+
+//void AlchemyLogic::filterData(vector<vector<string>> content, vector<string> queries)
+//{
+//
+//}

@@ -2,10 +2,10 @@
 #include "Formatting.h"
 #include "IObserver.h"
 //#include "Table.h"
-// Увеличили на 3 всё
-#define Y_COORD_FOR_FRAME_PRINTING			16		// Координата Y для печати рамки таблицы 
-#define Y_COORD_FOR_HEADER_PRINTING			19		// Координата Y для печати шапки таблицы
-#define Y_COORD_FOR_CONTENT_PRINTING		21		// Координата Y для печати содержимого таблицы
+// Увеличили на 6 всё
+#define Y_COORD_FOR_FRAME_PRINTING			19		// Координата Y для печати рамки таблицы 
+#define Y_COORD_FOR_HEADER_PRINTING			22		// Координата Y для печати шапки таблицы
+#define Y_COORD_FOR_CONTENT_PRINTING		24		// Координата Y для печати содержимого таблицы
 
 
 #define OUTER_BORDERS				2		// Внешние границы таблицы (левая и правая)

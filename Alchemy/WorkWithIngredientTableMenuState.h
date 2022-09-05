@@ -6,10 +6,17 @@
 #define INNER_MENU_ITEMS						3		// 3 внутренних пункта меню
 
 #define DEFAULT_NUMBER_OF_COLUMN				1		// Номер колонки по умолчанию при работе с таблицей
-#define NUMBER_OF_INGREDIENT_TABLE_COLUMNS		6		// Кол-во колонк в таблице с ингредиентами
+#define NUMBER_OF_SEARCHING_QUERIES				9		// Кол-во поисковых запросов для таблицы с ингредиентами
 
 #define X_COORD_FOR_FILTER_ITEMS				20		// Координата для печати пунктов меню во время фильтрации
 #define	GAP_BETWEEN_FILTER_AND_VALUE			5		// Простраство между фильтром и запросом
+
+// Стринговые фильтры согласно их координатам по Y
+#define FILTER_NAME_3								3		// Фильтр по имени
+#define FILTER_EFFECT_6								6		// Фильтр по эффекту 1
+#define FILTER_EFFECT_7								7		// Фильтр по эффекту 2
+
+#define COORD_DIFFERENCE_BETWEEN_COLON_AND_VALUE	2		// Разница в кооординатах между двоеточием и значением для ффильтраци
 
 class AlchemicalUserInterface;
 
@@ -29,7 +36,7 @@ public:
 protected:
 
 	// Номер столбца, по которому сортируем
-	int numberOfColumn;
+	int numberOfColumnforSorting;
 
 	// Порядок сортировки
 	bool orderOfSorting;
@@ -42,17 +49,16 @@ protected:
 	// Поисковые запросы
 	vector<string> searchingQueries;
 
+	// Добавляет поисковой запрос
+	void addSearchingQuery(string query, int numberOfQuery);
+
+#pragma region Сеттеры
+
 	// Задать вектор поисковых запросов по умолчанию
 	void setSearchingQueriesDefault();
 
 	// Задать контент для печати
 	virtual void setContent();
-
-	// Исходный контент таблицы - Весь
-	vector<vector<string>> initialContent;
-
-	// Контекент после печати и поиска
-	vector<vector<string>> contentAfterSortingAndSearch;
 
 	// Задать список создающих стейты функций
 	void setListOfCreatingFunctions() override;
@@ -61,15 +67,23 @@ protected:
 
 	void setListOfColumnTitles();
 
+#pragma endregion Сеттеры
+
+	// Исходный контент таблицы - Весь
+	vector<vector<string>> initialContent;
+
+	// Контент после сортировки
+	vector<vector<string>> contentAfterSortingAndResearch;
+
 	// Пункты внутреннего меню
 	map<int, string> innerMenuItems;
+
+	vector<string> listOfInnerMenuItems;
 
 	// Колонки для фильтрации
 	map<int, string> columnForFiltration;
 
-	vector<string> listOfColumnTitles;
-
-	vector<string> listOfInnerMenuItems;
+	vector<string> listOfColumnForFiltration;
 
 	int longestColumnSize;
 
@@ -80,9 +94,6 @@ protected:
 	//void chooseMenuItem() override;
 
 	void chooseMenuItem(vector<string> listOfItems, int xCoordForItemsPrinting);
-
-	//// Выбрать колонку для фильтрации
-	//void chooseFilterColumn();
 
 	// Получить следующее состояние
 	MenuState* getNextState() override;
@@ -99,6 +110,11 @@ protected:
 	virtual void workWithTable(OperationCode operationCode);
 
 	virtual void sortData();
+
+	// Запустить сортировку
+	virtual void launchSorting();
+
+	virtual void launchFilterMenu();
 
 	virtual void filterData();
 

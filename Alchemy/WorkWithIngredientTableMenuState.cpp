@@ -43,6 +43,7 @@ void WorkWithIngredientTableMenuState::printMenu()
 	fillMap<string>(columnForFiltration, listOfColumnForFiltration, currentYCursorCoordState, NUMBER_OF_SEARCHING_QUERIES);
 
 	setContent();
+	setSearchingQueriesDefault();
 
 	longestColumnSize = calculateLongestFIlteringItem();
 
@@ -57,6 +58,8 @@ void WorkWithIngredientTableMenuState::printMenu()
 	cout << endl;
 
 	printMenuItems(this->listOfInnerMenuItems);
+
+	printFilterItems(this->listOfColumnForFiltration);
 
 	cout << goToXY(this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
 
@@ -81,8 +84,6 @@ void WorkWithIngredientTableMenuState::printMenu()
 		int operationCode = defineOperation();
 		
 		this->workWithTable((OperationCode)operationCode);
-
-		//this->workWithTable((OperationCode)operationCode);
 	}
 }
 
@@ -104,7 +105,7 @@ void WorkWithIngredientTableMenuState::addSearchingQuery(string query, int numbe
 		this->contentAfterSortingAndResearch = initialContent;
 
 		// сортирум заново
-		launchSorting();
+		sortData();
 	}
 
 	// заменяем запрос
@@ -329,13 +330,13 @@ void WorkWithIngredientTableMenuState::workWithTable(OperationCode operationCode
 
 		case OperationCode::Sorting:
 		{
-			sortData();
+			launchSortingMenu();
 		}
 		break;
 	}
 }
 
-void WorkWithIngredientTableMenuState::sortData()
+void WorkWithIngredientTableMenuState::launchSortingMenu()
 {
 	while (this->alchemicalUserInterface->getExitFlag() != true)
 	{
@@ -346,8 +347,6 @@ void WorkWithIngredientTableMenuState::sortData()
 		// делаем выбор
 		this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumnforSorting, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);
 
-		launchSorting();
-
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
 		if (this->alchemicalUserInterface->getExitFlag() == true)
 		{
@@ -356,6 +355,10 @@ void WorkWithIngredientTableMenuState::sortData()
 
 			return;
 		}
+
+		// если таблица не пустая
+		if(contentAfterSortingAndResearch.size() > 0) 
+			sortData();
 
 		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndResearch, AlchemicalUserInterface::TableCode::IngredientTable, page, numberOfColumnforSorting, orderOfSorting);
 
@@ -370,7 +373,7 @@ void WorkWithIngredientTableMenuState::sortData()
 	}
 }
 
-void WorkWithIngredientTableMenuState::launchSorting()
+void WorkWithIngredientTableMenuState::sortData()
 {
 	// если критерий цифровой
 	if (numberOfColumnforSorting == INGREDIENT_TABLE_DIGIT_COLUMN_1 || numberOfColumnforSorting == INGREDIENT_TABLE_DIGIT_COLUMN_3 || numberOfColumnforSorting == INGREDIENT_TABLE_DIGIT_COLUMN_6)
@@ -383,6 +386,11 @@ void WorkWithIngredientTableMenuState::launchSorting()
 
 void WorkWithIngredientTableMenuState::launchFilterMenu()
 {
+	// Текущая координата Y сбрасываем ее
+	currentYCursorCoordState = MAIN_MENU_Y_COORD;
+
+	printFilterItems(this->listOfColumnForFiltration);
+
 	while (this->alchemicalUserInterface->getExitFlag() != true)
 	{
 		int page = FIRST_PAGE;
@@ -396,87 +404,137 @@ void WorkWithIngredientTableMenuState::launchFilterMenu()
 
 		this->ingredientTablePrinter->print(contentAfterSortingAndResearch, page, numberOfColumnforSorting, orderOfSorting);
 
-		// Текущая координата Y сбрасываем ее
-		currentYCursorCoordState = MAIN_MENU_Y_COORD;
-
-		printFilterItems(this->listOfColumnForFiltration);
+		//printFilterItems(this->listOfColumnForFiltration);
 
 		// выбираем пункт меню фильтрации
 		chooseMenuItem(this->listOfColumnForFiltration, X_COORD_FOR_FILTER_ITEMS);
 
-		////// делаем выбор
-		//this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);
+		int x = currentYCursorCoordState;
+
+		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
+		if (this->alchemicalUserInterface->getExitFlag() == true)
+		{
+			// сбрасываем флаг
+			this->alchemicalUserInterface->setExitFlag(false);
+
+			currentYCursorCoordState = MAIN_MENU_Y_COORD + 1;
+
+			return;
+		}
 
 		numberOfSearchingQuery = calculateNumberOfColumnForFiltration();
 
 		isString = isStringColumn(numberOfSearchingQuery);
 
-		cout << goToXY(currentYCursorCoordState, xCoordForFilterValue);
+		cout << goToXY(currentYCursorCoordState, xCoordForFilterValue) << eraseOnLine(FROM_CURSOR_TO_SCREEN_END);
 
 		queryForFiltration = this->alchemicalUserInterface->checkInput(queryForFiltration, isString, 0, MAX_INT, currentYCursorCoordState, this->xCoordForFilterValue);
 
 		addSearchingQuery(queryForFiltration, numberOfSearchingQuery);
 
+		filterData();
 
-		//// если критерий цифровой
-		//if (numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_1 || numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_3 || numberOfColumn == INGREDIENT_TABLE_DIGIT_COLUMN_6)
-		//	this->alchemicalUserInterface->getAlchemyLogic()->sortDigitData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
+		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndResearch, AlchemicalUserInterface::TableCode::IngredientTable, page, numberOfColumnforSorting, orderOfSorting);
 
-		//else
-		//	// сортируем
-		//	this->alchemicalUserInterface->getAlchemyLogic()->sortStringData(&contentAfterSortingAndSearch[0], numberOfColumn, orderOfSorting, contentAfterSortingAndSearch.size());
+		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
+		if (this->alchemicalUserInterface->getExitFlag() == true)
+		{
+			// сбрасываем флаг
+			this->alchemicalUserInterface->setExitFlag(false);
 
+			currentYCursorCoordState = MAIN_MENU_Y_COORD + 1;
 
-		//// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		//if (this->alchemicalUserInterface->getExitFlag() == true)
-		//{
-		//	// сбрасываем флаг
-		//	this->alchemicalUserInterface->setExitFlag(false);
+			return;
+		}
 
-		//	return;
-		//}
+		auto vec = contentAfterSortingAndResearch;
 
-		//this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndSearch, AlchemicalUserInterface::TableCode::IngredientTable, page, numberOfColumn, orderOfSorting);
-
-		//// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		//if (this->alchemicalUserInterface->getExitFlag() == true)
-		//{
-		//	// сбрасываем флаг
-		//	this->alchemicalUserInterface->setExitFlag(false);
-
-		//	return;
-		//}
+		x = currentYCursorCoordState;
 	}
 }
 
 void WorkWithIngredientTableMenuState::filterData()
 {
-	int indexOfQuery = 0;
-
-	auto begintIter = this->contentAfterSortingAndResearch.begin();
-	auto endIter = this->contentAfterSortingAndResearch.end();
+	int size = contentAfterSortingAndResearch.size();
 
 	int numberOfColumns = this->ingredientTablePrinter->getNumberOfColumns();
 
-	for (auto i = begintIter; i != endIter; ++i)
+	// буферный контент
+	vector<vector<string>> bufferContent;
+
+	for (int i = 0; i < size; ++i)
 	{
-		for()
+		// индекс фильтруемого столбца
+		int index = 0;
 
+		// индекс запроса в векторе запросов
+		int indexOfQuery = 0;
 
-		// если запрос по этому столбцу не пустой 
-		// и индекс меньше кол-ва колонок
-		if (this->searchingQueries[indexOfQuery] != "" && indexOfQuery < numberOfColumns && begintIter->operator[](indexOfQuery) != this->searchingQueries[indexOfQuery])
+		bool success = false;
+
+		for (int j = 0; j < numberOfColumns; ++j)
 		{
-			// удаляем этот вектор
-			this->contentAfterSortingAndResearch.erase(i);
+			bool isInt = false;
+			int intValue = 0;
 
-			++indexOfQuery;
+			if(indexOfQuery != (FILTER_NAME_3 - 1) && indexOfQuery != (FILTER_EFFECT_6 - 1) && indexOfQuery != (FILTER_EFFECT_7 - 1) || searchingQueries[indexOfQuery] != "")
+				isInt = tryParseToInt(searchingQueries[indexOfQuery]);
 
-			continue;
+			// если текущий запрос это число
+			if (isInt == true)
+			{
+				int min = 0;
+
+				intValue = stoi(contentAfterSortingAndResearch[i][j]);
+
+				// если первый запрос не пустой
+				if (this->searchingQueries[indexOfQuery] != "")
+				{
+					min = stoi(this->searchingQueries[indexOfQuery]);
+				}
+
+				++indexOfQuery;
+
+				int max = MAX_INT;
+
+				// если второй запрос не пустой
+				if (this->searchingQueries[indexOfQuery] != "")
+				{
+					max = stoi(this->searchingQueries[indexOfQuery]);
+				}
+
+				++indexOfQuery;
+
+				// если число не попадает в диапазон, то выходим из цикла
+				if (min > intValue || intValue > max)
+				{
+					success = false;
+					break;
+				}
+
+				success = true;
+			}
+
+			else
+			{
+				// если запросы не совпадают
+				if (this->searchingQueries[indexOfQuery] != "" && !hasSubstring(contentAfterSortingAndResearch[i][j], this->searchingQueries[indexOfQuery]))
+				{
+					success = false;
+					break;
+				}
+
+				++indexOfQuery;
+
+				success = true;
+			}
 		}
 
-
+		if (success)
+			bufferContent.push_back(contentAfterSortingAndResearch[i]);
 	}
+
+	contentAfterSortingAndResearch = bufferContent;
 }
 
 int WorkWithIngredientTableMenuState::calculateLongestFIlteringItem()

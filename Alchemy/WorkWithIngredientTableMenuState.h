@@ -109,10 +109,10 @@ protected:
 
 	virtual void workWithTable(OperationCode operationCode);
 
-	virtual void sortData();
+	virtual void launchSortingMenu();
 
 	// Запустить сортировку
-	virtual void launchSorting();
+	virtual void sortData();
 
 	virtual void launchFilterMenu();
 

@@ -125,4 +125,34 @@ bool firstStringIsSmallerOrEqualSecond(string str1, string str2)
 		return true;
 }
 
+bool hasSubstring(string mainString, string subString)
+{
+	std::transform(mainString.begin(), mainString.end(), mainString.begin(), ::tolower);
+	std::transform(subString.begin(), subString.end(), subString.begin(), ::tolower);
+
+	int substringSize = subString.size();
+	int mainStringSize = mainString.size();
+
+	int success = 0;
+
+	for (int i = 0, j = 0; i < mainStringSize; ++i)
+	{
+		if (mainString[i] == subString[j])
+		{
+			++success;
+			++j;
+		}
+		else
+		{
+			success = 0;
+			j = 0;
+		}
+
+		if (j == substringSize)
+			return true;
+	}
+
+	return false;
+}
+
 

@@ -101,6 +101,9 @@ void printNull(int parametr);
 // Стирает вывод на экране в зависимости от параметра
 string eraseOnScreen(string param);
 
+// Стирает вывод в строке в зависимости от параметра
+string eraseOnLine(string param);
+
 // Стирает опр кол-во символов на экране
 string eraseSymbolsOnScreen(string param);
 

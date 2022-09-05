@@ -34,6 +34,13 @@ string eraseOnScreen(string param)
     return res;
 }
 
+string eraseOnLine(string param)
+{
+    string res = "\x1b[" + param + "K";
+
+    return res;
+}
+
 string eraseSymbolsOnScreen(string param)
 {
     string res = "\x1b[" + param + "X";

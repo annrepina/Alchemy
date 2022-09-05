@@ -13,13 +13,8 @@
 #define EXIT_Y_COORD					2		// Координата Y кнопки выхода
 #define Y_COORD_AFTER_ALCHEMIST			8		// Координата Y после печати алхимика
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
-#define PAGE_Y_COORD					38		// Координата Y меню страниц таблицы
-//#define Y_COORD_AFTER_MENU_TITLE_1		9		// Координата Y первая после печати заголовка меню
-//#define Y_COORD_AFTER_MENU_TITLE_2		10		// Координата Y вторая после печати заголовка меню
-//#define Y_COORD_AFTER_MENU_TITLE_3		11		// Координата Y третья после печати заголовка меню
-//#define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
-//#define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
-//#define STANDARD_CURSOR_X_COORD			0		// Стандартная координата X курсора 
+#define PAGE_Y_COORD					41		// Координата Y меню страниц таблицы - УВЕЛИЧИЛА НА 3
+
 
 // Значения по умолчанию
 #define FIRST_PAGE						1		// Первая страница таблицы
@@ -104,7 +99,7 @@ public:
 	void chooseColumnForFiltration(int& numberOfColumn, TableCode code);
 
 
-	int calculateNumberOfColumnForFiltration();
+	//int calculateNumberOfColumnForFiltration();
 
 private:
 

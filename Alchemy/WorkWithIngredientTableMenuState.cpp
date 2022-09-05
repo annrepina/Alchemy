@@ -62,7 +62,7 @@ void WorkWithIngredientTableMenuState::printMenu()
 
 	while (this->alchemicalUserInterface->getExitFlag() == false)
 	{
-		chooseMenuItem(this->listOfInnerMenuItems);
+		chooseMenuItem(this->listOfInnerMenuItems, STANDARD_CURSOR_X_COORD);
 
 		//// сбрасываем флаг после выбора поиск/сортировка
 		//this->alchemicalUserInterface->setExitFlag(false);
@@ -153,23 +153,31 @@ void WorkWithIngredientTableMenuState::printFilterItems(vector<string> listOfIte
 
 	int index = this->currentYCursorCoordState - MAIN_MENU_Y_COORD;
 
+	// Координата x для печати двоеточия
+	int xCoordForColon = xCoordForFilterValue - 1;
+
 	// Печатаем ассоциативный массив
-	for (int i = index; i < border; ++i)
+	for (int i = index, j = this->currentYCursorCoordState; i < border; ++i, ++j)
 	{
+		cout << goToXY(j, X_COORD_FOR_FILTER_ITEMS);
+
 		if (i == index)
 		{
-			cout << goToXY(i, X_COORD_FOR_FILTER_ITEMS);
 			printTextWithBackground(listOfItems[i], R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
-			//cout << endl;
+
+			cout << goToXY(j, xCoordForColon) << ':';\
 		}
 
 		else
 			// Печатаем пункт меню
-			cout << listOfItems[i] /*<< endl*/;
+			cout << listOfItems[i] << goToXY(j, xCoordForColon) << ':';
 	}
+
+	// Возвращаемся в координаты
+	cout << goToXY(currentYCursorCoordState, X_COORD_FOR_FILTER_ITEMS);
 }
 
-void WorkWithIngredientTableMenuState::checkVerticalArrowsChoice(int borderYCoord, int keyCode, vector<string> items)
+void WorkWithIngredientTableMenuState::checkVerticalArrowsChoice(int borderYCoord, int xCoordForItemPrinting, int keyCode, vector<string> items)
 {
 		// если граничная координата не равна текущей
 	if (borderYCoord != this->currentYCursorCoordState)
@@ -177,7 +185,7 @@ void WorkWithIngredientTableMenuState::checkVerticalArrowsChoice(int borderYCoor
 		// Если кнопка вниз
 		if (VK_DOWN == keyCode)
 		{
-			cout << goToXY(currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
+			cout << goToXY(currentYCursorCoordState, xCoordForItemPrinting);
 
 			// Печатаем пункт меню без выделения
 			cout << items[currentYCursorCoordState - MAIN_MENU_Y_COORD];
@@ -191,16 +199,20 @@ void WorkWithIngredientTableMenuState::checkVerticalArrowsChoice(int borderYCoor
 			--this->currentYCursorCoordState;
 
 		// Переходим по координатам
-		cout << goToXY(this->currentYCursorCoordState, 0);
+		cout << goToXY(this->currentYCursorCoordState, xCoordForItemPrinting);
 
-		printMenuItems(items);
+		if(xCoordForItemPrinting > STANDARD_CURSOR_X_COORD)
+			printFilterItems(items);
+
+		else
+			printMenuItems(items);
 
 		// Возвращаемся в координаты
-		cout << goToXY(currentYCursorCoordState, 0);
+		cout << goToXY(currentYCursorCoordState, xCoordForItemPrinting);
 	}
 }
 
-void WorkWithIngredientTableMenuState::chooseMenuItem(vector<string> listOfItems)
+void WorkWithIngredientTableMenuState::chooseMenuItem(vector<string> listOfItems, int xCoordForItemsPrinting)
 {
 	this->alchemicalUserInterface->setFunc(std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this->alchemicalUserInterface, _1));
 
@@ -216,14 +228,14 @@ void WorkWithIngredientTableMenuState::chooseMenuItem(vector<string> listOfItems
 		{
 			case VK_UP:
 			{
-				this->checkVerticalArrowsChoice(this->boundaryYCoord, VK_UP, listOfItems);
+				this->checkVerticalArrowsChoice(this->boundaryYCoord, xCoordForItemsPrinting, VK_UP, listOfItems);
 			}
 			break;
 
 			case VK_DOWN:
 			{
 				// Проверяем стрелочки
-				this->checkVerticalArrowsChoice(this->boundaryYCoord + listOfItems.size() - 1, VK_DOWN, listOfItems);
+				this->checkVerticalArrowsChoice(this->boundaryYCoord + listOfItems.size() - 1, xCoordForItemsPrinting, VK_DOWN, listOfItems);
 			}
 			break;
 
@@ -260,7 +272,7 @@ void WorkWithIngredientTableMenuState::setListOfColumnTitles()
 	// если вектор пустой
 	if (this->listOfColumnTitles.empty())
 	{
-		this->listOfColumnTitles.push_back("№");
+		this->listOfColumnTitles.push_back("№ от");
 		this->listOfColumnTitles.push_back("Имя");
 		this->listOfColumnTitles.push_back("Цена");
 		this->listOfColumnTitles.push_back("Эффект 1");
@@ -351,17 +363,22 @@ void WorkWithIngredientTableMenuState::filterData()
 
 		this->ingredientTablePrinter->print(contentAfterSortingAndSearch, page, numberOfColumn, orderOfSorting);
 
+		// Текущая координата Y сбрасываем ее
+		currentYCursorCoordState = MAIN_MENU_Y_COORD;
+
 		printFilterItems(this->listOfColumnTitles);
 
 		// выбираем пункт меню фильтрации
-		chooseMenuItem(this->listOfColumnTitles);
+		chooseMenuItem(this->listOfColumnTitles, X_COORD_FOR_FILTER_ITEMS);
 
 		////// делаем выбор
 		//this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumn, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);
 
-		numberOfColumnForFiltration = this->alchemicalUserInterface->calculateNumberOfColumnForFiltration();
+		numberOfColumnForFiltration = calculateNumberOfColumnForFiltration();
 
 		isString = isStringColumn(numberOfColumnForFiltration);
+
+		cout << goToXY(currentYCursorCoordState, xCoordForFilterValue);
 
 		requestForFiltration = this->alchemicalUserInterface->checkInput(requestForFiltration, isString, 0, MAX_INT, currentYCursorCoordState, this->xCoordForFilterValue);
 
@@ -420,4 +437,13 @@ bool WorkWithIngredientTableMenuState::isStringColumn(int numberOfColumn)
 
 	else
 		return true;
+}
+
+int WorkWithIngredientTableMenuState::calculateNumberOfColumnForFiltration()
+{
+
+	int numberOfColumn = currentYCursorCoordState - MAIN_MENU_Y_COORD + 1;
+
+	return numberOfColumn;
+
 }

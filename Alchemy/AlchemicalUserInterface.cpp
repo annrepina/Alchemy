@@ -718,11 +718,11 @@ bool AlchemicalUserInterface::isColumnAndOrderChoiceFalse(int key)
 	return res;
 }
 
-int AlchemicalUserInterface::calculateNumberOfColumnForFiltration()
-{
-	int numberOfColumn = currentYCursorCoord - MAIN_MENU_Y_COORD + 1;
-
-	return numberOfColumn;
-}
+//int AlchemicalUserInterface::calculateNumberOfColumnForFiltration()
+//{
+//	int numberOfColumn = currentYCursorCoord - MAIN_MENU_Y_COORD + 1;
+//
+//	return numberOfColumn;
+//}
 
 

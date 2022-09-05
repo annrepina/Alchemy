@@ -79,7 +79,7 @@ protected:
 
 	//void chooseMenuItem() override;
 
-	void chooseMenuItem(vector<string> listOfItems);
+	void chooseMenuItem(vector<string> listOfItems, int xCoordForItemsPrinting);
 
 	//// Выбрать колонку для фильтрации
 	//void chooseFilterColumn();
@@ -108,7 +108,7 @@ protected:
 	// Искомая колонка является стринговой или интовой в тбалице?
 	virtual bool isStringColumn(int numberOfColumn);
 
-
+	int calculateNumberOfColumnForFiltration();
 
 private:
 
@@ -124,6 +124,6 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 
-	void checkVerticalArrowsChoice(int borderYCoord, int keyCode, vector<string> items);
+	void checkVerticalArrowsChoice(int borderYCoord, int xCoordForItemPrinting, int keyCode, vector<string> items);
 };
 

@@ -66,7 +66,7 @@ void WorkWithPotionTableMenuState::printMenu()
 
 	while (this->alchemicalUserInterface->getExitFlag() == false)
 	{
-		chooseMenuItem(listOfInnerMenuItems);
+		chooseMenuItem(listOfInnerMenuItems, STANDARD_CURSOR_X_COORD);
 
 		//// сбрасываем флаг после выбора поиск/сортировка
 		//this->alchemicalUserInterface->setExitFlag(false);

@@ -31,6 +31,8 @@ void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgr
 
 	// Если док пустой
 
+
+
 	// Создаем пустого алхимика
 	this->element->setAlchemist(new Alchemist);
 

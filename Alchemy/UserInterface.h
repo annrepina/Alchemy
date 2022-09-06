@@ -102,29 +102,19 @@ public:
 	// Проверка ввода
 	virtual string checkInput(string& value, bool isString, int max, int min, int yCoord, int xCoord);
 
-
 	// Печать ошибки из-за некорректного ввода
 	virtual void printError(int yCoord, int xCoord, string textOfError);
 
-	//// Проверка выбора стрелочек вверх/вниз
-	//void checkVerticalArrowsChoice(int borderYCoord, int keyCode, map <int, string> menu);
-
 protected:
-
-	//// Состояние меню
-	//MenuState* state;
 
 	// Название программы
 	string title;
 
-	//// Функция для предикатов
-	//function<bool(int)> func;
-
 	// Экземпляр клавиатуры
 	KeyBoard* keyBoard;
 
-	// Код меню
-	int menuCode;
+	//// Код меню
+	//int menuCode;
 
 	// Заполнить ассоциативный массив меню действий
 	virtual map<int, string> fillMenuMap(const int numberOfItems, const string listOfItems[]);
@@ -137,9 +127,6 @@ protected:
 
 	// Проверка ввода
 	int checkInput(string value, int min, int max, string textOfRangeError, int yCoord, int xCoord);
-
-	//// Расчитывает координату Х для заголовков
-	//void setXCoordInMiddle();
 
 #pragma region МЕТОДЫ ПЕЧАТИ
 
@@ -154,9 +141,6 @@ protected:
 
 	// Печать главного меню в цикле
 	virtual void printMenuInLoop(map<int, string> menu, string menuTitle) = 0;
-
-	//// Печать инструкций
-	//virtual void printInstructions() = 0;
 
 	// Печать прощания
 	virtual void printBye() = 0;

@@ -2,16 +2,11 @@
 
 UserInterface::UserInterface()
 {
-	//this->alchemist = nullptr;
-
 	this->titleXCoord = 0;
-	this->menuCode = 0;
+	//this->menuCode = 0;
 	this->currentXCursorCoord = 0;
 	this->currentYCursorCoord = 0;
-
 	this->keyBoard = this->keyBoard->getInstance();
-
-	//this->state = new MainMenu(*this);
 }
 
 void UserInterface::setTitle(string title)
@@ -104,11 +99,6 @@ void UserInterface::printError(int yCoord, int xCoord, string textOfError)
 
 	printColoredText(textOfError, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
 }
-
-//bool UserInterface::isMenuChoiceFalse(int key)
-//{
-//	return key != VK_1 && key != VK_2 && key != VK_NUMPAD1 && key != VK_NUMPAD2 && key != VK_ESCAPE;
-//}
 
 bool UserInterface::isArrowKeyFalse(int key)
 {

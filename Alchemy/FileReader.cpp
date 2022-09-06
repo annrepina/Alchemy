@@ -15,7 +15,7 @@ string FileReader::read()
 
 	ifstream stream(filePath, ios::in);
 
-	string res;
+	string res = "";
 
 	char ch;
 

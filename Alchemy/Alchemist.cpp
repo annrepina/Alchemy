@@ -5,7 +5,7 @@ Alchemist::Alchemist()
 	this->name = "";
 	this->alchemistLevel = START_LEVEL;
 	this->salesmanLevel = START_LEVEL;
-	this->ñapital = START_UP_CAPITAL;
+	this->capital = START_UP_CAPITAL;
 }
 
 void Alchemist::setName(string name)
@@ -23,6 +23,11 @@ void Alchemist::setSalesmanLevel(int salesmanLevel)
 	this->salesmanLevel = salesmanLevel;
 }
 
+void Alchemist::setCapital(int capital)
+{
+	this->capital = capital;
+}
+
 string Alchemist::getName()
 {
 	return this->name;
@@ -30,7 +35,7 @@ string Alchemist::getName()
 
 int Alchemist::getCapital()
 {
-	return this->ñapital;
+	return this->capital;
 }
 
 int Alchemist::getAlchemistLevel()
@@ -62,12 +67,12 @@ void Alchemist::increaseSalesmanLevel(int number)
 
 void Alchemist::increaseCapital(int value)
 {
-	this->ñapital += value;
+	this->capital += value;
 }
 
 void Alchemist::decreaseCapital(int value)
 {
-	this->ñapital -= value;
+	this->capital -= value;
 }
 
 void Alchemist::print()
@@ -75,5 +80,5 @@ void Alchemist::print()
 	cout << "Àëõèìèê: " << this->name << endl
 		<< "Óðîâåíü àëõèìèêà: " << this->alchemistLevel / LEVEL_DIVISOR << endl
 		<< "Óðîâåíü ïðîäàâöà: " << this->salesmanLevel / LEVEL_DIVISOR << endl
-		<< "Çîëîòî: " << this->ñapital << endl;
+		<< "Çîëîòî: " << this->capital << endl;
 }

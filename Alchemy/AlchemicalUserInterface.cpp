@@ -66,6 +66,9 @@ void AlchemicalUserInterface::launchMainLoop()
 	} while (exitFlag == false);
 
 	printBye();
+
+	// может и не надо
+	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 }
 
 #pragma region Геттеры

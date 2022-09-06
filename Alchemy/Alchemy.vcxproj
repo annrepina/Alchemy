@@ -141,6 +141,8 @@
   <ItemGroup>
     <ClCompile Include="AlchemicalMenuState.cpp" />
     <ClCompile Include="AlchemicalUserInterface.cpp" />
+    <ClCompile Include="AlchemistBinaryReader.cpp" />
+    <ClCompile Include="AlchemistBinaryWriter.cpp" />
     <ClCompile Include="AlchemyLogic.cpp" />
     <ClCompile Include="AlchemyLogicBuilder.cpp" />
     <ClCompile Include="AlchemyProgramParser.cpp" />
@@ -191,6 +193,8 @@
   <ItemGroup>
     <ClInclude Include="AlchemicalMenuState.h" />
     <ClInclude Include="AlchemicalUserInterface.h" />
+    <ClInclude Include="AlchemistBinaryReader.h" />
+    <ClInclude Include="AlchemistBinaryWriter.h" />
     <ClInclude Include="AlchemyLogic.h" />
     <ClInclude Include="AlchemyLogicBuilder.h" />
     <ClInclude Include="AlchemyProgramParser.h" />

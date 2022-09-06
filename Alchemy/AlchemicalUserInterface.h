@@ -64,12 +64,6 @@ public:
 		PotionTable
 	};
 
-	//enum class OperationCode
-	//{
-	//	Sorting,
-	//	Search
-	//};
-
 	// Печать страниц таблиц в цикле
 	void printTablePagesInLoop(TableCode code, int& page);
 
@@ -92,14 +86,9 @@ public:
 
 	void chooseExit();
 
-	//void workWithTable(OperationCode operationCode, TableCode tableCode, vector<vector<string>> tableData, int& numberOfColumn, bool& order);
-
 	void chooseColumnAndOrderOfSorting(int& numberOfColum, bool& orderOfSorting, TableCode code);
 
 	void chooseColumnForFiltration(int& numberOfColumn, TableCode code);
-
-
-	//int calculateNumberOfColumnForFiltration();
 
 private:
 
@@ -185,9 +174,6 @@ private:
 
 	// Печать главного меню в цикле
 	void printMenuInLoop(map<int, string> menu, string menuTitle) override;
-
-	//// Печать инструкций
-	//void printInstructions() override;
 
 	// Печать прощания
 	void printBye() override;

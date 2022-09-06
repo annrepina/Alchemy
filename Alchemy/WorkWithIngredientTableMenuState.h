@@ -65,7 +65,10 @@ protected:
 
 	void setListOfInnerMenuItems();
 
-	void setListOfColumnTitles();
+	virtual void setListOfColumnTitles();
+
+	// задаем некоторые поля
+	virtual void setFields();
 
 #pragma endregion Сеттеры
 
@@ -91,7 +94,7 @@ protected:
 
 	virtual void printFilterItems(vector<string> listOfItems);
 
-	//void chooseMenuItem() override;
+	virtual void workWithTable();
 
 	void chooseMenuItem(vector<string> listOfItems, int xCoordForItemsPrinting);
 

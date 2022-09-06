@@ -7,7 +7,7 @@
 
 #define MINIMUM_NUMBER_OF_INGREDIENTS		1		// Минимальное кол-во ингредиентов
 
-class WorkWithUsersInfredientTableMenuState : public WorkWithIngredientTableMenuState/*, public MenuState*/
+class WorkWithUsersInfredientTableMenuState : public WorkWithIngredientTableMenuState
 {
 public:
 

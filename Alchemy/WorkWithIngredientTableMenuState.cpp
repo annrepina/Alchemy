@@ -36,21 +36,7 @@ void WorkWithIngredientTableMenuState::printMenu()
 
 	fillMap<function<MenuState* (WorkWithIngredientTableMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
 
-	setListOfInnerMenuItems();
-	setListOfColumnTitles();
-
-	fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, INNER_MENU_ITEMS);
-	fillMap<string>(columnForFiltration, listOfColumnForFiltration, currentYCursorCoordState, NUMBER_OF_SEARCHING_QUERIES);
-
-	setContent();
-	setSearchingQueriesDefault();
-
-	longestColumnSize = calculateLongestFIlteringItem();
-
-	xCoordForFilterValue = X_COORD_FOR_FILTER_ITEMS + longestColumnSize + GAP_BETWEEN_FILTER_AND_VALUE;
-
-	// начальная страница таблицы
-	int page = FIRST_PAGE;
+	setFields();
 
 	printMenuTitle();
 
@@ -63,35 +49,13 @@ void WorkWithIngredientTableMenuState::printMenu()
 
 	cout << goToXY(this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
 
-	while (this->alchemicalUserInterface->getExitFlag() == false)
-	{
-		chooseMenuItem(this->listOfInnerMenuItems, STANDARD_CURSOR_X_COORD);
-
-		//// сбрасываем флаг после выбора поиск/сортировка
-		//this->alchemicalUserInterface->setExitFlag(false);
-
-		// если была нажата кнопка назад
-		if (currentYCursorCoordState == MAIN_MENU_Y_COORD + INNER_MENU_ITEMS - 1)
-		{
-			// сбрасываем координату
-			this->currentYCursorCoordState = MAIN_MENU_Y_COORD;
-
-			this->alchemicalUserInterface->setState(this->getNextState());
-
-			return;
-		}
-
-		int operationCode = defineOperation();
-		
-		this->workWithTable((OperationCode)operationCode);
-	}
+	workWithTable();
 }
 
 MenuState* WorkWithIngredientTableMenuState::getNextState()
 {
 	return this->stateCreatingFunctions[currentYCursorCoordState](*this);
 }
-
 
 void WorkWithIngredientTableMenuState::addSearchingQuery(string query, int numberOfQuery)
 {
@@ -174,6 +138,25 @@ void WorkWithIngredientTableMenuState::setListOfColumnTitles()
 	}
 }
 
+void WorkWithIngredientTableMenuState::setFields()
+{
+	setListOfInnerMenuItems();
+	setListOfColumnTitles();
+
+	fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, INNER_MENU_ITEMS);
+	fillMap<string>(columnForFiltration, listOfColumnForFiltration, currentYCursorCoordState, NUMBER_OF_SEARCHING_QUERIES);
+
+	setContent();
+	setSearchingQueriesDefault();
+
+	longestColumnSize = calculateLongestFIlteringItem();
+
+	xCoordForFilterValue = X_COORD_FOR_FILTER_ITEMS + longestColumnSize + GAP_BETWEEN_FILTER_AND_VALUE;
+
+	// начальная страница таблицы
+	int page = FIRST_PAGE;
+}
+
 #pragma endregion Сеттеры
 
 ReturnMenuState* WorkWithIngredientTableMenuState::createReturnMenuState()
@@ -230,6 +213,29 @@ void WorkWithIngredientTableMenuState::printFilterItems(vector<string> listOfIte
 
 	// Возвращаемся в координаты
 	cout << goToXY(currentYCursorCoordState, X_COORD_FOR_FILTER_ITEMS);
+}
+
+void WorkWithIngredientTableMenuState::workWithTable()
+{
+	while (this->alchemicalUserInterface->getExitFlag() == false)
+	{
+		chooseMenuItem(this->listOfInnerMenuItems, STANDARD_CURSOR_X_COORD);
+
+		// если была нажата кнопка назад
+		if (currentYCursorCoordState == MAIN_MENU_Y_COORD + INNER_MENU_ITEMS - 1)
+		{
+			// сбрасываем координату
+			this->currentYCursorCoordState = MAIN_MENU_Y_COORD;
+
+			this->alchemicalUserInterface->setState(this->getNextState());
+
+			return;
+		}
+
+		int operationCode = defineOperation();
+
+		this->workWithTable((OperationCode)operationCode);
+	}
 }
 
 void WorkWithIngredientTableMenuState::checkVerticalArrowsChoice(int borderYCoord, int xCoordForItemPrinting, int keyCode, vector<string> items)
@@ -409,8 +415,6 @@ void WorkWithIngredientTableMenuState::launchFilterMenu()
 		// выбираем пункт меню фильтрации
 		chooseMenuItem(this->listOfColumnForFiltration, X_COORD_FOR_FILTER_ITEMS);
 
-		int x = currentYCursorCoordState;
-
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
 		if (this->alchemicalUserInterface->getExitFlag() == true)
 		{
@@ -446,10 +450,6 @@ void WorkWithIngredientTableMenuState::launchFilterMenu()
 
 			return;
 		}
-
-		auto vec = contentAfterSortingAndResearch;
-
-		x = currentYCursorCoordState;
 	}
 }
 
@@ -556,11 +556,7 @@ int WorkWithIngredientTableMenuState::calculateLongestFIlteringItem()
 
 bool WorkWithIngredientTableMenuState::isStringColumn(int numberOfColumn)
 {
-	if (numberOfColumn == FILTER_NAME_3 || numberOfColumn == FILTER_EFFECT_6 || numberOfColumn == FILTER_EFFECT_7)
-		return true;
-
-	else
-		return false;
+	return numberOfColumn == FILTER_NAME_3 || numberOfColumn == FILTER_EFFECT_6 || numberOfColumn == FILTER_EFFECT_7;
 }
 
 int WorkWithIngredientTableMenuState::calculateNumberOfColumnForFiltration()

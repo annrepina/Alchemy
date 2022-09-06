@@ -27,23 +27,30 @@ void WorkWithUsersInfredientTableMenuState::printMenu()
 
 	fillMap<function<MenuState* (WorkWithUsersInfredientTableMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
 
-	setListOfInnerMenuItems();
+	//setListOfInnerMenuItems();
+	//setListOfColumnTitles();
 
-	fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, INNER_MENU_ITEMS);
+	//fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, INNER_MENU_ITEMS);
+	//fillMap<string>(columnForFiltration, listOfColumnForFiltration, currentYCursorCoordState, NUMBER_OF_SEARCHING_QUERIES);
 
-	setContent();
+	//setContent();
+	//setSearchingQueriesDefault();
 
-	// начальная страница таблицы
-	int page = FIRST_PAGE;
+	//longestColumnSize = calculateLongestFIlteringItem();
+
+	//xCoordForFilterValue = X_COORD_FOR_FILTER_ITEMS + longestColumnSize + GAP_BETWEEN_FILTER_AND_VALUE;
+
+	//// начальная страница таблицы
+	//int page = FIRST_PAGE;
+
+	setFields();
 
 	printMenuTitle();
-
-	string error;
 
 	// если кол-во доступных ингредиентов меньше ОДНОГО, то продать ничего не выйдет
 	if (this->contentAfterSortingAndResearch.size() < MINIMUM_NUMBER_OF_INGREDIENTS)
 	{
-		error = "У вас совсем нет ингредиентов.\nКупите что-нибудь у Аркадиии\.\nESC - назад";
+		string error = "У вас совсем нет ингредиентов.\nКупите что-нибудь у Аркадиии\.\nESC - назад";
 
 		printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
 
@@ -59,30 +66,31 @@ void WorkWithUsersInfredientTableMenuState::printMenu()
 
 	printMenuItems(listOfInnerMenuItems);
 
+	printFilterItems(this->listOfColumnForFiltration);
+
 	cout << goToXY(this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
 
-	while (this->alchemicalUserInterface->getExitFlag() == false)
-	{
-		chooseMenuItem(listOfInnerMenuItems, STANDARD_CURSOR_X_COORD);
+	//while (this->alchemicalUserInterface->getExitFlag() == false)
+	//{
+	//	chooseMenuItem(listOfInnerMenuItems, STANDARD_CURSOR_X_COORD);
 
-		//// сбрасываем флаг после выбора поиск/сортировка
-		//this->alchemicalUserInterface->setExitFlag(false);
+	//	// если была нажата кнопка назад
+	//	if (currentYCursorCoordState == MAIN_MENU_Y_COORD + INNER_MENU_ITEMS - 1)
+	//	{
+	//		// сбрасываем координату
+	//		this->currentYCursorCoordState = MAIN_MENU_Y_COORD;
 
-		// если была нажата кнопка назад
-		if (currentYCursorCoordState == MAIN_MENU_Y_COORD + INNER_MENU_ITEMS - 1)
-		{
-			// сбрасываем координату
-			this->currentYCursorCoordState = MAIN_MENU_Y_COORD;
+	//		this->alchemicalUserInterface->setState(this->getNextState());
 
-			this->alchemicalUserInterface->setState(this->getNextState());
+	//		return;
+	//	}
 
-			return;
-		}
+	//	int operationCode = defineOperation();
 
-		int operationCode = defineOperation();
+	//	workWithTable((OperationCode)operationCode);
+	//}
 
-		workWithTable((OperationCode)operationCode);
-	}
+	workWithTable();
 }
 
 void WorkWithUsersInfredientTableMenuState::setContent()

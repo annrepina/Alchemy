@@ -30,23 +30,23 @@ void WorkWithPotionTableMenuState::printMenu()
 
 	fillMap<function<MenuState* (WorkWithPotionTableMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
 
-	setListOfInnerMenuItems();
+	setFields();
 
-	fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, INNER_MENU_ITEMS);
+	//setListOfInnerMenuItems();
 
-	setContent();
+	//fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, INNER_MENU_ITEMS);
 
-	// начальная страница таблицы
-	int page = FIRST_PAGE;
+	//setContent();
+
+	//// начальная страница таблицы
+	//int page = FIRST_PAGE;
 
 	printMenuTitle();
-
-	string error;
 
 	// если кол-во доступных зелий меньше ОДНОГО, то сортировать ничего не выйдет
 	if (this->contentAfterSortingAndResearch.size() < MINIMUM_NUMBER_OF_POTIONTS)
 	{
-		error = "У вас совсем нет зелий.\nСоздайте что-нибудь.\.\nESC - назад";
+		string error = "У вас совсем нет зелий.\nСоздайте что-нибудь.\.\nESC - назад";
 
 		printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
 
@@ -62,30 +62,31 @@ void WorkWithPotionTableMenuState::printMenu()
 
 	printMenuItems(this->listOfInnerMenuItems);
 
+	printFilterItems(this->listOfColumnForFiltration);
+
 	cout << goToXY(this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
 
-	while (this->alchemicalUserInterface->getExitFlag() == false)
-	{
-		chooseMenuItem(listOfInnerMenuItems, STANDARD_CURSOR_X_COORD);
+	//while (this->alchemicalUserInterface->getExitFlag() == false)
+	//{
+	//	chooseMenuItem(listOfInnerMenuItems, STANDARD_CURSOR_X_COORD);
 
-		//// сбрасываем флаг после выбора поиск/сортировка
-		//this->alchemicalUserInterface->setExitFlag(false);
+	//	// если была нажата кнопка назад
+	//	if (currentYCursorCoordState == MAIN_MENU_Y_COORD + INNER_MENU_ITEMS - 1)
+	//	{
+	//		// сбрасываем координату
+	//		this->currentYCursorCoordState = MAIN_MENU_Y_COORD;
 
-		// если была нажата кнопка назад
-		if (currentYCursorCoordState == MAIN_MENU_Y_COORD + INNER_MENU_ITEMS - 1)
-		{
-			// сбрасываем координату
-			this->currentYCursorCoordState = MAIN_MENU_Y_COORD;
+	//		this->alchemicalUserInterface->setState(this->getNextState());
 
-			this->alchemicalUserInterface->setState(this->getNextState());
+	//		return;
+	//	}
 
-			return;
-		}
+	//	int operationCode = defineOperation();
 
-		int operationCode = defineOperation();
+	//	workWithTable((OperationCode)operationCode);
+	//}
 
-		workWithTable((OperationCode)operationCode);
-	}
+	workWithTable();
 }
 
 void WorkWithPotionTableMenuState::setContent()
@@ -95,7 +96,129 @@ void WorkWithPotionTableMenuState::setContent()
 	this->contentAfterSortingAndResearch = this->initialContent;
 }
 
-void WorkWithPotionTableMenuState::sortData()
+//void WorkWithPotionTableMenuState::sortData()
+//{
+//	while (this->alchemicalUserInterface->getExitFlag() != true)
+//	{
+//		int page = FIRST_PAGE;
+//
+//		this->potionTablePrinter->print(contentAfterSortingAndResearch, page, numberOfColumnforSorting, orderOfSorting);
+//
+//		//this->ingredientTablePrinter->print(contentAfterSortingAndSearch, page, numberOfColumn, orderOfSorting);
+//
+//		// делаем выбор
+//		this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumnforSorting, orderOfSorting, AlchemicalUserInterface::TableCode::PotionTable);
+//
+//		// если критерий цифровой
+//		if (numberOfColumnforSorting != NON_DIGIT_COLUMN)
+//			this->alchemicalUserInterface->getAlchemyLogic()->sortDigitData(&contentAfterSortingAndResearch[0], numberOfColumnforSorting, orderOfSorting, contentAfterSortingAndResearch.size());
+//
+//		else
+//			// сортируем
+//			this->alchemicalUserInterface->getAlchemyLogic()->sortStringData(&contentAfterSortingAndResearch[0], numberOfColumnforSorting, orderOfSorting, contentAfterSortingAndResearch.size());
+//
+//
+//		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
+//		if (this->alchemicalUserInterface->getExitFlag() == true)
+//		{
+//			// сбрасываем флаг
+//			this->alchemicalUserInterface->setExitFlag(false);
+//
+//			return;
+//		}
+//
+//		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndResearch, AlchemicalUserInterface::TableCode::PotionTable, page, numberOfColumnforSorting, orderOfSorting);
+//
+//		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
+//		if (this->alchemicalUserInterface->getExitFlag() == true)
+//		{
+//			// сбрасываем флаг
+//			this->alchemicalUserInterface->setExitFlag(false);
+//
+//			return;
+//		}
+//	}
+//}
+
+void WorkWithPotionTableMenuState::setListOfColumnTitles()
+{
+	// если вектор пустой
+	if (this->listOfColumnForFiltration.empty())
+	{
+		this->listOfColumnForFiltration.push_back("№ от");
+		this->listOfColumnForFiltration.push_back("№ до");
+		this->listOfColumnForFiltration.push_back("Имя");
+		this->listOfColumnForFiltration.push_back("Мощность от");
+		this->listOfColumnForFiltration.push_back("Мощность до");
+		this->listOfColumnForFiltration.push_back("Цена от");
+		this->listOfColumnForFiltration.push_back("Цена до");
+		this->listOfColumnForFiltration.push_back("Кол - во от");
+		this->listOfColumnForFiltration.push_back("Кол - во до");
+	}
+}
+
+void WorkWithPotionTableMenuState::launchFilterMenu()
+{
+	// Текущая координата Y сбрасываем ее
+	currentYCursorCoordState = MAIN_MENU_Y_COORD;
+
+	printFilterItems(this->listOfColumnForFiltration);
+
+	while (this->alchemicalUserInterface->getExitFlag() != true)
+	{
+		int page = FIRST_PAGE;
+
+		int numberOfSearchingQuery = 0;
+
+		// Запрос на фильтрацию
+		string queryForFiltration = "";
+
+		bool isString = true;
+
+		this->potionTablePrinter->print(contentAfterSortingAndResearch, page, numberOfColumnforSorting, orderOfSorting);
+
+		// выбираем пункт меню фильтрации
+		chooseMenuItem(this->listOfColumnForFiltration, X_COORD_FOR_FILTER_ITEMS);
+
+		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
+		if (this->alchemicalUserInterface->getExitFlag() == true)
+		{
+			// сбрасываем флаг
+			this->alchemicalUserInterface->setExitFlag(false);
+
+			currentYCursorCoordState = MAIN_MENU_Y_COORD + 1;
+
+			return;
+		}
+
+		numberOfSearchingQuery = calculateNumberOfColumnForFiltration();
+
+		isString = isStringColumn(numberOfSearchingQuery);
+
+		cout << goToXY(currentYCursorCoordState, xCoordForFilterValue) << eraseOnLine(FROM_CURSOR_TO_SCREEN_END);
+
+		queryForFiltration = this->alchemicalUserInterface->checkInput(queryForFiltration, isString, 0, MAX_INT, currentYCursorCoordState, this->xCoordForFilterValue);
+
+		addSearchingQuery(queryForFiltration, numberOfSearchingQuery);
+
+		filterData();
+
+		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndResearch, AlchemicalUserInterface::TableCode::PotionTable, page, numberOfColumnforSorting, orderOfSorting);
+
+		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
+		if (this->alchemicalUserInterface->getExitFlag() == true)
+		{
+			// сбрасываем флаг
+			this->alchemicalUserInterface->setExitFlag(false);
+
+			currentYCursorCoordState = MAIN_MENU_Y_COORD + 1;
+
+			return;
+		}
+	}
+}
+
+void WorkWithPotionTableMenuState::launchSortingMenu()
 {
 	while (this->alchemicalUserInterface->getExitFlag() != true)
 	{
@@ -103,19 +226,10 @@ void WorkWithPotionTableMenuState::sortData()
 
 		this->potionTablePrinter->print(contentAfterSortingAndResearch, page, numberOfColumnforSorting, orderOfSorting);
 
-		//this->ingredientTablePrinter->print(contentAfterSortingAndSearch, page, numberOfColumn, orderOfSorting);
-
 		// делаем выбор
 		this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumnforSorting, orderOfSorting, AlchemicalUserInterface::TableCode::PotionTable);
 
-		// если критерий цифровой
-		if (numberOfColumnforSorting != NON_DIGIT_COLUMN)
-			this->alchemicalUserInterface->getAlchemyLogic()->sortDigitData(&contentAfterSortingAndResearch[0], numberOfColumnforSorting, orderOfSorting, contentAfterSortingAndResearch.size());
-
-		else
-			// сортируем
-			this->alchemicalUserInterface->getAlchemyLogic()->sortStringData(&contentAfterSortingAndResearch[0], numberOfColumnforSorting, orderOfSorting, contentAfterSortingAndResearch.size());
-
+		sortData();
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
 		if (this->alchemicalUserInterface->getExitFlag() == true)
@@ -137,6 +251,106 @@ void WorkWithPotionTableMenuState::sortData()
 			return;
 		}
 	}
+}
+
+bool WorkWithPotionTableMenuState::isStringColumn(int numberOfColumn)
+{
+	return numberOfColumn == FILTER_NAME_3;
+}
+
+void WorkWithPotionTableMenuState::sortData()
+{
+	// если критерий цифровой
+	if (numberOfColumnforSorting != NON_DIGIT_COLUMN)
+		this->alchemicalUserInterface->getAlchemyLogic()->sortDigitData(&contentAfterSortingAndResearch[0], numberOfColumnforSorting, orderOfSorting, contentAfterSortingAndResearch.size());
+
+	else
+		// сортируем
+		this->alchemicalUserInterface->getAlchemyLogic()->sortStringData(&contentAfterSortingAndResearch[0], numberOfColumnforSorting, orderOfSorting, contentAfterSortingAndResearch.size());
+}
+
+void WorkWithPotionTableMenuState::filterData()
+{
+	int size = contentAfterSortingAndResearch.size();
+
+	int numberOfColumns = this->potionTablePrinter->getNumberOfColumns();
+
+	// буферный контент
+	vector<vector<string>> bufferContent;
+
+	for (int i = 0; i < size; ++i)
+	{
+		// индекс фильтруемого столбца
+		int index = 0;
+
+		// индекс запроса в векторе запросов
+		int indexOfQuery = 0;
+
+		bool success = false;
+
+		for (int j = 0; j < numberOfColumns; ++j)
+		{
+			bool isInt = false;
+			int intValue = 0;
+
+			if (indexOfQuery != (FILTER_NAME_3 - 1) || searchingQueries[indexOfQuery] != "")
+				isInt = tryParseToInt(searchingQueries[indexOfQuery]);
+
+			// если текущий запрос это число
+			if (isInt == true)
+			{
+				int min = 0;
+
+				intValue = stoi(contentAfterSortingAndResearch[i][j]);
+
+				// если первый запрос не пустой
+				if (this->searchingQueries[indexOfQuery] != "")
+				{
+					min = stoi(this->searchingQueries[indexOfQuery]);
+				}
+
+				++indexOfQuery;
+
+				int max = MAX_INT;
+
+				// если второй запрос не пустой
+				if (this->searchingQueries[indexOfQuery] != "")
+				{
+					max = stoi(this->searchingQueries[indexOfQuery]);
+				}
+
+				++indexOfQuery;
+
+				// если число не попадает в диапазон, то выходим из цикла
+				if (min > intValue || intValue > max)
+				{
+					success = false;
+					break;
+				}
+
+				success = true;
+			}
+
+			else
+			{
+				// если запросы не совпадают
+				if (this->searchingQueries[indexOfQuery] != "" && !hasSubstring(contentAfterSortingAndResearch[i][j], this->searchingQueries[indexOfQuery]))
+				{
+					success = false;
+					break;
+				}
+
+				++indexOfQuery;
+
+				success = true;
+			}
+		}
+
+		if (success)
+			bufferContent.push_back(contentAfterSortingAndResearch[i]);
+	}
+
+	contentAfterSortingAndResearch = bufferContent;
 }
 
 MenuState* WorkWithPotionTableMenuState::getNextState()

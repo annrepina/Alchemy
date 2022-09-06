@@ -3,7 +3,7 @@
 #include "ReturnMenuState.h"
 #include "PotionTablePrinter.h"
 
-#define MINIMUM_NUMBER_OF_POTIONTS		1	// Минимальное кол-во зелий
+#define MINIMUM_NUMBER_OF_POTIONTS								1	// Минимальное кол-во зелий
 
 class AlchemicalMenuState;
 
@@ -26,7 +26,21 @@ protected:
 
 	PotionTablePrinter* potionTablePrinter;
 
-	virtual void sortData();
+	//virtual void sortData();
+
+	void setListOfColumnTitles() override;
+
+	void launchFilterMenu() override;
+
+	void launchSortingMenu() override;
+
+	// Искомая колонка является стринговой или интовой в тбалице?
+	bool isStringColumn(int numberOfColumn) override;
+
+	// Запустить сортировку
+	void sortData() override;
+
+	void filterData() override;
 
 private:
 

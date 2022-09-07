@@ -122,6 +122,13 @@ int MenuState::printChoiceId(int yCoord, int xCoord, int tableCode)
 	return id;
 }
 
+int MenuState::printChoiceNumber(int yCoord, string choice)
+{
+	int number = alchemicalUserInterface->chooseNumber(choice, yCoord);
+
+	return number;
+}
+
 void MenuState::chooseMenuItem()
 {
 	this->alchemicalUserInterface->setFunc(std::bind(&AlchemicalUserInterface::isArrowKeyFalse, this->alchemicalUserInterface, _1));

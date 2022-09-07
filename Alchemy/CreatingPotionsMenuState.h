@@ -43,20 +43,27 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 
-	void printMenu(string choiceFirstIngredient, string choiceSecondIngredient);
+	void printMenu(string choiceFirstIngredient, string choiceSecondIngredient, string choiceNumberOfIngredients);
 
 	//// Печать выбора id
 	//int printChoiceId(int yCoord, int xCoord);
 
 	// уменьшить кол-во ингредиентов
-	void decreaseNumberOfIngredients(int firstIngredientId, int secondIngredientId);
+	void decreaseNumberOfIngredients(int firstIngredientId, int secondIngredientId, int number);
 
 	// Проверка введенных id на совпадение
 	void checkIngredientsId(int &firstIngredientId, int &secondIngredientId);
 
+	// Проверяем есть ли такое кол-во ингредиентов у пользователя
+	void checkNumberOfIngredients(int firstIngredientId, int secondIngredientId, int &numberOfPotion);
+
 	void printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& ingredientId);
 
 	void printErrorAndMakeChoiceAgain(int& ingredientId, int yCoord);
+
+	void printErrorAboutNumberAndMakeChoiceAgain(int ingredientId, int previousNumber, int& numberOfIngredients, int yCoord);
+
+	void printErrorAboutNumberAndMakeChoiceAgain(int yCoord, string textOfError, int& numberOfIngredients);
 
 	void checkIdForEquality(int& firstIngredientId, int secondIngredientId, int YCoord);
 

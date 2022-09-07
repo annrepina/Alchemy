@@ -123,7 +123,7 @@ bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
 	return false;
 }
 
-void AlchemyLogic::checkPotion(Potion* potion)
+void AlchemyLogic::checkPotion(Potion* potion, vector<Potion*>& potions)
 {	
 	// 0 - если таких зелий нет
 	int id = hasSuchPotion(potion);
@@ -131,6 +131,28 @@ void AlchemyLogic::checkPotion(Potion* potion)
 	// если точно такое же зелье уже есть
 	if (id > 0)
 	{
+		int vecSize = potions.size();
+
+		// полукчаем зелье из табл
+		Potion* oldPotion = this->potionTable->getPotionById(id);
+
+		// если вектор не пустой
+		if (vecSize > 0)
+		{
+			bool hasVectorSuchPotion = false;
+
+			for (int i = 0; i < vecSize; ++i)
+			{
+				hasVectorSuchPotion = isPotionsAreEqual(oldPotion, potions[i]);
+
+				if (hasVectorSuchPotion == true)
+					break;
+			}
+
+			if (!hasVectorSuchPotion)
+				potions.push_back(oldPotion);
+		}
+
 		this->potionTable->getPotionById(id)->increaseNumber();
 
 		this->potionTable->notify(id, NOT_NEW_ELEMENT);
@@ -142,7 +164,17 @@ void AlchemyLogic::checkPotion(Potion* potion)
 	else
 	{
 		this->potionTable->add(potion);
+
+		potions.push_back(potion);
 	}
+}
+
+bool AlchemyLogic::isPotionsAreEqual(Potion* potion1, Potion* potion2)
+{
+	if (potion1->getEffectId() == potion2->getEffectId() && potion1->getPower() == potion2->getPower() && potion1->getPrice() == potion2->getPrice())
+		return true;
+
+	return false;
 }
 
 //vector<int> AlchemyLogic::findEqualEffects(int firstIngredientId, int secondIngredientId)

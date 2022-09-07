@@ -93,6 +93,8 @@ protected:
 
 	virtual int printChoiceId(int yCoord, int xCoord, int tableCode);
 
+	virtual int printChoiceNumber(int yCoord, string choice);
+
 	// Ассоциативный массив состояний
 	std::map<int, MenuState*> menuStates;
 

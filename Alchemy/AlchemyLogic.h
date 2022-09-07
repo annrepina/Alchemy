@@ -77,7 +77,9 @@ public:
 
 	bool tryAddNewIngredientToTable(string ingredientName);
 
-	void checkPotion(Potion* potion);
+	void checkPotion(Potion* potion, vector<Potion*> &potions);
+
+	bool isPotionsAreEqual(Potion* potion1, Potion* potion2);
 
 	// Создть зелье
 	Potion* createPotion(Ingredient* firstIngredient, Ingredient* secondIngredient);

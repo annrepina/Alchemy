@@ -98,11 +98,13 @@ int IngredientsTable::getIdByIngredient(Ingredient* ingredient)
 
 void IngredientsTable::decreaseNumberOfIngredient(int ingredientId, int number)
 {
+	int previousNumber = getIngredientById(ingredientId)->getNumber();
+
 	// Получаем ингредиент и уменьшаем его кол-во
 	getIngredientById(ingredientId)->decreaseNumber(number);
 
 	// уведомляем всех
-	notify(ingredientId, getIngredientById(ingredientId)->getNumber() + number);
+	notify(ingredientId, previousNumber);
 }
 
 //void IngredientsTable::subscribe(IObserver* observer)

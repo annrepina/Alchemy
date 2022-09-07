@@ -145,7 +145,10 @@
     <ClCompile Include="AlchemistBinaryWriter.cpp" />
     <ClCompile Include="AlchemyLogic.cpp" />
     <ClCompile Include="AlchemyLogicBuilder.cpp" />
-    <ClCompile Include="AlchemyProgramParser.cpp" />
+    <ClCompile Include="AlchemyLogicReader.cpp" />
+    <ClCompile Include="AlchemyLogicWriter.cpp" />
+    <ClCompile Include="BinaryReader.cpp" />
+    <ClCompile Include="BinaryWriter.cpp" />
     <ClCompile Include="Builder.cpp" />
     <ClCompile Include="BuyingIngredientsFromListMenuState.cpp" />
     <ClCompile Include="BuyingIngredientsMenuState.cpp" />
@@ -197,7 +200,10 @@
     <ClInclude Include="AlchemistBinaryWriter.h" />
     <ClInclude Include="AlchemyLogic.h" />
     <ClInclude Include="AlchemyLogicBuilder.h" />
-    <ClInclude Include="AlchemyProgramParser.h" />
+    <ClInclude Include="AlchemyLogicReader.h" />
+    <ClInclude Include="AlchemyLogicWriter.h" />
+    <ClInclude Include="BinaryReader.h" />
+    <ClInclude Include="BinaryWriter.h" />
     <ClInclude Include="Builder.h" />
     <ClInclude Include="BuyingIngredientsFromListMenuState.h" />
     <ClInclude Include="BuyingIngredientsMenuState.h" />

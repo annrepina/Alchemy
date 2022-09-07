@@ -1,7 +1,7 @@
 #pragma once
 #include "IngredientsTable.h"
 #include "IngredientBuilder.h"
-#include "AlchemyProgramParser.h"
+#include "AlchemyLogicWriter.h"
 #include "AlchemyTableBuilder.h"
 
 // Строитель таблицы ингредиентов
@@ -20,7 +20,7 @@ public:
 	void setIngredientBuilder(IngredientBuilder* ingredientBuilder);
 
 	// Построить ингредиент
-	void buildTable(AlchemyProgramParser* alchemyProgramParser) override;
+	void buildTable(AlchemyLogicWriter* alchemyLogicWriter) override;
 
 private:
 	

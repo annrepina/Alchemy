@@ -1,20 +1,16 @@
 #pragma once
+#include "BinaryWriter.h"
 #include "Alchemist.h"
 #include <fstream>
 
-class AlchemistBinaryWriter
+class AlchemistBinaryWriter : public BinaryWriter<Alchemist>
 {
 public:
 
 	AlchemistBinaryWriter(Alchemist& alchemist, string filePath);
 
-	void write() const;
+	void write(ofstream& stream) const override;
 
 private:
 
-	// объект целевого класса
-	Alchemist& alchemist;
-
-	// Путь к файлу
-	string filePath;
 };

@@ -5,14 +5,19 @@
 //    this->path = path;
 //}
 
-Alchemist* AlchemistBinaryReader::readFromFile(string path)
+AlchemistBinaryReader::AlchemistBinaryReader()
 {
-    ifstream stream(path);
+}
+
+Alchemist* AlchemistBinaryReader::readFromFile(string path, ifstream& stream)
+{
+    //ifstream stream(path);
 
     if (stream.is_open())
     {
         Alchemist* alchemist = new Alchemist();
 
+        // читаем имя
         // создаем буффер размером с переменной хранязей размер чего-либо
         char* buffer = new char[sizeof(size_t)];
 
@@ -37,30 +42,40 @@ Alchemist* AlchemistBinaryReader::readFromFile(string path)
 
         delete[] buffer;
 
-        alchemist->getAlchemistLevel();
+        // читаем уровень алхимика
+
+        // узнаем размер переменной
+        auto size = sizeof(alchemist->getAlchemistLevel());
 
         // уровень алхимика
-        buffer = new char[sizeof(alchemist->getAlchemistLevel())];
+        buffer = new char[size];
 
-        stream.read(buffer, sizeof(alchemist->getAlchemistLevel()));
+        stream.read(buffer, size);
 
         alchemist->setAlchemistLevel(*(int*)buffer);
 
         delete[] buffer;
 
-        // уровень продажника
-        buffer = new char[sizeof(alchemist->getSalesmanLevel())];
+        // читаем уровень продажника
+        // узнаем размер переменной 
+        size = sizeof(alchemist->getSalesmanLevel());
 
-        stream.read(buffer, sizeof(alchemist->getSalesmanLevel()));
+        buffer = new char[size];
+
+        stream.read(buffer, size);
 
         alchemist->setSalesmanLevel(*(int*)buffer);
 
         delete[] buffer;
 
-        // капитал
-        buffer = new char[sizeof(alchemist->getCapital())];
+        // читаем капитал
+        // узнаем размер переменной
 
-        stream.read(buffer, sizeof(alchemist->getCapital()));
+        size = sizeof(alchemist->getCapital());
+
+        buffer = new char[size];
+
+        stream.read(buffer, size);
 
         alchemist->setCapital(*(int*)buffer);
 

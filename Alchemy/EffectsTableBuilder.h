@@ -1,6 +1,6 @@
 #pragma once
 #include "EffectsTable.h"
-#include "AlchemyProgramParser.h"
+#include "AlchemyLogicWriter.h"
 #include "EffectBuilder.h"
 #include "AlchemyTableBuilder.h"
 
@@ -16,7 +16,7 @@ public:
 	~EffectsTableBuilder() override;
 
 	// Строит таблицу эффектов
-	void buildTable(AlchemyProgramParser* alchemyProgramParser) override;
+	void buildTable(AlchemyLogicWriter* alchemyLogicWriter) override;
 
 	//// Добавить позитивные эффекты
 	//void addPositiveEffects(int numberOfEffects);

@@ -1,5 +1,5 @@
 #pragma once
-#include "AlchemyProgramParser.h"
+#include "AlchemyLogicWriter.h"
 #include "Builder.h"
 
 // Строитель таблицы
@@ -18,7 +18,7 @@ public:
 	//virtual ~AlchemyTableBuilder() = 0;
 
 	// Построить таблицу
-	virtual void buildTable(AlchemyProgramParser* alchemyProgramParser) = 0;
+	virtual void buildTable(AlchemyLogicWriter* alchemyLogicWriter) = 0;
 
 protected:
 

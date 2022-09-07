@@ -25,11 +25,13 @@ int main()
 
     //srand(1);
 
-    AlchemicalUserInterface userInterface;
+    string path = "AlchemyLogicBinary.txt";
 
-    userInterface.setTitle("Зельеварение");
+    AlchemicalUserInterface userInterface(path);
 
-    userInterface.launchMainLoop();
+    //userInterface.setTitle("Зельеварение");
+
+    userInterface.launchProgram();
 
 
 

@@ -12,7 +12,7 @@ EffectsTableBuilder::~EffectsTableBuilder()
 	clear();
 }
 
-void EffectsTableBuilder::buildTable(AlchemyProgramParser* alchemyProgramParser)
+void EffectsTableBuilder::buildTable(AlchemyLogicWriter* alchemyLogicWriter)
 {
 	// оюпяхл
 

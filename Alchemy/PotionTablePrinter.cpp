@@ -426,7 +426,7 @@ void PotionTablePrinter::changeTableContentForOneElement(int id)
 	{
 		// итератор на начало и конец вектора с контентом
 		auto beginIter = this->tableContent.begin();
-		auto endIter = this->tableContent.begin();
+		auto endIter = this->tableContent.end();
 
 		// итератор на начало вектора с доступными пользователю id
 		auto beginIterOfAvailableContent = this->availableElementsId.begin();

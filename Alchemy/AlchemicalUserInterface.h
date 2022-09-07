@@ -7,6 +7,8 @@
 #include "MainMenuState.h"
 #include "IObserver.h"
 #include "PotionTablePrinter.h"
+#include "AlchemyLogicWriter.h"
+#include "AlchemyLogicReader.h"
 
 // Координаты
 #define TITLE_Y_COORD					1		// Координаты Y курсора для печати названия программы
@@ -31,8 +33,11 @@ public:
 	// Конструктор по умолчанию
 	AlchemicalUserInterface();
 
+	// Конструктор с параметром
+	AlchemicalUserInterface(string path);
+
 	// Запуск главного цикла программы
-	void launchMainLoop() override;
+	void launchProgram() override;
 
 #pragma region ГЕТТЕРЫ
 
@@ -98,8 +103,11 @@ private:
 	// Строитель для алхимической программы
 	AlchemyLogicBuilder* alchemyLogicBuilder;
 
-	// Парсер для программы алхимии
-	AlchemyProgramParser* alchemyProgramParser;
+	// Райдер для логики алхимии
+	AlchemyLogicWriter* alchemyLogicWriter;
+
+	// Ридер для логики алхимии
+	AlchemyLogicReader* alchemyLogicReader;
 
 	// Принтер для печати таблицы ингредиентов
 	IngredientsTablePrinter* ingredientsTableprinter;
@@ -117,6 +125,9 @@ private:
 
 	// Граничная координата Y для управления стрелками
 	int boundaryYCoord;
+
+	// Путь для записи
+	string pathForWriting;
 
 #pragma region НАЗВАНИЕ ЗАГОЛОВКОВ
 

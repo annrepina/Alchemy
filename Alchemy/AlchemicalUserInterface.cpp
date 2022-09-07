@@ -10,6 +10,7 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	this->alchemicalMenuTitle = "Меню алхимии";
 	this->buyingIngredientsMenuTitle = "Покупка ингредиентов";
 	this->buingFaultMenuTitle = "Недостаточно средств для покупки ингредиента №";
+	this->title = "Зельеварение";
 
 	// Программа - алхимия
 	this->alchemyLogic = nullptr;
@@ -17,8 +18,8 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	// Строитель для алхимической программы
 	this->alchemyLogicBuilder = new AlchemyLogicBuilder();
 
-	// создаем новый экземпляр
-	this->alchemyProgramParser = new AlchemyProgramParser();
+	this->alchemyLogicWriter = nullptr;
+	this->alchemyLogicReader = new AlchemyLogicReader();
 
 	this->ingredientsTableprinter = new IngredientsTablePrinter();
 	this->potionTablePrinter = new PotionTablePrinter();
@@ -26,7 +27,12 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	this->state = new MainMenuState(this);
 }
 
-void AlchemicalUserInterface::launchMainLoop()
+AlchemicalUserInterface::AlchemicalUserInterface(string path) : AlchemicalUserInterface()
+{
+	this->pathForWriting = path;
+}
+
+void AlchemicalUserInterface::launchProgram()
 {
 	setAlchemyLogic();
 
@@ -69,6 +75,17 @@ void AlchemicalUserInterface::launchMainLoop()
 
 	// может и не надо
 	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
+
+	this->alchemyLogicWriter = new AlchemyLogicWriter(*this->alchemyLogic, this->pathForWriting);
+
+	ofstream stream;
+
+	this->alchemyLogicWriter->write(stream);
+
+	ifstream istream;
+
+	Alchemist* alch = this->alchemyLogicReader->returnAlchemist(this->pathForWriting, istream);
+
 }
 
 #pragma region Геттеры
@@ -124,7 +141,7 @@ void AlchemicalUserInterface::setExitFlag(bool exit)
 void AlchemicalUserInterface::setAlchemyLogic()
 {
 	// Создать программу Алхимии
-	this->alchemyLogicBuilder->buildAlchemyProgram(this->alchemyProgramParser);
+	this->alchemyLogicBuilder->buildAlchemyProgram(this->alchemyLogicWriter);
 
 	// Присвоить результат программе алхимии
 	this->alchemyLogic = this->alchemyLogicBuilder->getResult();

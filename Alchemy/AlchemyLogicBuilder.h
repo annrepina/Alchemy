@@ -1,6 +1,6 @@
 #pragma once
 #include "AlchemyLogic.h"
-#include "AlchemyProgramParser.h"
+#include "AlchemyLogicWriter.h"
 #include "EffectsTableBuilder.h"
 #include "IngredientsTableBuilder.h"
 #include "Builder.h"
@@ -19,10 +19,10 @@ public:
 	//AlchemyProgram* getResult();
 
 	// Построить программу алхимии
-	void buildAlchemyProgram(AlchemyProgramParser* alchemyProgramParse);
+	void buildAlchemyProgram(AlchemyLogicWriter* alchemyLogicWriter);
 
 	// Задает таблицу эффектов
-	void setEffectsTable(AlchemyProgramParser* alchemyProgramParse);
+	void setEffectsTable(AlchemyLogicWriter* alchemyLogicWriter);
 
 private:
 

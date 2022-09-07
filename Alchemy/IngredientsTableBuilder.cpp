@@ -16,7 +16,7 @@ void IngredientsTableBuilder::setIngredientBuilder(IngredientBuilder* ingredient
 	this->ingredientBuilder = ingredientBuilder;
 }
 
-void IngredientsTableBuilder::buildTable(AlchemyProgramParser* alchemyProgramParser)
+void IngredientsTableBuilder::buildTable(AlchemyLogicWriter* alchemyLogicWriter)
 {
 	// Парсим
 

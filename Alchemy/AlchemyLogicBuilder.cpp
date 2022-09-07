@@ -25,7 +25,7 @@ AlchemyLogicBuilder::~AlchemyLogicBuilder()
 //	return res;
 //}
 
-void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgramParse)
+void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyLogicWriter* alchemyLogicWriter)
 {
 	/// Парсим
 
@@ -33,11 +33,12 @@ void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgr
 
 
 
+
 	// Создаем пустого алхимика
 	this->element->setAlchemist(new Alchemist);
 
 	// Строим таблицу эффектов
-	this->effectsTableBuilder->buildTable(alchemyProgramParse);
+	this->effectsTableBuilder->buildTable(alchemyLogicWriter);
 
 	// Присваиваем программе таблицу эффектов
 	this->element->setEffectsTable(this->effectsTableBuilder->getResult());
@@ -52,7 +53,7 @@ void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgr
 	this->ingredientsTableBuilder->setIngredientBuilder(ingredientBuilder);
 
 	// Строим таблицу ингредиентов
-	this->ingredientsTableBuilder->buildTable(alchemyProgramParse);
+	this->ingredientsTableBuilder->buildTable(alchemyLogicWriter);
 
 	// Присваиваем таблицу ингредиентов
 	this->element->setIngredientsTable(ingredientsTableBuilder->getResult());
@@ -62,15 +63,12 @@ void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyProgramParser* alchemyProgr
 
 	// Задаем таблицу эффектов таблице зелий
 	this->element->getPotionTable()->setEffectsTable(this->element->getEffectsTable());
-
-	
-
 }
 
-void AlchemyLogicBuilder::setEffectsTable(AlchemyProgramParser* alchemyProgramParse)
+void AlchemyLogicBuilder::setEffectsTable(AlchemyLogicWriter* alchemyLogicWriter)
 {
 	// Строитель создает таблицу
-	this->effectsTableBuilder->buildTable(alchemyProgramParse);
+	this->effectsTableBuilder->buildTable(alchemyLogicWriter);
 
 	// Добавляем таблицу в программу
 	this->element->setEffectsTable(this->effectsTableBuilder->getResult());

@@ -1,34 +1,46 @@
 #include "AlchemistBinaryWriter.h"
 
-AlchemistBinaryWriter::AlchemistBinaryWriter(Alchemist& alchemist, string filePath)
-		: alchemist(alchemist), filePath(filePath)
+AlchemistBinaryWriter::AlchemistBinaryWriter(Alchemist& alchemist, string filePath) : BinaryWriter(alchemist, filePath)
 {
 }
 
-void AlchemistBinaryWriter::write() const
+void AlchemistBinaryWriter::write(ofstream& stream) const
 {
 	if ("" == this->filePath)
 		throw "Invalid file path";
 
-	ofstream stream(filePath, ios::out | ios::binary | ios::trunc);
+	// ЕСЛИ СТРИМ НЕ ОТКРЫТ, открываем для дозаписи
+	if(!stream.is_open())
+		stream.open(filePath, ios::app | ios::binary | ios::trunc);
 
 	// размер имени
-	auto nameSize = alchemist.getName().size();
+	auto nameSize = object.getName().size();
 
 	// пишем размер имени
 	stream.write((char*)(&nameSize), sizeof(nameSize));
 
 	// пишем само имя
-	stream << alchemist.getName();
+	stream << object.getName();
 
 	// пишем уровень алхимика
-	stream.write((char*)(alchemist.getAlchemistLevel()), sizeof(alchemist.getAlchemistLevel()));
+	// получаем уровень алхимика
+	auto alchemistLevel = object.getAlchemistLevel();
+
+	// пишем
+	stream.write((char*)(&alchemistLevel), sizeof(alchemistLevel));
 
 	// пишем уровень продажника
-	stream.write((char*)(alchemist.getSalesmanLevel()), sizeof(alchemist.getSalesmanLevel()));
+	// получаем уровень продажника
+	auto salesmanLevel = object.getSalesmanLevel();
+
+	stream.write((char*)(&salesmanLevel), sizeof(salesmanLevel));
 
 	// пишем капитал
-	stream.write((char*)(alchemist.getCapital()), sizeof(alchemist.getCapital()));
+	// получаем капитал
+	auto capital = object.getCapital();
+
+	// пишем
+	stream.write((char*)(&capital), sizeof(capital));
 
 	stream.close();
 }

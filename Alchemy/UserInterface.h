@@ -46,7 +46,7 @@ public:
 	UserInterface();
 
 	// Цикл программы
-	virtual void launchMainLoop() = 0;
+	virtual void launchProgram() = 0;
 
 	// Функция для предикатов
 	function<bool(int)> func;
@@ -112,9 +112,6 @@ protected:
 
 	// Экземпляр клавиатуры
 	KeyBoard* keyBoard;
-
-	//// Код меню
-	//int menuCode;
 
 	// Заполнить ассоциативный массив меню действий
 	virtual map<int, string> fillMenuMap(const int numberOfItems, const string listOfItems[]);

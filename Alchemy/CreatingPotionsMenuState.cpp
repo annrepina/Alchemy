@@ -115,16 +115,12 @@ void CreatingPotionsMenuState::printMenu()
 		string name = "";
 		int price = 0;
 		int power = 0;
-		//int number = 0;
 
 		// Если первое зелье не испорчено, то и все нормальные
 		if (potions[0]->getEffectId() > 0)
 		{
 			// изначальный размер таблицы
 			int originalSizeOfPoitionTable = potionsTable->getSize();
-
-			//// очищаем вектор
-			//potions.clear();
 
 			// Создаем вектор,куда мы поместим только уникальные зелья
 			vector<Potion*> uniquePotions;
@@ -174,7 +170,12 @@ void CreatingPotionsMenuState::printMenu()
 		{
 			error = "К сожалению, зелье не получилось!";
 
-			printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
+			printColoredText(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+
+			//printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
+
+			// ждем нажатия любой клавиши
+			char a = _getch();
 
 			error = "";
 		}
@@ -281,7 +282,7 @@ void CreatingPotionsMenuState::checkNumberOfIngredients(int firstIngredientId, i
 		{
 			numberOfIngredient = numberOfFirstIngredient;
 
-			printErrorAboutNumberAndMakeChoiceAgain(firstIngredientId, numberOfPotion, numberOfIngredient, Y_COORD_AFTER_MENU_TITLE_4);
+			printErrorAboutNumberAndMakeChoiceAgain(firstIngredientId, newNumber, numberOfIngredient, Y_COORD_AFTER_MENU_TITLE_4);
 
 			newNumber = numberOfIngredient;
 		}
@@ -293,7 +294,7 @@ void CreatingPotionsMenuState::checkNumberOfIngredients(int firstIngredientId, i
 		{
 			numberOfIngredient = numberOfSecondIngredient;
 
-			printErrorAboutNumberAndMakeChoiceAgain(secondIngredientId, numberOfPotion, numberOfIngredient, Y_COORD_AFTER_MENU_TITLE_4);
+			printErrorAboutNumberAndMakeChoiceAgain(secondIngredientId, newNumber, numberOfIngredient, Y_COORD_AFTER_MENU_TITLE_4);
 
 			newNumber = numberOfIngredient;
 		}

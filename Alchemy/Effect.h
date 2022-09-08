@@ -34,6 +34,8 @@ public:
 	// Получить имя
 	string getName();
 
+	bool getIsPositive();
+
 	// Печать эффекта
 	void print();
 

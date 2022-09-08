@@ -16,8 +16,15 @@ public:
 	// Добавить эффект
 	void add(Effect* effect) override;
 
+	// Добавить эффект
+	void add(Effect* effect, int id) override;
+
 	// Печать таблицы
 	void print();
+
+#pragma region Геттеры
+
+	int getId();
 
 	// Геттер для размера
 	int getSize();
@@ -30,6 +37,14 @@ public:
 	
 	// Получить итератор на начало map
 	map<int, Effect*>::iterator getEndIterator();
+
+#pragma endregion Геттеры
+
+#pragma region Сеттеры
+
+	void setId(int id);
+
+#pragma endregion Сеттеры
 
 private:
 

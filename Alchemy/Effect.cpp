@@ -38,6 +38,11 @@ string Effect::getName()
 	return this->name;
 }
 
+bool Effect::getIsPositive()
+{
+	return isPositive;
+}
+
 void Effect::print()
 {
 	cout << this->name << ' ' << this->isPositive;

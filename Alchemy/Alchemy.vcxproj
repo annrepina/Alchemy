@@ -155,8 +155,12 @@
     <ClCompile Include="BuyNewIngredientsMenuState.cpp" />
     <ClCompile Include="CreatingPotionsMenuState.cpp" />
     <ClCompile Include="EatingIngredientsMenuState.cpp" />
+    <ClCompile Include="EffectBinaryReader.cpp" />
+    <ClCompile Include="EffectBinaryWriter.cpp" />
     <ClCompile Include="EffectBuilder.cpp" />
     <ClCompile Include="EffectsTable.cpp" />
+    <ClCompile Include="EffectsTableBinaryReader.cpp" />
+    <ClCompile Include="EffectsTableBinaryWriter.cpp" />
     <ClCompile Include="EffectsTableBuilder.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Formatting.cpp" />
@@ -211,8 +215,12 @@
     <ClInclude Include="CreatingPotionsMenuState.h" />
     <ClInclude Include="EatingIngredientsMenuState.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="EffectBinaryReader.h" />
+    <ClInclude Include="EffectBinaryWriter.h" />
     <ClInclude Include="EffectBuilder.h" />
     <ClInclude Include="EffectsTable.h" />
+    <ClInclude Include="EffectsTableBinaryReader.h" />
+    <ClInclude Include="EffectsTableBinaryWriter.h" />
     <ClInclude Include="EffectsTableBuilder.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Formatting.h" />

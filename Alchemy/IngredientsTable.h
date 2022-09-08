@@ -23,6 +23,8 @@ public:
 	// Добавить ингредиент в таблицу
 	void add(Ingredient* ingredient) override;
 
+	void add(Ingredient* element, int id) override;
+
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
 

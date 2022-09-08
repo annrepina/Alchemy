@@ -22,6 +22,13 @@ void IngredientsTable::add(Ingredient* ingredient)
 	ingredient->subscribe(this);
 }
 
+void IngredientsTable::add(Ingredient* element, int id)
+{
+	this->ingredientsWithId.emplace(id, element);
+
+	element->subscribe(this);
+}
+
 void IngredientsTable::setEffectsTable(EffectsTable* effectsTable)
 {
 	this->effectsTable = effectsTable;

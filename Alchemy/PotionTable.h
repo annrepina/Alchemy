@@ -16,6 +16,8 @@ public:
 	// Добавить зелье в таблицу
 	void add(Potion* potion) override;
 
+	void add(Potion* element, int id) override;
+
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
 

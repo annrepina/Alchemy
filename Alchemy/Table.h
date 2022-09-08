@@ -25,6 +25,8 @@ public:
 
 	virtual void add(T* element) = 0;
 
+	virtual void add(T* element, int id) = 0;
+
 	string getTitle() 
 	{
 		return this->title;

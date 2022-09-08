@@ -42,10 +42,8 @@ void AlchemicalUserInterface::launchProgram()
 	this->ingredientsTableprinter->setTable(this->alchemyLogic->getIngredientsTable());
 	this->potionTablePrinter->setTable(this->alchemyLogic->getPotionTable());
 
-	// Считаем данные по таблице 
+	// Считаем данные по таблицам 
 	this->ingredientsTableprinter->calculateData();
-
-	/*if(this->alchemyLogic->getPotionTable()->getStartIterator() != this->alchemyLogic->getPotionTable()->getEndIterator())*/
 	this->potionTablePrinter->calculateData();
 
 	// Заполняем таблицу контентом
@@ -76,7 +74,7 @@ void AlchemicalUserInterface::launchProgram()
 	// может и не надо
 	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 
-	this->alchemyLogicWriter = new AlchemyLogicWriter(*this->alchemyLogic, this->pathForWriting);
+	this->alchemyLogicWriter = new AlchemyLogicWriter(this->alchemyLogic, this->pathForWriting);
 
 	ofstream stream;
 
@@ -84,7 +82,9 @@ void AlchemicalUserInterface::launchProgram()
 
 	ifstream istream;
 
-	Alchemist* alch = this->alchemyLogicReader->returnAlchemist(this->pathForWriting, istream);
+	AlchemyLogic* logic = alchemyLogicReader->readFromFile(this->pathForWriting, istream);
+
+	//Alchemist* alch = this->alchemyLogicReader->returnAlchemist(this->pathForWriting, istream);
 
 }
 

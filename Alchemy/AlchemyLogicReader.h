@@ -2,12 +2,15 @@
 #include "BinaryReader.h"
 #include "AlchemyLogic.h"
 #include "AlchemistBinaryReader.h"
+#include "EffectsTableBinaryReader.h"
 
 class AlchemyLogicReader : public BinaryReader< AlchemyLogic>
 {
 public:
 
 	AlchemyLogicReader();
+
+	~AlchemyLogicReader();
 
 	AlchemyLogic* readFromFile(string path, ifstream& stream);
 
@@ -16,5 +19,11 @@ public:
 private:
 
 	AlchemistBinaryReader* alchemistBinaryReader;
+
+	EffectsTableBinaryReader* effectsTableBinaryReader;
+
+
+
+	void clear() override;
 };
 

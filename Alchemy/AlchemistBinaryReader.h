@@ -10,9 +10,13 @@ public:
 	// Конструктор
 	AlchemistBinaryReader();
 
+	~AlchemistBinaryReader();
+
 	Alchemist* readFromFile(string path, ifstream& stream) override;
 
 private:
+
+	void clear() override;
 
 	//string path;
 };

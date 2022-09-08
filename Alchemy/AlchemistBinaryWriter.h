@@ -7,10 +7,14 @@ class AlchemistBinaryWriter : public BinaryWriter<Alchemist>
 {
 public:
 
-	AlchemistBinaryWriter(Alchemist& alchemist, string filePath);
+	AlchemistBinaryWriter(Alchemist* alchemist, string filePath);
+
+	~AlchemistBinaryWriter();
 
 	void write(ofstream& stream) const override;
 
 private:
+
+	void clear() override;
 
 };

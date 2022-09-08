@@ -20,6 +20,13 @@ void PotionTable::add(Potion* potion)
 	notify(id, NEW_ELEMENT);
 }
 
+void PotionTable::add(Potion* element, int id)
+{
+	this->potiontsWithId.emplace(id, element);
+
+	notify(id, NEW_ELEMENT);
+}
+
 void PotionTable::setEffectsTable(EffectsTable* effectsTable)
 {
 	this->effectsTable = effectsTable;
@@ -76,12 +83,12 @@ void PotionTable::decreaseNumberOfPotion(int potionId, int number)
 	// Получаем зелье и уменьшаем его кол-во
 	potion->decreaseNumber(number);
 
+	// сначала уведомляем принтер об этом
+	notify(potionId, NOT_NEW_ELEMENT);
+
 	// если кол-во зелья равно 0, то удаляем его из таблицы
 	if (potion->getNumber() == 0)
 	{
-		// сначала уведомляем принтер об этом
-		notify(potionId, NOT_NEW_ELEMENT);
-
 		// удаляем из map данный элемент
 		this->potiontsWithId.erase(potionId);
 
@@ -89,7 +96,7 @@ void PotionTable::decreaseNumberOfPotion(int potionId, int number)
 		delete potion;
 		potion = nullptr;
 
-		// еще раз уведомляем принтер после окончательного удаления элемента
+		// еще раз уведомляем принтер после окончательного удаления элемента, чтобы пересчитал данные
 		notify();
 	}
 }

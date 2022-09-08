@@ -23,6 +23,14 @@ void EffectsTable::add(Effect* effect)
 	++size;
 }
 
+void EffectsTable::add(Effect* effect, int id)
+{
+	//this->effects.push_back(effect);
+	this->effectsWithId.emplace(id, effect);
+
+	++size;
+}
+
 void EffectsTable::print()
 {
 	for (auto effect : effectsWithId)
@@ -31,6 +39,11 @@ void EffectsTable::print()
 		effect.second->print();
 		cout << endl;
 	}
+}
+
+int EffectsTable::getId()
+{
+	return this->id;
 }
 
 int EffectsTable::getSize()
@@ -51,6 +64,11 @@ map<int, Effect*>::iterator EffectsTable::getStartIterator()
 map<int, Effect*>::iterator EffectsTable::getEndIterator()
 {
 	return this->effectsWithId.end();
+}
+
+void EffectsTable::setId(int id)
+{
+	this->id = id;
 }
 
 void EffectsTable::clear()

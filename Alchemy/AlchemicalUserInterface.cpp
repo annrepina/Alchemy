@@ -18,13 +18,14 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	// Строитель для алхимической программы
 	this->alchemyLogicBuilder = new AlchemyLogicBuilder();
 
-	this->alchemyLogicWriter = nullptr;
+	this->alchemyLogicWriter = new AlchemyLogicWriter();
 	this->alchemyLogicReader = new AlchemyLogicReader();
 
 	this->ingredientsTableprinter = new IngredientsTablePrinter();
 	this->potionTablePrinter = new PotionTablePrinter();
 
 	this->state = new MainMenuState(this);
+
 }
 
 AlchemicalUserInterface::AlchemicalUserInterface(string path) : AlchemicalUserInterface()
@@ -74,17 +75,13 @@ void AlchemicalUserInterface::launchProgram()
 	// может и не надо
 	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 
-	this->alchemyLogicWriter = new AlchemyLogicWriter(this->alchemyLogic, this->pathForWriting);
-
 	ofstream stream;
 
-	this->alchemyLogicWriter->write(stream);
+	this->alchemyLogicWriter->write(stream, this->pathForWriting, this->alchemyLogic);
 
 	ifstream istream;
 
 	AlchemyLogic* logic = alchemyLogicReader->readFromFile(this->pathForWriting, istream);
-
-	//Alchemist* alch = this->alchemyLogicReader->returnAlchemist(this->pathForWriting, istream);
 
 }
 

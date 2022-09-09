@@ -1,10 +1,5 @@
 #include "AlchemistBinaryReader.h"
 
-//AlchemistBinaryReader::AlchemistBinaryReader(string path)
-//{
-//    this->path = path;
-//}
-
 AlchemistBinaryReader::AlchemistBinaryReader()
 {
 }

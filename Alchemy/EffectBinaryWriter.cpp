@@ -1,6 +1,6 @@
 #include "EffectBinaryWriter.h"
 
-EffectBinaryWriter::EffectBinaryWriter(Effect* effect, string filePath) : BinaryWriter(effect, filePath)
+EffectBinaryWriter::EffectBinaryWriter()
 {
 
 }
@@ -10,17 +10,17 @@ EffectBinaryWriter::~EffectBinaryWriter()
 	clear();
 }
 
-void EffectBinaryWriter::write(ofstream& stream) const
+void EffectBinaryWriter::write(ofstream& stream, string filePath, Effect* effect) const
 {
-	BinaryWriter::write(stream);
+	BinaryWriter::write(stream, filePath, effect);
 
 	// Получаем имя
-	string name = object->getName();
+	string name = effect->getName();
 	// пишем имя 
 	writeString(stream, name);
 
 	// Получаем Булева переменная, отвечающая позитивный или негативный эффект
-	bool isPositive = object->getIsPositive();
+	bool isPositive = effect->getIsPositive();
 	writeBool(stream, isPositive);
 }
 

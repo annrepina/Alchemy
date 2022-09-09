@@ -20,7 +20,7 @@ EffectsTable* EffectsTableBinaryReader::readFromFile(string path, ifstream& stre
 
         int size = this->readInt(stream);
 
-        EffectBinaryReader* effectBinaryReader = new EffectBinaryReader();;
+        EffectBinaryReader* effectBinaryReader = new EffectBinaryReader();
 
         for (int i = 0; i < size; ++i)
         {

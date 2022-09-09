@@ -1,8 +1,7 @@
 #include "EffectsTableBinaryWriter.h"
 
-EffectsTableBinaryWriter::EffectsTableBinaryWriter(EffectsTable* effectsTable, string filePath) : BinaryWriter(effectsTable, filePath)
+EffectsTableBinaryWriter::EffectsTableBinaryWriter()
 {
-	//this->effectBinaryWriter = nullptr;
 }
 
 EffectsTableBinaryWriter::~EffectsTableBinaryWriter()
@@ -10,34 +9,27 @@ EffectsTableBinaryWriter::~EffectsTableBinaryWriter()
 	clear();
 }
 
-void EffectsTableBinaryWriter::write(ofstream& stream) const
+void EffectsTableBinaryWriter::write(ofstream& stream, string filePath, EffectsTable* effectsTable) const
 {
-	BinaryWriter::write(stream);
+	BinaryWriter::write(stream, filePath, effectsTable);
 
 	// Получаем id
-	int id = object->getId();
+	int id = effectsTable->getId();
 	// Пишем id 
 	writeInt(stream, id);
 
 	// Получаем размер таблицы
-	int size = object->getSize();
+	int size = effectsTable->getSize();
 	// Пишем размер таблицы
 	writeInt(stream, size);
 
 	// Пишем мэп с эффектами effectsWithId
 	// узнаем итераторы
-	auto beginIter = object->getStartIterator();
-	auto endIter = object->getEndIterator();
-
-	// Создаем эффект
-	Effect* effect = new Effect();
+	auto beginIter = effectsTable->getStartIterator();
+	auto endIter = effectsTable->getEndIterator();
 
 	// создаем райтер для эффектов
-	EffectBinaryWriter* effectBinaryWriter = new EffectBinaryWriter(effect, this->filePath);
-
-	delete effect;
-
-	effect = nullptr;
+	EffectBinaryWriter* effectBinaryWriter = new EffectBinaryWriter();
 
 	// в цикле пишем ключ и эффект
 	for (auto i = beginIter; i != endIter; ++i)
@@ -48,13 +40,10 @@ void EffectsTableBinaryWriter::write(ofstream& stream) const
 		writeInt(stream, key);
 
 		// узнаем эффект
-		effect = i->second;
-
-		// инициализируем райтер
-		effectBinaryWriter->setObject(effect);
+		Effect* effect = i->second;
 
 		// пишем эффект
-		effectBinaryWriter->write(stream);
+		effectBinaryWriter->write(stream, filePath, effect);
 	}
 }
 

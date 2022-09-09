@@ -17,19 +17,16 @@ public:
 
 	virtual ~BinaryWriter()
 	{
-		//clear();
 	}
 
-	BinaryWriter(T* object, string filePath)/*
-		: object(object), filePath(filePath)*/
-	{
-		this->object = object;
-		this->filePath = filePath;
-	}
+	//BinaryWriter(/*string filePath*/)
+	//{
+	//	//this->filePath = filePath;
+	//}
 
-	virtual void write(ofstream& stream) const
+	virtual void write(ofstream& stream, string filePath, T* object) const
 	{
-		if ("" == this->filePath)
+		if ("" == filePath)
 			throw "Invalid file path";
 
 		// ЕСЛИ СТРИМ НЕ ОТКРЫТ, открываем для записи
@@ -37,18 +34,10 @@ public:
 			stream.open(filePath, ios::out | ios::binary | ios::trunc);
 	}
 
-	void setObject(T* obj)
-	{
-		this->object = obj;
-	}
-
 protected:
 
-	// объект целевого класса
-	T* object;
-
-	// Путь к файлу
-	string filePath;
+	//// Путь к файлу
+	//string filePath;
 
 	virtual void writeString(ofstream& stream, string text) const
 	{
@@ -57,8 +46,6 @@ protected:
 
 		// пишем размер текста
 		stream.write((char*)(&textSize), sizeof(textSize));
-
-		//stream.write((char*)(&text), textSize);
 
 		// пишем сам текст
 		stream << text;

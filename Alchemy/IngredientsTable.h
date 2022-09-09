@@ -42,9 +42,6 @@ public:
 	// Получить итератор на первый элемент в map
 	map<int, Ingredient*>::iterator getStartIterator();
 
-	//// Получить map
-	//map<int, Ingredient*> getIngredientsWithId();
-
 	// Получить таблицу эффектов
 	EffectsTable* getEffectsTable();
 
@@ -58,12 +55,6 @@ public:
 	int getIdByIngredient(Ingredient* ingredient);
 
 #pragma endregion ГЕТТЕРЫ
-
-	//void subscribe(IObserver* observer) override;
-
-	//void unsubscribe(IObserver* observer) override;
-
-	//void notify(int id) override;
 
 	// уменьшить кол-во ингредиента
 	void decreaseNumberOfIngredient(int ingredientId, int number);

@@ -7,16 +7,14 @@ class EffectsTableBinaryWriter : public BinaryWriter<EffectsTable>
 {
 public:
 
-	EffectsTableBinaryWriter(EffectsTable* effectsTable, string filePath);
+	EffectsTableBinaryWriter();
 
 	~EffectsTableBinaryWriter();
 
-	void write(ofstream& stream) const override;
+	void write(ofstream& stream, string filePath, EffectsTable* effectsTable) const override;
 
 protected:
 
 	void clear() override;
-
-	//EffectBinaryWriter* effectBinaryWriter;
 };
 

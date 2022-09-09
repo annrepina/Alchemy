@@ -1,11 +1,10 @@
 #include "AlchemyLogicWriter.h"
 //#include "AlchemistBinaryWriter.h"
 
-AlchemyLogicWriter::AlchemyLogicWriter(AlchemyLogic* alchemyLogic, string filePath) : BinaryWriter(alchemyLogic, filePath)
+AlchemyLogicWriter::AlchemyLogicWriter(/*AlchemyLogic* alchemyLogic, *//*string filePath*/)
 {
-	this->alchemistBinaryWriter = new AlchemistBinaryWriter(alchemyLogic->getAlchemist(), this->filePath);
-	this->effectsTableBinaryWriter = new EffectsTableBinaryWriter(alchemyLogic->getEffectsTable(), this->filePath);
-	this->effectBinaryWriter = new EffectBinaryWriter(alchemyLogic->getEffectsTable()->getEffectByKey(10), this->filePath);
+	this->alchemistBinaryWriter = new AlchemistBinaryWriter();
+	this->effectsTableBinaryWriter = new EffectsTableBinaryWriter();
 }
 
 AlchemyLogicWriter::~AlchemyLogicWriter()
@@ -13,17 +12,20 @@ AlchemyLogicWriter::~AlchemyLogicWriter()
 	clear();
 }
 
-void AlchemyLogicWriter::write(ofstream& stream) const
+void AlchemyLogicWriter::write(ofstream& stream, string filePath, AlchemyLogic* alchemyLogic) const
 {
-	if ("" == this->filePath)
-		throw "Invalid file path";
+	//if ("" == filePath)
+	//	throw "Invalid file path";
 
-	stream.open(filePath, ios::out | ios::binary | ios::trunc);
+	//stream.open(filePath, ios::out | ios::binary | ios::trunc);
 
-	alchemistBinaryWriter->write(stream);
-	//effectBinaryWriter->write(stream);
+	BinaryWriter::write(stream, filePath, alchemyLogic);
 
-	effectsTableBinaryWriter->write(stream);
+	Alchemist* alchemist = alchemyLogic->getAlchemist();
+	alchemistBinaryWriter->write(stream, filePath, alchemist);
+
+	EffectsTable* effectsTable = alchemyLogic->getEffectsTable();
+	effectsTableBinaryWriter->write(stream, filePath, effectsTable);
 
 
 	
@@ -37,8 +39,5 @@ void AlchemyLogicWriter::clear()
 	delete this->effectsTableBinaryWriter;
 }
 
-//void AlchemyLogicWriter::appointAlchemist(Alchemist& alchemist)
-//{
-//	this->alchemistBinaryWriter = new AlchemistBinaryWriter(alchemist, this->filePath);
-//}
+
 

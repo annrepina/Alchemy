@@ -164,6 +164,7 @@
     <ClCompile Include="EffectsTableBuilder.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Formatting.cpp" />
+    <ClCompile Include="IngredientsTableBinaryWriter.cpp" />
     <ClCompile Include="InstructionsMenuState.cpp" />
     <ClCompile Include="IObservable.cpp" />
     <ClCompile Include="IObserver.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="EffectsTableBuilder.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Formatting.h" />
+    <ClInclude Include="IngredientsTableBinaryWriter.h" />
     <ClInclude Include="InstructionsMenuState.h" />
     <ClInclude Include="IObservable.h" />
     <ClInclude Include="IObserver.h" />

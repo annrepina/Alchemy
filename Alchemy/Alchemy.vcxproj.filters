@@ -186,6 +186,9 @@
     <ClCompile Include="EffectBinaryReader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="IngredientsTableBinaryWriter.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Effect.h">
@@ -354,6 +357,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="EffectBinaryReader.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IngredientsTableBinaryWriter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

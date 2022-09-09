@@ -14,7 +14,7 @@ public:
 
 	AlchemyLogic* readFromFile(string path, ifstream& stream);
 
-	Alchemist* returnAlchemist(string path, ifstream& stream);
+	//Alchemist* returnAlchemist(string path, ifstream& stream);
 
 private:
 
@@ -22,7 +22,7 @@ private:
 
 	EffectsTableBinaryReader* effectsTableBinaryReader;
 
-	EffectBinaryReader* effectBinaryReader;
+	//EffectBinaryReader* effectBinaryReader;
 
 
 

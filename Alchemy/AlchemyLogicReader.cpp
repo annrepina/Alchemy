@@ -4,7 +4,6 @@ AlchemyLogicReader::AlchemyLogicReader()
 {
 	this->alchemistBinaryReader = new AlchemistBinaryReader();
 	this->effectsTableBinaryReader = new EffectsTableBinaryReader();
-	this->effectBinaryReader = new EffectBinaryReader();
 }
 
 AlchemyLogicReader::~AlchemyLogicReader()
@@ -14,8 +13,6 @@ AlchemyLogicReader::~AlchemyLogicReader()
 
 AlchemyLogic* AlchemyLogicReader::readFromFile(string path, ifstream& stream)
 {
-	//stream.open(stream, ios::in);
-
 	AlchemyLogic* alchemyLogic = new AlchemyLogic();
 
 	// открываем файл
@@ -24,8 +21,6 @@ AlchemyLogic* AlchemyLogicReader::readFromFile(string path, ifstream& stream)
 	// читаем алхимика
 	Alchemist* alchemist = alchemistBinaryReader->readFromFile(path, stream);
 	alchemyLogic->setAlchemist(alchemist);
-
-	//Effect* effect = effectBinaryReader->readFromFile(path, stream);
 
 	// Читаем таблицу эффектов
 	EffectsTable* effectsTable = effectsTableBinaryReader->readFromFile(path, stream);
@@ -37,16 +32,6 @@ AlchemyLogic* AlchemyLogicReader::readFromFile(string path, ifstream& stream)
 	stream.close();
 
 	return alchemyLogic;
-}
-
-Alchemist* AlchemyLogicReader::returnAlchemist(string path, ifstream& stream)
-{
-	// открываем файл
-	stream.open(path);
-
-	return alchemistBinaryReader->readFromFile(path, stream);
-
-	stream.close();
 }
 
 void AlchemyLogicReader::clear()

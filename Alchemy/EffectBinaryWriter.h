@@ -6,11 +6,11 @@ class EffectBinaryWriter : public BinaryWriter<Effect>
 {
 public:
 
-	EffectBinaryWriter(Effect* effect, string filePath);
+	EffectBinaryWriter();
 
 	~EffectBinaryWriter();
 
-	void write(ofstream& stream) const override;
+	void write(ofstream& stream, string filePath, Effect* effect) const override;
 
 private:
 

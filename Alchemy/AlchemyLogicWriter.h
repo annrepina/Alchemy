@@ -8,11 +8,11 @@ class AlchemyLogicWriter : public BinaryWriter<AlchemyLogic>
 {
 public:
 
-	AlchemyLogicWriter(AlchemyLogic* alchemyLogic, string filePath);
+	AlchemyLogicWriter(/*AlchemyLogic* alchemyLogic, string filePath*/);
 
 	~AlchemyLogicWriter();
 
-	void write(ofstream& stream) const override;
+	void write(ofstream& stream, string filePath, AlchemyLogic* alchemyLogic) const override;
 
 protected:
 
@@ -20,7 +20,7 @@ protected:
 
 	EffectsTableBinaryWriter* effectsTableBinaryWriter;
 
-	EffectBinaryWriter* effectBinaryWriter;
+	//EffectBinaryWriter* effectBinaryWriter;
 
 	void clear() override;
 

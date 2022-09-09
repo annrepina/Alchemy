@@ -15,7 +15,6 @@ public:
 
     virtual ~BinaryReader()
     {
-        //clear();
     }
 
     virtual T* readFromFile(string path, ifstream& stream) = 0;
@@ -43,20 +42,7 @@ protected:
     // читаем текст
 	virtual string readString(ifstream& stream)
 	{
-        //auto size = sizeof(size_t);
-
-        //// создаем буффер размером с переменной хранящей размер чего-либо
-        //char* buffer = new char[size];
-
-        //// считывает кол-во байтов равное размеру size_t
-        //stream.read(buffer, size);
-
         size_t textSize = readSize_t(stream);
-
-        //delete[] buffer;
-
-        //if (textSize > 100)
-        //    textSize = 26;
 
         // +1 для нуль терминала        
         char* buffer = new char[textSize + 1];             
@@ -105,9 +91,6 @@ protected:
 
         return res;
     }
-
-
-
 
     virtual void clear() = 0;
 };

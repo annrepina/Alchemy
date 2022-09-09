@@ -17,7 +17,5 @@ public:
 private:
 
 	void clear() override;
-
-	//string path;
 };
 

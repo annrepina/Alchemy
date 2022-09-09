@@ -22,22 +22,44 @@ public:
 
 protected:
 
-    // читаем текст
-	virtual string readString(ifstream& stream)
-	{
+    virtual size_t readSize_t(ifstream& stream)
+    {
+        size_t size = sizeof(size_t);
+
         // создаем буффер размером с переменной хранящей размер чего-либо
-        char* buffer = new char[sizeof(size_t)];
+        char* buffer = new char[size];
 
         // считывает кол-во байтов равное размеру size_t
-        stream.read(buffer, sizeof(size_t));
+        stream.read(buffer, size);
 
         // приводим сначала в указатель на сайз_т, а потом разыменовываем
-        size_t textSize = *(size_t*)buffer;
+        size_t textSize = *(int*)buffer;
 
         delete[] buffer;
 
-        // +1 для нуль терминала
-        buffer = new char[textSize + 1];
+        return textSize;
+    }
+
+    // читаем текст
+	virtual string readString(ifstream& stream)
+	{
+        //auto size = sizeof(size_t);
+
+        //// создаем буффер размером с переменной хранящей размер чего-либо
+        //char* buffer = new char[size];
+
+        //// считывает кол-во байтов равное размеру size_t
+        //stream.read(buffer, size);
+
+        size_t textSize = readSize_t(stream);
+
+        //delete[] buffer;
+
+        //if (textSize > 100)
+        //    textSize = 26;
+
+        // +1 для нуль терминала        
+        char* buffer = new char[textSize + 1];             
 
         // считываем само имя
         stream.read(buffer, textSize);

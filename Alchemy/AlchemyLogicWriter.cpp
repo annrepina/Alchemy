@@ -5,6 +5,7 @@ AlchemyLogicWriter::AlchemyLogicWriter(AlchemyLogic* alchemyLogic, string filePa
 {
 	this->alchemistBinaryWriter = new AlchemistBinaryWriter(alchemyLogic->getAlchemist(), this->filePath);
 	this->effectsTableBinaryWriter = new EffectsTableBinaryWriter(alchemyLogic->getEffectsTable(), this->filePath);
+	this->effectBinaryWriter = new EffectBinaryWriter(alchemyLogic->getEffectsTable()->getEffectByKey(10), this->filePath);
 }
 
 AlchemyLogicWriter::~AlchemyLogicWriter()
@@ -20,6 +21,8 @@ void AlchemyLogicWriter::write(ofstream& stream) const
 	stream.open(filePath, ios::out | ios::binary | ios::trunc);
 
 	alchemistBinaryWriter->write(stream);
+	//effectBinaryWriter->write(stream);
+
 	effectsTableBinaryWriter->write(stream);
 
 

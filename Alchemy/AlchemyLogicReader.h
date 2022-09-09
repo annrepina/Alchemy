@@ -22,6 +22,8 @@ private:
 
 	EffectsTableBinaryReader* effectsTableBinaryReader;
 
+	EffectBinaryReader* effectBinaryReader;
+
 
 
 	void clear() override;

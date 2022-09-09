@@ -20,6 +20,8 @@ protected:
 
 	EffectsTableBinaryWriter* effectsTableBinaryWriter;
 
+	EffectBinaryWriter* effectBinaryWriter;
+
 	void clear() override;
 
 };

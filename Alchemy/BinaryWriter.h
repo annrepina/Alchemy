@@ -53,10 +53,12 @@ protected:
 	virtual void writeString(ofstream& stream, string text) const
 	{
 		// размер текста
-		auto textSize = text.size();
+		size_t textSize = text.size();
 
 		// пишем размер текста
 		stream.write((char*)(&textSize), sizeof(textSize));
+
+		//stream.write((char*)(&text), textSize);
 
 		// пишем сам текст
 		stream << text;
@@ -71,7 +73,7 @@ protected:
 	virtual void writeBool(ofstream& stream, bool value) const
 	{
 		// пишем значение 
-		stream.write((char*)&value, sizeof(value));
+		stream.write((char*)(&value), sizeof(value));
 	}
 
 	virtual void clear() = 0;

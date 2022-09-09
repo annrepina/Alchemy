@@ -1,4 +1,5 @@
 #include "EffectBinaryReader.h"
+#include <iostream>
 
 EffectBinaryReader::EffectBinaryReader()
 {

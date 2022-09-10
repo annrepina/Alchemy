@@ -29,8 +29,8 @@ void CreatingPotionsMenuState::printMenu()
 
     fillMap<function<MenuState* (CreatingPotionsMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
 
-    // Успешность покупки 
-    bool success = false;
+    //// Успешность покупки 
+    //bool success = false;
 
     // Текст ошибки в случае неудачной покупки
     string error = "";
@@ -63,8 +63,8 @@ void CreatingPotionsMenuState::printMenu()
 	// Получаем таблицу зелий 
 	PotionTable* potionsTable = alchemyLogic->getPotionTable();
 
-	while (false == success)
-	{
+	//while (false == success)
+	//{
 		printMenu(choiceFirstIngredient, choiceSecondIngredient, choiceNumberOfPoition);
 
 		// начальная страница таблицы
@@ -162,7 +162,7 @@ void CreatingPotionsMenuState::printMenu()
 			// ждем нажатия любой клавиши
 			char a = _getch();
 
-			break;
+			//break;
 		}
 
 		// Если зелье не получилось
@@ -170,16 +170,16 @@ void CreatingPotionsMenuState::printMenu()
 		{
 			error = "К сожалению, зелье не получилось!";
 
-			printColoredText(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+			this->alchemicalUserInterface->printError(Y_COORD_AFTER_MENU_TITLE_5, STANDARD_CURSOR_X_COORD, error);
 
-			//printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
+			//printColoredText(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+
+			//printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_5, STANDARD_CURSOR_X_COORD);
 
 			// ждем нажатия любой клавиши
 			char a = _getch();
-
-			error = "";
 		}
-	}
+	//}
 }
 
 MenuState* CreatingPotionsMenuState::getNextState()

@@ -15,6 +15,7 @@ using namespace std;
 #define Y_COORD_AFTER_MENU_TITLE_2		10		//  оордината Y втора€ после печати заголовка меню
 #define Y_COORD_AFTER_MENU_TITLE_3		11		//  оордината Y треть€ после печати заголовка меню
 #define Y_COORD_AFTER_MENU_TITLE_4		12		//  оордината Y четверта€ после печати заголовка меню
+#define Y_COORD_AFTER_MENU_TITLE_5		13		//  оордината Y п€та€ после печати заголовка меню
 
 #define EXIT_INT						-1
 

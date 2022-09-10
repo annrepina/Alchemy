@@ -28,6 +28,8 @@
 #define INGREDIENT_TABLE_DIGIT_COLUMN_3			3	// Столбец 3
 #define INGREDIENT_TABLE_DIGIT_COLUMN_6			6	// Столбец 6
 
+#define INDEX_IF_CONTENT_OF_NUMBER_COLUMN		5	// Индекс контента колонки с кол-вом
+
 // Очередность столбцов id name price effect1 effect2 number
 
 class IngredientsTablePrinter : public TablePrinter<IngredientsTable>
@@ -71,9 +73,6 @@ private:
 	// посчитать максимальное id
 	int calculateMaxId() override;
 
-	//// Вернуть наибольший id
-	//int calculateMaxIdStrSize() override;
-
 	// Вернуть самое длинное название ингредиента
 	int calculateMaxNameSize() override;
 
@@ -88,6 +87,9 @@ private:
 
 	// Посчитать кол-во доступных пользователю ингредиентов
 	int calculateNumberOfAvailableElements();
+
+	// Добавить id доступных элементов если вектор пустой
+	void calculateAvailableElementsId();
 
 #pragma endregion МЕТОДЫ РАСЧЕТА
 

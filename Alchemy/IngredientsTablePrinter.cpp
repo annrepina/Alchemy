@@ -207,11 +207,32 @@ int IngredientsTablePrinter::calculateNumberOfAvailableElements()
 	return numberOfAvailableElements;
 }
 
+void IngredientsTablePrinter::calculateAvailableElementsId()
+{
+	int numberOfAvailableElements = this->table->getNumberOfAvailableElements();
+
+	// если вектор пустой
+	if (this->availableElementsId.size() == 0 && numberOfAvailableElements > 0)
+	{
+		auto beginIter = this->table->getBeginIteratorOfAvailableElements();
+		auto endIter = this->table->getEndIteratorOfAvailableElements();
+
+		for (auto i = beginIter; i != endIter; ++i)
+		{
+			this->availableElementsId.push_back(*i);
+		}
+	}
+
+	quickSort(&availableElementsId[0], availableElementsId.size());
+}
+
 void IngredientsTablePrinter::calculateData()
 {
 	TablePrinter::calculateData();
 
-	calculateNumberOfAvailableElements();
+	this->numberOfAvailableContent = calculateNumberOfAvailableElements();
+
+	calculateAvailableElementsId();
 }
 
 int IngredientsTablePrinter::getNumberOfAvailableContent()
@@ -608,10 +629,6 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id, int previo
 		auto beginIter = availableElementsId.begin();
 
 		availableElementsId.erase(beginIter + index);
-
-		//auto beginIter = 
-
-		//availableElementsId.erase(id);
 	}
 
 	changeTableContentForOneElement(id);

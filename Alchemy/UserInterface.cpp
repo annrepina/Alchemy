@@ -97,7 +97,7 @@ void UserInterface::printError(int yCoord, int xCoord, string textOfError)
 
 	cout << eraseSymbolsOnScreen(ONE_HUNDRED_SYMBOLS);
 
-	printColoredText(textOfError, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);
+	printColoredText(textOfError, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
 }
 
 bool UserInterface::isArrowKeyFalse(int key)

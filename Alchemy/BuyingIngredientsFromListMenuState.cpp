@@ -67,7 +67,7 @@ void BuyingIngredientsFromListMenuState::printMenu()
 		// перейти по координате для выбора
 		cout << goToXY(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1);
 
-		int id = this->alchemicalUserInterface->chooseId(/*choiceIngredient, */AlchemicalUserInterface::TableCode::IngredientTable);
+		int id = this->alchemicalUserInterface->chooseId(AlchemicalUserInterface::TableCode::IngredientTable);
 
 		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, Y_COORD_AFTER_MENU_TITLE_3);
 

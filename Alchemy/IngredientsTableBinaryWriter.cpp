@@ -2,6 +2,8 @@
 
 IngredientsTableBinaryWriter::IngredientsTableBinaryWriter()
 {
+	ingredientBinaryWriter = new IngredientBinaryWriter();
+	effectsTableBinaryWriter = new EffectsTableBinaryWriter();
 }
 
 IngredientsTableBinaryWriter::~IngredientsTableBinaryWriter()
@@ -13,23 +15,52 @@ void IngredientsTableBinaryWriter::write(ofstream& stream, string filePath, Ingr
 {
 	BinaryWriter::write(stream, filePath, ingredientsTable);
 
+	// получаем и пишем кол-во доступных элементов 
+	int numberOfAvailableElements = ingredientsTable->getNumberOfAvailableElements();
+	writeInt(stream, numberOfAvailableElements);
 
-	// Доступные пользователю элементы, те, у которых кол-во больше нуля
-	vector<int> availableElements;
+	// узнаем итераторы на вектор с id доступных элементов
+	auto beginIter = ingredientsTable->getBeginIteratorOfAvailableElements();
+	auto endIter = ingredientsTable->getEndIteratorOfAvailableElements();
 
-	// Id ингредиента
-	static int id;
+	// в цикле пишем значения
+	for (auto i = beginIter; i != endIter; ++i)
+	{
+		// получаем значение и пишем
+		int value = *i;
+		writeInt(stream, value);
+	}
 
-	// Ингредиенты
-	map<int, Ingredient*> ingredientsWithId;
+	// Получаем и пишем Id ингредиента
+	int id = ingredientsTable->getId();
+	writeInt(stream, id);
 
-	// Таблица эффектов
-	EffectsTable* effectsTable;
+	// узнаем итераторы на мэп
+	auto beginIterOfMap = ingredientsTable->getStartIterator();
+	auto endIterOfMap = ingredientsTable->getEndIterator();
 
-	// Чистит память
-	void clear();
+	// в цикле пишем значения
+	for (auto i = beginIterOfMap; i != endIterOfMap; ++i)
+	{
+		// Получаем и пишем id
+		int key = i->first;
+		writeInt(stream, key);
+
+		// Получаем и пишем ингредиент
+		Ingredient* ingredient = i->second;
+		ingredientBinaryWriter->write(stream, filePath, ingredient);
+	}
+
+	// Получаем и пишем Таблица эффектов
+	EffectsTable* effectsTable = ingredientsTable->getEffectsTable();
+	effectsTableBinaryWriter->write(stream, filePath, effectsTable);
 }
 
 void IngredientsTableBinaryWriter::clear()
 {
+	delete this->ingredientBinaryWriter;
+	this->ingredientBinaryWriter = nullptr;
+
+	delete this->effectsTableBinaryWriter;
+	this->effectsTableBinaryWriter = nullptr;
 }

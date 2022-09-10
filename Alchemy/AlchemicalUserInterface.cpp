@@ -11,6 +11,8 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	this->buyingIngredientsMenuTitle = "Покупка ингредиентов";
 	this->buingFaultMenuTitle = "Недостаточно средств для покупки ингредиента №";
 	this->title = "Зельеварение";
+	this->pathForWriting = "AlchemyLogicBinary.txt";
+
 
 	// Программа - алхимия
 	this->alchemyLogic = nullptr;
@@ -28,16 +30,9 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 
 }
 
-AlchemicalUserInterface::AlchemicalUserInterface(string path) : AlchemicalUserInterface()
-{
-	this->pathForWriting = path;
-}
-
 void AlchemicalUserInterface::launchProgram()
 {
 	setAlchemyLogic();
-
-	//fillAllMenu();
 
 	// Передаем в принтер таблицу
 	this->ingredientsTableprinter->setTable(this->alchemyLogic->getIngredientsTable());
@@ -72,17 +67,7 @@ void AlchemicalUserInterface::launchProgram()
 
 	printBye();
 
-	// может и не надо
-	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
-
-	ofstream stream;
-
-	this->alchemyLogicWriter->write(stream, this->pathForWriting, this->alchemyLogic);
-
-	ifstream istream;
-
-	AlchemyLogic* logic = alchemyLogicReader->readFromFile(this->pathForWriting, istream);
-
+	writeAlchemyLogic();
 }
 
 #pragma region Геттеры
@@ -137,11 +122,45 @@ void AlchemicalUserInterface::setExitFlag(bool exit)
 
 void AlchemicalUserInterface::setAlchemyLogic()
 {
-	// Создать программу Алхимии
-	this->alchemyLogicBuilder->buildAlchemyProgram(this->alchemyLogicWriter);
+	// Пустой ли файл
+	bool isFileEmpty = isFileForReadingEmpty();
 
-	// Присвоить результат программе алхимии
-	this->alchemyLogic = this->alchemyLogicBuilder->getResult();
+	if (isFileEmpty)
+	{
+		// Создать программу Алхимии
+		this->alchemyLogicBuilder->buildAlchemyProgram(this->alchemyLogicWriter);
+
+		// Присвоить результат программе алхимии
+		this->alchemyLogic = this->alchemyLogicBuilder->getResult();
+	}
+	else
+	{
+		ifstream istream;
+
+		this->alchemyLogic = alchemyLogicReader->readFromFile(this->pathForWriting, istream);
+	}
+}
+
+bool AlchemicalUserInterface::isFileForReadingEmpty()
+{
+	bool res = false;
+
+	ifstream stream;
+
+	// открываем файл
+	stream.open(this->pathForWriting, std::ios::binary);
+
+	int end = stream.peek();
+
+	if (end == EOF) 
+	{
+		if (stream.eof())
+			res = true;
+	}
+
+	stream.close();
+
+	return res;
 }
 
 #pragma endregion Сеттеры
@@ -190,8 +209,6 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 			case VK_ESCAPE:
 			{
 				exitFlag = true;
-
-				//this->setState(this->state->getNextState());
 			}
 			break;
 		}
@@ -217,7 +234,6 @@ void AlchemicalUserInterface::choosePageWhileSorting(vector<vector<string>> cont
 			if (checkHorizontalArrowChoice(content.size(), page, code, VK_LEFT))
 			{
 				printTablePagesInLoopWhileSorting(content, code, page, numberOfColumn, orderOfSorting);
-				//printTablePagesInLoop(code, page);
 				exit = true;
 			}
 		}
@@ -242,11 +258,7 @@ void AlchemicalUserInterface::choosePageWhileSorting(vector<vector<string>> cont
 
 		case VK_ESCAPE:
 		{
-
-			//exit = true;
 			exitFlag = true;
-
-			//this->setState(this->state->getNextState());
 		}
 		break;
 		}
@@ -297,8 +309,6 @@ void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode
 		case VK_ESCAPE:
 		{
 			exitFlag = true;
-
-			//this->setState(this->state->getNextState());
 		}
 		break;
 		}
@@ -570,6 +580,13 @@ void AlchemicalUserInterface::eraseScreenAfterAlchemist()
 {
 	cout << goToXY(Y_COORD_AFTER_ALCHEMIST, STANDARD_CURSOR_X_COORD);
 	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+}
+
+void AlchemicalUserInterface::writeAlchemyLogic()
+{
+	ofstream stream;
+
+	this->alchemyLogicWriter->write(stream, this->pathForWriting, this->alchemyLogic);
 }
 
 #pragma region Методы печати

@@ -32,6 +32,23 @@ public:
 		return this->title;
 	}
 
+	int getNumberOfAvailableElements()
+	{
+		return this->availableElements.size();
+	}
+	
+	// Получить итератор на начало вектора доступных элементов
+	vector<int>::iterator getBeginIteratorOfAvailableElements()
+	{
+		return this->availableElements.begin();
+	}
+
+	// Получить итератор на конец вектора доступных элементов
+	vector<int>::iterator getEndIteratorOfAvailableElements()
+	{
+		return this->availableElements.end();
+	}
+
 	// Добавить доступный элемент
 	void addAvailableElement(int id)
 	{
@@ -65,5 +82,3 @@ protected:
 private:
 
 };
-
-

@@ -28,6 +28,8 @@ public:
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
 
+	void setId(int id);
+
 	void update(int id, bool isNewElement) override;
 
 	void update(int id, int previousNumber) override;
@@ -53,6 +55,8 @@ public:
 
 	// получить ключ по значению
 	int getIdByIngredient(Ingredient* ingredient);
+
+	int getId();
 
 #pragma endregion ГЕТТЕРЫ
 

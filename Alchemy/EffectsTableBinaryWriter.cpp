@@ -2,6 +2,8 @@
 
 EffectsTableBinaryWriter::EffectsTableBinaryWriter()
 {
+	// создаем райтер для эффектов
+	this->effectBinaryWriter = new EffectBinaryWriter();
 }
 
 EffectsTableBinaryWriter::~EffectsTableBinaryWriter()
@@ -28,9 +30,6 @@ void EffectsTableBinaryWriter::write(ofstream& stream, string filePath, EffectsT
 	auto beginIter = effectsTable->getStartIterator();
 	auto endIter = effectsTable->getEndIterator();
 
-	// создаем райтер для эффектов
-	EffectBinaryWriter* effectBinaryWriter = new EffectBinaryWriter();
-
 	// в цикле пишем ключ и эффект
 	for (auto i = beginIter; i != endIter; ++i)
 	{
@@ -41,12 +40,13 @@ void EffectsTableBinaryWriter::write(ofstream& stream, string filePath, EffectsT
 
 		// узнаем эффект
 		Effect* effect = i->second;
-
 		// пишем эффект
-		effectBinaryWriter->write(stream, filePath, effect);
+		this->effectBinaryWriter->write(stream, filePath, effect);
 	}
 }
 
 void EffectsTableBinaryWriter::clear()
 {
+	delete this->effectBinaryWriter;
+	this->effectBinaryWriter = nullptr;
 }

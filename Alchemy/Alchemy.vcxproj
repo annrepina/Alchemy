@@ -164,6 +164,9 @@
     <ClCompile Include="EffectsTableBuilder.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Formatting.cpp" />
+    <ClCompile Include="IngredientBinaryReader.cpp" />
+    <ClCompile Include="IngredientBinaryWriter.cpp" />
+    <ClCompile Include="IngredientsTableBinaryReader.cpp" />
     <ClCompile Include="IngredientsTableBinaryWriter.cpp" />
     <ClCompile Include="InstructionsMenuState.cpp" />
     <ClCompile Include="IObservable.cpp" />
@@ -182,8 +185,12 @@
     <ClCompile Include="Alchemist.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Potion.cpp" />
+    <ClCompile Include="PotionBinaryReader.cpp" />
+    <ClCompile Include="PotionBinaryWriter.cpp" />
     <ClCompile Include="PotionBuilder.cpp" />
     <ClCompile Include="PotionTable.cpp" />
+    <ClCompile Include="PotionTableBinaryReader.cpp" />
+    <ClCompile Include="PotionTableBinaryWriter.cpp" />
     <ClCompile Include="PotionTablePrinter.cpp" />
     <ClCompile Include="ReturnMenuState.cpp" />
     <ClCompile Include="SellingIngredientsMenuState.cpp" />
@@ -225,6 +232,9 @@
     <ClInclude Include="EffectsTableBuilder.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Formatting.h" />
+    <ClInclude Include="IngredientBinaryReader.h" />
+    <ClInclude Include="IngredientBinaryWriter.h" />
+    <ClInclude Include="IngredientsTableBinaryReader.h" />
     <ClInclude Include="IngredientsTableBinaryWriter.h" />
     <ClInclude Include="InstructionsMenuState.h" />
     <ClInclude Include="IObservable.h" />
@@ -241,8 +251,12 @@
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Potion.h" />
+    <ClInclude Include="PotionBinaryReader.h" />
+    <ClInclude Include="PotionBinaryWriter.h" />
     <ClInclude Include="PotionBuilder.h" />
     <ClInclude Include="PotionTable.h" />
+    <ClInclude Include="PotionTableBinaryReader.h" />
+    <ClInclude Include="PotionTableBinaryWriter.h" />
     <ClInclude Include="PotionTablePrinter.h" />
     <ClInclude Include="ReturnMenuState.h" />
     <ClInclude Include="SellingIngredientsMenuState.h" />

@@ -16,8 +16,6 @@ class Ingredient : public IObservable
 {
 public:
 
-#pragma region Конструкторы
-
 	// Конструктор по умолчанию
 	Ingredient();
 
@@ -47,12 +45,9 @@ public:
 	// Геттер для цены
 	int getPrice();
 
+	int getNumberOfEffects();
+
 #pragma endregion ГЕТТЕРЫ
-
-	//// Конструктор с параметрами
-	//Ingredient(string name, float price, vector<Effect*> effects);
-
-#pragma endregion Конструкторы
 
 #pragma region Сеттеры
 
@@ -70,13 +65,13 @@ public:
 
 	void openEffectRandomly();
 
-	//// Сеттер для id
-	//void setId(int id);
-
 #pragma endregion Сеттеры
 
 	// Добавить эффект
 	void addEffect(int effectId);
+
+	// Добавить эффект с характеристикой
+	void addEffectWithCharacteristic(int effectId, bool characteristic);
 
 	// Увеличить кол-во ингредиента на опред число
 	void increaseNumber(int number);
@@ -86,11 +81,7 @@ public:
 
 private:
 
-	//// Счетчик ингредиентов
-	//static int counter;
-
-	//// id Ингредиента
-	//int id;
+	const static int numberOfEffects = NUMBER_OF_EFFECTS;
 	
 	// Название ингредиента
 	string name;
@@ -101,13 +92,7 @@ private:
 	// Кол-во
 	int number;
 
-	//// Массив эффекторов из 2х ингредиентов
-	//vector<int> effectsId;
-
 	// Массив эффектов из 2х ингредиентов и их значений известности игроку
 	map<int, bool> effectsId;
-
-	//// Метод очистки памяти
-	//void clear();
 };
 

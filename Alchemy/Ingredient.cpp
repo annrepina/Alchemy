@@ -1,17 +1,13 @@
 #include "Ingredient.h"
 #include <iostream>
 
-//int Ingredient::counter = 0;
+//int Ingredient::numberOfEffects = NUMBER_OF_EFFECTS;
 
 Ingredient::Ingredient()
 {
-	//++counter;
-	//this->id = counter;
 	this->name = "";
 	this->price = 0;
 	this->number = 0;
-	//this->effectsId.shrink_to_fit(NUMBER_OF_EFFECTS);
-	//this->effectsId.reserve(NUMBER_OF_EFFECTS);
 }
 
 Ingredient::~Ingredient()
@@ -26,10 +22,10 @@ void Ingredient::print()
 
 bool Ingredient::getEffectIsKnown(int number)
 {
-	if (NUMBER_OF_EFFECTS > number)
+	if (numberOfEffects > number)
 	{
 		int id = this->effectsId[number];
-		return id/*this->effectsId[number]*/;
+		return id;
 	}
 
 	return 0;
@@ -66,6 +62,11 @@ int Ingredient::getPrice()
 	return this->price;
 }
 
+int Ingredient::getNumberOfEffects()
+{
+	return this->numberOfEffects;
+}
+
 void Ingredient::setName(string name)
 {
 	this->name = name;
@@ -84,8 +85,6 @@ void Ingredient::setNumber(int number)
 void Ingredient::openEffect(int id)
 {
 	this->effectsId[id] = KNOWN;
-
-	//this->notify(id);
 }
 
 void Ingredient::openEffectRandomly()
@@ -109,8 +108,18 @@ void Ingredient::openEffectRandomly()
 void Ingredient::addEffect(int effectId)
 {
 	// Если размер вектора меньше двух, то добавляем элемент
-	if (NUMBER_OF_EFFECTS > this->effectsId.size())
+	if (numberOfEffects > this->effectsId.size())
 		this->effectsId.emplace(effectId, false);
+
+	else
+		return;
+}
+
+void Ingredient::addEffectWithCharacteristic(int effectId, bool characteristic)
+{
+	// Если размер вектора меньше двух, то добавляем элемент
+	if (numberOfEffects > this->effectsId.size())
+		this->effectsId.emplace(effectId, characteristic);
 
 	else
 		return;

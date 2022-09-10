@@ -25,9 +25,9 @@ int main()
 
     //srand(1);
 
-    string path = "AlchemyLogicBinary.txt";
+    //string path = "AlchemyLogicBinary.txt";
 
-    AlchemicalUserInterface userInterface(path);
+    AlchemicalUserInterface userInterface;
 
     //userInterface.setTitle("Зельеварение");
 

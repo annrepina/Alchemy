@@ -32,6 +32,11 @@ void PotionTable::setEffectsTable(EffectsTable* effectsTable)
 	this->effectsTable = effectsTable;
 }
 
+void PotionTable::setId(int id)
+{
+	this->id = id;
+}
+
 int PotionTable::hasSuchPotion(Potion* potion)
 {
 	// начальный индекс
@@ -126,6 +131,11 @@ Potion* PotionTable::getPotionById(int id)
 int PotionTable::getSize()
 {
 	return this->potiontsWithId.size();
+}
+
+int PotionTable::getId()
+{
+	return this->id;
 }
 
 //Potion* PotionTable::getSuchPotion(Potion* potion)

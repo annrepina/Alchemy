@@ -16,5 +16,8 @@ public:
 protected:
 
 	void clear() override;
+
+	// райтер для эффектов
+	EffectBinaryWriter* effectBinaryWriter;
 };
 

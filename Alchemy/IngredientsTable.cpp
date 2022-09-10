@@ -34,6 +34,11 @@ void IngredientsTable::setEffectsTable(EffectsTable* effectsTable)
 	this->effectsTable = effectsTable;
 }
 
+void IngredientsTable::setId(int id)
+{
+	this->id = id;
+}
+
 void IngredientsTable::update(int id, bool isNewElement)
 {
 	notify(id, isNewElement);
@@ -101,6 +106,11 @@ int IngredientsTable::getIdByIngredient(Ingredient* ingredient)
 	}
 
 	return 0;
+}
+
+int IngredientsTable::getId()
+{
+	return this->id;
 }
 
 void IngredientsTable::decreaseNumberOfIngredient(int ingredientId, int number)

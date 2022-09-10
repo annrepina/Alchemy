@@ -21,6 +21,8 @@ public:
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
 
+	void setId(int id);
+
 	// Возвращает ключ Зелья, если такое было, иначе -1
 	int hasSuchPotion(Potion* potion);
 
@@ -48,8 +50,7 @@ public:
 
 	int getSize();
 
-	//// Получить такое же зелье
-	//Potion* getSuchPotion(Potion* potion);
+	int getId();
 
 #pragma endregion Геттеры
 

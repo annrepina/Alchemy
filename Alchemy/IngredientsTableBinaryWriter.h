@@ -1,6 +1,8 @@
 #pragma once
 #include "BinaryWriter.h"
 #include "IngredientsTable.h"
+#include "IngredientBinaryWriter.h"
+#include "EffectsTableBinaryWriter.h"
 
 class IngredientsTableBinaryWriter : BinaryWriter<IngredientsTable>
 {
@@ -15,5 +17,9 @@ public:
 private:
 
 	void clear() override;
+
+	IngredientBinaryWriter* ingredientBinaryWriter;
+
+	EffectsTableBinaryWriter* effectsTableBinaryWriter;
 };
 

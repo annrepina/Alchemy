@@ -12,9 +12,6 @@ public:
 
 	~Potion();
 
-	//// Конструктор с параметрами
-	//Potion(Ingredient* ingredient1, Ingredient* ingredient2);
-
 #pragma region Сеттеры
 
 	void setEffectId(int id);

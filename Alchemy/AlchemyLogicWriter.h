@@ -3,12 +3,14 @@
 #include "AlchemyLogic.h"
 #include "AlchemistBinaryWriter.h"
 #include "EffectsTableBinaryWriter.h"
+#include "IngredientsTableBinaryWriter.h"
+#include "PotionTableBinaryWriter.h"
 
 class AlchemyLogicWriter : public BinaryWriter<AlchemyLogic>
 {
 public:
 
-	AlchemyLogicWriter(/*AlchemyLogic* alchemyLogic, string filePath*/);
+	AlchemyLogicWriter();
 
 	~AlchemyLogicWriter();
 
@@ -20,7 +22,9 @@ protected:
 
 	EffectsTableBinaryWriter* effectsTableBinaryWriter;
 
-	//EffectBinaryWriter* effectBinaryWriter;
+	IngredientsTableBinaryWriter* ingredientsTableBinaryWriter;
+
+	PotionTableBinaryWriter* potionTableBinaryWriter;
 
 	void clear() override;
 

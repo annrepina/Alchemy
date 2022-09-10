@@ -33,9 +33,6 @@ public:
 	// Конструктор по умолчанию
 	AlchemicalUserInterface();
 
-	// Конструктор с параметром
-	AlchemicalUserInterface(string path);
-
 	// Запуск главного цикла программы
 	void launchProgram() override;
 
@@ -117,9 +114,6 @@ private:
 	// Состояние меню
 	MenuState* state;
 
-	// Настроить программу Алхимии
-	void setAlchemyLogic();
-
 	// Флаг для выхода из главного цикла
 	bool exitFlag;
 
@@ -128,6 +122,11 @@ private:
 
 	// Путь для записи
 	string pathForWriting;
+
+	// Настроить программу Алхимии
+	void setAlchemyLogic();
+
+	bool isFileForReadingEmpty();
 
 #pragma region НАЗВАНИЕ ЗАГОЛОВКОВ
 
@@ -174,6 +173,8 @@ private:
 
 	// Стирает с консоли все после печати алхимика
 	void eraseScreenAfterAlchemist();
+
+	void writeAlchemyLogic();
 
 #pragma region МЕТОДЫ ПЕЧАТИ
 

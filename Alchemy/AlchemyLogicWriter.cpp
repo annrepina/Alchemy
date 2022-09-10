@@ -5,6 +5,8 @@ AlchemyLogicWriter::AlchemyLogicWriter(/*AlchemyLogic* alchemyLogic, *//*string 
 {
 	this->alchemistBinaryWriter = new AlchemistBinaryWriter();
 	this->effectsTableBinaryWriter = new EffectsTableBinaryWriter();
+	this->ingredientsTableBinaryWriter = new IngredientsTableBinaryWriter();
+	this->potionTableBinaryWriter = new PotionTableBinaryWriter();
 }
 
 AlchemyLogicWriter::~AlchemyLogicWriter()
@@ -14,11 +16,6 @@ AlchemyLogicWriter::~AlchemyLogicWriter()
 
 void AlchemyLogicWriter::write(ofstream& stream, string filePath, AlchemyLogic* alchemyLogic) const
 {
-	//if ("" == filePath)
-	//	throw "Invalid file path";
-
-	//stream.open(filePath, ios::out | ios::binary | ios::trunc);
-
 	BinaryWriter::write(stream, filePath, alchemyLogic);
 
 	Alchemist* alchemist = alchemyLogic->getAlchemist();
@@ -27,7 +24,11 @@ void AlchemyLogicWriter::write(ofstream& stream, string filePath, AlchemyLogic* 
 	EffectsTable* effectsTable = alchemyLogic->getEffectsTable();
 	effectsTableBinaryWriter->write(stream, filePath, effectsTable);
 
+	IngredientsTable* ingredientsTable = alchemyLogic->getIngredientsTable();
+	ingredientsTableBinaryWriter->write(stream, filePath, ingredientsTable);
 
+	PotionTable* potionTable = alchemyLogic->getPotionTable();
+	potionTableBinaryWriter->write(stream, filePath, potionTable);
 	
 	// в конце закрываем
 	stream.close();
@@ -36,7 +37,16 @@ void AlchemyLogicWriter::write(ofstream& stream, string filePath, AlchemyLogic* 
 void AlchemyLogicWriter::clear()
 {
 	delete this->alchemistBinaryWriter;
+	this->alchemistBinaryWriter = nullptr;
+
 	delete this->effectsTableBinaryWriter;
+	this->effectsTableBinaryWriter = nullptr;
+
+	delete this->ingredientsTableBinaryWriter;
+	this->ingredientsTableBinaryWriter = nullptr;
+
+	delete this->potionTableBinaryWriter;
+	this->potionTableBinaryWriter = nullptr;
 }
 
 

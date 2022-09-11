@@ -4,7 +4,6 @@
 
 BuyingIngredientsFromListMenuState::BuyingIngredientsFromListMenuState()
 {
-	//index = 0;
 }
 
 BuyingIngredientsFromListMenuState::BuyingIngredientsFromListMenuState(AlchemicalUserInterface* alchemicalUserInterface) : MenuState(alchemicalUserInterface)
@@ -12,12 +11,7 @@ BuyingIngredientsFromListMenuState::BuyingIngredientsFromListMenuState(Alchemica
 	this->title = "Покупка ингредиентов из \"Котелка Аркадии\"";
 	this->goToTitle = "Купить ингредиенты из \"Котелка Аркадии\"";
 	this->numberOfStates = 1;
-	//this->index = 0;
 }
-
-//BuyingIngredientsFromListMenuState::~BuyingIngredientsFromListMenuState()
-//{
-//}
 
 void BuyingIngredientsFromListMenuState::printMenu()
 {
@@ -49,9 +43,7 @@ void BuyingIngredientsFromListMenuState::printMenu()
 		printMenuTitle();
 
 		printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
-
 		printColoredTextByCoords(choiceIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
-
 		printColoredTextByCoords(choiceNumber, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD);
 
 		this->alchemicalUserInterface->printTablePagesInLoop(AlchemicalUserInterface::TableCode::IngredientTable, page);
@@ -68,7 +60,6 @@ void BuyingIngredientsFromListMenuState::printMenu()
 		cout << goToXY(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1);
 
 		int id = this->alchemicalUserInterface->chooseId(AlchemicalUserInterface::TableCode::IngredientTable);
-
 		int number = this->alchemicalUserInterface->chooseNumber(choiceNumber, Y_COORD_AFTER_MENU_TITLE_3);
 
 		success = this->alchemicalUserInterface->getAlchemyLogic()->tryBuyIngredientFromList(id, number);
@@ -115,4 +106,3 @@ ReturnMenuState* BuyingIngredientsFromListMenuState::createReturnMenuState()
 {
 	return new ReturnMenuState(new BuyingIngredientsMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface);
 }
-

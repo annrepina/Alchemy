@@ -8,6 +8,7 @@
 
 class AlchemicalMenuState;
 
+// Состояние меню - покупка ингредиентов
 class BuyingIngredientsMenuState : public MenuState
 {
 public:
@@ -15,8 +16,6 @@ public:
 	BuyingIngredientsMenuState();
 
 	BuyingIngredientsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
-
-	//~BuyingIngredientsMenuState() override;
 
 	// Печать меню
 	void printMenu() override;
@@ -46,6 +45,5 @@ private:
 
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
-
 };
 

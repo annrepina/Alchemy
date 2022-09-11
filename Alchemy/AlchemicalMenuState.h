@@ -11,10 +11,11 @@
 
 #define EDITION
 
-#define NUMBER_OF_ALCHEMICAL_MENU_ITEMS	7		// Кол-во пунктов в алхимическом меню
+#define NUMBER_OF_ALCHEMICAL_MENU_ITEMS		7	// Кол-во пунктов в алхимическом меню
 
 class MainMenuState;
 
+// Состояние меню - алхимическое меню
 class AlchemicalMenuState : public MenuState
 {
 public:
@@ -24,12 +25,8 @@ public:
 
 	AlchemicalMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
-	//~AlchemicalMenuState() override;
-
 	// Печать меню
 	void printMenu() override;
-
-protected:
 
 private:
 
@@ -44,9 +41,6 @@ private:
 
 	// Map функций, которые создают стейты и их ключи - координаты пунктов меню
 	map<int, function<MenuState* (AlchemicalMenuState&)> > stateCreatingFunctions;
-
-	//// Заполнить map функций, которые создают стейты и их ключи
-	//void fillStateCreatingFunctions();
 
 	// Вектор функций, которые создают стейты
 	vector< function<MenuState* (AlchemicalMenuState&)> > listOfCreatingFunctions;
@@ -71,6 +65,5 @@ private:
 
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
-
 };
 

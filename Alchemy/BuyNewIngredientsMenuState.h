@@ -4,6 +4,7 @@
 #include "IngredientBuilder.h"
 #include "ReturnMenuState.h"
 
+// Состояние меню - покупка новых ингредиентов
 class BuyNewIngredientsMenuState : public MenuState
 {
 public:
@@ -34,6 +35,5 @@ private:
 
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
-
 };
 

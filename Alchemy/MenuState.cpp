@@ -3,7 +3,7 @@
 
 int MenuState::currentYCursorCoordState = MAIN_MENU_Y_COORD;
 
-int MenuState::currentXCursorCoordState = 0;
+int MenuState::currentXCursorCoordState = STANDARD_CURSOR_X_COORD;
 
 MenuState::MenuState()
 {
@@ -11,7 +11,6 @@ MenuState::MenuState()
 	this->goToTitle = "";
 	this->alchemicalUserInterface = nullptr;
 	this->boundaryYCoord = MAIN_MENU_Y_COORD;
-	//this->exitFlag = false;
 	this->numberOfStates = 0;
 }
 
@@ -89,12 +88,7 @@ void MenuState::printMenuTitle()
 
 void MenuState::printMenuItems() 
 {
-	// Координата Y
-	//int yCoord = this->alchemicalUserInterface->getCurrentYCursorCoord();
-	//int yCoord = this->currentYCursorCoordState;
-
 	// Стартовый ключ в ассоциативном массиве
-	//int border = yCoord + menu.size();
 	int border = this->boundaryYCoord + this->menuStates.size();
 
 	// Печатаем ассоциативный массив
@@ -143,33 +137,32 @@ void MenuState::chooseMenuItem()
 
 		switch (this->alchemicalUserInterface->getKeyBoard()->getPressedKey())
 		{
-		case VK_UP:
-		{
-			this->checkVerticalArrowsChoice(this->boundaryYCoord, VK_UP);
+			case VK_UP:
+			{
+				this->checkVerticalArrowsChoice(this->boundaryYCoord, VK_UP);
+			}
+			break;
 
-		}
-		break;
+			case VK_DOWN:
+			{
+				// Проверяем стрелочки
+				this->checkVerticalArrowsChoice(this->boundaryYCoord + menuStates.size() - 1, VK_DOWN);
+			}
+			break;
 
-		case VK_DOWN:
-		{
-			// Проверяем стрелочки
-			this->checkVerticalArrowsChoice(this->boundaryYCoord + menuStates.size() - 1, VK_DOWN);
-		}
-		break;
+			case VK_RETURN:
+			{
+				// выход из цикла
+				innerExitFlag = true;
+			}
+			break;
 
-		case VK_RETURN:
-		{
-			// выход из цикла
-			innerExitFlag = true;
-		}
-		break;
-
-		case VK_ESCAPE:
-		{
-			this->alchemicalUserInterface->setExitFlag(true);
-			//exitFlag = true;
-		}
-		break;
+			case VK_ESCAPE:
+			{
+				this->alchemicalUserInterface->setExitFlag(true);
+				//exitFlag = true;
+			}
+			break;
 		}
 	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
 }

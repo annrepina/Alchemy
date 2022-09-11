@@ -6,7 +6,7 @@
 
 #define MINIMUM_NUMBER_OF_INGREDIENTS_FOR_CREATING		2	// минимально требуемое кол-во ингредиентов для смешивания 
 
-
+// Состояние меню - создание зелий
 class CreatingPotionsMenuState : public MenuState
 {
 public:
@@ -21,9 +21,6 @@ public:
 	void printMenu() override;
 
 private:
-
-	// строитель зелья
-	PotionBuilder* potionBuilder;
 
 	// Получить следующее состояние
 	MenuState* getNextState() override;
@@ -43,19 +40,9 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 
+#pragma region МЕТОДЫ ПЕЧАТИ
+
 	void printMenu(string choiceFirstIngredient, string choiceSecondIngredient, string choiceNumberOfIngredients);
-
-	//// Печать выбора id
-	//int printChoiceId(int yCoord, int xCoord);
-
-	// уменьшить кол-во ингредиентов
-	void decreaseNumberOfIngredients(int firstIngredientId, int secondIngredientId, int number);
-
-	// Проверка введенных id на совпадение
-	void checkIngredientsId(int &firstIngredientId, int &secondIngredientId);
-
-	// Проверяем есть ли такое кол-во ингредиентов у пользователя
-	void checkNumberOfIngredients(int firstIngredientId, int secondIngredientId, int &numberOfPotion);
 
 	void printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& ingredientId);
 
@@ -65,10 +52,22 @@ private:
 
 	void printErrorAboutNumberAndMakeChoiceAgain(int yCoord, string textOfError, int& numberOfIngredients);
 
+#pragma endregion МЕТОДЫ ПЕЧАТИ
+
+
+	// уменьшить кол-во ингредиентов
+	void decreaseNumberOfIngredients(int firstIngredientId, int secondIngredientId, int number);
+
+#pragma region МЕТОДЫ ПРОВЕРКИ
+
+	// Проверка введенных id на совпадение
+	void checkIngredientsId(int &firstIngredientId, int &secondIngredientId);
+
+	// Проверяем есть ли такое кол-во ингредиентов у пользователя
+	void checkNumberOfIngredients(int firstIngredientId, int secondIngredientId, int &numberOfPotion);
+
 	void checkIdForEquality(int& firstIngredientId, int secondIngredientId, int YCoord);
 
-	//// Действия для выхода из меню
-	//void exitMenu();
-
+#pragma endregion МЕТОДЫ ПРОВЕРКИ
 };
 

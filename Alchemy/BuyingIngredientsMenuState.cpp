@@ -12,11 +12,6 @@ BuyingIngredientsMenuState::BuyingIngredientsMenuState(AlchemicalUserInterface* 
     this->numberOfStates = NUMBER_OF_BUYING_MENU_ITEMS;
 }
 
-//BuyingIngredientsMenuState::~BuyingIngredientsMenuState()
-//{
-//    clear();
-//}
-
 void BuyingIngredientsMenuState::printMenu()
 {
     // Сбрасываем координату каждый раз заходя в метод печати
@@ -66,4 +61,3 @@ MenuState* BuyingIngredientsMenuState::getNextState()
 {
     return this->stateCreatingFunctions[currentYCursorCoordState](*this);
 }
-

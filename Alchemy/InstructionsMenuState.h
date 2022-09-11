@@ -6,6 +6,7 @@
 
 class MainMenuState;
 
+// Состояние меню - инструкции
 class InstructionsMenuState : public MenuState
 {
 public:
@@ -13,8 +14,6 @@ public:
 	InstructionsMenuState();
 
 	InstructionsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
-
-	//~InstructionsMenuState() override;
 
 	// Печать меню
 	void printMenu() override;
@@ -33,17 +32,10 @@ private:
 	// Map функций, которые создают стейты и их ключи - координаты пунктов меню
 	map<int, function<MenuState* (InstructionsMenuState&)> > stateCreatingFunctions;
 
-	//// Заполнить map функций, которые создают стейты и их ключи
-	//void fillStateCreatingFunctions();
-
 	// Вектор функций, которые создают стейты
 	vector< function<MenuState* (InstructionsMenuState&)> > listOfCreatingFunctions;
 
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
-
-	//// Создать состояние - меню инструкций
-	//InstructionsMenuState* createInstructionsMenuState();
-
 };
 

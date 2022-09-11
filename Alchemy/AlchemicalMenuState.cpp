@@ -12,11 +12,6 @@ AlchemicalMenuState::AlchemicalMenuState(AlchemicalUserInterface* alchemicalUser
 	this->numberOfStates = NUMBER_OF_ALCHEMICAL_MENU_ITEMS;
 }
 
-//AlchemicalMenuState::~AlchemicalMenuState()
-//{
-//	clear();
-//}
-
 void AlchemicalMenuState::printMenu()
 {
 	// Сбрасываем координату каждый раз заходя в метод печати
@@ -60,18 +55,6 @@ MenuState* AlchemicalMenuState::getNextState()
 	return this->stateCreatingFunctions[currentYCursorCoordState](*this);
 }
 
-//void AlchemicalMenuState::fillStateCreatingFunctions()
-//{
-//	// Стартовый ключ в ассоциативном массиве
-//	int startKey = this->currentYCursorCoordState;
-//
-//	// Заполняем ассоциативный массив
-//	for (int i = 0; i < this->numberOfStates; ++i, ++startKey)
-//	{
-//		stateCreatingFunctions.emplace(startKey, this->listOfCreatingFunctions[i]);
-//	}
-//}
-
 CreatingPotionsMenuState* AlchemicalMenuState::createCreatingPotionsMenuState()
 {
 	return new CreatingPotionsMenuState(this->alchemicalUserInterface);
@@ -106,4 +89,3 @@ ReturnMenuState* AlchemicalMenuState::createReturnMenuState()
 {
 	return new ReturnMenuState(new MainMenuState(this->alchemicalUserInterface), this->alchemicalUserInterface);
 }
-

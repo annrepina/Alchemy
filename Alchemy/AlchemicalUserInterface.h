@@ -1,7 +1,5 @@
 #pragma once
 #include "UserInterface.h"
-//#include "Alchemist.h"
-//#include "IngredientBuilder.h"
 #include "AlchemyLogicBuilder.h"
 #include "IngredientsTablePrinter.h"
 #include "MainMenuState.h"
@@ -17,13 +15,10 @@
 #define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
 #define PAGE_Y_COORD					44		// Координата Y меню страниц таблицы - УВЕЛИЧИЛА НА 6
 
-
 // Значения по умолчанию
 #define FIRST_PAGE						1		// Первая страница таблицы
 #define DEFAULT_NUMBER_OF_COLUMN		1		// Номер колонки по умолчанию при работе с таблицей
-
 #define MAX_INT							2147483647	// Самое большое число int 
-
 #define TWO_LINES						2		// Две строчки
 
 class AlchemicalUserInterface : public UserInterface
@@ -78,7 +73,7 @@ public:
 	void printFirstTablePage(TableCode code);
 
 	// Выбрать Id из таблицы
-	int chooseId(/*string strChoice, */TableCode code);
+	int chooseId(TableCode code);
 
 	// Выбрать Id из имеющихся элементов
 	int chooseIdFromAvailableElements(string strChoice, TableCode code);
@@ -126,7 +121,10 @@ private:
 	// Настроить программу Алхимии
 	void setAlchemyLogic();
 
-	bool isFileForReadingEmpty();
+	void writeAlchemyLogic();
+
+	// Стирает с консоли все после печати алхимика
+	void eraseScreenAfterAlchemist();
 
 #pragma region НАЗВАНИЕ ЗАГОЛОВКОВ
 
@@ -147,6 +145,8 @@ private:
 
 #pragma endregion НАЗВАНИЕ ЗАГОЛОВКОВ
 
+#pragma region Выбор
+
 	// Выбрать страницу таблицы
 	void choosePage(int page, TableCode code);
 
@@ -154,6 +154,8 @@ private:
 
 	// Выбрать страницу таблицы среди доступных элементов
 	void choosePageFromAvailableContent(int page, TableCode code);
+
+#pragma endregion ВЫБОР
 
 #pragma region ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
 
@@ -170,11 +172,6 @@ private:
 	bool checkVerticalArrowChoice(bool& orderOfSorting, int keyCode, TableCode code);
 
 #pragma endregion ПРОВЕРКА МЕНЮ ИЛИ ВЫБОРА
-
-	// Стирает с консоли все после печати алхимика
-	void eraseScreenAfterAlchemist();
-
-	void writeAlchemyLogic();
 
 #pragma region МЕТОДЫ ПЕЧАТИ
 
@@ -209,6 +206,7 @@ private:
 	// Неправильный выбор столбца или направления сортировки
 	bool isColumnAndOrderChoiceFalse(int key);
 
-#pragma endregion ПРЕДИКАТЫ
+	bool isFileForReadingEmpty();
 
+#pragma endregion ПРЕДИКАТЫ
 };

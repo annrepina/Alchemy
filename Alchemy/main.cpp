@@ -27,13 +27,13 @@ int main()
 
     //string path = "AlchemyLogicBinary.txt";
 
-    AlchemicalUserInterface userInterface;
+    AlchemicalUserInterface* userInterface = new AlchemicalUserInterface();
 
     //userInterface.setTitle("Зельеварение");
 
-    userInterface.launchProgram();
+    userInterface->launchProgram();
 
-
+    delete userInterface;
 
 
     //AlchemyProgramParser parser;

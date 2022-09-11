@@ -26,9 +26,6 @@ void BuyNewIngredientsMenuState::printMenu()
 	// такого ингредиента еще нет?
 	bool tryAddNewIngredient = false;
 
-	//// Задаем таблицу эффектов
-	//builder.setEffectsTable(this->alchemicalUserInterface->getAlchemyLogic()->getEffectsTable());
-
 	setListOfCreatingFunctions();
 
 	fillMap<function<MenuState* (BuyNewIngredientsMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
@@ -50,25 +47,11 @@ void BuyNewIngredientsMenuState::printMenu()
 
 		printColoredTextByCoords(inputName, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
 
-		//cout << inputName;
-
-		//cin.getline()
-
-		//std::string name;
-		//std::cout << "Input name: ";
 		std::cin.ignore(1, '\n');
 		getline(std::cin, ingredientName);
 
 		if (ingredientName == "")
 			continue;
-
-		//ingredientName = std::getline(std::cin, ingredientName);
-
-		//cin.getline(ingredientName, 25, '\n');
-
-		//getline(cin, ingredientName, '\n');
-
-		//cin >> ingredientName;
 
 		// Удачно ли добавили новый ингредиент
 		tryAddNewIngredient = this->alchemicalUserInterface->getAlchemyLogic()->tryAddNewIngredientToTable(ingredientName);
@@ -76,13 +59,10 @@ void BuyNewIngredientsMenuState::printMenu()
 		// если неудачно, значит такой ингредиент в базе уже есть
 		if (!tryAddNewIngredient)
 		{
-			cout << "У Аркадии есть " << ingredientName << ". ";
+			cout << "У Аркадии уже есть " << ingredientName << ". ";
 
 			// ищем по имени этот ингредиент
 			ingredient = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getIngredientByName(ingredientName);
-
-			// выводим скок стоит
-			//cout << ingredientName << " стоит " << ingredient->getPrice() << " септ." << endl;
 
 			// узнаем id ингредиента
 			ingredientId = this->alchemicalUserInterface->getAlchemyLogic()->getIngredientsTable()->getIdByIngredient(ingredient);

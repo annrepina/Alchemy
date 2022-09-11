@@ -21,6 +21,7 @@ using namespace std;
 
 class AlchemicalUserInterface;
 
+// Класс - состояние меню
 class MenuState
 {
 public:
@@ -48,8 +49,6 @@ public:
 
 	// Получить следующее состояние
 	virtual MenuState* getNextState() = 0;
-
-	//void fillMenuStates();
 
 protected:
 
@@ -80,21 +79,25 @@ protected:
 	// Задать список создающих стейты функций
 	virtual void setListOfCreatingFunctions() = 0;
 
+#pragma region МЕТОДЫ ПЕЧАТИ
+
 	// Печать название меню
 	virtual void printMenuTitle();
 
 	// Печать главного меню
 	virtual void printMenuItems();
 
+	virtual int printChoiceId(int yCoord, int xCoord, int tableCode);
+
+	virtual int printChoiceNumber(int yCoord, string choice);
+
+#pragma endregion МЕТОДЫ ПЕЧАТИ
+
 	// Принять решение
 	virtual void chooseMenuItem();
 
 	// Выбор продолжить или назад
 	virtual void chooseContinueOrGoBack();
-
-	virtual int printChoiceId(int yCoord, int xCoord, int tableCode);
-
-	virtual int printChoiceNumber(int yCoord, string choice);
 
 	// Ассоциативный массив состояний
 	std::map<int, MenuState*> menuStates;
@@ -113,7 +116,4 @@ protected:
 
 	// Действия для выхода из меню
 	virtual void exitMenu();
-
-private:
-
 };

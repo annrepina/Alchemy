@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\MenuStates">
+      <UniqueIdentifier>{b8683ff2-6c90-444f-994b-250a7c26a825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\MenuStates">
+      <UniqueIdentifier>{c1578bd4-c978-4b70-8c1d-1b90330e37c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,28 +96,10 @@
     <ClCompile Include="IngredientsTablePrinter.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="MenuState.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="MainMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="AlchemicalMenuState.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="InstructionsMenuState.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="BuyingIngredientsFromListMenuState.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="BuyingIngredientsMenuState.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="CreatingPotionsMenuState.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="EatingIngredientsMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="ReturnMenuState.cpp">
@@ -124,9 +112,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="WorkWithTablesMenuState.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="BuyNewIngredientsMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="IObserver.cpp">
@@ -210,6 +195,27 @@
     <ClCompile Include="PotionTableBinaryReader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Исходные файлы\MenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="AlchemicalMenuState.cpp">
+      <Filter>Исходные файлы\MenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="BuyingIngredientsFromListMenuState.cpp">
+      <Filter>Исходные файлы\MenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="BuyingIngredientsMenuState.cpp">
+      <Filter>Исходные файлы\MenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="BuyNewIngredientsMenuState.cpp">
+      <Filter>Исходные файлы\MenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CreatingPotionsMenuState.cpp">
+      <Filter>Исходные файлы\MenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="EatingIngredientsMenuState.cpp">
+      <Filter>Исходные файлы\MenuStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Effect.h">
@@ -284,28 +290,7 @@
     <ClInclude Include="IngredientsTablePrinter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="MenuState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="MainMenuState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="AlchemicalMenuState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="InstructionsMenuState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="BuyingIngredientsFromListMenuState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="BuyingIngredientsMenuState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="CreatingPotionsMenuState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="EatingIngredientsMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ReturnMenuState.h">
@@ -318,9 +303,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="WorkWithTablesMenuState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="BuyNewIngredientsMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="IObserver.h">
@@ -403,6 +385,30 @@
     </ClInclude>
     <ClInclude Include="PotionTableBinaryReader.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Файлы заголовков\MenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="AlchemicalMenuState.h">
+      <Filter>Файлы заголовков\MenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="BuyingIngredientsFromListMenuState.h">
+      <Filter>Файлы заголовков\MenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="BuyingIngredientsMenuState.h">
+      <Filter>Файлы заголовков\MenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="BuyNewIngredientsMenuState.h">
+      <Filter>Файлы заголовков\MenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CreatingPotionsMenuState.h">
+      <Filter>Файлы заголовков\MenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="EatingIngredientsMenuState.h">
+      <Filter>Файлы заголовков\MenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="InstructionsMenuState.h">
+      <Filter>Файлы заголовков\MenuStates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

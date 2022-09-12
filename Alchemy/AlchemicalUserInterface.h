@@ -95,9 +95,6 @@ public:
 	// Выбрать Id из таблицы
 	int chooseId(TableCode code);
 
-	// Выбрать Id из имеющихся элементов
-	int chooseIdFromAvailableElements(string strChoice, TableCode code);
-
 	// Вбрать кол-во ингредиента или зелья
 	int chooseNumber(string strChoice, int yCoord);
 
@@ -107,9 +104,6 @@ public:
 	// Выбрать столбец и порядок сортировки
 	void chooseColumnAndOrderOfSorting(int& numberOfColum, bool& orderOfSorting, TableCode code);
 
-	// Выбрать столбез для фильтрации
-	void chooseColumnForFiltration(int& numberOfColumn, TableCode code);
-
 #pragma endregion МЕТОДЫ ВЫБОРА
 
 	// Расчитать данные по таблицам
@@ -118,8 +112,8 @@ public:
 	// Заполни контент таблиц
 	void fillInTablesContent();
 
+	// Назначить подписчиков
 	void addSubscribers();
-
 
 private:
 
@@ -138,6 +132,7 @@ private:
 	// Принтер для печати таблицы ингредиентов
 	IngredientsTablePrinter* ingredientsTableprinter;
 
+	// Принтер печати таблицы зелий
 	PotionTablePrinter* potionTablePrinter;
 
 	// Состояние меню

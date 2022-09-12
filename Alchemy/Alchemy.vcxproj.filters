@@ -63,9 +63,6 @@
     <ClCompile Include="FileReader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="AlchemicalUserInterface.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="EffectsTable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -220,6 +217,9 @@
       <Filter>Исходные файлы\MenuStates</Filter>
     </ClCompile>
     <ClCompile Include="UserInterface.cpp">
+      <Filter>Исходные файлы\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="AlchemicalUserInterface.cpp">
       <Filter>Исходные файлы\Interfaces</Filter>
     </ClCompile>
   </ItemGroup>

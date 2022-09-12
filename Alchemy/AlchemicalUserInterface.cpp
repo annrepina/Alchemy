@@ -210,38 +210,38 @@ void AlchemicalUserInterface::choosePageWhileSorting(vector<vector<string>> cont
 
 		switch (this->keyBoard->getPressedKey())
 		{
-		case VK_LEFT:
-		{
-			if (checkHorizontalArrowChoice(content.size(), page, code, VK_LEFT))
+			case VK_LEFT:
 			{
-				printTablePagesInLoopWhileSorting(content, code, page, numberOfColumn, orderOfSorting);
+				if (checkHorizontalArrowChoice(content.size(), page, code, VK_LEFT))
+				{
+					printTablePagesInLoopWhileSorting(content, code, page, numberOfColumn, orderOfSorting);
+					exit = true;
+				}
+			}
+			break;
+
+			case VK_RIGHT:
+			{
+				// Проверяем стрелочки
+				if (checkHorizontalArrowChoice(content.size(), page, code, VK_RIGHT))
+				{
+					printTablePagesInLoopWhileSorting(content, code, page, numberOfColumn, orderOfSorting);
+					exit = true;
+				}
+			}
+			break;
+
+			case VK_RETURN:
+			{
 				exit = true;
 			}
-		}
-		break;
+			break;
 
-		case VK_RIGHT:
-		{
-			// Проверяем стрелочки
-			if (checkHorizontalArrowChoice(content.size(), page, code, VK_RIGHT))
+			case VK_ESCAPE:
 			{
-				printTablePagesInLoopWhileSorting(content, code, page, numberOfColumn, orderOfSorting);
-				exit = true;
+				wasExit = true;
 			}
-		}
-		break;
-
-		case VK_RETURN:
-		{
-			exit = true;
-		}
-		break;
-
-		case VK_ESCAPE:
-		{
-			wasExit = true;
-		}
-		break;
+			break;
 		}
 	} while (false == wasExit && false == exit);
 }
@@ -260,37 +260,37 @@ void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode
 
 		switch (this->keyBoard->getPressedKey())
 		{
-		case VK_LEFT:
-		{
-			if (checkHorizontalArrowChoice(page, code, VK_LEFT))
+			case VK_LEFT:
 			{
-				printTableWithAvailableToUserElements(code, page);
+				if (checkHorizontalArrowChoice(page, code, VK_LEFT))
+				{
+					printTableWithAvailableToUserElements(code, page);
+					exit = true;
+				}
+			}
+			break;
+
+			case VK_RIGHT:
+			{
+				// Проверяем стрелочки
+				if (checkHorizontalArrowChoice(page, code, VK_RIGHT))
+				{
+					printTableWithAvailableToUserElements(code, page);
+					exit = true;
+				}
+			}
+			break;
+
+			case VK_RETURN:
+			{
 				exit = true;
 			}
-		}
-		break;
+			break;
 
-		case VK_RIGHT:
-		{
-			// Проверяем стрелочки
-			if (checkHorizontalArrowChoice(page, code, VK_RIGHT))
+			case VK_ESCAPE:
 			{
-				printTableWithAvailableToUserElements(code, page);
-				exit = true;
+				wasExit = true;
 			}
-		}
-		break;
-
-		case VK_RETURN:
-		{
-			exit = true;
-		}
-		break;
-
-		case VK_ESCAPE:
-		{
-			wasExit = true;
-		}
 		break;
 		}
 	} while (false == wasExit && false == exit);
@@ -357,11 +357,6 @@ void AlchemicalUserInterface::chooseColumnAndOrderOfSorting(int& numberOfColumn,
 	} while (false == wasExit && false == exit);
 }
 
-void AlchemicalUserInterface::chooseColumnForFiltration(int& numberOfColumn, TableCode code)
-{
-
-}
-
 void AlchemicalUserInterface::calculateTablesData()
 {
 	// Считаем данные по таблицам 
@@ -424,11 +419,6 @@ int AlchemicalUserInterface::chooseId(TableCode code)
 	}
 
 	return id;
-}
-
-int AlchemicalUserInterface::chooseIdFromAvailableElements(string strChoice, TableCode code)
-{
-	return 0;
 }
 
 int AlchemicalUserInterface::chooseNumber(string strChoice, int yCoord)
@@ -623,8 +613,6 @@ void AlchemicalUserInterface::printMenuInLoop(map<int, string> menu, string menu
 	printMenu(menu);
 
 	cout << goToXY(currentYCursorCoord, STANDARD_CURSOR_X_COORD);
-	
-	//chooseMenuItem(menu);
 }
 
 void AlchemicalUserInterface::printBye()
@@ -654,8 +642,6 @@ void AlchemicalUserInterface::printAlchemist()
 
 void AlchemicalUserInterface::printMenuTitle(string title)
 {
-	//eraseScreenAfterAlchemist();
-
 	this->currentXCursorCoord = calculateXCoordInMiddle(title);
 
 	cout << goToXY(this->currentYCursorCoord - TWO_LINES, currentXCursorCoord);
@@ -735,7 +721,6 @@ void AlchemicalUserInterface::printFirstTablePage(TableCode code)
 	{
 
 	}
-
 }
 
 void AlchemicalUserInterface::printAlchemyLogic()
@@ -773,12 +758,3 @@ bool AlchemicalUserInterface::isColumnAndOrderChoiceFalse(int key)
 
 	return res;
 }
-
-//int AlchemicalUserInterface::calculateNumberOfColumnForFiltration()
-//{
-//	int numberOfColumn = currentYCursorCoord - MAIN_MENU_Y_COORD + 1;
-//
-//	return numberOfColumn;
-//}
-
-

@@ -57,7 +57,7 @@ void SellingIngredientsMenuState::printMenu()
 	this->alchemicalUserInterface->printTableWithAvailableToUserElements(AlchemicalUserInterface::TableCode::IngredientTable, page);
 
 	// если был нажат esc
-	if (true == this->alchemicalUserInterface->getExitFlag())
+	if (true == this->alchemicalUserInterface->getWasExit())
 	{
 		goBack();
 

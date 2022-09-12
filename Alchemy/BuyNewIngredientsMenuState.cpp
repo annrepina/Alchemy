@@ -100,10 +100,10 @@ void BuyNewIngredientsMenuState::printMenu()
 	chooseContinueOrGoBack();
 
 	// если был нажат ESC, то выходим назад
-	if (this->alchemicalUserInterface->getExitFlag() == true)
+	if (this->alchemicalUserInterface->getWasExit() == true)
 	{
 		// сбрасываем флаг
-		this->alchemicalUserInterface->setExitFlag(false);
+		this->alchemicalUserInterface->setWasExit(false);
 
 		this->alchemicalUserInterface->setState(this->getNextState());
 	}

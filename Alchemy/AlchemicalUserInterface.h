@@ -9,18 +9,19 @@
 #include "AlchemyLogicReader.h"
 
 // Координаты
-#define TITLE_Y_COORD					1		// Координаты Y курсора для печати названия программы
-#define EXIT_Y_COORD					2		// Координата Y кнопки выхода
-#define Y_COORD_AFTER_ALCHEMIST			8		// Координата Y после печати алхимика
-#define MAIN_MENU_Y_COORD				10		// Координата Y меню действий
-#define PAGE_Y_COORD					44		// Координата Y меню страниц таблицы - УВЕЛИЧИЛА НА 6
+#define TITLE_Y_COORD					1			// Координаты Y курсора для печати названия программы
+#define EXIT_Y_COORD					2			// Координата Y кнопки выхода
+#define Y_COORD_AFTER_ALCHEMIST			8			// Координата Y после печати алхимика
+#define MAIN_MENU_Y_COORD				10			// Координата Y меню действий
+#define PAGE_Y_COORD					44			// Координата Y меню страниц таблицы - УВЕЛИЧИЛА НА 6
 
 // Значения по умолчанию
-#define FIRST_PAGE						1		// Первая страница таблицы
-#define DEFAULT_NUMBER_OF_COLUMN		1		// Номер колонки по умолчанию при работе с таблицей
+#define FIRST_PAGE						1			// Первая страница таблицы
+#define DEFAULT_NUMBER_OF_COLUMN		1			// Номер колонки по умолчанию при работе с таблицей
 #define MAX_INT							2147483647	// Самое большое число int 
-#define TWO_LINES						2		// Две строчки
+#define TWO_LINES						2			// Две строчки
 
+// Интерфейс программы - Зельеварение
 class AlchemicalUserInterface : public UserInterface
 {
 public:
@@ -33,15 +34,19 @@ public:
 
 #pragma region ГЕТТЕРЫ
 
-	// Получить граничную координату Y
+	// Получить граничную координату Y для проверки нажатия стрелочек
 	int getBoundaryYCoord();
 
-	bool getExitFlag();
+	// Узнать был ли выход
+	bool getWasExit();
 
+	// Получить логику програмы зельеварения
 	AlchemyLogic* getAlchemyLogic();
 
+	// Получить принтер таблицы ингредиентов
 	IngredientsTablePrinter* getIngredientsTablePrinter();
 
+	// Получить принтер таблицы зелий
 	PotionTablePrinter* getPotionTablePrinter();
 
 #pragma endregion ГЕТТЕРЫ
@@ -51,19 +56,27 @@ public:
 	// Установить состояние
 	void setState(MenuState* state);
 
-	void setExitFlag(bool exit);
+	// установить значение для булевой "был выход?"
+	void setWasExit(bool exit);
+
+	// Задать таблицы
+	void setTables();
 
 #pragma endregion CЕТТЕРЫ
 
+	// Код таблицы
 	enum class TableCode
 	{
 		IngredientTable,
 		PotionTable
 	};
 
+#pragma region МЕТОДЫ ПЕЧАТИ
+
 	// Печать страниц таблиц в цикле
 	void printTablePagesInLoop(TableCode code, int& page);
 
+	// Печать страниц таблиц в цикле во время сортировки
 	void printTablePagesInLoopWhileSorting(vector<vector<string>> content, TableCode code, int& page, int numberOfColumn, bool orderOfSorting);
 
 	// Печать таблицы только с теми элементами, которые существуют у юзера
@@ -71,6 +84,13 @@ public:
 
 	// Печать таблицы первой страницы таблицы (только то, что есть у юзера)
 	void printFirstTablePage(TableCode code);
+
+	// Печать логику алхимии
+	void printAlchemyLogic();
+
+#pragma endregion МЕТОДЫ ПЕЧАТИ
+
+#pragma region МЕТОДЫ ВЫБОРА
 
 	// Выбрать Id из таблицы
 	int chooseId(TableCode code);
@@ -81,11 +101,25 @@ public:
 	// Вбрать кол-во ингредиента или зелья
 	int chooseNumber(string strChoice, int yCoord);
 
+	// Сделать выход из меню
 	void chooseExit();
 
+	// Выбрать столбец и порядок сортировки
 	void chooseColumnAndOrderOfSorting(int& numberOfColum, bool& orderOfSorting, TableCode code);
 
+	// Выбрать столбез для фильтрации
 	void chooseColumnForFiltration(int& numberOfColumn, TableCode code);
+
+#pragma endregion МЕТОДЫ ВЫБОРА
+
+	// Расчитать данные по таблицам
+	void calculateTablesData();
+
+	// Заполни контент таблиц
+	void fillInTablesContent();
+
+	void addSubscribers();
+
 
 private:
 
@@ -109,8 +143,8 @@ private:
 	// Состояние меню
 	MenuState* state;
 
-	// Флаг для выхода из главного цикла
-	bool exitFlag;
+	// был выход из главного цикла?
+	bool wasExit;
 
 	// Граничная координата Y для управления стрелками
 	int boundaryYCoord;
@@ -121,6 +155,7 @@ private:
 	// Настроить программу Алхимии
 	void setAlchemyLogic();
 
+	// Записать в файл логику программы зельеварения
 	void writeAlchemyLogic();
 
 	// Стирает с консоли все после печати алхимика
@@ -150,6 +185,7 @@ private:
 	// Выбрать страницу таблицы
 	void choosePage(int page, TableCode code);
 
+	// Выбрать страницу во время сортировки
 	void choosePageWhileSorting(vector<vector<string>> content, int page, TableCode code, int numberOfColumn, bool orderOfSorting);
 
 	// Выбрать страницу таблицы среди доступных элементов
@@ -206,6 +242,7 @@ private:
 	// Неправильный выбор столбца или направления сортировки
 	bool isColumnAndOrderChoiceFalse(int key);
 
+	// Файл для печати пустой?
 	bool isFileForReadingEmpty();
 
 #pragma endregion ПРЕДИКАТЫ

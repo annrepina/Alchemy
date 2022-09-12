@@ -90,7 +90,7 @@ void WorkWithPotionTableMenuState::launchFilterMenu()
 
 	printFilterItems(this->listOfColumnFilters);
 
-	while (this->alchemicalUserInterface->getExitFlag() != true)
+	while (this->alchemicalUserInterface->getWasExit() != true)
 	{
 		int page = FIRST_PAGE;
 
@@ -107,10 +107,10 @@ void WorkWithPotionTableMenuState::launchFilterMenu()
 		chooseMenuItem(this->listOfColumnFilters, X_COORD_FOR_FILTER_ITEMS);
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		if (this->alchemicalUserInterface->getExitFlag() == true)
+		if (this->alchemicalUserInterface->getWasExit() == true)
 		{
 			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
+			this->alchemicalUserInterface->setWasExit(false);
 
 			currentYCursorCoordState = MAIN_MENU_Y_COORD + 1;
 
@@ -132,10 +132,10 @@ void WorkWithPotionTableMenuState::launchFilterMenu()
 		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndResearch, AlchemicalUserInterface::TableCode::PotionTable, page, numberOfColumnforSorting, orderOfSorting);
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		if (this->alchemicalUserInterface->getExitFlag() == true)
+		if (this->alchemicalUserInterface->getWasExit() == true)
 		{
 			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
+			this->alchemicalUserInterface->setWasExit(false);
 
 			currentYCursorCoordState = MAIN_MENU_Y_COORD + 1;
 
@@ -146,7 +146,7 @@ void WorkWithPotionTableMenuState::launchFilterMenu()
 
 void WorkWithPotionTableMenuState::launchSortingMenu()
 {
-	while (this->alchemicalUserInterface->getExitFlag() != true)
+	while (this->alchemicalUserInterface->getWasExit() != true)
 	{
 		int page = FIRST_PAGE;
 
@@ -158,10 +158,10 @@ void WorkWithPotionTableMenuState::launchSortingMenu()
 		sortData();
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		if (this->alchemicalUserInterface->getExitFlag() == true)
+		if (this->alchemicalUserInterface->getWasExit() == true)
 		{
 			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
+			this->alchemicalUserInterface->setWasExit(false);
 
 			return;
 		}
@@ -169,10 +169,10 @@ void WorkWithPotionTableMenuState::launchSortingMenu()
 		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndResearch, AlchemicalUserInterface::TableCode::PotionTable, page, numberOfColumnforSorting, orderOfSorting);
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		if (this->alchemicalUserInterface->getExitFlag() == true)
+		if (this->alchemicalUserInterface->getWasExit() == true)
 		{
 			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
+			this->alchemicalUserInterface->setWasExit(false);
 
 			return;
 		}

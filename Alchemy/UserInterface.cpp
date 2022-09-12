@@ -3,7 +3,6 @@
 UserInterface::UserInterface()
 {
 	this->titleXCoord = 0;
-	//this->menuCode = 0;
 	this->currentXCursorCoord = 0;
 	this->currentYCursorCoord = 0;
 	this->keyBoard = this->keyBoard->getInstance();
@@ -225,4 +224,3 @@ bool UserInterface::isEnterEscKeyFalse(int key)
 
 	return res;
 }
-

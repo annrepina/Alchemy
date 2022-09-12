@@ -159,12 +159,12 @@ void MenuState::chooseMenuItem()
 
 			case VK_ESCAPE:
 			{
-				this->alchemicalUserInterface->setExitFlag(true);
+				this->alchemicalUserInterface->setWasExit(true);
 				//exitFlag = true;
 			}
 			break;
 		}
-	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
+	} while (false == this->alchemicalUserInterface->getWasExit() && false == innerExitFlag);
 }
 
 void MenuState::chooseContinueOrGoBack()
@@ -191,11 +191,11 @@ void MenuState::chooseContinueOrGoBack()
 
 			case VK_ESCAPE:
 			{
-				this->alchemicalUserInterface->setExitFlag(true);
+				this->alchemicalUserInterface->setWasExit(true);
 			}
 			break;
 		}
-	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
+	} while (false == this->alchemicalUserInterface->getWasExit() && false == innerExitFlag);
 }
 
 void MenuState::checkVerticalArrowsChoice(int borderYCoord, int keyCode)
@@ -240,7 +240,7 @@ void MenuState::clear()
 void MenuState::goBack()
 {
 	// סבנאסûגאול פכאד
-	this->alchemicalUserInterface->setExitFlag(false);
+	this->alchemicalUserInterface->setWasExit(false);
 
 	this->alchemicalUserInterface->setState(this->getNextState());
 }

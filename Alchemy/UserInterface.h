@@ -6,8 +6,6 @@
 #include "Formatting.h"
 #include "ServiceFunctions.h"
 #include "KeyBoard.h"
-//#include "MenuState.h"
-//#include "MenuState.h"
 
 using namespace std;
 
@@ -20,21 +18,18 @@ using std::placeholders::_1;
 #define Y_COORD_AFTER_MENU_TITLE_1		9		// Координата Y после печати заголовка меню
 
 // Коды клавиш
-#define VK_1					0x31	// Клавиша 1
-#define VK_2					0x32	// Клавиша 2
-#define VK_NUMPAD1				0x61	// Клавиша цифровой клавиатуры 1
-#define VK_NUMPAD2				0x62	// Клавиша цифровой клавиатуры 2
-#define VK_ESCAPE				0x1B	// Клавиша ESC
-#define VK_RETURN				0x0D	// Клавиша Enter
-#define VK_LEFT					75		// Клавиша со стрелкой влево
-#define VK_UP					72		// Клавиша со стрелкой вверх
-#define VK_RIGHT				77		// Клавиша со стрелкой вправо
-#define VK_DOWN					80		// Клавиша со стрелкой вниз
+#define VK_1							0x31	// Клавиша 1
+#define VK_2							0x32	// Клавиша 2
+#define VK_NUMPAD1						0x61	// Клавиша цифровой клавиатуры 1
+#define VK_NUMPAD2						0x62	// Клавиша цифровой клавиатуры 2
+#define VK_ESCAPE						0x1B	// Клавиша ESC
+#define VK_RETURN						0x0D	// Клавиша Enter
+#define VK_LEFT							75		// Клавиша со стрелкой влево
+#define VK_UP							72		// Клавиша со стрелкой вверх
+#define VK_RIGHT						77		// Клавиша со стрелкой вправо
+#define VK_DOWN							80		// Клавиша со стрелкой вниз
 
-
-#define NUMBER_OF_MAIN_MENU_ITEMS	6		// Количество главных пунктов меню в интерфейсе вместе с "выберите"
-
-#define EXIT_INT					-1		// Значения int в случае выхода
+#define NUMBER_OF_MAIN_MENU_ITEMS		6		// Количество главных пунктов меню в интерфейсе вместе с "выберите"
 
 
 // Класс - Пользовательский интерфейс
@@ -153,7 +148,4 @@ protected:
 	// Текущая координата Y
 	int currentYCursorCoord;
 
-private:
-
 };
-

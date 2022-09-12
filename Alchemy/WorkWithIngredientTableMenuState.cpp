@@ -212,7 +212,7 @@ void WorkWithIngredientTableMenuState::printFilterItems(vector<string> listOfIte
 
 void WorkWithIngredientTableMenuState::workWithTable()
 {
-	while (this->alchemicalUserInterface->getExitFlag() == false)
+	while (this->alchemicalUserInterface->getWasExit() == false)
 	{
 		chooseMenuItem(this->listOfInnerMenuItems, STANDARD_CURSOR_X_COORD);
 
@@ -304,12 +304,12 @@ void WorkWithIngredientTableMenuState::chooseMenuItem(vector<string> listOfItems
 
 			case VK_ESCAPE:
 			{
-				this->alchemicalUserInterface->setExitFlag(true);
+				this->alchemicalUserInterface->setWasExit(true);
 				//exitFlag = true;
 			}
 			break;
 		}
-	} while (false == this->alchemicalUserInterface->getExitFlag() && false == innerExitFlag);
+	} while (false == this->alchemicalUserInterface->getWasExit() && false == innerExitFlag);
 }
 
 int WorkWithIngredientTableMenuState::defineOperation()
@@ -339,7 +339,7 @@ void WorkWithIngredientTableMenuState::workWithTable(OperationCode operationCode
 
 void WorkWithIngredientTableMenuState::launchSortingMenu()
 {
-	while (this->alchemicalUserInterface->getExitFlag() != true)
+	while (this->alchemicalUserInterface->getWasExit() != true)
 	{
 		int page = FIRST_PAGE;
 
@@ -349,10 +349,10 @@ void WorkWithIngredientTableMenuState::launchSortingMenu()
 		this->alchemicalUserInterface->chooseColumnAndOrderOfSorting(numberOfColumnforSorting, orderOfSorting, AlchemicalUserInterface::TableCode::IngredientTable);
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		if (this->alchemicalUserInterface->getExitFlag() == true)
+		if (this->alchemicalUserInterface->getWasExit() == true)
 		{
 			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
+			this->alchemicalUserInterface->setWasExit(false);
 
 			return;
 		}
@@ -364,10 +364,10 @@ void WorkWithIngredientTableMenuState::launchSortingMenu()
 		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndResearch, AlchemicalUserInterface::TableCode::IngredientTable, page, numberOfColumnforSorting, orderOfSorting);
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		if (this->alchemicalUserInterface->getExitFlag() == true)
+		if (this->alchemicalUserInterface->getWasExit() == true)
 		{
 			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
+			this->alchemicalUserInterface->setWasExit(false);
 
 			return;
 		}
@@ -392,7 +392,7 @@ void WorkWithIngredientTableMenuState::launchFilterMenu()
 
 	printFilterItems(this->listOfColumnFilters);
 
-	while (this->alchemicalUserInterface->getExitFlag() != true)
+	while (this->alchemicalUserInterface->getWasExit() != true)
 	{
 		int page = FIRST_PAGE;
 
@@ -409,10 +409,10 @@ void WorkWithIngredientTableMenuState::launchFilterMenu()
 		chooseMenuItem(this->listOfColumnFilters, X_COORD_FOR_FILTER_ITEMS);
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		if (this->alchemicalUserInterface->getExitFlag() == true)
+		if (this->alchemicalUserInterface->getWasExit() == true)
 		{
 			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
+			this->alchemicalUserInterface->setWasExit(false);
 
 			currentYCursorCoordState = MAIN_MENU_Y_COORD + 1;
 
@@ -434,10 +434,10 @@ void WorkWithIngredientTableMenuState::launchFilterMenu()
 		this->alchemicalUserInterface->printTablePagesInLoopWhileSorting(contentAfterSortingAndResearch, AlchemicalUserInterface::TableCode::IngredientTable, page, numberOfColumnforSorting, orderOfSorting);
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
-		if (this->alchemicalUserInterface->getExitFlag() == true)
+		if (this->alchemicalUserInterface->getWasExit() == true)
 		{
 			// сбрасываем флаг
-			this->alchemicalUserInterface->setExitFlag(false);
+			this->alchemicalUserInterface->setWasExit(false);
 
 			currentYCursorCoordState = MAIN_MENU_Y_COORD + 1;
 

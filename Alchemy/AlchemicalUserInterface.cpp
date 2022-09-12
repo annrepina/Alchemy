@@ -2,7 +2,7 @@
 
 AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 {
-	this->exitFlag = false;
+	this->wasExit = false;
 	this->currentYCursorCoord = MAIN_MENU_Y_COORD;
 	this->boundaryYCoord = MAIN_MENU_Y_COORD;
 	this->instructionsMenuTitle = "Инструкции к программе \"Зельеварение\"";
@@ -12,7 +12,6 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	this->buingFaultMenuTitle = "Недостаточно средств для покупки ингредиента №";
 	this->title = "Зельеварение";
 	this->pathForWriting = "AlchemyLogicBinary.txt";
-
 
 	// Программа - алхимия
 	this->alchemyLogic = nullptr;
@@ -27,45 +26,20 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	this->potionTablePrinter = new PotionTablePrinter();
 
 	this->state = new MainMenuState(this);
-
 }
 
 void AlchemicalUserInterface::launchProgram()
 {
 	setAlchemyLogic();
+	setTables();
 
-	// Передаем в принтер таблицу
-	this->ingredientsTableprinter->setTable(this->alchemyLogic->getIngredientsTable());
-	this->potionTablePrinter->setTable(this->alchemyLogic->getPotionTable());
+	calculateTablesData();
 
-	// Считаем данные по таблицам 
-	this->ingredientsTableprinter->calculateData();
-	this->potionTablePrinter->calculateData();
+	fillInTablesContent();
 
-	// Заполняем таблицу контентом
-	this->ingredientsTableprinter->fillInTableContent();
-	this->potionTablePrinter->fillInTableContent();
+	addSubscribers();
 
-	// Добавляем подписчиков
-	this->alchemyLogic->getIngredientsTable()->subscribe(this->ingredientsTableprinter);
-	this->alchemyLogic->getPotionTable()->subscribe(this->potionTablePrinter);
-
-	printTitle();
-
-	printExitButton();
-
-	do
-	{
-		printAlchemist();
-
-		// Вытащила из принтМенюТайтл
-		eraseScreenAfterAlchemist();
-
-		this->state->printMenu();
-
-	} while (exitFlag == false);
-
-	printBye();
+	printAlchemyLogic();
 
 	writeAlchemyLogic();
 }
@@ -77,9 +51,9 @@ int AlchemicalUserInterface::getBoundaryYCoord()
 	return this->boundaryYCoord;
 }
 
-bool AlchemicalUserInterface::getExitFlag()
+bool AlchemicalUserInterface::getWasExit()
 {
-	return this->exitFlag;
+	return this->wasExit;
 }
 
 AlchemyLogic* AlchemicalUserInterface::getAlchemyLogic()
@@ -115,9 +89,16 @@ void AlchemicalUserInterface::setState(MenuState* state)
 	}
 }
 
-void AlchemicalUserInterface::setExitFlag(bool exit)
+void AlchemicalUserInterface::setWasExit(bool exit)
 {
-	this->exitFlag = exit;
+	this->wasExit = exit;
+}
+
+void AlchemicalUserInterface::setTables()
+{
+	// Передаем в принтер таблицу
+	this->ingredientsTableprinter->setTable(this->alchemyLogic->getIngredientsTable());
+	this->potionTablePrinter->setTable(this->alchemyLogic->getPotionTable());
 }
 
 void AlchemicalUserInterface::setAlchemyLogic()
@@ -208,11 +189,11 @@ void AlchemicalUserInterface::choosePage(int page, TableCode code)
 
 			case VK_ESCAPE:
 			{
-				exitFlag = true;
+				wasExit = true;
 			}
 			break;
 		}
-	} while (false == exitFlag && false == exit);
+	} while (false == wasExit && false == exit);
 }
 
 void AlchemicalUserInterface::choosePageWhileSorting(vector<vector<string>> content, int page, TableCode code, int numberOfColumn, bool orderOfSorting)
@@ -258,11 +239,11 @@ void AlchemicalUserInterface::choosePageWhileSorting(vector<vector<string>> cont
 
 		case VK_ESCAPE:
 		{
-			exitFlag = true;
+			wasExit = true;
 		}
 		break;
 		}
-	} while (false == exitFlag && false == exit);
+	} while (false == wasExit && false == exit);
 }
 
 void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode code)
@@ -308,11 +289,11 @@ void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode
 
 		case VK_ESCAPE:
 		{
-			exitFlag = true;
+			wasExit = true;
 		}
 		break;
 		}
-	} while (false == exitFlag && false == exit);
+	} while (false == wasExit && false == exit);
 }
 
 void AlchemicalUserInterface::chooseColumnAndOrderOfSorting(int& numberOfColumn, bool& orderOfSorting, TableCode code)
@@ -369,16 +350,37 @@ void AlchemicalUserInterface::chooseColumnAndOrderOfSorting(int& numberOfColumn,
 
 			case VK_ESCAPE:
 			{
-				exitFlag = true;
+				wasExit = true;
 			}
 			break;
 		}
-	} while (false == exitFlag && false == exit);
+	} while (false == wasExit && false == exit);
 }
 
 void AlchemicalUserInterface::chooseColumnForFiltration(int& numberOfColumn, TableCode code)
 {
 
+}
+
+void AlchemicalUserInterface::calculateTablesData()
+{
+	// Считаем данные по таблицам 
+	this->ingredientsTableprinter->calculateData();
+	this->potionTablePrinter->calculateData();
+}
+
+void AlchemicalUserInterface::fillInTablesContent()
+{
+	// Заполняем таблицу контентом
+	this->ingredientsTableprinter->fillInTableContent();
+	this->potionTablePrinter->fillInTableContent();
+}
+
+void AlchemicalUserInterface::addSubscribers()
+{
+	// Добавляем подписчиков
+	this->alchemyLogic->getIngredientsTable()->subscribe(this->ingredientsTableprinter);
+	this->alchemyLogic->getPotionTable()->subscribe(this->potionTablePrinter);
 }
 
 void AlchemicalUserInterface::chooseExit()
@@ -392,10 +394,10 @@ void AlchemicalUserInterface::chooseExit()
 
 		if (this->keyBoard->getPressedKey() == VK_ESCAPE)
 		{
-			exitFlag = true;
+			wasExit = true;
 		}
 
-	} while (false == exitFlag);
+	} while (false == wasExit);
 }
 
 int AlchemicalUserInterface::chooseId(TableCode code)
@@ -734,6 +736,26 @@ void AlchemicalUserInterface::printFirstTablePage(TableCode code)
 
 	}
 
+}
+
+void AlchemicalUserInterface::printAlchemyLogic()
+{
+	printTitle();
+
+	printExitButton();
+
+	do
+	{
+		printAlchemist();
+
+		// Вытащила из принтМенюТайтл
+		eraseScreenAfterAlchemist();
+
+		this->state->printMenu();
+
+	} while (wasExit == false);
+
+	printBye();
 }
 
 #pragma endregion Методы печати

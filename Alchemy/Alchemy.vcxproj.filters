@@ -19,6 +19,12 @@
     <Filter Include="Файлы заголовков\MenuStates">
       <UniqueIdentifier>{c1578bd4-c978-4b70-8c1d-1b90330e37c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Interfaces">
+      <UniqueIdentifier>{d5ffaef4-2d70-46cf-842d-9dafd157bb91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Interfaces">
+      <UniqueIdentifier>{02e12dd8-ad4e-4d43-8b29-87e5c557e7d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -49,9 +55,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="KeyBoard.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="UserInterface.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="EffectBuilder.cpp">
@@ -216,6 +219,9 @@
     <ClCompile Include="WorkWithPotionTableMenuState.cpp">
       <Filter>Исходные файлы\MenuStates</Filter>
     </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
+      <Filter>Исходные файлы\Interfaces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Effect.h">
@@ -245,16 +251,10 @@
     <ClInclude Include="KeyBoard.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="UserInterface.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="EffectBuilder.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="FileReader.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="AlchemicalUserInterface.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="EffectsTable.h">
@@ -409,6 +409,12 @@
     </ClInclude>
     <ClInclude Include="WorkWithPotionTableMenuState.h">
       <Filter>Файлы заголовков\MenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.h">
+      <Filter>Файлы заголовков\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="AlchemicalUserInterface.h">
+      <Filter>Файлы заголовков\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

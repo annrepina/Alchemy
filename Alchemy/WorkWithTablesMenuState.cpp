@@ -12,11 +12,6 @@ WorkWithTablesMenuState::WorkWithTablesMenuState(AlchemicalUserInterface* alchem
 	this->numberOfStates = WORK_WITH_TABLES_MENU_ITEMS;
 }
 
-//WorkWithTablesMenuState::~WorkWithTablesMenuState()
-//{
-//	clear();
-//}
-
 void WorkWithTablesMenuState::printMenu()
 {
 	// Сбрасываем координату каждый раз заходя в метод печати
@@ -74,4 +69,3 @@ WorkWithUsersInfredientTableMenuState* WorkWithTablesMenuState::createWorkWithUs
 {
 	return new WorkWithUsersInfredientTableMenuState(this->alchemicalUserInterface);
 }
-

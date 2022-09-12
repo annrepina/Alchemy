@@ -7,31 +7,35 @@
 
 class AlchemicalMenuState;
 
+// Сосотояние меню - работа с таблицей зелий
 class WorkWithPotionTableMenuState : public WorkWithIngredientTableMenuState
 {
 public:
 
+	// Конструктор по умолчанию
 	WorkWithPotionTableMenuState();
 
+	// Конструктор с параметром
 	WorkWithPotionTableMenuState(AlchemicalUserInterface* alchemicalUserInterface);
-
-	//~WorkWithTablesMenuState() override;
 
 	// Печать меню
 	void printMenu() override;
 
 protected:
 
+	// Задать контент для печати
 	void setContent() override;
 
+	// Принтер таблицы зелий
 	PotionTablePrinter* potionTablePrinter;
 
-	//virtual void sortData();
+	// Задать список фильтров
+	void setListOfColumnFilters() override;
 
-	void setListOfColumnTitles() override;
-
+	// Запустить меню фильтрации
 	void launchFilterMenu() override;
 
+	// Запустить меню сортировки
 	void launchSortingMenu() override;
 
 	// Искомая колонка является стринговой или интовой в тбалице?
@@ -40,6 +44,7 @@ protected:
 	// Запустить сортировку
 	void sortData() override;
 
+	// Фильтровать данные
 	void filterData() override;
 
 private:
@@ -62,4 +67,3 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 };
-

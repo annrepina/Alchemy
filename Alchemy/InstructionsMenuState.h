@@ -11,8 +11,10 @@ class InstructionsMenuState : public MenuState
 {
 public:
 
+	// Конструктор по умолчанию
 	InstructionsMenuState();
 
+	// Конструктор с параметром
 	InstructionsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
 	// Печать меню
@@ -38,4 +40,3 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 };
-

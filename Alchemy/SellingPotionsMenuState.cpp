@@ -12,11 +12,6 @@ SellingPotionsMenuState::SellingPotionsMenuState(AlchemicalUserInterface* alchem
 	this->numberOfStates = 1;
 }
 
-//SellingPotionsMenuState::~SellingPotionsMenuState()
-//{
-//	clear();
-//}
-
 void SellingPotionsMenuState::printMenu()
 {
 	// Сбрасываем координату каждый раз заходя в метод печати
@@ -28,80 +23,64 @@ void SellingPotionsMenuState::printMenu()
 
 	// Текст ошибки в случае неудачной продажи
 	string error = "";
-
 	string choicePotion = "Введите № зелья: ";
-
 	string choiceNumberOfPotion = "Введите кол-во зелья: ";
 
 	// Получаем нашу логику
 	AlchemyLogic* alchemyLogic = this->alchemicalUserInterface->getAlchemyLogic();
 
-	// Получаем таблицу ингредиентов 
-	//IngredientsTable* ingredientsTable = alchemyLogic->getIngredientsTable();
-
-	while (true)
+	// если кол-во доступных зелий меньше ОДНОГО, то продать ничего не выйдет
+	if (this->alchemicalUserInterface->getPotionTablePrinter()->getNumberOfLines() < MINIMUM_NUMBER_OF_POTIONTS_FOR_SELLING)
 	{
-		// если кол-во доступных зелий меньше ОДНОГО, то продать ничего не выйдет
-		if (this->alchemicalUserInterface->getPotionTablePrinter()->getNumberOfLines() < MINIMUM_NUMBER_OF_POTIONTS_FOR_SELLING)
-		{
-			error = "У вас совсем нет зелий.\nСоздайте что-нибудь\.\nESC - назад";
+		error = "У вас совсем нет зелий.\nСоздайте что-нибудь\.\nESC - назад";
 
-			printMenuTitle();
+		printMenuTitle();
 
-			printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
+		printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
 
-			this->alchemicalUserInterface->chooseExit();
+		this->alchemicalUserInterface->chooseExit();
 
-			exitMenu();
+		goBack();
 
-			return;
-		}
-
-		printMenu(choicePotion, choiceNumberOfPotion);
-
-		// начальная страница таблицы
-		int page = FIRST_PAGE;
-
-		// печатаем таблицу имеющихся ингредиентов
-		//this->alchemicalUserInterface->printTableWithAvailableToUserElements(AlchemicalUserInterface::TableCode::IngredientTable, page);
-
-		this->alchemicalUserInterface->printTablePagesInLoop(AlchemicalUserInterface::TableCode::PotionTable, page);
-
-		// если был нажат esc
-		if (true == this->alchemicalUserInterface->getExitFlag())
-		{
-			exitMenu();
-
-			return;
-		}
-
-		int potionId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_2, choicePotion.size() + 1, (int)AlchemicalUserInterface::TableCode::PotionTable);
-
-		int numberOfPotion = this->alchemicalUserInterface->chooseNumber(choiceNumberOfPotion, Y_COORD_AFTER_MENU_TITLE_3);
-
-		// если ввели отсутствующие id
-		checkPotionId(potionId);
-
-		checkNumberOfPotion(numberOfPotion, potionId);
-
-		//alchemyLogic->sellIngredient(ingredientId, numberOfIngredient);
-
-		alchemyLogic->sellPotion(potionId, numberOfPotion);
-
-		// принтер пересчитывает
-		this->alchemicalUserInterface->getPotionTablePrinter()->calculateData();
-
-		string congratulations = "Вы отличный торговец!";
-
-		cout << goToXY(Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
-
-		printColoredText(congratulations, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
-
-		// ждем нажатия любой клавиши
-		char a = _getch();
-
-		break;
+		return;
 	}
+
+	printMenu(choicePotion, choiceNumberOfPotion);
+
+	// начальная страница таблицы
+	int page = FIRST_PAGE;
+
+	this->alchemicalUserInterface->printTablePagesInLoop(AlchemicalUserInterface::TableCode::PotionTable, page);
+
+	// если был нажат esc
+	if (true == this->alchemicalUserInterface->getExitFlag())
+	{
+		goBack();
+
+		return;
+	}
+
+	int potionId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_2, choicePotion.size() + 1, (int)AlchemicalUserInterface::TableCode::PotionTable);
+
+	int numberOfPotion = this->alchemicalUserInterface->chooseNumber(choiceNumberOfPotion, Y_COORD_AFTER_MENU_TITLE_3);
+
+	// если ввели отсутствующие id
+	checkPotionId(potionId);
+	checkNumberOfPotion(numberOfPotion, potionId);
+
+	alchemyLogic->sellPotion(potionId, numberOfPotion);
+
+	// принтер пересчитывает
+	this->alchemicalUserInterface->getPotionTablePrinter()->calculateData();
+
+	string congratulations = "Вы отличный торговец!";
+
+	cout << goToXY(Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
+
+	printColoredText(congratulations, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+
+	// ждем нажатия любой клавиши
+	char a = _getch();
 }
 
 MenuState* SellingPotionsMenuState::getNextState()
@@ -131,9 +110,7 @@ ReturnMenuState* SellingPotionsMenuState::createReturnMenuState()
 void SellingPotionsMenuState::printMenu(string choicePotion, string choiceNumberOfPotions)
 {
 	printMenuTitle();
-
 	printColoredTextByCoords(choicePotion, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
-
 	printColoredTextByCoords(choiceNumberOfPotions, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD);
 }
 
@@ -176,5 +153,3 @@ void SellingPotionsMenuState::checkNumberOfPotion(int& numberOfPotion, int potio
 		numberOfPotion = this->alchemicalUserInterface->chooseNumber(textOfError, Y_COORD_AFTER_MENU_TITLE_3);
 	}
 }
-
-

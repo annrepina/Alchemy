@@ -51,7 +51,7 @@ void BuyingIngredientsFromListMenuState::printMenu()
 		// если был нажат esc
 		if (true == this->alchemicalUserInterface->getExitFlag())
 		{
-			exitMenu();
+			goBack();
 
 			return;
 		}

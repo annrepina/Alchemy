@@ -39,9 +39,9 @@ void IngredientBinaryWriter::write(ofstream& stream, string filePath, Ingredient
 		int key = i->first;
 		writeInt(stream, key);
 
-		// Получаем будеву, отвечающую за позитивность
-		bool isPositive = i->second;
-		writeBool(stream, isPositive);
+		// Получаем будеву, отвечающую за известность эффекта
+		bool isKnown = i->second;
+		writeBool(stream, isKnown);
 	}
 }
 

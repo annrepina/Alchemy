@@ -42,18 +42,22 @@ private:
 
 #pragma region МЕТОДЫ ПЕЧАТИ
 
+	// Печать меню
 	void printMenu(string choiceFirstIngredient, string choiceSecondIngredient, string choiceNumberOfIngredients);
 
+	// Печать ошибки, затем пользователь делает выбор снова
 	void printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& ingredientId);
 
+	// Печать ошибки, затем пользователь делает выбор снова
 	void printErrorAndMakeChoiceAgain(int& ingredientId, int yCoord);
 
+	// Печать ошибки о количестве, затем пользователь делает выбор снова
 	void printErrorAboutNumberAndMakeChoiceAgain(int ingredientId, int previousNumber, int& numberOfIngredients, int yCoord);
 
+	// Печать ошибки о количестве, затем пользователь делает выбор снова
 	void printErrorAboutNumberAndMakeChoiceAgain(int yCoord, string textOfError, int& numberOfIngredients);
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
-
 
 	// уменьшить кол-во ингредиентов
 	void decreaseNumberOfIngredients(int firstIngredientId, int secondIngredientId, int number);
@@ -66,6 +70,7 @@ private:
 	// Проверяем есть ли такое кол-во ингредиентов у пользователя
 	void checkNumberOfIngredients(int firstIngredientId, int secondIngredientId, int &numberOfPotion);
 
+	// Проверка введенных id ингредиентов на равенство 
 	void checkIdForEquality(int& firstIngredientId, int secondIngredientId, int YCoord);
 
 #pragma endregion МЕТОДЫ ПРОВЕРКИ

@@ -13,8 +13,10 @@ class BuyingIngredientsMenuState : public MenuState
 {
 public:
 
+	// Конструктор по умолчанию
 	BuyingIngredientsMenuState();
 
+	// Конструктор с параметром
 	BuyingIngredientsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
 	// Печать меню
@@ -40,7 +42,7 @@ private:
 	// Создать состояние - меню покупки зелий из списка
 	BuyingIngredientsFromListMenuState* createBuyingIngredientsFromListMenuState();
 
-	// Создать состояние - меню инструкций
+	// Создать состояние - меню покупки новых зелий
 	BuyNewIngredientsMenuState* createBuyNewIngredientsMenuState();
 
 	// Создать состояние - меню назад

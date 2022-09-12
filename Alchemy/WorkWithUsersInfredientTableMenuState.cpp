@@ -27,22 +27,6 @@ void WorkWithUsersInfredientTableMenuState::printMenu()
 
 	fillMap<function<MenuState* (WorkWithUsersInfredientTableMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
 
-	//setListOfInnerMenuItems();
-	//setListOfColumnTitles();
-
-	//fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, INNER_MENU_ITEMS);
-	//fillMap<string>(columnForFiltration, listOfColumnForFiltration, currentYCursorCoordState, NUMBER_OF_SEARCHING_QUERIES);
-
-	//setContent();
-	//setSearchingQueriesDefault();
-
-	//longestColumnSize = calculateLongestFIlteringItem();
-
-	//xCoordForFilterValue = X_COORD_FOR_FILTER_ITEMS + longestColumnSize + GAP_BETWEEN_FILTER_AND_VALUE;
-
-	//// начальная страница таблицы
-	//int page = FIRST_PAGE;
-
 	setFields();
 
 	printMenuTitle();
@@ -56,7 +40,7 @@ void WorkWithUsersInfredientTableMenuState::printMenu()
 
 		this->alchemicalUserInterface->chooseExit();
 
-		exitMenu();
+		goBack();
 
 		return;
 	}
@@ -65,30 +49,9 @@ void WorkWithUsersInfredientTableMenuState::printMenu()
 	cout << endl;
 
 	printMenuItems(listOfInnerMenuItems);
-
-	printFilterItems(this->listOfColumnForFiltration);
+	printFilterItems(this->listOfColumnFilters);
 
 	cout << goToXY(this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
-
-	//while (this->alchemicalUserInterface->getExitFlag() == false)
-	//{
-	//	chooseMenuItem(listOfInnerMenuItems, STANDARD_CURSOR_X_COORD);
-
-	//	// если была нажата кнопка назад
-	//	if (currentYCursorCoordState == MAIN_MENU_Y_COORD + INNER_MENU_ITEMS - 1)
-	//	{
-	//		// сбрасываем координату
-	//		this->currentYCursorCoordState = MAIN_MENU_Y_COORD;
-
-	//		this->alchemicalUserInterface->setState(this->getNextState());
-
-	//		return;
-	//	}
-
-	//	int operationCode = defineOperation();
-
-	//	workWithTable((OperationCode)operationCode);
-	//}
 
 	workWithTable();
 }

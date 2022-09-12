@@ -221,9 +221,9 @@ void IngredientsTablePrinter::calculateAvailableElementsId()
 		{
 			this->availableElementsId.push_back(*i);
 		}
-	}
 
-	quickSort(&availableElementsId[0], availableElementsId.size());
+		quickSort(&availableElementsId[0], availableElementsId.size());
+	}
 }
 
 void IngredientsTablePrinter::calculateData()
@@ -484,12 +484,12 @@ void IngredientsTablePrinter::fillInTableContent()
 		// Добавляем цену 
 		this->tableContent[i].push_back(to_string(intValue));
 
+		// Итератор на map с эффектами у ингредиента
+		map<int, bool>::iterator effectIter = iter->second->getBeginIteratorOfEffectsId();
+
 		// для каждого ингредиента
 		for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
 		{
-			// Итератор на map с эффектами у ингредиента
-			map<int, bool>::iterator effectIter = iter->second->getBeginIteratorOfEffectsId();
-
 			// Добываем булеву
 			isEffectKnown = effectIter->second;
 

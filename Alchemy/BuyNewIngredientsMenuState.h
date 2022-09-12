@@ -9,8 +9,10 @@ class BuyNewIngredientsMenuState : public MenuState
 {
 public:
 
+	// Конструктор по умолчанию
 	BuyNewIngredientsMenuState();
 
+	// Конструктор с параметром
 	BuyNewIngredientsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
 	// Печать меню

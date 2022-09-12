@@ -38,7 +38,7 @@ void CreatingPotionsMenuState::printMenu()
 
 		this->alchemicalUserInterface->chooseExit();
 
-		exitMenu();
+		goBack();
 
 		return;
 	}
@@ -64,7 +64,7 @@ void CreatingPotionsMenuState::printMenu()
 	// если был нажат esc
 	if (true == this->alchemicalUserInterface->getExitFlag())
 	{
-		exitMenu();
+		goBack();
 
 		return;
 	}

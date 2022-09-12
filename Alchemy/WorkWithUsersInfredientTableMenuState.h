@@ -1,18 +1,19 @@
 #pragma once
-//#include "MenuState.h"
 #include "WorkWithIngredientTableMenuState.h"
 #include "ReturnMenuState.h"
 #include "IngredientsTablePrinter.h"
-//#include "MenuState.h"
 
 #define MINIMUM_NUMBER_OF_INGREDIENTS		1		// Минимальное кол-во ингредиентов
 
+// Состояние меню - работа с ингредиентами юзера
 class WorkWithUsersInfredientTableMenuState : public WorkWithIngredientTableMenuState
 {
 public:
 
+	// Конструктор по умолчанию
 	WorkWithUsersInfredientTableMenuState();
 
+	// Конструктор с параметром
 	WorkWithUsersInfredientTableMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
 	// Печать меню
@@ -20,6 +21,7 @@ public:
 
 protected:
 
+	// Задать контент для печати
 	void setContent() override;
 
 private:

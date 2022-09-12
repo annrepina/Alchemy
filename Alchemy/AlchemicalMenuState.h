@@ -23,6 +23,7 @@ public:
 	// Конструктор по умолчанию
 	AlchemicalMenuState();
 
+	// Конструктор с параметром
 	AlchemicalMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
 	// Печать меню

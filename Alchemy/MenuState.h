@@ -17,8 +17,6 @@ using namespace std;
 #define Y_COORD_AFTER_MENU_TITLE_4		12		// Координата Y четвертая после печати заголовка меню
 #define Y_COORD_AFTER_MENU_TITLE_5		13		// Координата Y пятая после печати заголовка меню
 
-#define EXIT_INT						-1
-
 class AlchemicalUserInterface;
 
 // Класс - состояние меню
@@ -87,13 +85,15 @@ protected:
 	// Печать главного меню
 	virtual void printMenuItems();
 
+	// Печать меню для выбора id
 	virtual int printChoiceId(int yCoord, int xCoord, int tableCode);
 
+	// Печать меню для выбора количества
 	virtual int printChoiceNumber(int yCoord, string choice);
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 
-	// Принять решение
+	// Выбрать пункт меню
 	virtual void chooseMenuItem();
 
 	// Выбор продолжить или назад
@@ -111,9 +111,6 @@ protected:
 	// Очистить память
 	virtual void clear();
 
-	// был ли нажат esc для выхода
-	virtual bool wasExit(int number);
-
-	// Действия для выхода из меню
-	virtual void exitMenu();
+	// Действия для выхода из меню в предыдущее
+	virtual void goBack();
 };

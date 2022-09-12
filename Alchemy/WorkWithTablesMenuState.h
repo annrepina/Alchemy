@@ -7,15 +7,16 @@
 
 #define WORK_WITH_TABLES_MENU_ITEMS		4	// Кол-во пунктов меню работы с таблицами
 
+// Состояние меню - работа с таблицами
 class WorkWithTablesMenuState : public MenuState
 {
 public:
 
+	// Конструктор по умолчанию
 	WorkWithTablesMenuState();
 
+	// Конструктор с параметром
 	WorkWithTablesMenuState(AlchemicalUserInterface* alchemicalUserInterface);
-
-	//~WorkWithTablesMenuState() override;
 
 	// Печать меню
 	void printMenu() override;
@@ -37,13 +38,15 @@ private:
 	// Вектор функций, которые создают стейты
 	vector< function<MenuState* (WorkWithTablesMenuState&)> > listOfCreatingFunctions;
 
-		// Создать состояние - меню назад
+	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 
+	// Создать состояние - меню работs с таблицей ингредиентов
 	WorkWithIngredientTableMenuState* createWorkWithIngredientTableMenuState();
 
+	// Создать состояние - меню работы с таблицей ингредиентов
 	WorkWithPotionTableMenuState* createWorkWithPotionTableMenuState();
 
+	// Создать состояние - меню работы с таблицей ингредиентов пользователя
 	WorkWithUsersInfredientTableMenuState* createWorkWithUsersInfredientTableMenuState();
 };
-

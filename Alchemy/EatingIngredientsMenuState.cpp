@@ -42,7 +42,7 @@ void EatingIngredientsMenuState::printMenu()
 
 		this->alchemicalUserInterface->chooseExit();
 
-		exitMenu();
+		goBack();
 
 		return;
 	}
@@ -60,7 +60,7 @@ void EatingIngredientsMenuState::printMenu()
 	// если был нажат esc
 	if (true == this->alchemicalUserInterface->getExitFlag())
 	{
-		exitMenu();
+		goBack();
 
 		return;
 	}
@@ -110,7 +110,7 @@ void EatingIngredientsMenuState::checkIngredientsId(int& ingredientId)
 {
 	int index = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(ingredientId);
 
-	bool wasClosedEff = wasClosedEffect(ingredientId);
+	bool wasClosedEff = wasUnknownEffect(ingredientId);
 
 	while (index == NO_POSITION || wasClosedEff == false)
 	{
@@ -130,7 +130,7 @@ void EatingIngredientsMenuState::checkIngredientsId(int& ingredientId)
 
 		index = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(ingredientId);
 
-		wasClosedEff = wasClosedEffect(ingredientId);
+		wasClosedEff = wasUnknownEffect(ingredientId);
 	}
 }
 
@@ -141,7 +141,7 @@ void EatingIngredientsMenuState::printErrorAndMakeChoiceAgain(int yCoord, string
 	ingredientId = printChoiceId(yCoord, textOfError.size() + 1, (int)AlchemicalUserInterface::TableCode::IngredientTable);
 }
 
-bool EatingIngredientsMenuState::wasClosedEffect(int ingredientId)
+bool EatingIngredientsMenuState::wasUnknownEffect(int ingredientId)
 {
 	bool wasClosedEffect = false;
 

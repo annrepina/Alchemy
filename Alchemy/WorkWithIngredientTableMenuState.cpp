@@ -4,14 +4,12 @@
 
 //#define DEBUG
 
-//string WorkWithIngredientTableMenuState::listOfColumnTitles[NUMBER_OF_INGREDIENT_TABLE_COLUMNS] = { "є", "»м€", "÷ена", "Ёффект 1", "Ёффект 2", " ол-во" };
-
 WorkWithIngredientTableMenuState::WorkWithIngredientTableMenuState()
 {
 	this->numberOfColumnforSorting = DEFAULT_NUMBER_OF_COLUMN;
 	this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
 	this->ingredientTablePrinter = nullptr;
-	this->longestColumnSize = 0;
+	this->longestFilterSize = 0;
 	this->xCoordForFilterValue = 0;
 }
 
@@ -23,7 +21,7 @@ WorkWithIngredientTableMenuState::WorkWithIngredientTableMenuState(AlchemicalUse
 	this->numberOfColumnforSorting = DEFAULT_NUMBER_OF_COLUMN;
 	this->orderOfSorting = ASCENDING_ORDER_OF_SORTING;
 	this->ingredientTablePrinter = alchemicalUserInterface->getIngredientsTablePrinter();
-	this->longestColumnSize = 0;
+	this->longestFilterSize = 0;
 	this->xCoordForFilterValue = 0;
 }
 
@@ -44,8 +42,7 @@ void WorkWithIngredientTableMenuState::printMenu()
 	cout << endl;
 
 	printMenuItems(this->listOfInnerMenuItems);
-
-	printFilterItems(this->listOfColumnForFiltration);
+	printFilterItems(this->listOfColumnFilters);
 
 	cout << goToXY(this->currentYCursorCoordState, STANDARD_CURSOR_X_COORD);
 
@@ -106,8 +103,6 @@ void WorkWithIngredientTableMenuState::setContent()
 	this->initialContent = this->ingredientTablePrinter->getTableContent();
 
 	this->contentAfterSortingAndResearch = this->initialContent;
-
-	//this->contentAfterSortingAndSearch = this->contentAfterSorting;
 }
 
 void WorkWithIngredientTableMenuState::setListOfInnerMenuItems()
@@ -121,37 +116,37 @@ void WorkWithIngredientTableMenuState::setListOfInnerMenuItems()
 	}
 }
 
-void WorkWithIngredientTableMenuState::setListOfColumnTitles()
+void WorkWithIngredientTableMenuState::setListOfColumnFilters()
 {
 	// если вектор пустой
-	if (this->listOfColumnForFiltration.empty())
+	if (this->listOfColumnFilters.empty())
 	{
-		this->listOfColumnForFiltration.push_back("є от");
-		this->listOfColumnForFiltration.push_back("є до");
-		this->listOfColumnForFiltration.push_back("»м€");
-		this->listOfColumnForFiltration.push_back("÷ена от");
-		this->listOfColumnForFiltration.push_back("÷ена до");
-		this->listOfColumnForFiltration.push_back("Ёффект 1");
-		this->listOfColumnForFiltration.push_back("Ёффект 2");
-		this->listOfColumnForFiltration.push_back(" ол - во от");
-		this->listOfColumnForFiltration.push_back(" ол - во до");
+		this->listOfColumnFilters.push_back("є от");
+		this->listOfColumnFilters.push_back("є до");
+		this->listOfColumnFilters.push_back("»м€");
+		this->listOfColumnFilters.push_back("÷ена от");
+		this->listOfColumnFilters.push_back("÷ена до");
+		this->listOfColumnFilters.push_back("Ёффект 1");
+		this->listOfColumnFilters.push_back("Ёффект 2");
+		this->listOfColumnFilters.push_back(" ол - во от");
+		this->listOfColumnFilters.push_back(" ол - во до");
 	}
 }
 
 void WorkWithIngredientTableMenuState::setFields()
 {
 	setListOfInnerMenuItems();
-	setListOfColumnTitles();
+	setListOfColumnFilters();
 
 	fillMap<string>(innerMenuItems, listOfInnerMenuItems, currentYCursorCoordState, INNER_MENU_ITEMS);
-	fillMap<string>(columnForFiltration, listOfColumnForFiltration, currentYCursorCoordState, NUMBER_OF_SEARCHING_QUERIES);
+	fillMap<string>(columnForFiltration, listOfColumnFilters, currentYCursorCoordState, NUMBER_OF_SEARCHING_QUERIES);
 
 	setContent();
 	setSearchingQueriesDefault();
 
-	longestColumnSize = calculateLongestFIlteringItem();
+	longestFilterSize = calculateLongestFIlteringItem();
 
-	xCoordForFilterValue = X_COORD_FOR_FILTER_ITEMS + longestColumnSize + GAP_BETWEEN_FILTER_AND_VALUE;
+	xCoordForFilterValue = X_COORD_FOR_FILTER_ITEMS + longestFilterSize + GAP_BETWEEN_FILTER_AND_VALUE;
 
 	// начальна€ страница таблицы
 	int page = FIRST_PAGE;
@@ -395,7 +390,7 @@ void WorkWithIngredientTableMenuState::launchFilterMenu()
 	// “екуща€ координата Y сбрасываем ее
 	currentYCursorCoordState = MAIN_MENU_Y_COORD;
 
-	printFilterItems(this->listOfColumnForFiltration);
+	printFilterItems(this->listOfColumnFilters);
 
 	while (this->alchemicalUserInterface->getExitFlag() != true)
 	{
@@ -410,10 +405,8 @@ void WorkWithIngredientTableMenuState::launchFilterMenu()
 
 		this->ingredientTablePrinter->print(contentAfterSortingAndResearch, page, numberOfColumnforSorting, orderOfSorting);
 
-		//printFilterItems(this->listOfColumnForFiltration);
-
 		// выбираем пункт меню фильтрации
-		chooseMenuItem(this->listOfColumnForFiltration, X_COORD_FOR_FILTER_ITEMS);
+		chooseMenuItem(this->listOfColumnFilters, X_COORD_FOR_FILTER_ITEMS);
 
 		// если был выход из меню сортировки, то не покидаем совсем программу, а выходим только из сортировки
 		if (this->alchemicalUserInterface->getExitFlag() == true)
@@ -543,7 +536,7 @@ int WorkWithIngredientTableMenuState::calculateLongestFIlteringItem()
 
 	int size = 0;
 
-	for (auto line : this->listOfColumnForFiltration)
+	for (auto line : this->listOfColumnFilters)
 	{
 		if (longest.size() < line.size())
 			longest = line;

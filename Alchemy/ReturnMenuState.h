@@ -1,13 +1,13 @@
 #pragma once
 #include "MenuState.h"
 
+// Состояние меню - назад
 class ReturnMenuState : public MenuState
 {
 public:
 
+	// Конструктор с параметром
 	ReturnMenuState(MenuState* previousMenuState, AlchemicalUserInterface* alchemicalUserInterface);
-
-	//~ReturnMenuState() override;
 
 	// Печать меню
 	void printMenu() override;
@@ -25,7 +25,4 @@ private:
 
 	// Задать список создающих стейты функций
 	void setListOfCreatingFunctions() override;
-
-
 };
-

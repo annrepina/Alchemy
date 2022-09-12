@@ -12,11 +12,6 @@ SellingIngredientsMenuState::SellingIngredientsMenuState(AlchemicalUserInterface
 	this->numberOfStates = 1;
 }
 
-//SellingIngredientsMenuState::~SellingIngredientsMenuState()
-//{
-//	clear();
-//}
-
 void SellingIngredientsMenuState::printMenu()
 {
 	// Сбрасываем координату каждый раз заходя в метод печати
@@ -28,9 +23,7 @@ void SellingIngredientsMenuState::printMenu()
 
 	// Текст ошибки в случае неудачной продажи
 	string error = "";
-
 	string choiceIngredient = "Введите № ингредиента: ";
-
 	string choiceNumberOfIngredient = "Введите кол-во ингредиента: ";
 
 	// Получаем нашу логику
@@ -39,62 +32,56 @@ void SellingIngredientsMenuState::printMenu()
 	// Получаем таблицу ингредиентов 
 	IngredientsTable* ingredientsTable = alchemyLogic->getIngredientsTable();
 
-	while (true)
+	// если кол-во доступных ингредиентов меньше ОДНОГО, то продать ничего не выйдет
+	if (this->alchemicalUserInterface->getIngredientsTablePrinter()->getNumberOfAvailableContent() < MINIMUM_NUMBER_OF_INGREDIENTS_FOR_SELLING)
 	{
-		// если кол-во доступных ингредиентов меньше ОДНОГО, то продать ничего не выйдет
-		if (this->alchemicalUserInterface->getIngredientsTablePrinter()->getNumberOfAvailableContent() < MINIMUM_NUMBER_OF_INGREDIENTS_FOR_SELLING)
-		{
-			error = "У вас совсем нет ингредиентов.\nПрикупите чего-нибудь у Аркадии.\nESC - назад";
+		error = "У вас совсем нет ингредиентов.\nПрикупите чего-нибудь у Аркадии.\nESC - назад";
 
-			printMenuTitle();
+		printMenuTitle();
 
-			printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
+		printColoredTextByCoords(error, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED, Y_COORD_AFTER_MENU_TITLE_1, STANDARD_CURSOR_X_COORD);
 
-			this->alchemicalUserInterface->chooseExit();
+		this->alchemicalUserInterface->chooseExit();
 
-			exitMenu();
+		goBack();
 
-			return;
-		}
-
-		printMenu(choiceIngredient, choiceNumberOfIngredient);
-
-		// начальная страница таблицы
-		int page = FIRST_PAGE;
-
-		// печатаем таблицу имеющихся ингредиентов
-		this->alchemicalUserInterface->printTableWithAvailableToUserElements(AlchemicalUserInterface::TableCode::IngredientTable, page);
-
-		// если был нажат esc
-		if (true == this->alchemicalUserInterface->getExitFlag())
-		{
-			exitMenu();
-
-			return;
-		}
-
-		int ingredientId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1, (int)AlchemicalUserInterface::TableCode::IngredientTable);
-
-		int numberOfIngredient = this->alchemicalUserInterface->chooseNumber(choiceNumberOfIngredient, Y_COORD_AFTER_MENU_TITLE_3);
-
-		// если ввели отсутствующие id
-		checkIngredientsId(ingredientId);
-
-		checkNumberOfIngredient(numberOfIngredient, ingredientId);
-
-		alchemyLogic->sellIngredient(ingredientId, numberOfIngredient);
-
-		string congratulations = "Вы отличный торговец!";
-
-		cout << goToXY(Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
-
-		printColoredText(congratulations, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
-
-		// ждем нажатия любой клавиши
-		char a = _getch();
-
-		break;
+		return;
 	}
+
+	printMenu(choiceIngredient, choiceNumberOfIngredient);
+
+	// начальная страница таблицы
+	int page = FIRST_PAGE;
+
+	// печатаем таблицу имеющихся ингредиентов
+	this->alchemicalUserInterface->printTableWithAvailableToUserElements(AlchemicalUserInterface::TableCode::IngredientTable, page);
+
+	// если был нажат esc
+	if (true == this->alchemicalUserInterface->getExitFlag())
+	{
+		goBack();
+
+		return;
+	}
+
+	int ingredientId = printChoiceId(Y_COORD_AFTER_MENU_TITLE_2, choiceIngredient.size() + 1, (int)AlchemicalUserInterface::TableCode::IngredientTable);
+
+	int numberOfIngredient = this->alchemicalUserInterface->chooseNumber(choiceNumberOfIngredient, Y_COORD_AFTER_MENU_TITLE_3);
+
+	// если ввели отсутствующие id
+	checkIngredientsId(ingredientId);
+	checkNumberOfIngredient(numberOfIngredient, ingredientId);
+
+	alchemyLogic->sellIngredient(ingredientId, numberOfIngredient);
+
+	string congratulations = "Вы отличный торговец!";
+
+	cout << goToXY(Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
+
+	printColoredText(congratulations, R_DECIMAL_RED, G_DECIMAL_RED, B_DECIMAL_RED);
+
+	// ждем нажатия любой клавиши
+	char a = _getch();
 }
 
 MenuState* SellingIngredientsMenuState::getNextState()
@@ -124,9 +111,7 @@ ReturnMenuState* SellingIngredientsMenuState::createReturnMenuState()
 void SellingIngredientsMenuState::printMenu(string choiceIngredient, string choiceNumberOfIngredient)
 {
 	printMenuTitle();
-
 	printColoredTextByCoords(choiceIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
-
 	printColoredTextByCoords(choiceNumberOfIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD);
 }
 

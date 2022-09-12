@@ -8,8 +8,10 @@ class EatingIngredientsMenuState : public MenuState
 {
 public:
 
+	// Конструктор по умолчанию
 	EatingIngredientsMenuState();
 
+	// Конструктор с параметром
 	EatingIngredientsMenuState(AlchemicalUserInterface* alchemicalUserInterface);
 
 	// Печать меню
@@ -35,9 +37,12 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 
+	// Проверка id на наличие такого
 	void checkIngredientsId(int& ingredientId);
 
+	// Печать ошибки и пользователь делает выбор снова
 	void printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& ingredientId);
 
-	bool wasClosedEffect(int ingredientId);
+	// Был ли неизвестен эффект у ингредиента
+	bool wasUnknownEffect(int ingredientId);
 };

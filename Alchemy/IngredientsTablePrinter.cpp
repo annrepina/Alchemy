@@ -207,24 +207,24 @@ int IngredientsTablePrinter::calculateNumberOfAvailableElements()
 	return numberOfAvailableElements;
 }
 
-void IngredientsTablePrinter::calculateAvailableElementsId()
-{
-	int numberOfAvailableElements = this->table->getNumberOfAvailableElements();
-
-	// если вектор пустой
-	if (this->availableElementsId.size() == 0 && numberOfAvailableElements > 0)
-	{
-		auto beginIter = this->table->getBeginIteratorOfAvailableElements();
-		auto endIter = this->table->getEndIteratorOfAvailableElements();
-
-		for (auto i = beginIter; i != endIter; ++i)
-		{
-			this->availableElementsId.push_back(*i);
-		}
-
-		quickSort(&availableElementsId[0], availableElementsId.size());
-	}
-}
+//void IngredientsTablePrinter::calculateAvailableElementsId()
+//{
+//	int numberOfAvailableElements = this->table->getNumberOfAvailableElements();
+//
+//	// если вектор пустой
+//	if (this->availableElementsId.size() == 0 && numberOfAvailableElements > 0)
+//	{
+//		auto beginIter = this->table->getBeginIteratorOfAvailableElements();
+//		auto endIter = this->table->getEndIteratorOfAvailableElements();
+//
+//		for (auto i = beginIter; i != endIter; ++i)
+//		{
+//			this->availableElementsId.push_back(*i);
+//		}
+//
+//		quickSort(&availableElementsId[0], availableElementsId.size());
+//	}
+//}
 
 void IngredientsTablePrinter::calculateData()
 {
@@ -232,7 +232,7 @@ void IngredientsTablePrinter::calculateData()
 
 	this->numberOfAvailableContent = calculateNumberOfAvailableElements();
 
-	calculateAvailableElementsId();
+	//calculateAvailableElementsId();
 }
 
 int IngredientsTablePrinter::getNumberOfAvailableContent()
@@ -240,9 +240,9 @@ int IngredientsTablePrinter::getNumberOfAvailableContent()
 	return this->numberOfAvailableContent;
 }
 
-#pragma endregion Методы расчета
+#pragma endregion МЕТОДЫ РАСЧЕТА
 
-#pragma region Методы печати
+#pragma region МЕТОДЫ ПЕЧАТИ
 
 void IngredientsTablePrinter::print(int page)
 {
@@ -408,32 +408,40 @@ void IngredientsTablePrinter::printAvailableContent(int page)
 	// сбрасываем координату
 	this->yCoordForContentPrinting = Y_COORD_FOR_CONTENT_PRINTING;
 
-	//// Итератор на начало 
-	//map<int, Ingredient*>::iterator iter = table->getStartIterator();
-
 	int i = 0;
+
+	auto beginIterOfAvailableElements = this->table->getBeginIteratorOfAvailableElements();
+	auto endIterOfAvailableElements = this->table->getEndIteratorOfAvailableElements();
 
 	if (page > 1)
 	{
 		i = (page - 1) * NUMBER_OF_CONTENT_LINES;
 	}
 
-	for (; i < this->numberOfLines && i < border; ++i)
-	{
-		// если кол-во ингредиента больше нуля
-		if (this->table->getIngredientById(i + 1)->getNumber() > 0)
-		{
-			for (int j = 0; j < this->numberOfColumns; ++j)
-			{
-				cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[j]);
+	//auto l = beginIterOfAvailableElements + 10;
+	//auto l = beginIterOfAvailableElements + (i * NUMBER_OF_CONTENT_LINES);
 
-				cout << this->tableContent[i][j];
+	auto addintToIter = i;
+	auto startIter = beginIterOfAvailableElements + addintToIter;
+
+	for (auto j = startIter; i < this->numberOfLines && i < border && j != endIterOfAvailableElements; ++i, ++j)
+	{
+		int index = *j;
+
+		// если кол-во ингредиента больше нуля
+		//if (this->table->getIngredientById(/*i + 1*/index)->getNumber() > 0)
+		//{
+			for (int k = 0; k < this->numberOfColumns; ++k)
+			{
+				cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[k]);
+
+				cout << this->tableContent[index - 1][k];
 			}
 
 			this->yCoordForContentPrinting += GAPS;
-		}
-		else
-			++border;
+		//}
+		//else
+		//	++border;
 	}
 
 	cout << endl << endl;
@@ -615,20 +623,20 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id, int previo
 	{
 		++numberOfAvailableContent;
 
-		availableElementsId.push_back(id);
+		//availableElementsId.push_back(id);
 
-		quickSort(&availableElementsId[0], availableElementsId.size());
+		//quickSort(&availableElementsId[0], availableElementsId.size());
 	}
 	// если предыдущее было больше нуля, а сейчас ноль
 	else if (previousNumber > 0 && ingredient->getNumber() == 0)
 	{
 		--numberOfAvailableContent;
 
-		int index = binarySearch(availableElementsId, id);
+		//int index = binarySearch(availableElementsId, id);
 
-		auto beginIter = availableElementsId.begin();
+		//auto beginIter = availableElementsId.begin();
 
-		availableElementsId.erase(beginIter + index);
+		//availableElementsId.erase(beginIter + index);
 	}
 
 	changeTableContentForOneElement(id);

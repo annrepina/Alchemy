@@ -1,4 +1,5 @@
 #include "PotionTable.h"
+#include "ServiceFunctions.h"
 
 int PotionTable::id = 0;
 
@@ -97,11 +98,17 @@ void PotionTable::decreaseNumberOfPotion(int potionId, int number)
 		// удаляем из map данный элемент
 		this->potiontsWithId.erase(potionId);
 
+		// находим этот элемент в доступных элементах и удаляем
+		int index = binarySearch(this->availableElements, potionId);
+
+		auto beginIter = availableElements.begin();
+		availableElements.erase(beginIter + index);
+
 		// удаляем само зелье
 		delete potion;
 		potion = nullptr;
 
-		// еще раз уведомляем принтер после окончательного удаления элемента, чтобы пересчитал данные
+		// еще раз уведомляем принтер после окончательного удаления элемента, чтобы пересчитал данные по кол-ву строк
 		notify();
 	}
 }

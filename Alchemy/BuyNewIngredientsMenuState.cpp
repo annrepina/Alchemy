@@ -47,8 +47,7 @@ void BuyNewIngredientsMenuState::printMenu()
 
 		printColoredTextByCoords(inputName, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
 
-		std::cin.ignore(1, '\n');
-		getline(std::cin, ingredientName);
+		this->alchemicalUserInterface->enter(ingredientName);
 
 		if (ingredientName == "")
 			continue;

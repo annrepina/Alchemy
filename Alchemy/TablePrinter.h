@@ -30,6 +30,7 @@ public:
 		this->table = nullptr;
 		this->numberOfColumns = 0;
 		this->numberOfLines = 0;
+		this->numberOfAvailableContent = 0;
 		this->tableWidth = 0;
 		this->xCoordForFramePrinting = 0;
 		this->xCoordForContentPrinting = 0;
@@ -108,7 +109,12 @@ public:
 		this->numberOfColumns = this->columnWidthValues.size();
 
 		this->xCoordsForContentPrinting = calculateXCoordsForContentPrinting();
+
+		//this->numberOfAvailableContent = calculateNumberOfAvailableElements();
 	}
+
+	//// Посчитать кол-во доступных пользователю ингредиентов
+	//virtual int calculateNumberOfAvailableElements() = 0;
 
 	// Получить кол-во колонок
 	int getNumberOfColumns()
@@ -127,11 +133,16 @@ public:
 		return this->tableContent;
 	}
 
-	// Получить вектор айдишников доступных элементов
-	vector<int> getAvailableElementsId()
+	PrintableTable* getTable()
 	{
-		return availableElementsId;
+		return this->table;
 	}
+
+	//// Получить вектор айдишников доступных элементов
+	//vector<int> getAvailableElementsId()
+	//{
+	//	return availableElementsId;
+	//}
 
 	// Задать таблицу
 	virtual void setTable(PrintableTable* table)
@@ -139,12 +150,12 @@ public:
 		this->table = table;
 	}
 
-	int findElementInAvailableElementsId(int key)
-	{
-		int res = binarySearch(this->availableElementsId, key);
+	//virtual int findElementInAvailableElementsId(int key)
+	//{
+	//	int res = binarySearch(this->availableElementsId, key);
 
-		return res;
-	}
+	//	return res;
+	//}
 
 protected:
 
@@ -184,8 +195,11 @@ protected:
 	// Вектор стрингов с содержимым таблицы
 	vector< vector <string> > tableContent;
 
-	// вектор с id доступных элементов
-	vector<int> availableElementsId;
+	//// вектор с id доступных элементов
+	//vector<int> availableElementsId;
+
+	// Кол-во доступного контента
+	int numberOfAvailableContent;
 
 #pragma region МЕТОДЫ РАСЧЕТА
 

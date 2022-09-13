@@ -44,7 +44,7 @@ private:
 	// Проверка введенного количества зелья на корректность
 	void checkNumberOfPotion(int& numberOfPotion, int potionId);
 
-#pragma region Методы печати
+#pragma region МЕТОДЫ ПЕЧАТИ
 
 	// Печать меню
 	void printMenu(string choiceIngredient, string choiceNumberOfIngredient);
@@ -55,5 +55,5 @@ private:
 	// Печать ошибки и пользователь делает выбор снова
 	void printErrorAndMakeChoiceAgain(int yCoord, string textOfError, int& potionId);
 
-#pragma region Методы печати
+#pragma region МЕТОДЫ ПЕЧАТИ
 };

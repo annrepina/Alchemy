@@ -4,23 +4,28 @@
 
 using namespace std;
 
+// Класс который читает другие классы из бинарного файла
 template <typename T>
 class BinaryReader
 {
 public:
 
+    // Конструктор по умолчанию
 	BinaryReader()
 	{
 	}
 
+    // Виртуальный деструктор
     virtual ~BinaryReader()
     {
     }
 
+    // Читать из бинарного файла
     virtual T* readFromFile(string path, ifstream& stream) = 0;
 
 protected:
 
+    // Читать size_t из бинарного файла
     virtual size_t readSize_t(ifstream& stream)
     {
         size_t size = sizeof(size_t);
@@ -39,7 +44,7 @@ protected:
         return textSize;
     }
 
-    // читаем текст
+    // читаем текст из бинарного файла
 	virtual string readString(ifstream& stream)
 	{
         size_t textSize = readSize_t(stream);
@@ -60,6 +65,7 @@ protected:
         return res;
 	}
 
+    // Читать int из бинарного файла
     virtual int readInt(ifstream& stream)
     {
         // узнаем размер переменной
@@ -77,6 +83,7 @@ protected:
         return res;
     }
 
+    // Читать bool из бинарного файла
     virtual bool readBool(ifstream& stream)
     {
         auto size = sizeof(bool);
@@ -92,6 +99,7 @@ protected:
         return res;
     }
 
+    // Очистить память
     virtual void clear() = 0;
 };
 

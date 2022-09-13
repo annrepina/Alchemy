@@ -59,7 +59,7 @@ void CreatingPotionsMenuState::printMenu()
 	int page = FIRST_PAGE;
 
 	// печатаем таблицу имеющихся ингредиентов
-	this->alchemicalUserInterface->printTableWithAvailableToUserElements(AlchemicalUserInterface::TableCode::IngredientTable, page);
+	this->alchemicalUserInterface->printIngredientsTableWithAvailableToUserElements(page);
 
 	// если был нажат esc
 	if (true == this->alchemicalUserInterface->getWasExit())
@@ -188,9 +188,7 @@ void CreatingPotionsMenuState::printMenu(string choiceFirstIngredient, string ch
 	printMenuTitle();
 
 	printColoredTextByCoords(choiceFirstIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
-
 	printColoredTextByCoords(choiceSecondIngredient, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_3, STANDARD_CURSOR_X_COORD);
-
 	printColoredTextByCoords(choiceNumberOfIngredients, R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE, Y_COORD_AFTER_MENU_TITLE_4, STANDARD_CURSOR_X_COORD);
 }
 
@@ -206,8 +204,8 @@ void CreatingPotionsMenuState::decreaseNumberOfIngredients(int firstIgredientId,
 
 void CreatingPotionsMenuState::checkIngredientsId(int& firstIngredientId, int& secondIngredientId)
 {
-	int firstIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(firstIngredientId);
-	int secondIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(secondIngredientId);
+	int firstIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->getTable()->findElementInAvailableElements(firstIngredientId);
+	int secondIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->getTable()->findElementInAvailableElements(secondIngredientId);
 
 	while (firstIndex == NO_POSITION)
 	{
@@ -215,7 +213,7 @@ void CreatingPotionsMenuState::checkIngredientsId(int& firstIngredientId, int& s
 
 		checkIdForEquality(firstIngredientId, secondIngredientId, Y_COORD_AFTER_MENU_TITLE_2);
 
-		firstIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(firstIngredientId);
+		firstIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->getTable()->findElementInAvailableElements(firstIngredientId);
 	}
 
 	while (secondIndex == NO_POSITION)
@@ -224,7 +222,7 @@ void CreatingPotionsMenuState::checkIngredientsId(int& firstIngredientId, int& s
 
 		checkIdForEquality(secondIngredientId, firstIngredientId, Y_COORD_AFTER_MENU_TITLE_3);
 
-		secondIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(secondIngredientId);
+		secondIndex = this->alchemicalUserInterface->getIngredientsTablePrinter()->getTable()->findElementInAvailableElements(secondIngredientId);
 	}
 }
 

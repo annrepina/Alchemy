@@ -29,12 +29,16 @@ public:
 
 	void printWithSortingMarkers(int page, int numberOfColumn, bool orderOfSorting) override;
 
+	void printAvailableElements(int page) override;
+
 	// заполнить вектор с содержимым таблицы
 	void fillInTableContent() override;
 
-	void printAvailableElements(int page) override;
+	void calculateData() override;
 
 	void update() override;
+
+	//int findElementInAvailableElementsId(int key) override;
 
 private:
 
@@ -68,6 +72,12 @@ private:
 
 	// Расчитать макс длину стрингового отображения цены
 	int calculateMaxPriceStrSize();
+
+	//// Посчитать кол-во доступных пользователю ингредиентов
+	//int calculateNumberOfAvailableElements() override;
+
+	//// Добавить id доступных элементов если вектор пустой
+	//void calculateAvailableElementsId();
 
 #pragma endregion МЕТОДЫ РАСЧЕТА
 

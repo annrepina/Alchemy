@@ -15,6 +15,22 @@ void PotionTableBinaryWriter::write(ofstream& stream, string path, PotionTable* 
 {
 	BinaryWriter::write(stream, path, potionTable);
 
+	// получаем и пишем кол-во доступных элементов 
+	int numberOfAvailableElements = potionTable->getNumberOfAvailableElements();
+	writeInt(stream, numberOfAvailableElements);
+
+	// узнаем итераторы на вектор с id доступных элементов
+	auto beginAvailableIter = potionTable->getBeginIteratorOfAvailableElements();
+	auto endAvailableIter = potionTable->getEndIteratorOfAvailableElements();
+
+	// в цикле пишем значения
+	for (auto i = beginAvailableIter; i != endAvailableIter; ++i)
+	{
+		// получаем значение и пишем
+		int value = *i;
+		writeInt(stream, value);
+	}
+
 	// Получаем и пишем Id 
 	int id = potionTable->getId();
 	writeInt(stream, id);

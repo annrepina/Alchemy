@@ -5,25 +5,24 @@
 
 using namespace std;
 
+// Класс, который пишет другой класс в файл в бинарном виде
 template <typename T>
 class BinaryWriter
 {
 public:
 
+	// Конструктор по умолчанию
 	BinaryWriter()
 	{
 
 	}
 
+	// Виртуальный деструктор
 	virtual ~BinaryWriter()
 	{
 	}
 
-	//BinaryWriter(/*string filePath*/)
-	//{
-	//	//this->filePath = filePath;
-	//}
-
+	// Писать в файл
 	virtual void write(ofstream& stream, string filePath, T* object) const
 	{
 		if ("" == filePath)
@@ -36,9 +35,7 @@ public:
 
 protected:
 
-	//// Путь к файлу
-	//string filePath;
-
+	// Писать строку в файл
 	virtual void writeString(ofstream& stream, string text) const
 	{
 		// размер текста
@@ -51,18 +48,21 @@ protected:
 		stream << text;
 	}
 
+	// писать инт в файл
 	virtual void writeInt(ofstream& stream, int value) const
 	{
 		// пишем значение
 		stream.write((char*)(&value), sizeof(value));
 	}
 
+	// писать bool в файл
 	virtual void writeBool(ofstream& stream, bool value) const
 	{
 		// пишем значение 
 		stream.write((char*)(&value), sizeof(value));
 	}
 
+	// очистить память
 	virtual void clear() = 0;
 };
 

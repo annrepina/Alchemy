@@ -54,7 +54,7 @@ void SellingIngredientsMenuState::printMenu()
 	int page = FIRST_PAGE;
 
 	// печатаем таблицу имеющихся ингредиентов
-	this->alchemicalUserInterface->printTableWithAvailableToUserElements(AlchemicalUserInterface::TableCode::IngredientTable, page);
+	this->alchemicalUserInterface->printIngredientsTableWithAvailableToUserElements(page);
 
 	// если был нажат esc
 	if (true == this->alchemicalUserInterface->getWasExit())
@@ -131,13 +131,13 @@ void SellingIngredientsMenuState::printErrorAndMakeChoiceAgain(int yCoord, strin
 
 void SellingIngredientsMenuState::checkIngredientsId(int& ingredientId)
 {
-	int index = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(ingredientId);
+	int index = this->alchemicalUserInterface->getIngredientsTablePrinter()->getTable()->findElementInAvailableElements(ingredientId);
 
 	while (index == NO_POSITION)
 	{
 		printErrorAndMakeChoiceAgain(ingredientId, Y_COORD_AFTER_MENU_TITLE_2);
 
-		index = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(ingredientId);
+		index = this->alchemicalUserInterface->getIngredientsTablePrinter()->getTable()->findElementInAvailableElements(ingredientId);
 	}
 }
 

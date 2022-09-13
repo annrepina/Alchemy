@@ -75,10 +75,10 @@ bool AlchemyLogic::tryBuyIngredientFromList(int id, int number)
 
 		ingredient->increaseNumber(number);
 
+		ingredientsTable->addAvailableElement(id);
+
 		// уведомляем подписчиков об изменениях
 		ingredientsTable->notify(id, previousNumber);
-
-		ingredientsTable->addAvailableElement(id);
 
 		alchemist->decreaseCapital(cost);
 
@@ -107,13 +107,10 @@ bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
 		// добавляем ингредиент в таблицу
 		this->ingredientsTable->add(res);
 
-		res->subscribe(this->ingredientsTable);
+		//res->subscribe(this->ingredientsTable);
 
 		// id Этого ингредиента
 		int id = (--this->ingredientsTable->getEndIterator())->first;
-
-		// добавляем элемент в вектор имеющихся элементов
-		this->ingredientsTable->addAvailableElement(id);
 
 		this->ingredientsTable->notify(id, NEW_ELEMENT);
 
@@ -164,6 +161,10 @@ void AlchemyLogic::checkPotion(Potion* potion, vector<Potion*>& potions)
 	else
 	{
 		this->potionTable->add(potion);
+
+		auto endIter = potionTable->getEndIterator();
+
+		this->potionTable->addAvailableElement((--endIter)->first);
 
 		potions.push_back(potion);
 	}
@@ -299,7 +300,6 @@ void AlchemyLogic::sellIngredient(int ingredientId, int numberOfIngredient)
 	decreaseNumberOfIngredient(ingredientId, numberOfIngredient);
 
 	this->alchemist->increaseCapital(profit);
-
 	this->alchemist->increaseSalesmanLevel(numberOfIngredient);
 }
 

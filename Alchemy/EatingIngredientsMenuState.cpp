@@ -55,7 +55,7 @@ void EatingIngredientsMenuState::printMenu()
 	int page = FIRST_PAGE;
 
 	// печатаем таблицу имеющихся ингредиентов
-	this->alchemicalUserInterface->printTableWithAvailableToUserElements(AlchemicalUserInterface::TableCode::IngredientTable, page);
+	this->alchemicalUserInterface->printIngredientsTableWithAvailableToUserElements(page);
 
 	// если был нажат esc
 	if (true == this->alchemicalUserInterface->getWasExit())
@@ -108,7 +108,7 @@ ReturnMenuState* EatingIngredientsMenuState::createReturnMenuState()
 
 void EatingIngredientsMenuState::checkIngredientsId(int& ingredientId)
 {
-	int index = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(ingredientId);
+	int index = this->alchemicalUserInterface->getIngredientsTablePrinter()->getTable()->findElementInAvailableElements(ingredientId);
 
 	bool wasClosedEff = wasUnknownEffect(ingredientId);
 
@@ -123,13 +123,10 @@ void EatingIngredientsMenuState::checkIngredientsId(int& ingredientId)
 		else
 			error = "У ингредиента с номером " + to_string(ingredientId) + " все эффекты открыты, выберите другой номер: ";
 
-		// сбрасываем
-		wasClosedEff = false;
-
 		printErrorAndMakeChoiceAgain(Y_COORD_AFTER_MENU_TITLE_2, error, ingredientId);
 
-		index = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(ingredientId);
-
+		// пересчитываем
+		index = this->alchemicalUserInterface->getIngredientsTablePrinter()->getTable()->findElementInAvailableElements(ingredientId);
 		wasClosedEff = wasUnknownEffect(ingredientId);
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Formatting.h"
+#include "ServiceFunctions.h"
 
 using namespace std;
 
@@ -67,8 +68,18 @@ public:
 		}
 
 		// если такого элемента не было
-		if(!hasSuchElement)
+		if (!hasSuchElement)
+		{
 			this->availableElements.push_back(id);
+			quickSort(&availableElements[0], availableElements.size());
+		}
+	}
+
+	virtual int findElementInAvailableElements(int key)
+	{
+		int res = binarySearch(this->availableElements, key);
+
+		return res;
 	}
 
 protected:

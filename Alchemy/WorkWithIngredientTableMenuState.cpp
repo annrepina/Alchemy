@@ -198,7 +198,7 @@ void WorkWithIngredientTableMenuState::printFilterItems(vector<string> listOfIte
 		{
 			printTextWithBackground(listOfItems[i], R_DECIMAL_GREY, G_DECIMAL_GREY, B_DECIMAL_GREY);
 
-			cout << goToXY(j, xCoordForColon) << ':';\
+			cout << goToXY(j, xCoordForColon) << ':';
 		}
 
 		else
@@ -305,7 +305,6 @@ void WorkWithIngredientTableMenuState::chooseMenuItem(vector<string> listOfItems
 			case VK_ESCAPE:
 			{
 				this->alchemicalUserInterface->setWasExit(true);
-				//exitFlag = true;
 			}
 			break;
 		}

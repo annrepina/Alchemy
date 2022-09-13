@@ -23,8 +23,6 @@ void InstructionsMenuState::printMenu()
 	fillMap<function<MenuState* (InstructionsMenuState&)>>(stateCreatingFunctions, listOfCreatingFunctions, currentYCursorCoordState, numberOfStates);
 	fillMap<MenuState*>(menuStates, listOfStates, this->currentYCursorCoordState, this->numberOfStates);
 
-	//cout << goToXY(this->currentYCursorCoordState + 1, STANDARD_CURSOR_X_COORD);
-
 	printMenuTitle();
 
 	printColoredText("Выберите действие:", R_AQUAMARINE, G_AQUAMARINE, B_AQUAMARINE);

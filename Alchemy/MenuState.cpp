@@ -244,4 +244,3 @@ void MenuState::goBack()
 
 	this->alchemicalUserInterface->setState(this->getNextState());
 }
-

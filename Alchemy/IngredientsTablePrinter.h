@@ -88,8 +88,8 @@ private:
 	// Посчитать кол-во доступных пользователю ингредиентов
 	int calculateNumberOfAvailableElements();
 
-	// Добавить id доступных элементов если вектор пустой
-	void calculateAvailableElementsId();
+	//// Добавить id доступных элементов если вектор пустой
+	//void calculateAvailableElementsId();
 
 #pragma endregion МЕТОДЫ РАСЧЕТА
 

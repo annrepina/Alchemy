@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <functional>
 #include <map>
+#include <fstream>
 #include "Formatting.h"
 #include "ServiceFunctions.h"
 #include "KeyBoard.h"
@@ -99,6 +100,9 @@ public:
 
 	// ѕечать ошибки из-за некорректного ввода
 	virtual void printError(int yCoord, int xCoord, string textOfError);
+
+	// ¬вести значение
+	void enter(string& value);
 
 protected:
 

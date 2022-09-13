@@ -39,10 +39,14 @@ int UserInterface::checkInput(string value, int min, int max, string textOfRange
 
 	do
 	{
-		cin >> value;
+		enter(value);
+
+		if (value == "")
+			continue;
 
 		success = tryParseToInt(value);
 
+		// если не число
 		if (!success)
 		{
 			string textOfError = "Вы ввели недопустимое значение, попробуйте снова: ";
@@ -62,12 +66,16 @@ int UserInterface::checkInput(string value, int min, int max, string textOfRange
 		}
 		else
 		{
-			break;
+			return intValue;
 		}
 
 	} while (true);
+}
 
-	return intValue;
+void UserInterface::enter(string& value)
+{
+	std::cin.ignore(0, EOF);
+	getline(std::cin, value, '\n');
 }
 
 int UserInterface::getCurrentYCursorCoord()
@@ -179,8 +187,6 @@ string UserInterface::checkInput(string& value, bool isString, int max, int min,
 {
 	int intRequest = 0;
 
-	//string strRequest = "";
-
 	// если требуется число
 	if (!isString)
 	{
@@ -188,7 +194,18 @@ string UserInterface::checkInput(string& value, bool isString, int max, int min,
 		value = to_string(intRequest);
 	}
 	else
-		cin >> value;
+	{
+		do {
+			enter(value);
+
+			if (value == "")
+				continue;
+
+			else
+				break;
+
+		} while (true);
+	}
 
 	return value;
 }

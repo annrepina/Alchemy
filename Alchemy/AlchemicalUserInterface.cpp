@@ -246,12 +246,14 @@ void AlchemicalUserInterface::choosePageWhileSorting(vector<vector<string>> cont
 	} while (false == wasExit && false == exit);
 }
 
-void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode code)
+void AlchemicalUserInterface::choosePageFromAvailableContentOfIngredientsTable(int page)
 {
 	this->func = std::bind(&AlchemicalUserInterface::isPageChoiceFalse, this, _1);
 
 	// Флаг ддля выхода из цикла
 	bool exit = false;
+
+	int contentSize = this->ingredientsTableprinter->getNumberOfAvailableContent();
 
 	do
 	{
@@ -262,9 +264,9 @@ void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode
 		{
 			case VK_LEFT:
 			{
-				if (checkHorizontalArrowChoice(page, code, VK_LEFT))
+				if (checkHorizontalArrowChoice(contentSize, page, TableCode::IngredientTable, VK_LEFT))
 				{
-					printTableWithAvailableToUserElements(code, page);
+					printIngredientsTableWithAvailableToUserElements(page);
 					exit = true;
 				}
 			}
@@ -273,9 +275,9 @@ void AlchemicalUserInterface::choosePageFromAvailableContent(int page, TableCode
 			case VK_RIGHT:
 			{
 				// Проверяем стрелочки
-				if (checkHorizontalArrowChoice(page, code, VK_RIGHT))
+				if (checkHorizontalArrowChoice(contentSize, page, TableCode::IngredientTable, VK_RIGHT))
 				{
-					printTableWithAvailableToUserElements(code, page);
+					printIngredientsTableWithAvailableToUserElements(page);
 					exit = true;
 				}
 			}
@@ -401,19 +403,17 @@ int AlchemicalUserInterface::chooseId(TableCode code)
 
 	string value = "";
 
+	string errorText = "Данного значения не существует в таблице, попробуйте снова: ";
+
 	if (code == TableCode::IngredientTable)
 	{
 		auto iter = --this->alchemyLogic->getIngredientsTable()->getEndIterator();
-
-		string errorText = "Данного значения не существует в таблице, попробуйте снова: ";
 
 		id = checkInput(value, 1, iter->first, errorText, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
 	}
 	else
 	{
 		auto iter = --this->alchemyLogic->getPotionTable()->getEndIterator();
-
-		string errorText = "Данного значения не существует в таблице, попробуйте снова: ";
 
 		id = checkInput(value, 1, iter->first, errorText, Y_COORD_AFTER_MENU_TITLE_2, STANDARD_CURSOR_X_COORD);
 	}
@@ -627,10 +627,21 @@ void AlchemicalUserInterface::printAlchemist()
 	// Если файл пустой и имя пустое
 	if ("" == this->alchemyLogic->getAlchemist()->getName())
 	{
+		cout << "Введите ваше имя: ";
+
 		string name;
 
-		cout << "Введите ваше имя: ";
-		cin >> name;
+		do {
+
+			enter(name);
+
+			if (name == "")
+				continue;
+
+			else
+				break;
+
+		} while (true);
 
 		this->alchemyLogic->getAlchemist()->setName(name);
 	}
@@ -692,35 +703,16 @@ void AlchemicalUserInterface::printTablePagesInLoopWhileSorting(vector<vector<st
 	choosePageWhileSorting(content, page, code, numberOfColumn, orderOfSorting);
 }
 
-void AlchemicalUserInterface::printTableWithAvailableToUserElements(TableCode code, int& page)
+void AlchemicalUserInterface::printIngredientsTableWithAvailableToUserElements(int& page)
 {
-	if (code == TableCode::IngredientTable)
-	{
-		if (this->ingredientsTableprinter->getNumberOfAvailableContent() <= (page - 1) * NUMBER_OF_CONTENT_LINES)
-			return;
+	if (this->ingredientsTableprinter->getNumberOfAvailableContent() <= (page - 1) * NUMBER_OF_CONTENT_LINES)
+		return;
 
-		this->ingredientsTableprinter->printAvailableElements(page);
+	this->ingredientsTableprinter->printAvailableElements(page);
 
-		printPageMenu(page);
+	printPageMenu(page);
 
-		choosePageFromAvailableContent(page, TableCode::IngredientTable);
-	}
-	else
-	{
-
-	}
-}
-
-void AlchemicalUserInterface::printFirstTablePage(TableCode code)
-{
-	if (code == TableCode::IngredientTable)
-	{
-		this->ingredientsTableprinter->printAvailableElements(FIRST_PAGE);
-	}
-	else
-	{
-
-	}
+	choosePageFromAvailableContentOfIngredientsTable(page);
 }
 
 void AlchemicalUserInterface::printAlchemyLogic()

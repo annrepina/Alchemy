@@ -1,6 +1,7 @@
 #include "IngredientsTable.h"
 #include <iostream>
 #include "EffectsTable.h"
+#include "ServiceFunctions.h"
 
 int IngredientsTable::id = 0;
 
@@ -119,6 +120,16 @@ void IngredientsTable::decreaseNumberOfIngredient(int ingredientId, int number)
 
 	// Получаем ингредиент и уменьшаем его кол-во
 	getIngredientById(ingredientId)->decreaseNumber(number);
+
+	// Если кол-во ингредиента стало ноль, то удаляем этот ингредиент
+	if (getIngredientById(ingredientId)->getNumber() == 0)
+	{
+		int index = binarySearch(availableElements, ingredientId);
+
+		auto beginIter = availableElements.begin();
+
+		availableElements.erase(beginIter + index);
+	}
 
 	// уведомляем всех
 	notify(ingredientId, previousNumber);

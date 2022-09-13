@@ -17,7 +17,7 @@ IngredientsTable* IngredientsTableBinaryReader::readFromFile(string path, ifstre
 	{
 		IngredientsTable* ingredientsTable = new IngredientsTable();
 		
-		// читаем id доступных элементов
+		// читаем кол-во доступных элементов
 		int numberOfAvailableElements = readInt(stream);
 
 		for (int i = 0; i < numberOfAvailableElements; ++i)

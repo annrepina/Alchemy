@@ -70,7 +70,7 @@ void SellingPotionsMenuState::printMenu()
 
 	alchemyLogic->sellPotion(potionId, numberOfPotion);
 
-	// принтер пересчитывает
+	// принтер пересчитывает все данные
 	this->alchemicalUserInterface->getPotionTablePrinter()->calculateData();
 
 	string congratulations = "Вы отличный торговец!";
@@ -130,13 +130,13 @@ void SellingPotionsMenuState::printErrorAndMakeChoiceAgain(int yCoord, string te
 
 void SellingPotionsMenuState::checkPotionId(int& potionId)
 {
-	int index = this->alchemicalUserInterface->getPotionTablePrinter()->findElementInAvailableElementsId(potionId);
+	int index = this->alchemicalUserInterface->getPotionTablePrinter()->getTable()->findElementInAvailableElements(potionId);
 
 	while (index == NO_POSITION)
 	{
 		printErrorAndMakeChoiceAgain(potionId, Y_COORD_AFTER_MENU_TITLE_2);
 
-		index = this->alchemicalUserInterface->getIngredientsTablePrinter()->findElementInAvailableElementsId(potionId);
+		index = this->alchemicalUserInterface->getPotionTablePrinter()->getTable()->findElementInAvailableElements(potionId);
 	}
 }
 

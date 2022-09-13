@@ -80,10 +80,7 @@ public:
 	void printTablePagesInLoopWhileSorting(vector<vector<string>> content, TableCode code, int& page, int numberOfColumn, bool orderOfSorting);
 
 	// Печать таблицы только с теми элементами, которые существуют у юзера
-	void printTableWithAvailableToUserElements(TableCode code, int& page);
-
-	// Печать таблицы первой страницы таблицы (только то, что есть у юзера)
-	void printFirstTablePage(TableCode code);
+	void printIngredientsTableWithAvailableToUserElements(int& page);
 
 	// Печать логику алхимии
 	void printAlchemyLogic();
@@ -175,7 +172,7 @@ private:
 
 #pragma endregion НАЗВАНИЕ ЗАГОЛОВКОВ
 
-#pragma region Выбор
+#pragma region ВЫБОР
 
 	// Выбрать страницу таблицы
 	void choosePage(int page, TableCode code);
@@ -183,8 +180,8 @@ private:
 	// Выбрать страницу во время сортировки
 	void choosePageWhileSorting(vector<vector<string>> content, int page, TableCode code, int numberOfColumn, bool orderOfSorting);
 
-	// Выбрать страницу таблицы среди доступных элементов
-	void choosePageFromAvailableContent(int page, TableCode code);
+	// Выбрать страницу таблицы ингредиентов среди доступных элементов
+	void choosePageFromAvailableContentOfIngredientsTable(int page);
 
 #pragma endregion ВЫБОР
 

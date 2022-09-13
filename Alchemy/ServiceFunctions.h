@@ -104,7 +104,7 @@ void quickSort(T* vec, int size)
 }
 
 template<typename T>
-int binarySearch(vector<T> vec,/* const int ARRAY_SIZE,*/ int key)
+int binarySearch(vector<T> vec, int key)
 {
 	// Индекс искомого числа (остается -1, если число не найдено в массиве)
 	int index = NO_POSITION;

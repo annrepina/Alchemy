@@ -1,5 +1,4 @@
 #include "AlchemyLogicWriter.h"
-//#include "AlchemistBinaryWriter.h"
 
 AlchemyLogicWriter::AlchemyLogicWriter(/*AlchemyLogic* alchemyLogic, *//*string filePath*/)
 {
@@ -48,6 +47,3 @@ void AlchemyLogicWriter::clear()
 	delete this->potionTableBinaryWriter;
 	this->potionTableBinaryWriter = nullptr;
 }
-
-
-

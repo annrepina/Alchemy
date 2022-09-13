@@ -17,6 +17,16 @@ PotionTable* PotionTableBinaryReader::readFromFile(string path, ifstream& stream
 	{
 		PotionTable* potionTable = new PotionTable();
 
+		// читаем кол-во доступных элементов
+		int numberOfAvailableElements = readInt(stream);
+
+		for (int i = 0; i < numberOfAvailableElements; ++i)
+		{
+			// Читаем и добавляем id 
+			int id = readInt(stream);
+			potionTable->addAvailableElement(id);
+		}
+
 		// Читаем Id 
 		int id = readInt(stream);
 		potionTable->setId(id);

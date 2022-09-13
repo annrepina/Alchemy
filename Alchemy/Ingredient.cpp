@@ -24,7 +24,7 @@ bool Ingredient::getEffectIsKnown(int number)
 {
 	if (numberOfEffects > number)
 	{
-		int id = this->effectsId[number];
+		bool id = this->effectsId[number];
 		return id;
 	}
 

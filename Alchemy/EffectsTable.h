@@ -11,6 +11,7 @@ public:
 	// Конструктор по умолчанию
 	EffectsTable();
 
+	// Деструктор
 	~EffectsTable() override;
 
 	// Добавить эффект
@@ -24,6 +25,7 @@ public:
 
 #pragma region Геттеры
 
+	// геттер для статик id 
 	int getId();
 
 	// Геттер для размера
@@ -42,6 +44,7 @@ public:
 
 #pragma region Сеттеры
 
+	// Сеттер для статик id
 	void setId(int id);
 
 #pragma endregion Сеттеры
@@ -60,4 +63,3 @@ private:
 	// Очищает память
 	void clear();
 };
-

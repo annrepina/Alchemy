@@ -162,7 +162,6 @@
     <ClCompile Include="EffectsTableBinaryReader.cpp" />
     <ClCompile Include="EffectsTableBinaryWriter.cpp" />
     <ClCompile Include="EffectsTableBuilder.cpp" />
-    <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Formatting.cpp" />
     <ClCompile Include="IngredientBinaryReader.cpp" />
     <ClCompile Include="IngredientBinaryWriter.cpp" />
@@ -230,7 +229,6 @@
     <ClInclude Include="EffectsTableBinaryReader.h" />
     <ClInclude Include="EffectsTableBinaryWriter.h" />
     <ClInclude Include="EffectsTableBuilder.h" />
-    <ClInclude Include="FileReader.h" />
     <ClInclude Include="Formatting.h" />
     <ClInclude Include="IngredientBinaryReader.h" />
     <ClInclude Include="IngredientBinaryWriter.h" />

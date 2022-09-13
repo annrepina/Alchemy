@@ -1,30 +1,30 @@
 #pragma once
 #include "Formatting.h"
 #include "IObserver.h"
-//#include "Table.h"
-// Увеличили на 6 всё
+
+// Координаты для печати
 #define Y_COORD_FOR_FRAME_PRINTING			19		// Координата Y для печати рамки таблицы 
 #define Y_COORD_FOR_HEADER_PRINTING			22		// Координата Y для печати шапки таблицы
 #define Y_COORD_FOR_CONTENT_PRINTING		24		// Координата Y для печати содержимого таблицы
 
+#define OUTER_BORDERS						2		// Внешние границы таблицы (левая и правая)
 
-#define OUTER_BORDERS				2		// Внешние границы таблицы (левая и правая)
+#define NUMBER_OF_LINES_ON_PAGE				11		// Кол-во строк на одной странице
+#define NUMBER_OF_CONTENT_LINES				10		// Кол-во строк с содержимым
 
-#define NUMBER_OF_LINES_ON_PAGE		11		// Кол-во строк на одной странице
-#define NUMBER_OF_CONTENT_LINES		10		// Кол-во строк с содержимым
+#define GAPS								2		// Кол-во пробелов в столбце (1 слева и 1 справа)
 
-#define GAPS						2		// Кол-во пробелов в столбце (1 слева и 1 справа)
-
-#define ASCENDING_ORDER_OF_SORTING		true	// Порядок сортировки по возрастанию
-#define DESCENDING_ORDER_OF_SORTING		false	// Порядок сортировки по убыванию
+#define ASCENDING_ORDER_OF_SORTING			true	// Порядок сортировки по возрастанию
+#define DESCENDING_ORDER_OF_SORTING			false	// Порядок сортировки по убыванию
 
 
-// Класс-шаблон печатающий что-либо
+// Класс-шаблон печатающий таблицы - принтер
 template <typename PrintableTable>
 class TablePrinter : public IObserver
 {
 public:
 
+	// Конструктор по умолчанию
 	TablePrinter()
 	{
 		this->table = nullptr;
@@ -39,11 +39,13 @@ public:
 		this->page = 1;
 	}
 
+	// Деструктор
 	virtual ~TablePrinter()
 	{
 
 	}
 
+	// Обновить контент для печати исходя из измениния объекта подписки - Таблицы
 	void update(int id, bool isNewElement) override
 	{
 		// если новый элемент
@@ -59,6 +61,7 @@ public:
 		}
 	}
 
+	// Обновить контент для печати исходя из измениния объекта подписки - Таблицы
 	void update(int id, int previousNumber) override
 	{
 		// если элементов меньше, чем id, значит был добавлен новый элемент
@@ -74,11 +77,13 @@ public:
 		}
 	}
 
+	// Обновить контент для печати исходя из измениния объекта подписки - Таблицы
 	virtual void update()
 	{
 
 	}
 
+	// Метож печати границ и названия таблицы
 	virtual void print(int page)
 	{
 		setPage(page);
@@ -91,8 +96,10 @@ public:
 	// Печать определенного контента напрямую передаваемого принтеру
 	virtual void print(vector<vector<string>> content, int page, int numberOfColumn, bool orderOfSorting) = 0;
 
+	// Печать таблицы с маркерами сортировки
 	virtual void printWithSortingMarkers(int page, int numberOfColumn, bool orderOfSorting) = 0;
 	
+	// Печать элементов таблицы, которые доступны алхимику, т.е. у которых кол-во больше нуля
 	virtual void printAvailableElements(int page) = 0;
 
 	// Расчитать данные по таблице
@@ -109,12 +116,7 @@ public:
 		this->numberOfColumns = this->columnWidthValues.size();
 
 		this->xCoordsForContentPrinting = calculateXCoordsForContentPrinting();
-
-		//this->numberOfAvailableContent = calculateNumberOfAvailableElements();
 	}
-
-	//// Посчитать кол-во доступных пользователю ингредиентов
-	//virtual int calculateNumberOfAvailableElements() = 0;
 
 	// Получить кол-во колонок
 	int getNumberOfColumns()
@@ -128,34 +130,23 @@ public:
 		return this->numberOfLines;
 	}
 
+	// Получить контент таблицы
 	vector<vector<string>> getTableContent()
 	{
 		return this->tableContent;
 	}
 
+	// Получить таблицу
 	PrintableTable* getTable()
 	{
 		return this->table;
 	}
-
-	//// Получить вектор айдишников доступных элементов
-	//vector<int> getAvailableElementsId()
-	//{
-	//	return availableElementsId;
-	//}
 
 	// Задать таблицу
 	virtual void setTable(PrintableTable* table)
 	{
 		this->table = table;
 	}
-
-	//virtual int findElementInAvailableElementsId(int key)
-	//{
-	//	int res = binarySearch(this->availableElementsId, key);
-
-	//	return res;
-	//}
 
 protected:
 
@@ -195,9 +186,6 @@ protected:
 	// Вектор стрингов с содержимым таблицы
 	vector< vector <string> > tableContent;
 
-	//// вектор с id доступных элементов
-	//vector<int> availableElementsId;
-
 	// Кол-во доступного контента
 	int numberOfAvailableContent;
 
@@ -206,17 +194,19 @@ protected:
 	// Рассчитать кол-во строк в таблице
 	virtual int calculateNumberOfLines() = 0;
 
+	// Расчитать ширину таблицы
 	virtual int calculateWidth() = 0;
 
+	// Расчитать размер числа - максимального id элемента в таблицк
 	virtual int calculateMaxId() = 0;
 
-	//virtual int calculateMaxIdStrSize() = 0;
-
+	// Расчитать размер максимального имени элемента в таблице
 	virtual int calculateMaxNameSize() = 0;
 
-	// Вернуть наибольшее кол-во элементов
+	// Вернуть размер числа - наибольшее кол-во которое имеет элементы
 	virtual int calculateMaxNumberStrSize() = 0;
 
+	// Расчитать координату X для печати контента таблицы
 	virtual vector<int> calculateXCoordsForContentPrinting()
 	{
 		int startCoord = xCoordForFramePrinting + GAPS; 
@@ -237,10 +227,9 @@ protected:
 	// Расчитывает ширину каждого столбца и возвращает вектор
 	virtual vector<int> calculateColumnWidth() = 0;
 
+	// Расчитывает координату x для печати таблицы
 	virtual int calculateXCoordForPrinting()
 	{
-		/*this->xCoordForPrinting = calculateXCoordInMiddle(this->tableWidth);*/
-
 		int xCoordForPrinting = calculateXCoordInMiddle(this->tableWidth);
 
 		return xCoordForPrinting;
@@ -279,10 +268,9 @@ protected:
 		goToCoordAndIncreaseY(this->yCoordForFramePrinting, this->xCoordForFramePrinting);
 
 		printLowerLineOfHeader();
-
-		//printLowerTableFrame(1, this->tableWidth - OUTER_BORDERS);
 	}
 
+	// Печать нижнюю часть шапки таблицы
 	virtual void printLowerLineOfHeader()
 	{
 		cout << turnOnDECMode();
@@ -308,17 +296,12 @@ protected:
 	// Печатать внутреннюю рамку таблицы
 	virtual void printInnerFrame()
 	{
-		//// Одна колонка для шапки таблицы
-		//int numberOfLines = this->numberOfLines + 1;
-
 		// По кол-ву колонок
 		for (int i = 0; i < NUMBER_OF_LINES_ON_PAGE; ++i)
 		{
 			goToCoordAndIncreaseY(this->yCoordForFramePrinting, this->xCoordForFramePrinting);
 
 			printInnerVerticalLines();
-
-			//cout << endl;
 
 			goToCoordAndIncreaseY(this->yCoordForFramePrinting, this->xCoordForFramePrinting);
 
@@ -334,6 +317,7 @@ protected:
 		this->yCoordForFramePrinting = Y_COORD_FOR_FRAME_PRINTING;
 	}
 
+	// Печать внутренних вертикальных линий талицы
 	virtual void printInnerVerticalLines()
 	{
 		cout << turnOnDECMode();
@@ -354,8 +338,10 @@ protected:
 	// Печать содержимого таблицы по страницам
 	virtual void printContent(int page) = 0;
 
+	// Печать контента, передаваемого напрямую принтеру
 	virtual void printContent(vector<vector<string>> content, int page) = 0;
 
+	// Печать доступный пользователю контент (элементы, у которых кол-во больше нуля)
 	virtual void printAvailableContent(int page) = 0;
 
 	// Печать шапки таблицы
@@ -370,11 +356,12 @@ protected:
 	// Изменить контент одного элемента
 	virtual void changeTableContentForOneElement(int id) = 0;
 
-	// Изменить контент одного элемента
+	// Изменить контент одного элемента с учетом измения кол-ва этого элемента
 	virtual void changeTableContentForOneElement(int id, int previousNumber) = 0;
 
 private:
 
+	// Сеттер для страницы
 	void setPage(int page)
 	{
 		this->page = page;
@@ -389,5 +376,3 @@ private:
 		}
 	}
 };
-
-

@@ -9,24 +9,6 @@ IngredientsTablePrinter::~IngredientsTablePrinter()
 {
 }
 
-
-
-//void IngredientsTablePrinter::update(int id)
-//{
-//	// если элементов меньше, чем id, значит был добавлен новый элемент
-//	if (this->tableContent.size() < id)
-//	{
-//		addElementToTableContent(id);
-//	}
-//	else
-//	{
-//		this->tableContent[id - 1].clear();
-//
-//		changeTableContentForOneElement(id);
-//	}
-//
-//}
-
 #pragma region ћетоды расчета
 
 int IngredientsTablePrinter::calculateNumberOfLines()
@@ -67,7 +49,6 @@ int IngredientsTablePrinter::calculateMaxNameSize()
 	int maxNameSize = table->getStartIterator()->second->getName().size();
 
 	map<int, Ingredient*>::iterator startIter = table->getStartIterator();
-
 	map<int, Ingredient*>::iterator endIter = table->getEndIterator();
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
@@ -94,7 +75,6 @@ int IngredientsTablePrinter::calculateMaxNumberStrSize()
 	int strMaxNumberSize;
 
 	map<int, Ingredient*>::iterator startIter = table->getStartIterator();
-
 	map<int, Ingredient*>::iterator endIter = table->getEndIterator();
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
@@ -128,7 +108,6 @@ int IngredientsTablePrinter::calculateMaxEffectNameSize()
 	int maxEffectNameSize = table->getEffectsTable()->getEffectByKey(firstEffectId)->getName().size();
 
 	map<int, Ingredient*>::iterator startIter = table->getStartIterator();
-
 	map<int, Ingredient*>::iterator endIter = table->getEndIterator();
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
@@ -182,8 +161,6 @@ vector<int> IngredientsTablePrinter::calculateColumnWidth()
 		columnWidth.push_back(effectColumnWidth);
 	}
 
-	//int numberColumnWidth = calculateMaxNumberStrSize(table) + GAPS;
-
 	int numberColumnWidth = calculateMaxNumberStrSize() + GAPS;
 
 	columnWidth.push_back(numberColumnWidth);
@@ -207,32 +184,11 @@ int IngredientsTablePrinter::calculateNumberOfAvailableElements()
 	return numberOfAvailableElements;
 }
 
-//void IngredientsTablePrinter::calculateAvailableElementsId()
-//{
-//	int numberOfAvailableElements = this->table->getNumberOfAvailableElements();
-//
-//	// если вектор пустой
-//	if (this->availableElementsId.size() == 0 && numberOfAvailableElements > 0)
-//	{
-//		auto beginIter = this->table->getBeginIteratorOfAvailableElements();
-//		auto endIter = this->table->getEndIteratorOfAvailableElements();
-//
-//		for (auto i = beginIter; i != endIter; ++i)
-//		{
-//			this->availableElementsId.push_back(*i);
-//		}
-//
-//		quickSort(&availableElementsId[0], availableElementsId.size());
-//	}
-//}
-
 void IngredientsTablePrinter::calculateData()
 {
 	TablePrinter::calculateData();
 
 	this->numberOfAvailableContent = calculateNumberOfAvailableElements();
-
-	//calculateAvailableElementsId();
 }
 
 int IngredientsTablePrinter::getNumberOfAvailableContent()
@@ -273,15 +229,6 @@ void IngredientsTablePrinter::printWithSortingMarkers(int page, int numberOfColu
 
 void IngredientsTablePrinter::printAvailableElements(int page)
 {
-	//TablePrinter::printAvailableElements(page);
-
-	//// если на остальные страницы контента нет, то не печатаем
-	//if (numberOfAvailableContent <= (page - 1) * NUMBER_OF_CONTENT_LINES)
-	//	return;
-
-	//if (this->numberOfAvailableContent <= (page - 1) * NUMBER_OF_CONTENT_LINES)
-	//	return;
-
 	TablePrinter::print(page);
 
 	this->printHeader();
@@ -342,9 +289,6 @@ void IngredientsTablePrinter::printContent(int page)
 	// сбрасываем координату
 	this->yCoordForContentPrinting = Y_COORD_FOR_CONTENT_PRINTING;
 
-	//// »тератор на начало 
-	//map<int, Ingredient*>::iterator iter = table->getStartIterator();
-
 	int i = 0;
 
 	if (page > 1)
@@ -373,9 +317,6 @@ void IngredientsTablePrinter::printContent(vector<vector<string>> content, int p
 
 	// сбрасываем координату
 	this->yCoordForContentPrinting = Y_COORD_FOR_CONTENT_PRINTING;
-
-	//// »тератор на начало 
-	//map<int, Ingredient*>::iterator iter = table->getStartIterator();
 
 	int i = 0;
 
@@ -418,30 +359,20 @@ void IngredientsTablePrinter::printAvailableContent(int page)
 		i = (page - 1) * NUMBER_OF_CONTENT_LINES;
 	}
 
-	//auto l = beginIterOfAvailableElements + 10;
-	//auto l = beginIterOfAvailableElements + (i * NUMBER_OF_CONTENT_LINES);
-
-	auto addintToIter = i;
-	auto startIter = beginIterOfAvailableElements + addintToIter;
+	auto startIter = beginIterOfAvailableElements + i;
 
 	for (auto j = startIter; i < this->numberOfLines && i < border && j != endIterOfAvailableElements; ++i, ++j)
 	{
 		int index = *j;
 
-		// если кол-во ингредиента больше нул€
-		//if (this->table->getIngredientById(/*i + 1*/index)->getNumber() > 0)
-		//{
-			for (int k = 0; k < this->numberOfColumns; ++k)
-			{
-				cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[k]);
+		for (int k = 0; k < this->numberOfColumns; ++k)
+		{
+			cout << goToXY(this->yCoordForContentPrinting, this->xCoordsForContentPrinting[k]);
 
-				cout << this->tableContent[index - 1][k];
-			}
+			cout << this->tableContent[index - 1][k];
+		}
 
-			this->yCoordForContentPrinting += GAPS;
-		//}
-		//else
-		//	++border;
+		this->yCoordForContentPrinting += GAPS;
 	}
 
 	cout << endl << endl;
@@ -573,7 +504,6 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id)
 	// дл€ каждого ингредиента
 	for (int j = 0; j < NUMBER_OF_EFFECTS; ++j)
 	{
-
 		// ƒобываем булеву
 		isEffectKnown = effectIter->second;
 
@@ -602,14 +532,6 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id)
 
 	this->tableContent[tableContentId].push_back(to_string(intValue));
 
-	//// если число ингрдеиентов стало 1, то увеличиваем кол-во доступных элементов
-	//if (intValue == 1)
-	//	++numberOfAvailableContent;
-
-	//// если стало 0, то уменьшаем
-	//else if (intValue == 0)
-	//	--numberOfAvailableContent;
-
 	// пересчитываем данные
 	this->calculateData();
 }
@@ -620,24 +542,11 @@ void IngredientsTablePrinter::changeTableContentForOneElement(int id, int previo
 
 	// если предыдущее кол-во равно ноль и текущее кол-во больше нул€
 	if (previousNumber == 0 && ingredient->getNumber() > 0)
-	{
 		++numberOfAvailableContent;
 
-		//availableElementsId.push_back(id);
-
-		//quickSort(&availableElementsId[0], availableElementsId.size());
-	}
 	// если предыдущее было больше нул€, а сейчас ноль
 	else if (previousNumber > 0 && ingredient->getNumber() == 0)
-	{
 		--numberOfAvailableContent;
-
-		//int index = binarySearch(availableElementsId, id);
-
-		//auto beginIter = availableElementsId.begin();
-
-		//availableElementsId.erase(beginIter + index);
-	}
 
 	changeTableContentForOneElement(id);
 }

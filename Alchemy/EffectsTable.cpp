@@ -14,10 +14,8 @@ EffectsTable::~EffectsTable()
 	clear();
 }
 
-
 void EffectsTable::add(Effect* effect)
 {
-	//this->effects.push_back(effect);
 	this->effectsWithId.emplace(++id, effect);
 
 	++size;
@@ -25,7 +23,6 @@ void EffectsTable::add(Effect* effect)
 
 void EffectsTable::add(Effect* effect, int id)
 {
-	//this->effects.push_back(effect);
 	this->effectsWithId.emplace(id, effect);
 
 	++size;

@@ -7,7 +7,7 @@ using namespace std;
 
 #define Y_COORD_FOR_FRAME_PRINTING	10		// Координата Y для печати
 
-// Класс- таблица
+// Шаблонный класс - таблица
 template<typename T>
 class Table
 {
@@ -24,15 +24,19 @@ public:
 	{
 	}
 
+	// Добавить элемент в таблицу
 	virtual void add(T* element) = 0;
 
+	// Добавить элемент в таблицу с id 
 	virtual void add(T* element, int id) = 0;
 
+	// Геттер для названия
 	string getTitle() 
 	{
 		return this->title;
 	}
 
+	// Геттер для получения доступных элементов (тех, у которых кол-во больше 0)
 	int getNumberOfAvailableElements()
 	{
 		return this->availableElements.size();
@@ -89,7 +93,5 @@ protected:
 
 	// Доступные пользователю элементы, те, у которых кол-во больше нуля
 	vector<int> availableElements;
-
-private:
 
 };

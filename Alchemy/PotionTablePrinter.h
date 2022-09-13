@@ -2,6 +2,7 @@
 #include "TablePrinter.h"
 #include "PotionTable.h"
 
+// Длины слов - названий шапок
 #define PRICE_LENGTH				4		// Длина слова "Цена"
 #define NUMBER_LENGTH				6		// Длина слова "Кол-во"
 #define POWER_LENGTH				8		// Длина слова "Мощность"
@@ -15,34 +16,39 @@
 #define COLUMN_4					4	// Столбец 4
 #define COLUMN_5					5	// Столбец 5
 
-class PotionTablePrinter : public TablePrinter<PotionTable>/*, public IObserver*/
+// Класс, печатающий таблицу зелий - принтер таблицы зелий
+class PotionTablePrinter : public TablePrinter<PotionTable>
 {
 public:
 
+	// Конструктор по умолчанию
 	PotionTablePrinter();
 
+	// Деструктор
 	~PotionTablePrinter() override;
 
+	// Печать таблицы
 	void print(int page) override;
 
+	// Печать передаваемого контента таблицы
 	void print(vector<vector<string>> content, int page, int numberOfColumn, bool orderOfSorting) override;
 
+	// Печать с маркерами сортировки
 	void printWithSortingMarkers(int page, int numberOfColumn, bool orderOfSorting) override;
 
+	// Печать доступных элементов, кол-во которых больше нуля
 	void printAvailableElements(int page) override;
 
 	// заполнить вектор с содержимым таблицы
 	void fillInTableContent() override;
 
+	// Расчитать данные для печати
 	void calculateData() override;
 
+	// Обновление контента для печати после измения таблицы зелий
 	void update() override;
 
-	//int findElementInAvailableElementsId(int key) override;
-
 private:
-
-	//void update(int id) override;
 
 #pragma region МЕТОДЫ РАСЧЕТА
 
@@ -55,29 +61,20 @@ private:
 	// Рассчитать ширину таблицы
 	int calculateWidth() override;
 
-	// посчитать максимальное id
+	// посчитать размер числа - максимального id зелья
 	int calculateMaxId() override;
 
-	//// Вернуть наибольший id
-	//int calculateMaxIdStrSize() override;
-
-	// Вернуть самое длинное название ингредиента
+	// Рассчитать размер самого длинного названия зелий
 	int calculateMaxNameSize() override;
 
-	// Вернуть наибольшее кол-во ингредиентов
+	// Рассчитать размер числа - наибольшего кол-ва зелий
 	int calculateMaxNumberStrSize() override;
 
-	// Рассчитать макс длину стрингового отображения мощности зелья
+	// Рассчитать макс размер стрингового отображения максимальной мощности зелий
 	int calculateMaxPowerStrSize();
 
-	// Расчитать макс длину стрингового отображения цены
+	// Расчитать макс размер - стрингового отображения цены
 	int calculateMaxPriceStrSize();
-
-	//// Посчитать кол-во доступных пользователю ингредиентов
-	//int calculateNumberOfAvailableElements() override;
-
-	//// Добавить id доступных элементов если вектор пустой
-	//void calculateAvailableElementsId();
 
 #pragma endregion МЕТОДЫ РАСЧЕТА
 
@@ -86,11 +83,13 @@ private:
 	// Печать шапки таблицы
 	void printHeader() override;
 
+	// Печать шапки таблицы с маркерами сортировки
 	void printHeader(int numberOfColumn, bool ordreOfSorting) override;
 
 	// Печать содержимого таблицы
 	void printContent(int page) override;
 
+	// Печать контента таблицы, передаваемого в ф-цию
 	void printContent(vector<vector<string>> content, int page) override;
 
 	// Печать доступного содержимого таблицы
@@ -98,16 +97,15 @@ private:
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 
-	// заполнить один элемент вектора содержимым таблицы
+	// Изменить контент определенного зелья
 	void changeTableContentForOneElement(int id) override;
 
-	// заполнить один элемент вектора содержимым таблицы
+	// зИзменить контент определенного зелья с учетом кол-ва
 	void changeTableContentForOneElement(int id, int previousNumber) override;
 
-	// Обновить содержимое таблицы - добавить новый ингредиент
+	// Обновить содержимое таблицы - добавить новое зелье
 	void addElementToTableContent(int id) override;
 
-	// Найти индекс искомого элемента в таблице контента по ключу
-	int findIndexInTableContentByKey(int key);
+	// Найти индекс искомого элемента в таблице контента по id
+	int findIndexInTableContentByKey(int id);
 };
-

@@ -37,6 +37,18 @@
     <Filter Include="Исходные файлы\BinaryWriters">
       <UniqueIdentifier>{957f11ec-2121-4fca-817e-466bf588b39a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Tables">
+      <UniqueIdentifier>{30ec0390-2026-4d85-a3ea-a50302077f95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Tables">
+      <UniqueIdentifier>{0aa262f0-1dde-4b64-9aa0-bb1a7e6a1090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\TablePrinters">
+      <UniqueIdentifier>{99357e37-74ab-421f-b833-4a316ae24c48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\TablePrinters">
+      <UniqueIdentifier>{37491c0b-6ba1-44f3-b318-f61ed070c0a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,12 +84,6 @@
     <ClCompile Include="EffectBuilder.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="FileReader.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectsTable.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="EffectsTableBuilder.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -87,25 +93,13 @@
     <ClCompile Include="AlchemyLogicBuilder.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="IngredientsTable.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="IngredientsTableBuilder.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Table.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="AlchemyTableBuilder.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Builder.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="TablePrinter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IngredientsTablePrinter.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuState.cpp">
@@ -126,31 +120,7 @@
     <ClCompile Include="PotionBuilder.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="PotionTable.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionTablePrinter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectsTableBinaryWriter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectBinaryWriter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IngredientsTableBinaryWriter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IngredientBinaryWriter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="IngredientsTableBinaryReader.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionBinaryWriter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionTableBinaryWriter.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="MenuState.cpp">
@@ -234,6 +204,45 @@
     <ClCompile Include="AlchemyLogicWriter.cpp">
       <Filter>Исходные файлы\BinaryWriters</Filter>
     </ClCompile>
+    <ClCompile Include="EffectBinaryWriter.cpp">
+      <Filter>Исходные файлы\BinaryWriters</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectsTableBinaryWriter.cpp">
+      <Filter>Исходные файлы\BinaryWriters</Filter>
+    </ClCompile>
+    <ClCompile Include="IngredientBinaryWriter.cpp">
+      <Filter>Исходные файлы\BinaryWriters</Filter>
+    </ClCompile>
+    <ClCompile Include="IngredientsTableBinaryWriter.cpp">
+      <Filter>Исходные файлы\BinaryWriters</Filter>
+    </ClCompile>
+    <ClCompile Include="PotionBinaryWriter.cpp">
+      <Filter>Исходные файлы\BinaryWriters</Filter>
+    </ClCompile>
+    <ClCompile Include="PotionTableBinaryWriter.cpp">
+      <Filter>Исходные файлы\BinaryWriters</Filter>
+    </ClCompile>
+    <ClCompile Include="Table.cpp">
+      <Filter>Исходные файлы\Tables</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectsTable.cpp">
+      <Filter>Исходные файлы\Tables</Filter>
+    </ClCompile>
+    <ClCompile Include="IngredientsTable.cpp">
+      <Filter>Исходные файлы\Tables</Filter>
+    </ClCompile>
+    <ClCompile Include="PotionTable.cpp">
+      <Filter>Исходные файлы\Tables</Filter>
+    </ClCompile>
+    <ClCompile Include="TablePrinter.cpp">
+      <Filter>Исходные файлы\TablePrinters</Filter>
+    </ClCompile>
+    <ClCompile Include="IngredientsTablePrinter.cpp">
+      <Filter>Исходные файлы\TablePrinters</Filter>
+    </ClCompile>
+    <ClCompile Include="PotionTablePrinter.cpp">
+      <Filter>Исходные файлы\TablePrinters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Effect.h">
@@ -266,12 +275,6 @@
     <ClInclude Include="EffectBuilder.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="FileReader.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectsTable.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="EffectsTableBuilder.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -281,25 +284,13 @@
     <ClInclude Include="AlchemyLogicBuilder.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="IngredientsTable.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="IngredientsTableBuilder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Table.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="AlchemyTableBuilder.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Builder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="TablePrinter.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IngredientsTablePrinter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="MainMenuState.h">
@@ -315,30 +306,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="PotionBuilder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="PotionTable.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="PotionTablePrinter.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectsTableBinaryWriter.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectBinaryWriter.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IngredientsTableBinaryWriter.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IngredientBinaryWriter.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="PotionBinaryWriter.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="PotionTableBinaryWriter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="MenuState.h">
@@ -427,6 +394,45 @@
     </ClInclude>
     <ClInclude Include="AlchemyLogicWriter.h">
       <Filter>Файлы заголовков\BinaryWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectBinaryWriter.h">
+      <Filter>Файлы заголовков\BinaryWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectsTableBinaryWriter.h">
+      <Filter>Файлы заголовков\BinaryWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="IngredientBinaryWriter.h">
+      <Filter>Файлы заголовков\BinaryWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="IngredientsTableBinaryWriter.h">
+      <Filter>Файлы заголовков\BinaryWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="PotionBinaryWriter.h">
+      <Filter>Файлы заголовков\BinaryWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="PotionTableBinaryWriter.h">
+      <Filter>Файлы заголовков\BinaryWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Файлы заголовков\Tables</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectsTable.h">
+      <Filter>Файлы заголовков\Tables</Filter>
+    </ClInclude>
+    <ClInclude Include="IngredientsTable.h">
+      <Filter>Файлы заголовков\Tables</Filter>
+    </ClInclude>
+    <ClInclude Include="PotionTable.h">
+      <Filter>Файлы заголовков\Tables</Filter>
+    </ClInclude>
+    <ClInclude Include="TablePrinter.h">
+      <Filter>Файлы заголовков\TablePrinters</Filter>
+    </ClInclude>
+    <ClInclude Include="IngredientsTablePrinter.h">
+      <Filter>Файлы заголовков\TablePrinters</Filter>
+    </ClInclude>
+    <ClInclude Include="PotionTablePrinter.h">
+      <Filter>Файлы заголовков\TablePrinters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

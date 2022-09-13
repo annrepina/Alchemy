@@ -43,14 +43,8 @@ int PotionTable::hasSuchPotion(Potion* potion)
 	// начальный индекс
 	int key = -1;
 
-	auto mapp = this->potiontsWithId;
-
 	auto beginIter = getStartIterator();
 	auto endIter = getEndIterator();
-
-
-
-	//Potion* potion1 = beginIter->second;
 
 	int effectId = potion->getEffectId();
 	int price = potion->getPrice();
@@ -144,31 +138,6 @@ int PotionTable::getId()
 {
 	return this->id;
 }
-
-//Potion* PotionTable::getSuchPotion(Potion* potion)
-//{
-//	Potion* potion = nullptr;
-//
-//	auto beginIter = getStartIterator();
-//	auto endIter = getEndIterator();
-//
-//	int effectId = potion->getEffectId();
-//	int price = potion->getPrice();
-//	int power = potion->getPower();
-//
-//	for (auto i = beginIter; i != endIter; ++i)
-//	{
-//		// если совпадают основные показатели
-//		if (effectId == i->second->getEffectId() && price == i->second->getPrice() && power == i->second->getPower())
-//		{
-//			potion = i->second;
-//
-//			break;
-//		}
-//	}
-//
-//	return potion;
-//}
 
 void PotionTable::clear()
 {

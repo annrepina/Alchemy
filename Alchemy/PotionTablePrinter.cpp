@@ -108,20 +108,12 @@ void PotionTablePrinter::update()
 	calculateData();
 }
 
-//int PotionTablePrinter::findElementInAvailableElementsId(int key)
-//{
-//	int res = binarySearch(this->availableElementsId, key);
-//
-//	return res;
-//}
-
 #pragma region Методы расчета
 
 int PotionTablePrinter::calculateNumberOfLines()
 {
 	// итератор на начало map
 	auto startIter = table->getStartIterator();
-
 	// итератор на конец map
 	auto endIter = table->getEndIterator();
 
@@ -129,14 +121,7 @@ int PotionTablePrinter::calculateNumberOfLines()
 	int numberOfLines = 0;
 
 	for (auto i = startIter; i != endIter; ++i)
-	{
-		//// если кол-во зелья больше 0
-		//if (i->second->getNumber() > 0)
-		//{
-			++numberOfLines;
-		//}
-	}
-
+		++numberOfLines;
 
 	return numberOfLines;
 }
@@ -221,7 +206,6 @@ int PotionTablePrinter::calculateMaxNameSize()
 int PotionTablePrinter::calculateMaxNumberStrSize()
 {
 	auto startIter = table->getStartIterator();
-
 	auto endIter = table->getEndIterator();
 
 	if (startIter != endIter)
@@ -307,39 +291,6 @@ int PotionTablePrinter::calculateMaxPriceStrSize()
 
 	return 0;
 }
-
-//void PotionTablePrinter::calculateAvailableElementsId()
-//{
-//	// если вектор пустой
-//	if (this->availableElementsId.size() == 0 && numberOfLines > 0)
-//	{
-//		auto beginIter = this->table->getBeginIteratorOfAvailableElements();
-//		auto endIter = this->table->getEndIteratorOfAvailableElements();
-//
-//		for (auto i = beginIter; i != endIter; ++i)
-//		{
-//			this->availableElementsId.push_back(*i);
-//		}
-//
-//		quickSort(&availableElementsId[0], availableElementsId.size());
-//	}
-//}
-
-//int PotionTablePrinter::calculateNumberOfAvailableElements()
-//{
-//	int numberOfAvailableElements = 0;
-//
-//	for (int i = 0; i < this->numberOfLines; ++i)
-//	{
-//		// если кол-во ингредиента больше нуля
-//		if (this->table->getPotionById(i + 1)->getNumber() > 0)
-//		{
-//			++numberOfAvailableElements;
-//		}
-//	}
-//
-//	return numberOfAvailableElements;
-//}
 
 #pragma endregion Методы расчета
 
@@ -474,9 +425,6 @@ void PotionTablePrinter::changeTableContentForOneElement(int id)
 		auto beginIter = this->tableContent.begin();
 		auto endIter = this->tableContent.end();
 
-		//// итератор на начало вектора с доступными пользователю id
-		//auto beginIterOfAvailableContent = this->availableElementsId.begin();
-
 		int startIndex = 0;
 
 		// перебираем в цикле вектор
@@ -493,7 +441,6 @@ void PotionTablePrinter::changeTableContentForOneElement(int id)
 
 		// удаляем данный элемент из вектора контента и доступных id
 		this->tableContent.erase(beginIter);
-		//this->availableElementsId.erase(beginIterOfAvailableContent);
 
 		// пересчитываем данные
 		this->calculateData();
@@ -545,12 +492,7 @@ void PotionTablePrinter::changeTableContentForOneElement(int id, int previousNum
 
 void PotionTablePrinter::addElementToTableContent(int id)
 {
-	//this->availableElementsId.push_back(id);
-
 	Potion* potion = table->getPotionById(id);
-
-	//// последний индекс в содержимом таблицы 
-	//int lastIndex = findIndexInTableContentByKey(id);
 
 	int lastIndex = tableContent.size();
 
@@ -568,9 +510,6 @@ void PotionTablePrinter::addElementToTableContent(int id)
 
 	// Добавляем этот вектор во внешний
 	this->tableContent.push_back(line);
-
-	//// добываем id
-	//intValue = endIter->first;
 
 	// Добавляем в первый вектор id
 	tableContent[lastIndex].push_back(to_string(id));

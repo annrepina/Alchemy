@@ -6,7 +6,6 @@
 
 #define MULTIPLIER									3		// Множитель для расчета длины таблицы
 
-//#define NUMBER_OF_COLUMNS							6		// Кол-во колонок
 #define OUTER_BORDERS								2		// Внешние границы таблицы (левая и правая)
 #define GAPS										2		// Кол-во пробелов в столбце (1 слева и 1 справа)
 #define NUMBER_OF_COLUMNS							6		// Кол-во колонок
@@ -15,13 +14,7 @@
 #define PRICE_LENGTH								4		// Длина слова "Цена"
 #define NUMBER_LENGTH								6		// Длина слова "Кол-во"
 
-#define UNKNOWN_EFFECT				"НЕИЗВЕСТНО"	// если эффект у данного ингредиента неизветстен
-
-
-// Цифровые столбцы в таблице
-//#define COLUMN_1			1	// Столбец 1
-//#define COLUMN_3			3	// Столбец 3
-//#define COLUMN_6			6	// Столбец 6
+#define UNKNOWN_EFFECT								"НЕИЗВЕСТНО"	// если эффект у данного ингредиента неизветстен
 
 // Цифровые столбцы в таблице
 #define INGREDIENT_TABLE_DIGIT_COLUMN_1			1	// Столбец 1
@@ -30,37 +23,42 @@
 
 #define INDEX_IF_CONTENT_OF_NUMBER_COLUMN		5	// Индекс контента колонки с кол-вом
 
-// Очередность столбцов id name price effect1 effect2 number
-
+// Класс, печатающий таблицу ингредиентов - принтер таблицы ингредиентов
 class IngredientsTablePrinter : public TablePrinter<IngredientsTable>
 {
 public:
 
+	// Конструктор по умолчанию
 	IngredientsTablePrinter();
 
+	// Деструктор
 	~IngredientsTablePrinter() override;
 
+	// Печать таблицы
 	void print(int page) override;
 
+	// Печать передаваемого напрямую принтеру контента таблицы
 	void print(vector<vector<string>> content, int page, int numberOfColumn, bool orderOfSorting) override;
 
+	// Печать с маркерами сортировкти
 	void printWithSortingMarkers(int page, int numberOfColumn, bool orderOfSorting) override;
 
+	// Печать доступных элементов, кол-во у которых больше нуля
 	void printAvailableElements(int page) override;
 
 	// заполнить вектор с содержимым таблицы
 	void fillInTableContent() override;
 
+	// Расчитать данные для печати
 	void calculateData() override;
 
+	// Геттер кол-ва доступных элементов
 	int getNumberOfAvailableContent();
 
 private:
 
 	// Кол-во доступных пользователю элементов
 	int numberOfAvailableContent;
-
-	//int numberOfelement
 
 #pragma region МЕТОДЫ РАСЧЕТА
 	
@@ -70,13 +68,13 @@ private:
 	// Рассчитать ширину таблицы
 	int calculateWidth() override;
 
-	// посчитать максимальное id
+	// посчитать размер числа - максимального id
 	int calculateMaxId() override;
 
-	// Вернуть самое длинное название ингредиента
+	// Посчитать размер самого длинного название ингредиента
 	int calculateMaxNameSize() override;
 
-	// Вернуть наибольшее кол-во ингредиентов
+	// Посчитать размер числа - наибольшее кол-во ингредиентов
 	int calculateMaxNumberStrSize() override;
 
 	// Посчитать размеры максимальных имен эффектов
@@ -88,9 +86,6 @@ private:
 	// Посчитать кол-во доступных пользователю ингредиентов
 	int calculateNumberOfAvailableElements();
 
-	//// Добавить id доступных элементов если вектор пустой
-	//void calculateAvailableElementsId();
-
 #pragma endregion МЕТОДЫ РАСЧЕТА
 
 #pragma region МЕТОДЫ ПЕЧАТИ
@@ -98,11 +93,13 @@ private:
 	// Печать шапки таблицы
 	void printHeader() override;
 
+	// Печать шапки таблицы с маркерами сортировки
 	void printHeader(int numberOfColumn, bool ordreOfSorting) override;
 
 	// Печать содержимого таблицы
 	void printContent(int page) override;
 
+	// Печать контента передаваемого принтеру
 	void printContent(vector<vector<string>> content, int page) override;
 
 	// Печать доступного содержимого таблицы
@@ -110,12 +107,12 @@ private:
 
 #pragma endregion МЕТОДЫ ПЕЧАТИ
 
-	// заполнить один элемент вектора содержимым таблицы
+	// Изменитm контент для печати определенного ингредиента по id 
 	void changeTableContentForOneElement(int id) override;
 
+	// Изменитm контент для печати определенного ингредиента по id с учетом кол-ва
 	void changeTableContentForOneElement(int id, int previousNumber) override;
 
 	// Обновить содержимое таблицы - добавить новый ингредиент
 	void addElementToTableContent(int id) override;
 };
-

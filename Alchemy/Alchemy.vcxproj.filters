@@ -49,30 +49,21 @@
     <Filter Include="Исходные файлы\TablePrinters">
       <UniqueIdentifier>{37491c0b-6ba1-44f3-b318-f61ed070c0a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Builders">
+      <UniqueIdentifier>{e67e9658-0885-4c10-b44a-6ace9a23c56b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Builders">
+      <UniqueIdentifier>{f0021e10-9b31-4011-91da-4b29bfeabc69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\MainClassesOfProgram">
+      <UniqueIdentifier>{e98cca2b-6736-4899-a002-4cd14074d7d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\MainClassesOfProgram">
+      <UniqueIdentifier>{77939c14-5af5-438e-b08d-d6f96dbac9d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Effect.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Ingredient.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IngredientBuilder.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IngredientDirector.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Alchemist.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="AlchemyLogic.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Formatting.cpp">
@@ -81,28 +72,7 @@
     <ClCompile Include="KeyBoard.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="EffectBuilder.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectsTableBuilder.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="ServiceFunctions.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="AlchemyLogicBuilder.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IngredientsTableBuilder.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="AlchemyTableBuilder.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Builder.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenuState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="InstructionsMenuState.cpp">
@@ -112,15 +82,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="IObservable.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Potion.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionBuilder.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IngredientsTableBinaryReader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="MenuState.cpp">
@@ -243,69 +204,66 @@
     <ClCompile Include="PotionTablePrinter.cpp">
       <Filter>Исходные файлы\TablePrinters</Filter>
     </ClCompile>
+    <ClCompile Include="Builder.cpp">
+      <Filter>Исходные файлы\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="AlchemyLogicBuilder.cpp">
+      <Filter>Исходные файлы\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="AlchemyTableBuilder.cpp">
+      <Filter>Исходные файлы\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectBuilder.cpp">
+      <Filter>Исходные файлы\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectsTableBuilder.cpp">
+      <Filter>Исходные файлы\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="IngredientBuilder.cpp">
+      <Filter>Исходные файлы\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="IngredientsTableBinaryReader.cpp">
+      <Filter>Исходные файлы\BinaryReaders</Filter>
+    </ClCompile>
+    <ClCompile Include="IngredientsTableBuilder.cpp">
+      <Filter>Исходные файлы\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="PotionBuilder.cpp">
+      <Filter>Исходные файлы\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>Исходные файлы\MenuStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Alchemist.cpp">
+      <Filter>Исходные файлы\MainClassesOfProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="AlchemyLogic.cpp">
+      <Filter>Исходные файлы\MainClassesOfProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Исходные файлы\MainClassesOfProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="Ingredient.cpp">
+      <Filter>Исходные файлы\MainClassesOfProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="Potion.cpp">
+      <Filter>Исходные файлы\MainClassesOfProgram</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Effect.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Ingredient.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IngredientBuilder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IngredientDirector.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Alchemist.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="AlchemyLogic.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Formatting.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="KeyBoard.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="EffectBuilder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectsTableBuilder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="ServiceFunctions.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="AlchemyLogicBuilder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IngredientsTableBuilder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="AlchemyTableBuilder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Builder.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="IObserver.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="IObservable.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Potion.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="PotionBuilder.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="MenuState.h">
@@ -433,6 +391,48 @@
     </ClInclude>
     <ClInclude Include="PotionTablePrinter.h">
       <Filter>Файлы заголовков\TablePrinters</Filter>
+    </ClInclude>
+    <ClInclude Include="Builder.h">
+      <Filter>Файлы заголовков\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="AlchemyLogicBuilder.h">
+      <Filter>Файлы заголовков\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="AlchemyTableBuilder.h">
+      <Filter>Файлы заголовков\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectBuilder.h">
+      <Filter>Файлы заголовков\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectsTableBuilder.h">
+      <Filter>Файлы заголовков\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="IngredientBuilder.h">
+      <Filter>Файлы заголовков\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="IngredientsTableBuilder.h">
+      <Filter>Файлы заголовков\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="PotionBuilder.h">
+      <Filter>Файлы заголовков\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>Файлы заголовков\MenuStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Alchemist.h">
+      <Filter>Файлы заголовков\MainClassesOfProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="AlchemyLogic.h">
+      <Filter>Файлы заголовков\MainClassesOfProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Файлы заголовков\MainClassesOfProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="Ingredient.h">
+      <Filter>Файлы заголовков\MainClassesOfProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="Potion.h">
+      <Filter>Файлы заголовков\MainClassesOfProgram</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

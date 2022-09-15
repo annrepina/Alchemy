@@ -12,35 +12,21 @@ public:
 	// Конструктор по умолчанию
 	EffectsTableBuilder();
 
-	//// Деструктор
+	// Деструктор
 	~EffectsTableBuilder() override;
 
 	// Строит таблицу эффектов
-	void buildTable(AlchemyLogicWriter* alchemyLogicWriter) override;
-
-	//// Добавить позитивные эффекты
-	//void addPositiveEffects(int numberOfEffects);
-
-	//// Добавить негативные эффекты
-	//void addNegativeEffects(int numberOfEffects);
-
-	//// Получить результат
-	//EffectsTable* getResult();
+	void buildTable() override;
 
 private:
 
-	//EffectsTable* effectsTable;
-
+	// СТроитель эффектов
 	EffectBuilder* effectBuilder;
 
 	// Добавить эффекты
 	void addEffects(int numberOfEffects, bool isPositive);
 
-	//// Сбрасывает до начальных установок
-	//void reset() override;
-
 	// Очищает память
 	void clear() override;
 
 };
-

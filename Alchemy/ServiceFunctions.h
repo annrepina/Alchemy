@@ -24,6 +24,7 @@ int findDelimetrIndexes(const char delimetr, const size_t length, const string s
 // Попытаться привести к инту
 bool tryParseToInt(string value);
 
+// заполнить ассоциативный массив данными из вектора
 template<typename T>
 void fillMap(map<int, T>& map, vector <T> vector, int startKey, int border)
 {
@@ -39,6 +40,7 @@ void fillMap(map<int, T>& map, vector <T> vector, int startKey, int border)
 
 }
 
+// Быстрая сортировка
 template<typename T>
 void quickSort(T* vec, int size)
 {

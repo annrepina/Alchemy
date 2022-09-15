@@ -180,9 +180,7 @@
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Ingredient.cpp" />
     <ClCompile Include="IngredientBuilder.cpp" />
-    <ClCompile Include="IngredientDirector.cpp" />
     <ClCompile Include="Alchemist.cpp" />
-    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="PotionBinaryReader.cpp" />
     <ClCompile Include="PotionBinaryWriter.cpp" />
@@ -241,13 +239,11 @@
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="Ingredient.h" />
     <ClInclude Include="IngredientBuilder.h" />
-    <ClInclude Include="IngredientDirector.h" />
     <ClInclude Include="Alchemist.h" />
     <ClInclude Include="IngredientsTable.h" />
     <ClInclude Include="IngredientsTableBuilder.h" />
     <ClInclude Include="IngredientsTablePrinter.h" />
     <ClInclude Include="KeyBoard.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="PotionBinaryReader.h" />
     <ClInclude Include="PotionBinaryWriter.h" />

@@ -91,4 +91,3 @@ void PotionBuilder::setPotion(int effectId, Ingredient* ingredient1, Ingredient*
 	// увеличиваем уровень алхимика
 	alchemist->increaseAlchemistLevel();
 }
-

@@ -26,7 +26,7 @@ public:
 	// Сеттер имени
 	void setName(string name);
 
-	// Сеттер для булевой
+	// Сеттер для характеристики эффекта
 	void setIsPositive(bool isPositive);
 
 #pragma endregion Сеттеры
@@ -34,6 +34,7 @@ public:
 	// Получить имя
 	string getName();
 
+	// Получить характеристику эффекта
 	bool getIsPositive();
 
 	// Печать эффекта
@@ -41,18 +42,10 @@ public:
 
 private:
 
-	//// Счетчик эффектов
-	//static int counter;
-
-	//// id эффекта
-	//int id;
-
 	// Название эффекта
 	string name;
 
-	// Булева переменная, отвечающая позитивный или негативный эффект
+	// Характеристика эффекта, говорящая позитивный или негативный эффект
 	bool isPositive;
 
-
 };
-

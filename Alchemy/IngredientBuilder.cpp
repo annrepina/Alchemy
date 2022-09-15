@@ -106,15 +106,8 @@ string IngredientBuilder::listOfIngredientsNames[NUMBER_OF_INGREDIENTS] = {
 
 IngredientBuilder::IngredientBuilder() : Builder()
 {
-	//reset();
-
 	this->effectsTable = nullptr;
 }
-
-//IngredientBuilder::~IngredientBuilder()
-//{
-//	clear();
-//}
 
 void IngredientBuilder::setEffectsTable(EffectsTable* effectsTable)
 {
@@ -244,15 +237,6 @@ void IngredientBuilder::addEffect(int effectId)
 	this->element->addEffect(effectId);
 }
 
-//Ingredient* IngredientBuilder::getResult()
-//{
-//	Ingredient* result = this->ingredient;
-//
-//	reset();
-//
-//	return result;
-//}
-
 string IngredientBuilder::chooseIngredientName(int lastIndex)
 {
 	// Рандомно выбираем имя из списка
@@ -267,20 +251,6 @@ string IngredientBuilder::chooseIngredientName(int lastIndex)
 	// Возвращаем имя
 	return name;
 }
-
-//void IngredientBuilder::reset()
-//{
-//	this->ingredient = new Ingredient();
-//}
-//
-//void IngredientBuilder::clear()
-//{
-//	if (this->ingredient != nullptr)
-//	{
-//		delete this->ingredient;
-//		this->ingredient = nullptr;
-//	}
-//}
 
 void IngredientBuilder::fillEffectId()
 {

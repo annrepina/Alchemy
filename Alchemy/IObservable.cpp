@@ -4,6 +4,10 @@ IObservable::IObservable()
 {
 }
 
+IObservable::~IObservable()
+{
+}
+
 void IObservable::subscribe(IObserver* observer)
 {
 	this->observerList.push_back(observer);
@@ -50,5 +54,3 @@ void IObservable::notify()
 		observer->update();
 	}
 }
-
-

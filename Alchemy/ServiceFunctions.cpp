@@ -81,8 +81,6 @@ bool tryParseToInt(string value)
 {
 	bool res = true;
 
-	//cin >> value;
-
 	// содержит в себе индекс первого символа не являющегося цифрой
 	size_t nonDigitIndex;
 
@@ -154,5 +152,3 @@ bool hasSubstring(string mainString, string subString)
 
 	return false;
 }
-
-

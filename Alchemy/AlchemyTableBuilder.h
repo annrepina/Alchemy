@@ -2,7 +2,7 @@
 #include "AlchemyLogicWriter.h"
 #include "Builder.h"
 
-// Строитель таблицы
+// Строитель таблицы в программе зельеварение
 template <typename Tab>
 class AlchemyTableBuilder : public Builder<Tab>
 {
@@ -14,23 +14,7 @@ public:
 
 	}
 
-	//// Деструктор
-	//virtual ~AlchemyTableBuilder() = 0;
-
 	// Построить таблицу
-	virtual void buildTable(AlchemyLogicWriter* alchemyLogicWriter) = 0;
-
-protected:
-
-	//// Сборосить до начальных установок
-	//virtual void reset() = 0;
-
-	//// Чистит память
-	//virtual void clear() = 0;
-
-private:
-
-
+	virtual void buildTable() = 0;
 
 };
-

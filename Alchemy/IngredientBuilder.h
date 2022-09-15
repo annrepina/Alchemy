@@ -5,18 +5,13 @@
 
 #define NUMBER_OF_INGREDIENTS		100		// Кол-во ингредиентов
 
-//#define MIN_PRICE					4		// Минимальная цена ингредиента
-//#define MAX_PRICE					135		// Максимальная цена ингредиента
-
+// Строитель ингредиентов
 class IngredientBuilder : public Builder<Ingredient>
 {
 public:
 
 	// Конструктор по умолчанию
 	IngredientBuilder();
-
-	//// Деструктор
-	//~IngredientBuilder();
 
 	// Сеттер для таблицы эффектов
 	void setEffectsTable(EffectsTable* effectsTable);
@@ -75,4 +70,3 @@ private:
 	// Список id эффектов
 	vector<int> effectsId;
 };
-

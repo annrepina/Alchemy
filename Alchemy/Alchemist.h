@@ -31,6 +31,7 @@ public:
 	// Сеттер для уровня продавца
 	void setSalesmanLevel(int salesmanLevel);
 
+	// Сеттер для капитала
 	void setCapital(int capital);
 
 #pragma endregion Сеттеры
@@ -43,8 +44,10 @@ public:
 	// Геттер для капитала
 	int getCapital();
 
+	// Геттер для уровня алхимика
 	int getAlchemistLevel();
 
+	// Геттер для уровня продажника
 	int getSalesmanLevel();
 
 #pragma endregion Геттеры 
@@ -81,4 +84,3 @@ private:
 	// Капитал пользователя
 	int capital;
 };
-

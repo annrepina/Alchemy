@@ -64,13 +64,7 @@ string EffectBuilder::listOfNegativeEffectsNames[NUMBER_OF_NEGATIVE_EFFECTS] = {
 
 EffectBuilder::EffectBuilder() : Builder()
 {
-	//reset();
 }
-
-//EffectBuilder::~EffectBuilder()
-//{
-//	clear();
-//}
 
 void EffectBuilder::setName(string name)
 {
@@ -103,29 +97,6 @@ void EffectBuilder::buildEffect(int lastIndex, string listOfEffects[], bool isPo
 	setIsPositive(isPositive);
 }
 
-//Effect* EffectBuilder::getResult()
-//{
-//	Effect* res = this->effect;
-//
-//	reset();
-//
-//	return res;
-//}
-
-//void EffectBuilder::reset()
-//{
-//	effect = new Effect;
-//}
-//
-//void EffectBuilder::clear()
-//{
-//	if (nullptr != this->effect)
-//	{
-//		delete this->effect;
-//		this->effect = nullptr;
-//	}
-//}
-
 string EffectBuilder::chooseEffectName(int lastIndex, string listOfEffectsNames[])
 {
 	// Рандомно выбираем имя из списка
@@ -140,5 +111,3 @@ string EffectBuilder::chooseEffectName(int lastIndex, string listOfEffectsNames[
 	// Возвращаем имя
 	return name;
 }
-
-

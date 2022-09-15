@@ -50,11 +50,7 @@ using namespace std;
 // Желтый цвет
 #define R_DECIMAL_YELLOW	"255"
 #define G_DECIMAL_YELLOW	"255"
-#define B_DECIMAL_YELLOW	"0"
-
-//// Цвета для стандартоного форматированя текста
-//// Красный цвет
-//#define RED_FOREGROUND		"31"		
+#define B_DECIMAL_YELLOW	"0"	
 
 
 /* Коды для стирания вывода с экрана консоли */
@@ -63,8 +59,8 @@ using namespace std;
 #define WHOLE_SCREEN				"2" // Очищает всю строку или экран.
 
 /* Виртуальные коды клавиш клавиатуры */
-#define VK_ESCAPE	0x1B	// ESC key
-#define VK_RETURN	0x0D	// ENTER key
+#define VK_ESCAPE					0x1B	// ESC key
+#define VK_RETURN					0x0D	// ENTER key
 
 /* Графические символы в кодировке DEC */
 #define TOP_LEFT_CORNER				"l"      // верхний левый угол
@@ -196,9 +192,6 @@ void printLowerTableFrame(int numberOfColumn, int columWidth);
 
 #pragma region Функции для печати таблицы с РАЗНОЙ шириной колонок и строчек с высотой 1
 
-//// Печатает верхнюю рамку таблицы
-//void printTopTableFrame(int numberOfColumn, vector <int> columnWidth);
-
 // ечатает внутреннюю границу таблицы
 void printInnerTableFrame(/*int numberOfColumn, */vector <int> columnWidth);
 
@@ -206,14 +199,3 @@ void printInnerTableFrame(/*int numberOfColumn, */vector <int> columnWidth);
 void printLowerTableFrame(vector <int> columnWidth);
 
 #pragma endregion Функции для печати таблицы с РАЗНОЙ шириной колонок и строчек с высотой 1
-
-
-#pragma region ФУНКЦИИ ДЛЯ ПЕЧАТИ ТАБЛИЦЫ 
-
-//void printInnerTableFrame(int columnWidth);
-
-
-
-#pragma endregion ФУНКЦИИ ДЛЯ ПЕЧАТИ ТАБЛИЦЫ 
-
-

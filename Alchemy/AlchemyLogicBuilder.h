@@ -5,6 +5,7 @@
 #include "IngredientsTableBuilder.h"
 #include "Builder.h"
 
+// Строитель класса AlchemyLogic
 class AlchemyLogicBuilder : public Builder<AlchemyLogic>
 {
 public:
@@ -15,19 +16,13 @@ public:
 	// Деструктор 
 	~AlchemyLogicBuilder() override;
 
-	//// Получить результа
-	//AlchemyProgram* getResult();
-
 	// Построить программу алхимии
-	void buildAlchemyProgram(AlchemyLogicWriter* alchemyLogicWriter);
+	void buildAlchemyProgram();
 
 	// Задает таблицу эффектов
 	void setEffectsTable(AlchemyLogicWriter* alchemyLogicWriter);
 
 private:
-
-	//// Экземпляр программы алхимии
-	//AlchemyProgram* alchemyProgram;
 
 	// Строитель таблицы эффектов
 	EffectsTableBuilder* effectsTableBuilder;
@@ -38,10 +33,6 @@ private:
 	// Строитель ингредиентов
 	IngredientBuilder* ingredientBuilder;
 
-	//// Сбросить до начальных установок
-	//void reset();
-
 	// Чистить память
 	void clear() override;
 };
-

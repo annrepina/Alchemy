@@ -375,15 +375,9 @@ void printLowerTableFrame(int numberOfColumn, int columWidth)
     cout << turnOffDECMode();
 }
 
-//void printTopTableFrame(int numberOfColumn, vector<int> columnWidth)
-//{
-//}
-
-void printInnerTableFrame(/*int numberOfColumn, */vector<int> columnWidth)
+void printInnerTableFrame(vector<int> columnWidth)
 {
     int numberOfColumn = columnWidth.size();
-
-    //int numberBeforeLast = numberOfColumn
 
     cout << turnOnDECMode();
 
@@ -435,26 +429,3 @@ void printLowerTableFrame(vector<int> columnWidthValues)
 
     cout << turnOffDECMode();
 }
-
-//void printInnerTableFrame(int columnWidth)
-//{
-//    cout << turnOnDECMode();
-//
-//
-//    // если это не первый и не последний индекс
-//    if (FIRST_INDEX != i)
-//    {
-//        cout << SYMBOL_CROSS;
-//    }
-//    else
-//    {
-//        cout << SYMBOL_FIRST_HALF_H_LETTER;
-//    }
-//
-//    for (int i = 0; i < columWidth; ++i)
-//    {
-//        cout << HORIZONTAL_LINE;
-//    }
-//
-//    cout << SYMBOL_SECOND_HALF_H_LETTER;
-//}

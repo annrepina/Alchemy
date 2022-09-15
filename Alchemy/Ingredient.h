@@ -30,10 +30,10 @@ public:
 	// Узнать известен ли пользователю эффект у данного ингредиента по номеру эффекта
 	bool getEffectIsKnown(int number);
 
-	// Получить итератор на начало ассоциативного массива
+	// Получить итератор на начало ассоциативного массива effectsId
 	map<int, bool>::iterator getBeginIteratorOfEffectsId();
 
-	// Получить итератор на конец ассоциативного массива
+	// Получить итератор на конец ассоциативного массива effectsId
 	map<int, bool>::iterator getEndIteratorOfEffectsId();
 	
 	// Получить имя
@@ -45,6 +45,7 @@ public:
 	// Геттер для цены
 	int getPrice();
 
+	// Геттер для кол-ва эффектов
 	int getNumberOfEffects();
 
 #pragma endregion ГЕТТЕРЫ
@@ -57,12 +58,13 @@ public:
 	// Сеттер для цены
 	void setPrice(float price);
 
-	// Геттер для кол-ва
+	// Сеттер для кол-ва
 	void setNumber(int number);
 
 	// Открыть эффект по id
 	void openEffect(int id);
 
+	// Открыть эффект рандомно
 	void openEffectRandomly();
 
 #pragma endregion Сеттеры
@@ -76,11 +78,12 @@ public:
 	// Увеличить кол-во ингредиента на опред число
 	void increaseNumber(int number);
 
-	// уменьшить кол-во ингредиентов на 1
+	// уменьшить кол-во ингредиентов на опред число
 	void decreaseNumber(int number);
 
 private:
 
+	// Кол-во эффектов
 	const static int numberOfEffects = NUMBER_OF_EFFECTS;
 	
 	// Название ингредиента
@@ -89,7 +92,7 @@ private:
 	// Цена за ингредиент
 	int price;
 
-	// Кол-во
+	// Кол-во ингредиента у алхимика
 	int number;
 
 	// Массив эффектов из 2х ингредиентов и их значений известности игроку

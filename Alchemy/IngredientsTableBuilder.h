@@ -12,26 +12,19 @@ public:
 	// Конструктор по умолчанию
 	IngredientsTableBuilder();
 
+	// Деструктор
 	~IngredientsTableBuilder() override;
-
-	//IngredientsTable* getResult();
 
 	// Сеттер строителя ингредиентов
 	void setIngredientBuilder(IngredientBuilder* ingredientBuilder);
 
 	// Построить ингредиент
-	void buildTable(AlchemyLogicWriter* alchemyLogicWriter) override;
+	void buildTable() override;
 
 private:
-	
-	//// Таблица ингредиентов
-	//IngredientsTable* ingredientsTable;
 
 	// Строитель ингредиентов
 	IngredientBuilder* ingredientBuilder;
-
-	//// Сборосить до начальных установок
-	//void reset() override;
 
 	// Чистит память
 	void clear() override;
@@ -39,4 +32,3 @@ private:
 	// Добавить ингредиенты в таблицу
 	void addIngredients(int numberOfIngredients);
 };
-

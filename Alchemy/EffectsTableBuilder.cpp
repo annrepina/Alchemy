@@ -2,8 +2,6 @@
 
 EffectsTableBuilder::EffectsTableBuilder() : AlchemyTableBuilder()
 {
-	/*reset();*/
-	//effectBuilder = new EffectBuilder();
 	effectBuilder = nullptr;
 }
 
@@ -12,14 +10,8 @@ EffectsTableBuilder::~EffectsTableBuilder()
 	clear();
 }
 
-void EffectsTableBuilder::buildTable(AlchemyLogicWriter* alchemyLogicWriter)
+void EffectsTableBuilder::buildTable()
 {
-	// ПАРСИМ
-
-	// ЕСЛИ док был пустой и не спарсилось
-
-	// Создаем эффекты сами
-
 	// Создаем нового строителя ингредиентов
 	effectBuilder = new EffectBuilder();
 
@@ -44,29 +36,9 @@ void EffectsTableBuilder::addEffects(int numberOfEffects, bool isPositive)
 		--lastIndex;
 	}
 }
-//
-//EffectsTable* EffectsTableBuilder::getResult()
-//{
-//	EffectsTable* res = this->effectsTable;
-//
-//	reset();
-//
-//	return res;
-//}
-//
-//void EffectsTableBuilder::reset()
-//{
-//	effectsTable = new EffectsTable();
-//}
 
 void EffectsTableBuilder::clear()
 {
-	//if (nullptr != this->effectsTable)
-	//{
-	//	delete this->effectsTable;
-	//	this->effectsTable = nullptr;
-	//}
-
 	AlchemyTableBuilder::clear();
 
 	if (nullptr != this->effectBuilder)

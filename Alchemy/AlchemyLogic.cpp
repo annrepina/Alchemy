@@ -2,14 +2,9 @@
 
 AlchemyLogic::AlchemyLogic()
 {
-	//this->alchemist = new Alchemist();
-
 	this->alchemist = nullptr;
-
 	this->effectsTable = nullptr;
-
 	this->ingredientsTable = nullptr;
-
 	this->potionTable = nullptr;
 }
 
@@ -107,8 +102,6 @@ bool AlchemyLogic::tryAddNewIngredientToTable(string ingredientName)
 		// добавляем ингредиент в таблицу
 		this->ingredientsTable->add(res);
 
-		//res->subscribe(this->ingredientsTable);
-
 		// id Этого ингредиента
 		int id = (--this->ingredientsTable->getEndIterator())->first;
 
@@ -178,57 +171,9 @@ bool AlchemyLogic::isPotionsAreEqual(Potion* potion1, Potion* potion2)
 	return false;
 }
 
-//vector<int> AlchemyLogic::findEqualEffects(int firstIngredientId, int secondIngredientId)
-//{
-//	// Вектор id эффектов, которые совпали
-//	vector<int> equalEffectsId;
-//
-//	// первый ингредиент
-//	Ingredient* firstIngredient = this->ingredientsTable->getIngredientById(firstIngredientId);
-//
-//	// второй ингредиент
-//	Ingredient* secondIngredient = this->ingredientsTable->getIngredientById(secondIngredientId);
-//
-//	// Итератор на начало мэпа с эффектами первого ингредиента
-//	auto firstIngredientBeginIter = firstIngredient->getBeginIteratorOfEffectsId();
-//
-//	// итератор на конец мэпа с эффектами первого ингредиента 
-//	auto firstIngredientEndInter = firstIngredient->getEndIteratorOfEffectsId();
-//
-//	auto secondIngredientBeginIter = secondIngredient->getBeginIteratorOfEffectsId();
-//
-//	auto secondIngredientEndInter = secondIngredient->getEndIteratorOfEffectsId();
-//
-//	for (auto i = firstIngredientBeginIter; i != firstIngredientEndInter; ++i)
-//	{
-//		for (auto j = secondIngredientBeginIter; j != secondIngredientEndInter; ++j)
-//		{
-//			// если id эффектов совпали
-//			if (i->first == j->first)
-//			{
-//				// Добавляем в вектор эффектов
-//				equalEffectsId.push_back(i->first);
-//
-//				break;
-//			}
-//		}
-//	}
-//
-//	return equalEffectsId;
-//}
-
-//void AlchemyLogic::addPotion(int effectId)
-//{
-//	//// Создаем строителя зелий
-//	//PotionBuilder potionBuilder;
-//
-//	//potionBuilder.buildPotion()
-//}
-
 bool AlchemyLogic::hasSuchIngredientName(string ingredientName)
 {
 	map<int, Ingredient*>::iterator startIter = ingredientsTable->getStartIterator();
-
 	map<int, Ingredient*>::iterator endIter = ingredientsTable->getEndIterator();
 
 	for (map<int, Ingredient*>::iterator i = startIter; i != endIter; ++i)
@@ -248,7 +193,6 @@ int AlchemyLogic::hasSuchPotion(Potion* potion)
 	int id = 0;
 
 	map<int, Potion*>::iterator startIter = potionTable->getStartIterator();
-
 	map<int, Potion*>::iterator endIter = potionTable->getEndIterator();
 
 	// Id эффекта зелья
@@ -273,11 +217,6 @@ int AlchemyLogic::hasSuchPotion(Potion* potion)
 
 	return id;
 }
-
-//Ingredient* AlchemyLogic::createNewIngredient(string ingredientName)
-//{
-//	return nullptr;
-//}
 
 Potion* AlchemyLogic::createPotion(Ingredient* firstIngredient, Ingredient* secondIngredient)
 {
@@ -312,7 +251,6 @@ void AlchemyLogic::sellPotion(int potionId, int numberOfPotion)
 	decreaseNumberOfPotion(potionId, numberOfPotion);
 
 	this->alchemist->increaseCapital(profit);
-
 	this->alchemist->increaseSalesmanLevel(numberOfPotion);
 }
 
@@ -336,24 +274,6 @@ void AlchemyLogic::eatIngredient(int ingredientId)
 
 	ingredient->notify(ingredientId, NOT_NEW_ELEMENT);
 }
-
-//void AlchemyLogic::workWithTable(OperationCode code, vector<vector<string>> tableData, int numberOfColumn, bool order)
-//{
-//	switch (code)
-//	{
-//		case OperationCode::Search:
-//		{
-//
-//		}
-//		break;
-//
-//		case OperationCode::Sorting:
-//		{
-//			sortData(tableData, numberOfColumn, order);
-//		}
-//		break;
-//	}
-//}
 
 void AlchemyLogic::sortStringData(vector<string>* tableData, int numberOfColumn, bool order, int size)
 {
@@ -560,8 +480,3 @@ void AlchemyLogic::sortDigitData(vector<string>* tableData, int numberOfColumn, 
 		sortDigitData(tableData + right + 1, numberOfColumn, order, size - right - 1);
 	}
 }
-
-//void AlchemyLogic::filterData(vector<vector<string>> content, vector<string> queries)
-//{
-//
-//}

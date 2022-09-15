@@ -1,8 +1,6 @@
 #include "Ingredient.h"
 #include <iostream>
 
-//int Ingredient::numberOfEffects = NUMBER_OF_EFFECTS;
-
 Ingredient::Ingredient()
 {
 	this->name = "";
@@ -12,7 +10,6 @@ Ingredient::Ingredient()
 
 Ingredient::~Ingredient()
 {
-
 }
 
 void Ingredient::print()
@@ -134,4 +131,3 @@ void Ingredient::decreaseNumber(int number)
 {
 	this->number -= number;
 }
-

@@ -10,7 +10,6 @@ KeyBoard::KeyBoard()
 
 KeyBoard::~KeyBoard()
 {
-
 }
 
 KeyBoard* KeyBoard::getInstance()
@@ -26,8 +25,6 @@ KeyBoard* KeyBoard::getInstance()
 int KeyBoard::getPressedKey()
 {
 	int res = this->pressedKey;
-
-	//this->pressedKey = RESET;
 
 	return res;
 }
@@ -46,13 +43,6 @@ void KeyBoard::waitForKey()
 
 		// Проверка на то является ли клавиша функциональной
 	} while (FUNCTIONAL_KEY_CODE == key);
-
-
-	//// записываем нажатую клавишу
-	//int key = _getch();
-
-	//// Проверка на то является ли клавиша функциональной
-	//if(FUNCTIONAL_KEY_CODE == key)
 
 	// Присваиваем нажатую кнопку
 	this->pressedKey = key;

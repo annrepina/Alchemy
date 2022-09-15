@@ -1,6 +1,7 @@
 #pragma once
 
-// Строитель - шаблон
+// Шаблонный класс - по паттерну строитель
+// Конструируют другие классы
 template <typename T>
 class Builder
 {
@@ -18,6 +19,7 @@ public:
 		clear();
 	}
 
+	// Получить результат
 	virtual T* getResult()
 	{
 		T* result = this->element;
@@ -29,11 +31,14 @@ public:
 
 protected:
 
+	// Сбросить параметры строителя
+	// Создают новый объект строительства
 	virtual void reset()
 	{
 		this->element = new T();
 	}
 
+	// Очистить память
 	virtual void clear() 
 	{
 		if (nullptr != this->element)
@@ -43,9 +48,6 @@ protected:
 		}
 	}
 
+	// Объект строительства
 	T* element;
-
-private:
-
 };
-

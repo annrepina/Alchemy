@@ -2,7 +2,6 @@
 
 IngredientsTableBuilder::IngredientsTableBuilder() : AlchemyTableBuilder()
 {
-	//reset();
 	this->ingredientBuilder = nullptr;
 }
 
@@ -16,16 +15,8 @@ void IngredientsTableBuilder::setIngredientBuilder(IngredientBuilder* ingredient
 	this->ingredientBuilder = ingredientBuilder;
 }
 
-void IngredientsTableBuilder::buildTable(AlchemyLogicWriter* alchemyLogicWriter)
+void IngredientsTableBuilder::buildTable()
 {
-	// Парсим
-
-	// ЕСЛИ док пустой
-
-	//this->ingredientBuilder = new IngredientBuilder();
-
-	//this->ingredientBuilder->setEffectsTable(effectsTable);
-
 	this->addIngredients(NUMBER_OF_INGREDIENTS);
 
 	this->element->setEffectsTable(this->ingredientBuilder->getEffectsTable());
@@ -49,8 +40,6 @@ void IngredientsTableBuilder::addIngredients(int numberOfIngredients)
 
 	// Последний индекс в списке эффектов
 	int lastEffectsIndex = this->ingredientBuilder->getEffectsTableSize() - 1;
-
-	//this->ingredientBuilder.
 
 	// В цикле добавляем эффекты в таблицу
 	for (int i = 0; i < numberOfIngredients; ++i)

@@ -1,9 +1,4 @@
 #pragma once
-//#include <string>
-//#include <conio.h>
-//#include <functional>
-//#include "Formatting.h"
-//#include "KeyBoard.h"
 #include "Alchemist.h"
 #include "IngredientsTable.h"
 #include "PotionTable.h"
@@ -12,37 +7,16 @@
 #include "PotionBuilder.h"
 #include "ServiceFunctions.h"
 
-//using namespace std;
-//
-//using std::placeholders::_1;
-
-//// Координаты
-//#define TITLE_Y_COORD			1		// Координаты Y курсора для печати названия программы
-//#define Y_COORD_AFTER_TITLE		4		// Координата Y после названя программы
-//
-//// Коды клавиш
-//#define VK_1					0x31	// Клавиша 1
-//#define VK_2					0x32	// Клавиша 2
-//#define VK_NUMPAD1				0x61	// Клавиша цифровой клавиатуры 1
-//#define VK_NUMPAD2				0x62	// Клавиша цифровой клавиатуры 2
-//#define VK_ESCAPE				0x1B	// Клавиша ESC
-//#define VK_RETURN				0x0D	// Клавиша Enter
-
 #define ASCENDING_ORDER_OF_SORTING		true	// Порядок сортировки по возрастанию
 #define DESCENDING_ORDER_OF_SORTING		false	// Порядок сортировки по убыванию
 
+// Класс, представляющий логику зельеварения
 class AlchemyLogic
 {
 public:
 
 	// Конструктор по умолчанию
 	AlchemyLogic();
-
-	//enum class OperationCode
-	//{
-	//	Sorting,
-	//	Search
-	//};
 
 #pragma region СЕТТЕРЫ
 
@@ -52,8 +26,10 @@ public:
 	// Сеттер для таблицы ингредиентов
 	void setIngredientsTable(IngredientsTable* ingredientsTable);
 
+	// Сеттер для таблицы зельев
 	void setPotionTable(PotionTable* potionTable);
 
+	// Сеттер для алхимика
 	void setAlchemist(Alchemist* alchemist);
 
 #pragma endregion СЕТТЕРЫ
@@ -66,8 +42,10 @@ public:
 	// Геттер для таблицы эффектов
 	EffectsTable* getEffectsTable();
 
+	// Геттер для таблицы ингредиентов
 	IngredientsTable* getIngredientsTable();
 
+	// Геттер для таблицы зельев
 	PotionTable* getPotionTable();
 
 #pragma endregion ГЕТТЕРЫ
@@ -75,40 +53,38 @@ public:
 	// Попробовать добавить опр. кол-во ингредиента из списка
 	bool tryBuyIngredientFromList(int id, int number);
 
+	// Попробовать добавить новый ингредиент в таблицу
 	bool tryAddNewIngredientToTable(string ingredientName);
 
+	// Проверить зелье, есть ли такое уже в таблице
 	void checkPotion(Potion* potion, vector<Potion*> &potions);
 
+	// Зелья одинаковые?
 	bool isPotionsAreEqual(Potion* potion1, Potion* potion2);
 
 	// Создть зелье
 	Potion* createPotion(Ingredient* firstIngredient, Ingredient* secondIngredient);
 
+	// Продать ингредиент
 	void sellIngredient(int ingredientId, int numberOfIngredient);
 
+	// Продать зелье
 	void sellPotion(int potionId, int numberOfPotion);
 
+	// Уменьшить кол-во ингредиента
 	void decreaseNumberOfIngredient(int ingredientId, int numberOfIngredient);
 
+	// Уменьшить кол-во зелья
 	void decreaseNumberOfPotion(int potionId, int numberOfPotion);
 
+	// Съесть ингредиент
 	void eatIngredient(int ingredientId);
 
-	//void workWithTable(OperationCode code, vector<vector<string>> tableData, int numberOfColumn, bool order);
-
-	// Когда данные строковые
+	// Сортировка Когда данные строковые
 	void sortStringData(vector<string>* tableData, int numberOfColumn, bool order, int size);
 
-	// Когда данные цифровые
+	// Сортировка Когда данные цифровые
 	void sortDigitData(vector<string>* tableData, int numberOfColumn, bool order, int size);
-
-	//// Фильтрация по запросам
-	//void filterData(vector<vector<string>> content, vector<string> queries);
-
-	//vector<int> findEqualEffects(int firstIngredientId, int secondIngredientId);
-
-	//// Создать зелье и поместить его в таблицу
-	//void addPotion(int effectId);
 
 private:
 
@@ -129,8 +105,4 @@ private:
 
 	// Имееет ли таблица такое зелье, если да то возвращает Id этого зелья
 	int hasSuchPotion(Potion* potion);
-
-	//// Создать новый ингредиент
-	//Ingredient* createNewIngredient(string ingredientName);
 };
-

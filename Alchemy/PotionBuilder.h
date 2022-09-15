@@ -11,12 +11,15 @@ using namespace std;
 #define COEFFICIENT_OF_POWER			3		// Коэффициент мощности зелья
 #define COEFFICIENT_OF_PRICE			2		// Коэффициент цены зелья
 
+// Строитель зелий
 class PotionBuilder : public Builder<Potion>
 {
 public:
 
+	// Конструктор по умолчанию
 	PotionBuilder();
 
+	// Сконструировать зелье
 	void buildPotion(Ingredient* ingredient1, Ingredient* ingredient2, Alchemist* alchemist);
 
 private:
@@ -33,4 +36,3 @@ private:
 	// Задать зелье
 	void setPotion(int effectId, Ingredient* ingredient1, Ingredient* ingredient2, Alchemist* alchemist);
 };
-

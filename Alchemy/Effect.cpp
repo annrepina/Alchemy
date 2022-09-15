@@ -1,15 +1,10 @@
 #include "Effect.h"
 #include <iostream>
 
-//int Effect::counter = 0;
-
 Effect::Effect()
 {
 	name = "";
 	isPositive = false;
-	//++counter;
-	//id = counter;
-
 }
 
 Effect::Effect(string name, bool isPositive)
@@ -47,8 +42,3 @@ void Effect::print()
 {
 	cout << this->name << ' ' << this->isPositive;
 }
-
-//void Effect::setId(int id)
-//{
-//	this->id = id;
-//}

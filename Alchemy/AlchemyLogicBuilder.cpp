@@ -2,12 +2,8 @@
 
 AlchemyLogicBuilder::AlchemyLogicBuilder() : Builder()
 {
-	/*reset();*/
-
 	this->effectsTableBuilder = new EffectsTableBuilder();
-
 	this->ingredientsTableBuilder = new IngredientsTableBuilder();
-
 	this->ingredientBuilder = new IngredientBuilder();
 }
 
@@ -16,29 +12,13 @@ AlchemyLogicBuilder::~AlchemyLogicBuilder()
 	clear();
 }
 
-//AlchemyProgram* AlchemyProgramBuilder::getResult()
-//{
-//	AlchemyProgram* res = this->alchemyProgram;
-//
-//	reset();
-//
-//	return res;
-//}
-
-void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyLogicWriter* alchemyLogicWriter)
+void AlchemyLogicBuilder::buildAlchemyProgram()
 {
-	/// Парсим
-
-	// Если док пустой
-
-
-
-
 	// Создаем пустого алхимика
 	this->element->setAlchemist(new Alchemist);
 
 	// Строим таблицу эффектов
-	this->effectsTableBuilder->buildTable(alchemyLogicWriter);
+	this->effectsTableBuilder->buildTable();
 
 	// Присваиваем программе таблицу эффектов
 	this->element->setEffectsTable(this->effectsTableBuilder->getResult());
@@ -53,7 +33,7 @@ void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyLogicWriter* alchemyLogicWr
 	this->ingredientsTableBuilder->setIngredientBuilder(ingredientBuilder);
 
 	// Строим таблицу ингредиентов
-	this->ingredientsTableBuilder->buildTable(alchemyLogicWriter);
+	this->ingredientsTableBuilder->buildTable();
 
 	// Присваиваем таблицу ингредиентов
 	this->element->setIngredientsTable(ingredientsTableBuilder->getResult());
@@ -68,16 +48,11 @@ void AlchemyLogicBuilder::buildAlchemyProgram(AlchemyLogicWriter* alchemyLogicWr
 void AlchemyLogicBuilder::setEffectsTable(AlchemyLogicWriter* alchemyLogicWriter)
 {
 	// Строитель создает таблицу
-	this->effectsTableBuilder->buildTable(alchemyLogicWriter);
+	this->effectsTableBuilder->buildTable();
 
 	// Добавляем таблицу в программу
 	this->element->setEffectsTable(this->effectsTableBuilder->getResult());
 }
-
-//void AlchemyProgramBuilder::reset()
-//{
-//	this->alchemyProgram = new AlchemyProgram();
-//}
 
 void AlchemyLogicBuilder::clear()
 {

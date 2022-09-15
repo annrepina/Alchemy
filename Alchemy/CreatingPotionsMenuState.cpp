@@ -91,7 +91,7 @@ void CreatingPotionsMenuState::printMenu()
 	// Создаем вектор созданных зелий
 	vector<Potion*> potions;
 
-	// добавляем создданные зелья в вектор
+	// добавляем созданные зелья в вектор
 	for (int i = 0; i < numberOfPotion; ++i)
 	{
 		Potion* potion = alchemyLogic->createPotion(firstIngredient, secondIngredient);

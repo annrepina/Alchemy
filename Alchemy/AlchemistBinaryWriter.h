@@ -12,7 +12,7 @@ public:
 	AlchemistBinaryWriter();
 
 	// деструктор
-	~AlchemistBinaryWriter();
+	~AlchemistBinaryWriter() override;
 
 	// Писать в файл в бинарном виде
 	void write(ofstream& stream, string filePath, Alchemist* alchemist) const override;

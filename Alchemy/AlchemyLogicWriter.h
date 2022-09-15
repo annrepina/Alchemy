@@ -15,7 +15,7 @@ public:
 	AlchemyLogicWriter();
 
 	// Деструктор
-	~AlchemyLogicWriter();
+	~AlchemyLogicWriter() override;
 
 	// Пишет в файл в бинарном виде
 	void write(ofstream& stream, string filePath, AlchemyLogic* alchemyLogic) const override;

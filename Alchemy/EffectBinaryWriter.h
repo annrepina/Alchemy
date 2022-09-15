@@ -11,7 +11,7 @@ public:
 	EffectBinaryWriter();
 
 	// Деструктор
-	~EffectBinaryWriter();
+	~EffectBinaryWriter() override;
 
 	// Пишет в файл в бинарном виде
 	void write(ofstream& stream, string filePath, Effect* effect) const override;

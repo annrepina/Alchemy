@@ -47,6 +47,9 @@ void EffectsTableBinaryWriter::write(ofstream& stream, string filePath, EffectsT
 
 void EffectsTableBinaryWriter::clear()
 {
-	delete this->effectBinaryWriter;
-	this->effectBinaryWriter = nullptr;
+	if (nullptr != this->effectBinaryWriter)
+	{
+		delete this->effectBinaryWriter;
+		this->effectBinaryWriter = nullptr;
+	}
 }

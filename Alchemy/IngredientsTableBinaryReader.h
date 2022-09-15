@@ -13,7 +13,7 @@ public:
 	IngredientsTableBinaryReader();
 
 	// Деструктор
-	~IngredientsTableBinaryReader();
+	~IngredientsTableBinaryReader() override;
 
 	// Читать из бинарного файла
 	IngredientsTable* readFromFile(string path, ifstream& stream) override;

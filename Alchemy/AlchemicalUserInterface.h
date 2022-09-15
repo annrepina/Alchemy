@@ -29,6 +29,9 @@ public:
 	// Конструктор по умолчанию
 	AlchemicalUserInterface();
 
+	// Деструктор
+	~AlchemicalUserInterface() override;
+
 	// Запуск главного цикла программы
 	void launchProgram() override;
 
@@ -152,6 +155,9 @@ private:
 
 	// Стирает с консоли все после печати алхимика
 	void eraseScreenAfterAlchemist();
+
+	// Очистить память
+	void clear();
 
 #pragma region НАЗВАНИЕ ЗАГОЛОВКОВ
 

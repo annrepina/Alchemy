@@ -8,6 +8,11 @@ UserInterface::UserInterface()
 	this->keyBoard = this->keyBoard->getInstance();
 }
 
+UserInterface::~UserInterface()
+{
+	this->keyBoard->release();
+}
+
 void UserInterface::setTitle(string title)
 {
 	this->title = title;

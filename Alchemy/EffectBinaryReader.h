@@ -11,7 +11,7 @@ public:
 	EffectBinaryReader();
 
 	// Деструктор
-	~EffectBinaryReader();
+	~EffectBinaryReader() override;
 
 	// Читать из бинарного файла
 	Effect* readFromFile(string path, ifstream& stream) override;

@@ -11,7 +11,7 @@ public:
 	IngredientBinaryReader();
 
 	// Деструктор
-	~IngredientBinaryReader();
+	~IngredientBinaryReader() override;
 
 	// Читать из бинарного файла
 	Ingredient* readFromFile(string path, ifstream& stream) override;

@@ -32,7 +32,6 @@ using std::placeholders::_1;
 
 #define NUMBER_OF_MAIN_MENU_ITEMS		6		// Количество главных пунктов меню в интерфейсе вместе с "выберите"
 
-
 // Класс - Пользовательский интерфейс
 class UserInterface
 {
@@ -40,6 +39,9 @@ public:
 
 	// Конструктор по умолчанию
 	UserInterface();
+
+	// Деструктор
+	virtual ~UserInterface();
 
 	// Цикл программы
 	virtual void launchProgram() = 0;

@@ -12,7 +12,7 @@ public:
 	EffectsTableBinaryWriter();
 
 	// Деструктор
-	~EffectsTableBinaryWriter();
+	~EffectsTableBinaryWriter() override;
 
 	// Пишет в файл в бинарном виде
 	void write(ofstream& stream, string filePath, EffectsTable* effectsTable) const override;

@@ -28,6 +28,14 @@ AlchemicalUserInterface::AlchemicalUserInterface() : UserInterface()
 	this->state = new MainMenuState(this);
 }
 
+AlchemicalUserInterface::~AlchemicalUserInterface()
+{
+	// Вызываем деструктор базового класса
+	UserInterface::~UserInterface();
+
+	clear();
+}
+
 void AlchemicalUserInterface::launchProgram()
 {
 	setAlchemyLogic();
@@ -109,7 +117,7 @@ void AlchemicalUserInterface::setAlchemyLogic()
 	if (isFileEmpty)
 	{
 		// Создать программу Алхимии
-		this->alchemyLogicBuilder->buildAlchemyProgram(this->alchemyLogicWriter);
+		this->alchemyLogicBuilder->buildAlchemyProgram();
 
 		// Присвоить результат программе алхимии
 		this->alchemyLogic = this->alchemyLogicBuilder->getResult();
@@ -572,6 +580,51 @@ void AlchemicalUserInterface::eraseScreenAfterAlchemist()
 {
 	cout << goToXY(Y_COORD_AFTER_ALCHEMIST, STANDARD_CURSOR_X_COORD);
 	cout << eraseOnScreen(FROM_CURSOR_TO_SCREEN_END);
+}
+
+void AlchemicalUserInterface::clear()
+{
+	if (nullptr != this->alchemyLogic)
+	{
+		delete this->alchemyLogic;
+		this->alchemyLogic = nullptr;
+	}
+
+	if (nullptr != this->alchemyLogicBuilder)
+	{
+		delete this->alchemyLogicBuilder;
+		this->alchemyLogicBuilder = nullptr;
+	}
+
+	if (nullptr != this->alchemyLogicWriter)
+	{
+		delete this->alchemyLogicWriter;
+		this->alchemyLogicWriter = nullptr;
+	}
+
+	if (nullptr != this->alchemyLogicReader)
+	{
+		delete this->alchemyLogicReader;
+		this->alchemyLogicReader = nullptr;
+	}
+
+	if (nullptr != this->ingredientsTableprinter)
+	{
+		delete this->ingredientsTableprinter;
+		this->ingredientsTableprinter = nullptr;
+	}
+
+	if (nullptr != this->potionTablePrinter)
+	{
+		delete this->potionTablePrinter;
+		this->potionTablePrinter = nullptr;
+	}
+
+	if (nullptr != this->state)
+	{
+		delete this->state;
+		this->state = nullptr;
+	}
 }
 
 void AlchemicalUserInterface::writeAlchemyLogic()

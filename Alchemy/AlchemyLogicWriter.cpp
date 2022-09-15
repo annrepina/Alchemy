@@ -35,15 +35,27 @@ void AlchemyLogicWriter::write(ofstream& stream, string filePath, AlchemyLogic* 
 
 void AlchemyLogicWriter::clear()
 {
-	delete this->alchemistBinaryWriter;
-	this->alchemistBinaryWriter = nullptr;
+	if (nullptr != this->alchemistBinaryWriter)
+	{
+		delete this->alchemistBinaryWriter;
+		this->alchemistBinaryWriter = nullptr;
+	}
 
-	delete this->effectsTableBinaryWriter;
-	this->effectsTableBinaryWriter = nullptr;
+	if (nullptr != this->effectsTableBinaryWriter)
+	{
+		delete this->effectsTableBinaryWriter;
+		this->effectsTableBinaryWriter = nullptr;
+	}
 
-	delete this->ingredientsTableBinaryWriter;
-	this->ingredientsTableBinaryWriter = nullptr;
+	if (nullptr != this->ingredientsTableBinaryWriter)
+	{
+		delete this->ingredientsTableBinaryWriter;
+		this->ingredientsTableBinaryWriter = nullptr;
+	}
 
-	delete this->potionTableBinaryWriter;
-	this->potionTableBinaryWriter = nullptr;
+	if (nullptr != this->potionTableBinaryWriter)
+	{
+		delete this->potionTableBinaryWriter;
+		this->potionTableBinaryWriter = nullptr;
+	}
 }

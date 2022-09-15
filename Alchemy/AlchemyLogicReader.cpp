@@ -43,15 +43,27 @@ AlchemyLogic* AlchemyLogicReader::readFromFile(string path, ifstream& stream)
 
 void AlchemyLogicReader::clear()
 {
-	delete this->alchemistBinaryReader;
-	this->alchemistBinaryReader = nullptr;
+	if (nullptr != this->alchemistBinaryReader)
+	{
+		delete this->alchemistBinaryReader;
+		this->alchemistBinaryReader = nullptr;
+	}
 
-	delete this->effectsTableBinaryReader;
-	this->effectsTableBinaryReader = nullptr;
+	if (nullptr != this->effectsTableBinaryReader)
+	{
+		delete this->effectsTableBinaryReader;
+		this->effectsTableBinaryReader = nullptr;
+	}
 
-	delete this->ingredientsTableBinaryReader;
-	this->ingredientsTableBinaryReader = nullptr;
+	if (nullptr != this->ingredientsTableBinaryReader)
+	{
+		delete this->ingredientsTableBinaryReader;
+		this->ingredientsTableBinaryReader = nullptr;
+	}
 
-	delete this->potionTableBinaryReader;
-	this->potionTableBinaryReader = nullptr;
+	if (nullptr != this->potionTableBinaryReader)
+	{
+		delete this->potionTableBinaryReader;
+		this->potionTableBinaryReader = nullptr;
+	}
 }

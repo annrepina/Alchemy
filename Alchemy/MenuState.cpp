@@ -231,9 +231,11 @@ void MenuState::clear()
 {
 	for (auto state : this->listOfStates)
 	{
-		delete state;
-
-		state = nullptr;
+		if (nullptr != state)
+		{
+			delete state;
+			state = nullptr;
+		}
 	}
 }
 

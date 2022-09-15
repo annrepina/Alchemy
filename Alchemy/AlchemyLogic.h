@@ -18,6 +18,9 @@ public:
 	// Конструктор по умолчанию
 	AlchemyLogic();
 
+	// Деструктор
+	~AlchemyLogic();
+
 #pragma region СЕТТЕРЫ
 
 	// Сеттер для таблицы эффектов
@@ -105,4 +108,7 @@ private:
 
 	// Имееет ли таблица такое зелье, если да то возвращает Id этого зелья
 	int hasSuchPotion(Potion* potion);
+
+	// Очистить память
+	void clear();
 };

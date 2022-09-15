@@ -59,9 +59,15 @@ PotionTable* PotionTableBinaryReader::readFromFile(string path, ifstream& stream
 
 void PotionTableBinaryReader::clear()
 {
-	delete this->potionBinaryReader;
-	this->potionBinaryReader = nullptr;
+	if (nullptr != this->potionBinaryReader)
+	{
+		delete this->potionBinaryReader;
+		this->potionBinaryReader = nullptr;
+	}
 
-	delete this->effectsTableBinaryReader;
-	this->effectsTableBinaryReader = nullptr;
+	if (nullptr != this->effectsTableBinaryReader)
+	{
+		delete this->effectsTableBinaryReader;
+		this->effectsTableBinaryReader = nullptr;
+	}
 }

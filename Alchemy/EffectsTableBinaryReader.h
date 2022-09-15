@@ -12,7 +12,7 @@ public:
 	EffectsTableBinaryReader();
 
 	// Деструктор
-	~EffectsTableBinaryReader();
+	~EffectsTableBinaryReader() override;
 
 	// Читать из бинарного файла
 	EffectsTable* readFromFile(string path, ifstream& stream) override;

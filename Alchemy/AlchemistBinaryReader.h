@@ -12,7 +12,7 @@ public:
 	AlchemistBinaryReader();
 
 	// Деструктор
-	~AlchemistBinaryReader();
+	~AlchemistBinaryReader() override;
 
 	// Читать из бинарного файла
 	Alchemist* readFromFile(string path, ifstream& stream) override;

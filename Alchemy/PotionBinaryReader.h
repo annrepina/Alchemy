@@ -11,7 +11,7 @@ public:
 	PotionBinaryReader();
 
 	// Деструктор
-	~PotionBinaryReader();
+	~PotionBinaryReader() override;
 
 	// Читать из бинарного файла
 	Potion* readFromFile(string path, ifstream& stream) override;

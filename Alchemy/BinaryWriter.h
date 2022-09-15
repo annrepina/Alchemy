@@ -65,4 +65,3 @@ protected:
 	// очистить память
 	virtual void clear() = 0;
 };
-

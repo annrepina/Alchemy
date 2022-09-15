@@ -8,6 +8,11 @@ AlchemyLogic::AlchemyLogic()
 	this->potionTable = nullptr;
 }
 
+AlchemyLogic::~AlchemyLogic()
+{
+	clear();
+}
+
 void AlchemyLogic::setEffectsTable(EffectsTable* effectsTable)
 {
 	this->effectsTable = effectsTable;
@@ -216,6 +221,33 @@ int AlchemyLogic::hasSuchPotion(Potion* potion)
 	}
 
 	return id;
+}
+
+void AlchemyLogic::clear()
+{
+	if (nullptr != alchemist)
+	{
+		delete alchemist;
+		alchemist = nullptr;
+	}
+
+	if (nullptr != effectsTable)
+	{
+		delete effectsTable;
+		effectsTable = nullptr;
+	}
+
+	if (nullptr != ingredientsTable)
+	{
+		delete ingredientsTable;
+		ingredientsTable = nullptr;
+	}
+
+	if (nullptr != potionTable)
+	{
+		delete potionTable;
+		potionTable = nullptr;
+	}
 }
 
 Potion* AlchemyLogic::createPotion(Ingredient* firstIngredient, Ingredient* secondIngredient)

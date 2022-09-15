@@ -11,7 +11,7 @@ public:
 	IngredientBinaryWriter();
 
 	// Деструктор
-	~IngredientBinaryWriter();
+	~IngredientBinaryWriter() override;
 
 	// Пишет в файл в бинарном виде
 	void write(ofstream& stream, string filePath, Ingredient* ingredient) const override;

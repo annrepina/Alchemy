@@ -61,9 +61,15 @@ void PotionTableBinaryWriter::write(ofstream& stream, string path, PotionTable* 
 
 void PotionTableBinaryWriter::clear()
 {
-	delete this->potionBinaryWriter;
-	this->potionBinaryWriter = nullptr;
+	if (nullptr != this->potionBinaryWriter)
+	{
+		delete this->potionBinaryWriter;
+		this->potionBinaryWriter = nullptr;
+	}
 
-	delete this->effectsTableBinaryWriter;
-	this->effectsTableBinaryWriter = nullptr;
+	if (nullptr != this->effectsTableBinaryWriter)
+	{
+		delete this->effectsTableBinaryWriter;
+		this->effectsTableBinaryWriter = nullptr;
+	}
 }

@@ -11,7 +11,7 @@ public:
 	PotionBinaryWriter();
 
 	// Деструктор
-	~PotionBinaryWriter();
+	~PotionBinaryWriter() override;
 
 	// Пишет в файл в бинарном виде
 	void write(ofstream& stream, string path, Potion* potion) const override;

@@ -56,12 +56,24 @@ void AlchemyLogicBuilder::setEffectsTable(AlchemyLogicWriter* alchemyLogicWriter
 
 void AlchemyLogicBuilder::clear()
 {
-	// Вызываем ф-wb. у базового класса
+	// Вызываем функцию очистки у базового класса
 	Builder::clear();
 
 	if (nullptr != this->effectsTableBuilder)
 	{
 		delete this->effectsTableBuilder;
 		this->effectsTableBuilder = nullptr;
+	}
+
+	if (nullptr != this->ingredientsTableBuilder)
+	{
+		delete this->ingredientsTableBuilder;
+		this->ingredientsTableBuilder = nullptr;
+	}
+
+	if (nullptr != this->ingredientBuilder)
+	{
+		delete this->ingredientBuilder;
+		this->ingredientBuilder = nullptr;
 	}
 }

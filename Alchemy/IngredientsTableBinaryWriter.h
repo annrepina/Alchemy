@@ -13,7 +13,7 @@ public:
 	IngredientsTableBinaryWriter();
 
 	// Деструктор
-	~IngredientsTableBinaryWriter();
+	~IngredientsTableBinaryWriter() override;
 
 	// Пишет в файл в бинарном виде
 	void write(ofstream& stream, string filePath, IngredientsTable* ingredientsTable) const override;

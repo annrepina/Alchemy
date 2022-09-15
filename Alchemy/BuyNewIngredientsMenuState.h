@@ -38,4 +38,3 @@ private:
 	// Создать состояние - меню назад
 	ReturnMenuState* createReturnMenuState();
 };
-

@@ -53,9 +53,15 @@ IngredientsTable* IngredientsTableBinaryReader::readFromFile(string path, ifstre
 
 void IngredientsTableBinaryReader::clear()
 {
-	delete this->ingredientBinaryReader;
-	this->ingredientBinaryReader = nullptr;
+	if (nullptr != this->ingredientBinaryReader)
+	{
+		delete this->ingredientBinaryReader;
+		this->ingredientBinaryReader = nullptr;
+	}
 
-	delete this->effectsTableBinaryReader;
-	this->effectsTableBinaryReader = nullptr;
+	if (nullptr != this->effectsTableBinaryReader)
+	{
+		delete this->effectsTableBinaryReader;
+		this->effectsTableBinaryReader = nullptr;
+	}
 }

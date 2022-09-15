@@ -15,10 +15,10 @@ public:
 	AlchemyLogicReader();
 
 	// Деструктор
-	~AlchemyLogicReader();
+	~AlchemyLogicReader() override;
 
 	// Читать из бинарного файла
-	AlchemyLogic* readFromFile(string path, ifstream& stream);
+	AlchemyLogic* readFromFile(string path, ifstream& stream) override;
 
 private:
 

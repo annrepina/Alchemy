@@ -58,9 +58,15 @@ void IngredientsTableBinaryWriter::write(ofstream& stream, string filePath, Ingr
 
 void IngredientsTableBinaryWriter::clear()
 {
-	delete this->ingredientBinaryWriter;
-	this->ingredientBinaryWriter = nullptr;
+	if (nullptr != this->ingredientBinaryWriter)
+	{
+		delete this->ingredientBinaryWriter;
+		this->ingredientBinaryWriter = nullptr;
+	}
 
-	delete this->effectsTableBinaryWriter;
-	this->effectsTableBinaryWriter = nullptr;
+	if (nullptr != this->effectsTableBinaryWriter)
+	{
+		delete this->effectsTableBinaryWriter;
+		this->effectsTableBinaryWriter = nullptr;
+	}
 }

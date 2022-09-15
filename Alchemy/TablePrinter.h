@@ -17,7 +17,6 @@
 #define ASCENDING_ORDER_OF_SORTING			true	// Порядок сортировки по возрастанию
 #define DESCENDING_ORDER_OF_SORTING			false	// Порядок сортировки по убыванию
 
-
 // Класс-шаблон печатающий таблицы - принтер
 template <typename PrintableTable>
 class TablePrinter : public IObserver
